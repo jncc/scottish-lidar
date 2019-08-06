@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "tsc --noEmit",
+    "dev": "parcel ./src/*.html --port 4000",
+    "lint": "tslint --project .",
+    "clean": "rimraf ./dist",
+    "build": "yarn clean && yarn tsc && yarn lint && parcel build ./src/index.html"
   },
   "devDependencies": {
     "@types/leaflet": "1.4.6",
