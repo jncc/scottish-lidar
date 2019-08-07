@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "jsx":             "react",  // write react jsx
+      "lib":       ["es6", "dom"], // assume these libs will be present https://basarat.gitbooks.io/typescript/docs/types/lib.d.ts.html#lib-option
+      //"outDir":          "./tsc/", // .gitignored directory for when `tsc` is run manually outside webpack, preventing .js files from being written next to source files everywhere
+      "strict":          true,     // use typescript's strict type-checking
+      "target":          "es5",    // support older es5 browsers
+      "esModuleInterop": true,     // support lodash imports with parcel bundler
+    },
+    "include": [
+      "./src/**/**/*"
+    ],
+  }
+  

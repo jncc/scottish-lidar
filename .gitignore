@@ -1,5 +1,6 @@
 
-web/node_modules/
-web/.cache/
-web/dist/
-web/tsc/
+node_modules/
+.env
+.cache/
+dist/
+tsc/

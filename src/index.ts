@@ -10,9 +10,15 @@ import './styles.less'
 // import 'ts-polyfill/lib/es2017-string'
 // import 'url-search-params-polyfill'
 
+import { env } from './env'
 
 // draw the leaflet map in the div
 // let div = document.getElementById('map') as HTMLElement
 // createMap(div, config)
 
 console.log('hello')
+
+if (!env.CATALOG_API_ENDPOINT) {
+    console.log('CATALOG_API_ENDPOINT is required')
+}
+

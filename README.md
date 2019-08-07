@@ -9,6 +9,20 @@ The [Scottish Remote Sensing Data Portal](https://remotesensingdata.gov.scot/) i
 Initial dev notes
 -----------------
 
+App structure
+/index.html (`/`) - home page
+/app.html         - react app
+    - `/app#/list`
+    - `/app#/list?group=lidar%2Fphase-1`
+    - `/app#/map`
+    - `/app#/download`
+/about.html (`/about`)      - about page
+/contribute.html (`/contribute`) - how to contribute page
+
+When building on Jenkins, set environment variables like so:
+
+    SOME_VAR=some_val parcel index.html (or hopefully: SOME_VAR=some_val yarn dev)
+
 https://rsp.github.io/gh-pages-no-extension/
 
 https://stackoverflow.com/questions/16534545/how-to-get-rid-of-html-extension-when-serving-webpages-with-node-js
