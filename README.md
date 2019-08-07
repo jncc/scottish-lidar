@@ -20,10 +20,14 @@ Due to Parcel.js's quite basic support for multiple page web applications, you'l
 
 In production, the `.html` extension isn't needed (Github Pages searches for `.html` extensions and `index.html` in particular automatically).
 
+TODO: https://stackoverflow.com/questions/20915695/passing-jade-variables-from-content-to-page-title
+
 TODO: How to alter the links in dev / production?
 
 - React Router could use .env `URL_EXTENSION`
 - Pug could use `locals.URL_EXTENSION` (see Parcel docs)
+
+TODO: Leaflet CSS might need normal CSS box model. https://getbootstrap.com/docs/4.3/getting-started/introduction/#box-sizing
 
 Initial dev notes
 -----------------

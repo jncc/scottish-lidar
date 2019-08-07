@@ -1,0 +1,10 @@
+
+extends ../layout.pug
+
+block title
+
+block content
+  - pageTitle = 'Home page'
+  - var pets = ['cat', 'dog']
+  each petName in pets
+    p #{petName}

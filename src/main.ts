@@ -25,4 +25,3 @@ console.log('hello')
 if (!env.CATALOG_API_ENDPOINT) {
     console.log('CATALOG_API_ENDPOINT is required')
 }
-

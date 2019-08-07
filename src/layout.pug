@@ -1,0 +1,17 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    block title #{pageTitle}
+  body
+    div(class='container')
+      h1 This is the app page
+      if process.env.NODE_ENV === 'production'
+        p Rendered in PRODUCTION mode
+      else
+        p Rendered in DEVELOPMENT mode
+      block content
+      // - this is a comment
+      p This is plain old <em>HTML</em> content.
+    script(src='./main.ts')
