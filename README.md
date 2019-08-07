@@ -6,6 +6,25 @@ The [Scottish Remote Sensing Data Portal](https://remotesensingdata.gov.scot/) i
 
 > The repository is named `scottish-lidar` for historical reasons.
 
+Local development
+-----------------
+
+This is Node app and we use the Yarn package manager.
+
+    yarn
+    yarn dev
+
+Due to Parcel.js's quite basic support for multiple page web applications, you'll need to open your browser at
+
+    http://localhost:4000/index.html <-- note the `index.html`
+
+In production, the `.html` extension isn't needed (Github Pages searches for `.html` extensions and `index.html` in particular automatically).
+
+TODO: How to alter the links in dev / production?
+
+- React Router could use .env `URL_EXTENSION`
+- Pug could use `locals.URL_EXTENSION` (see Parcel docs)
+
 Initial dev notes
 -----------------
 
@@ -23,7 +42,7 @@ When building on Jenkins, set environment variables like so:
 
     SOME_VAR=some_val parcel index.html (or hopefully: SOME_VAR=some_val yarn dev)
 
-https://rsp.github.io/gh-pages-no-extension/
+
 
 https://stackoverflow.com/questions/16534545/how-to-get-rid-of-html-extension-when-serving-webpages-with-node-js
 

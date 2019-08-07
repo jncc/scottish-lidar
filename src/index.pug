@@ -1,0 +1,14 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // - could also add shrink-to-fit=no on map
+    title Home page
+  body
+    h1 This is the home page
+    if process.env.NODE_ENV === 'production'
+      h1 PRODUCTION
+    else
+      h1 DEVELOPMENT
+    script(src='./index.ts')
