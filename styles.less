@@ -1,4 +1,23 @@
 
+@spot-primary: #0065bd;
+@spot-muted: rgb(114, 114, 114);
+
+body {
+  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 h1 {
-    color: red;
+    color: @spot-primary;
+}
+
+.header {
+  border-top: 0.5rem solid @spot-primary;
+  > div {
+    padding: 2rem 0;
+  }
+  .heading-text {
+    color: @spot-muted;
+    font-size: 200%;
+    font-weight: 100;
+  }
 }

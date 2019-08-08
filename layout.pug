@@ -3,9 +3,15 @@ html(lang='en')
   head
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='shortcut icon' href='../assets/favicon.ico')
+    link(href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900,400italic' rel='stylesheet' type='text/css')
     block head
-      title Scottish Remote Sensing Portal
+      title Scottish Remote Sensing Data Portal
   body
+    div(class='header')
+      div(class='container')
+        img(alt='Scottish Government Remote Sensing Portal' src='../assets/scotgovlogo.svg' width='240' height='44')
+        span(class='heading-text') &nbsp; Scottish Remote Sensing Data Portal
     div(class='container')
       block content
       if process.env.NODE_ENV === 'production'

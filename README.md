@@ -6,8 +6,10 @@ The [Scottish Remote Sensing Data Portal](https://remotesensingdata.gov.scot/) i
 
 > The repository is named `scottish-lidar` for historical reasons.
 
-Local development
------------------
+Development
+-----------
+
+Please enable [EditorConfig](https://EditorConfig.org) before you do anything else. For VS Code, install the extension.
 
 You'll need Node (version 8 or above), plus Yarn and Typescript installed globally.
 
@@ -25,7 +27,7 @@ Due to [this issue](https://github.com/parcel-bundler/parcel/issues/1315) you'll
 
 In production, the `.html` extension isn't needed (Github Pages searches for `.html` extensions, and `index.html` in particular, automatically).
 
-Due to [this issue](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has to have its own bundle. This could be improved and simplified in the future - really only two bundles are needed - one shared bundle, with the styles, and one for the single-page app.
+Due to [this bug](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has to have its own bundle. This could be improved in the future - only two bundles are needed - one shared bundle (with the styles imported) and the the for the single-page React app.
 
 TODO: How to alter the links in dev / production?
 
@@ -33,6 +35,12 @@ TODO: How to alter the links in dev / production?
 - Pug could use `locals.URL_EXTENSION` (see Parcel docs)
 
 TODO: Leaflet CSS might need normal CSS box model. https://getbootstrap.com/docs/4.3/getting-started/introduction/#box-sizing
+
+Before you push new code, run
+
+    yarn lint
+
+to ensure your code passes the style rules.
 
 Jenkins
 -------
@@ -45,17 +53,17 @@ When building on Jenkins, set environment variables like so:
 Application structure 
 ---------------------
 
-/home.html (`/`) - home page
-/app.html         - react app
+- /index.html (`/`) - home page
+- /app.html         - react app
     - `/app#/list`
     - `/app#/list?group=lidar%2Fphase-1`
     - `/app#/map`
     - `/app#/download`
-/about.html (`/about`)           - about page
-/contribute.html (`/contribute`) - how to contribute page
-/cookies.html (`/cookies`)       - cookies page
-/privacy.html (`/privacy`)       - privacy page
-/404.html (`/notthere`)          - 404 page
+- /about.html (`/about`)           - about page
+- /contribute.html (`/contribute`) - how to contribute page
+- /cookies.html (`/cookies`)       - cookies page
+- /privacy.html (`/privacy`)       - privacy page
+- /404.html (`/notthere`)          - 404 page
 
 Server-side API
 ---------------
