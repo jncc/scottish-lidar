@@ -9,18 +9,23 @@ The [Scottish Remote Sensing Data Portal](https://remotesensingdata.gov.scot/) i
 Local development
 -----------------
 
-This is Node app and we use the Yarn package manager.
+You'll need Node (version 8 or above), plus Yarn and Typescript installed globally.
 
-    yarn
-    yarn dev
+    yarn      # install packages
+    yarn dev  # build and run a development server
 
-Due to Parcel.js's quite basic support for multiple page web applications, you'll need to open your browser at
+Workarounds for Parcel's limited support for multi-page apps
+------------------------------------------------------------
+
+Parcel.js is great but currently has only basic support for multi-page web applications.
+
+Due to [this issue](https://github.com/parcel-bundler/parcel/issues/1315) you'll need to open your browser manually at
 
     http://localhost:4000/index.html <-- note the `index.html`
 
-In production, the `.html` extension isn't needed (Github Pages searches for `.html` extensions and `index.html` in particular automatically).
+In production, the `.html` extension isn't needed (Github Pages searches for `.html` extensions, and `index.html` in particular, automatically).
 
-TODO: https://stackoverflow.com/questions/20915695/passing-jade-variables-from-content-to-page-title
+Due to [this issue](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has to have its own bundle. This could be improved and simplified in the future. Really only two bundles are needed - one shared bundle, with the styles, and one for the single-page app.
 
 TODO: How to alter the links in dev / production?
 
@@ -29,48 +34,50 @@ TODO: How to alter the links in dev / production?
 
 TODO: Leaflet CSS might need normal CSS box model. https://getbootstrap.com/docs/4.3/getting-started/introduction/#box-sizing
 
-Initial dev notes
------------------
-
-App structure
-/index.html (`/`) - home page
-/app.html         - react app
-    - `/app#/list`
-    - `/app#/list?group=lidar%2Fphase-1`
-    - `/app#/map`
-    - `/app#/download`
-/about.html (`/about`)      - about page
-/contribute.html (`/contribute`) - how to contribute page
+Jenkins
+-------
 
 When building on Jenkins, set environment variables like so:
 
     SOME_VAR=some_val parcel index.html (or hopefully: SOME_VAR=some_val yarn dev)
 
 
+Application structure 
+---------------------
 
-https://stackoverflow.com/questions/16534545/how-to-get-rid-of-html-extension-when-serving-webpages-with-node-js
+/home.html (`/`) - home page
+/app.html         - react app
+    - `/app#/list`
+    - `/app#/list?group=lidar%2Fphase-1`
+    - `/app#/map`
+    - `/app#/download`
+/about.html (`/about`)           - about page
+/contribute.html (`/contribute`) - how to contribute page
+/cookies.html (`/cookies`)       - cookies page
+/privacy.html (`/privacy`)       - privacy page
+/404.html (`/notthere`)          - 404 page
 
-Server side API
+Server-side API
 ---------------
 
-We're going to expose the existing Catalog database API on the Internet and remove the need for a backend web server or any cloud functions. This is an significant additional deliverable.
+We're going to expose the existing "Catalog" database API on the Internet, removing the need for a backend web server or cloud functions. This is also a significant additional deliverable.
 
-The "catalog" database has two basic concepts: *collections* and *products*. In this application, a collection is visualized with a *layer* on the map.
+The Catalog database has two basic concepts: *collections* and *products*. In this application, a collection is visualized with a *layer* on the map.
 
 `GET search/collection/scotland-gov/*` for the List page and the Map sidebar.
 
-We are not expecting to need to use server-side paging (collection data can fit into memory easily and be got in one request). We could keep this collection in memory as it's used by all the important pages.
+We are not expecting to need to use server-side paging for this call (collection data can fit into memory easily and be fetched in one request). We'll keep this collection in memory as it's used by all the application pages.
 
 Collections are filterable by *group* (by the first 3 segments) in the List page, e.g.
 
-- `scotland-gov/lidar/phase-1` ("group")
+- `scotland-gov/lidar/phase-1` (group)
 - `scotland-gov/lidar/phase-2`
 - `scotland-gov/lidar/phase-3`
 
 Collections are also grouped in the Map UI in the same way, e.g.
 
-- lidar/phase-1 ("group")
-  - dsm `scotland-gov/lidar/phase-1/dsm`
+- lidar/phase-1 (group)
+  - dsm `scotland-gov/lidar/phase-1/dsm` (collection)
   - dtm `scotland-gov/lidar/phase-1/dtm`
   - laz `scotland-gov/lidar/phase-1/laz`
 
