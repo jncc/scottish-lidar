@@ -1,5 +1,5 @@
 
-import '../styles'
+import '../shared'
 
 // polyfills
 // import 'ts-polyfill/lib/es2016-array-include'

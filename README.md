@@ -25,7 +25,7 @@ Due to [this issue](https://github.com/parcel-bundler/parcel/issues/1315) you'll
 
 In production, the `.html` extension isn't needed (Github Pages searches for `.html` extensions, and `index.html` in particular, automatically).
 
-Due to [this issue](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has to have its own bundle. This could be improved and simplified in the future. Really only two bundles are needed - one shared bundle, with the styles, and one for the single-page app.
+Due to [this issue](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has to have its own bundle. This could be improved and simplified in the future - really only two bundles are needed - one shared bundle, with the styles, and one for the single-page app.
 
 TODO: How to alter the links in dev / production?
 

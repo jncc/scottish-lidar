@@ -1,6 +1,6 @@
 
 /**
- * The app's environment variables.
+ * Provides the environment variables.
  */
 export const env = {
     NODE_ENV:             process.env.NODE_ENV as 'development' | 'production',

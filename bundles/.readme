@@ -1,0 +1,2 @@
+This folder of separate bundle entrypoints will be unnecessary when Parcel.js improves
+its support for multi-page applications (see readme.md).

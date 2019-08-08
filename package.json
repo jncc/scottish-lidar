@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "tsc": "tsc --noEmit",
-    "pug": "pug --pretty ./src/pages",
-    "dev": "parcel ./src/pages/*.pug --port 4000",
+    "pug": "pug --pretty ./pages",
+    "dev": "parcel ./pages/*.pug --port 4000",
     "lint": "tslint --project .",
-    "clean": "rimraf ./dist",
-    "build": "yarn clean && yarn tsc && yarn lint && parcel build ./src/index.html"
+    "clean": "rimraf .cache ./dist",
+    "build": "yarn clean && yarn tsc && yarn lint && parcel build ./pages/*.pug"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "5.10.1",
