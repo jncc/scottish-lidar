@@ -1,0 +1,38 @@
+pipeline {
+    agent { label ' nodejs ' }
+    stages {
+        stage('Checkout master and build') {
+            steps {
+                checkout([$class: 'GitSCM', 
+                    branches: [[name: '*/master']], 
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [[$class: 'RelativeTargetDirectory', 
+                                    relativeTargetDir: 'master']], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [[url: 'https://github.com/jncc/scottish-lidar.git']]])
+                dir('./master') {
+                    sh 'yarn'
+                    sh 'yarn build'
+                    // sh 'dotnet run -- -g -s $AWS_ELASTICSEARCH_INDEX -a $GOOGLE_ANALYTICS_ID -t $GOOGLE_TAG_MANAGER_ID'
+                }
+            }
+        }
+        stage('Checkout deployment branch and push') {
+            steps {
+                dir('./gh-pages')  {
+                    deleteDir()
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.GIT_CREDENTIALS_ID,
+                        usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+                        sh 'git clone https://github.com/jncc/scottish-lidar.git . --branch=gh-pages --depth 1'
+                        sh 'git config --local credential.helper "!p() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; p"'
+                        // sh 'rm -r ./*' except .git?
+                        sh 'cp -r ../master/dist/* .'
+                        sh 'git add --all'
+                        sh 'git commit -a -m "Jenkins Build ' + env.BUILD_NUMBER + '" --author "Jenkins <jenkins@jncc.gov.uk>" || echo \'Commit failed. There is probably nothing to commit.\''
+                        sh 'git push --force || echo \'Push failed. There is probably nothing to commit.\''
+                    }
+                }
+            }
+        }
+    }
+}

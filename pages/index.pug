@@ -9,6 +9,7 @@ block content
   - var pets = ['cat', 'dog']
   each petName in pets
     p #{petName}
-
+  div
+    a(href='/app' + process.env.PAGE_EXTENSION) Go to app
 block scripts
   script(src='../bundles/index.ts')

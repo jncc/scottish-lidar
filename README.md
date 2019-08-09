@@ -11,7 +11,7 @@ Development
 
 Please enable [EditorConfig](https://EditorConfig.org) before you do anything else. For VS Code, install the extension.
 
-You'll need Node (version 8 or above), plus Yarn and Typescript installed globally.
+You'll need Node (version 8 or above), with Yarn installed globally.
 
     yarn      # install packages
     yarn dev  # build and run a development server
@@ -19,7 +19,7 @@ You'll need Node (version 8 or above), plus Yarn and Typescript installed global
 Workarounds for Parcel's limited support for multi-page apps
 ------------------------------------------------------------
 
-Parcel.js is great but currently has only basic support for multi-page web applications.
+Parcel.js is great but so far has only basic support for multi-page web applications.
 
 Due to [this issue](https://github.com/parcel-bundler/parcel/issues/1315) you'll need to open your browser manually at
 

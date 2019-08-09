@@ -12,13 +12,10 @@ import { CookiesProvider } from 'react-cookie'
 
 import { env } from '../env'
 
-console.log('hello')
-
 if (!env.CATALOG_API_ENDPOINT) {
+  // tslint:disable-next-line
   console.log('CATALOG_API_ENDPOINT is required')
 }
-
-console.log('Hello from the app')
 
 // draw the leaflet map in the div
 // let div = document.getElementById('map') as HTMLElement

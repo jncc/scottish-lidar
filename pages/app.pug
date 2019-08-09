@@ -6,7 +6,9 @@ block head
 
 block content
   h1 App page
-  div(id='app')
+  p
+    a(href='/' + process.env.INDEX_PAGE + process.env.PAGE_EXTENSION) Go to home page
+  div#app
 
 block scripts
   script(src='../bundles/app.ts')
