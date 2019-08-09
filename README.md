@@ -27,12 +27,7 @@ Due to [this issue](https://github.com/parcel-bundler/parcel/issues/1315) you'll
 
 In production, the `.html` extension isn't needed (Github Pages searches for `.html` extensions, and `index.html` in particular, automatically).
 
-Due to [this bug](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has to have its own bundle. This could be improved in the future - only two bundles are needed - one shared bundle (with the styles imported) and the the for the single-page React app.
-
-TODO: How to alter the links in dev / production?
-
-- React Router could use .env `URL_EXTENSION`
-- Pug could use `locals.URL_EXTENSION` (see Parcel docs)
+Due to [this bug](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has to have its own bundle. This could be improved in the future - only two bundles are really needed; one shared bundle (with the styles imported) and one for the single-page React app.
 
 TODO: Leaflet CSS might need normal CSS box model. https://getbootstrap.com/docs/4.3/getting-started/introduction/#box-sizing
 
