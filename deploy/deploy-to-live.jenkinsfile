@@ -1,5 +1,5 @@
 pipeline {
-    agent { label ' nodejs ' }
+    agent { label ' dotnet ' }
     stages {
         stage('Checkout master and build') {
             steps {
@@ -25,8 +25,9 @@ pipeline {
                         usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
                         sh 'git clone https://github.com/jncc/scottish-lidar.git . --branch=gh-pages --depth 1'
                         sh 'git config --local credential.helper "!p() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; p"'
-                        // sh 'rm -r ./*' except .git?
+                        // todo: sh 'rm -r ./*' except .git?
                         sh 'cp -r ../master/dist/* .'
+                        sh 'ls'                        
                         sh 'git add --all'
                         sh 'git commit -a -m "Jenkins Build ' + env.BUILD_NUMBER + '" --author "Jenkins <jenkins@jncc.gov.uk>" || echo \'Commit failed. There is probably nothing to commit.\''
                         sh 'git push --force || echo \'Push failed. There is probably nothing to commit.\''
