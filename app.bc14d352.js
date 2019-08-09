@@ -61,10 +61,10 @@ var e=arguments[3];Object.defineProperty(exports,"__esModule",{value:!0});var n=
 },{"react":"1n8/","./CookiesContext":"5KgB"}],"Qw/v":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),Object.defineProperty(exports,"Cookies",{enumerable:!0,get:function(){return e.default}}),Object.defineProperty(exports,"CookiesProvider",{enumerable:!0,get:function(){return r.default}}),Object.defineProperty(exports,"withCookies",{enumerable:!0,get:function(){return t.default}}),Object.defineProperty(exports,"useCookies",{enumerable:!0,get:function(){return o.default}});var e=u(require("./Cookies")),r=u(require("./CookiesProvider")),t=u(require("./withCookies")),o=u(require("./useCookies"));function u(e){return e&&e.__esModule?e:{default:e}}
 },{"./Cookies":"bJ20","./CookiesProvider":"uCyj","./withCookies":"rtR6","./useCookies":"UWIy"}],"8Tcw":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.env={NODE_ENV:"production",CATALOG_API_ENDPOINT:void 0,PAGE_EXTENSION:void 0,INDEX_PAGE:void 0};
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.env={NODE_ENV:"production",CATALOG_API_ENDPOINT:void 0,PAGE_EXTENSION:'""',INDEX_PAGE:'""'};
 },{}],"aL2q":[function(require,module,exports) {
 "use strict";var e=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var r={};if(null!=e)for(var t in e)Object.hasOwnProperty.call(e,t)&&(r[t]=e[t]);return r.default=e,r};Object.defineProperty(exports,"__esModule",{value:!0});var r=e(require("react")),t=e(require("react-dom")),n=require("react-cookie"),i=require("../env");i.env.CATALOG_API_ENDPOINT||console.log("CATALOG_API_ENDPOINT is required");var l=function(){return r.createElement("div",null,"This is the app!")};t.render(r.createElement(n.CookiesProvider,null,r.createElement(l,null)),document.getElementById("app"));
 },{"react":"1n8/","react-dom":"NKHc","react-cookie":"Qw/v","../env":"8Tcw"}],"2E24":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),require("../shared"),require("../app/main");
 },{"../shared":"LcwX","../app/main":"aL2q"}]},{},["2E24"], null)
-//# sourceMappingURL=/app.52433ad5.js.map
+//# sourceMappingURL=/app.bc14d352.js.map
