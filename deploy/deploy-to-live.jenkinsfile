@@ -30,7 +30,7 @@ pipeline {
                         sh 'cp -r ../master/dist/* .'
                         // Github Pages custom domain configured with a file called 'CNAME'
                         sh 'echo "dev-scottish-remote-sensing-portal.jncc.gov.uk" > CNAME'
-                        sh 'ls'
+                        sh 'ls -a'
                         sh 'git add --all'
                         sh 'git config user.name "Jenkins"'
                         sh 'git config user.email "jenkins@jncc.gov.uk"'
