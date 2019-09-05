@@ -60,10 +60,10 @@ var t,e=arguments[3];function n(t){return(n="function"==typeof Symbol&&"symbol"=
 },{"react":"1n8/","./CookiesContext":"5KgB"}],"Qw/v":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),Object.defineProperty(exports,"Cookies",{enumerable:!0,get:function(){return e.default}}),Object.defineProperty(exports,"CookiesProvider",{enumerable:!0,get:function(){return r.default}}),Object.defineProperty(exports,"withCookies",{enumerable:!0,get:function(){return t.default}}),Object.defineProperty(exports,"useCookies",{enumerable:!0,get:function(){return o.default}});var e=u(require("./Cookies")),r=u(require("./CookiesProvider")),t=u(require("./withCookies")),o=u(require("./useCookies"));function u(e){return e&&e.__esModule?e:{default:e}}
 },{"./Cookies":"bJ20","./CookiesProvider":"uCyj","./withCookies":"rtR6","./useCookies":"UWIy"}],"8Tcw":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.env={NODE_ENV:"production",CATALOG_API_ENDPOINT:void 0,PAGE_EXTENSION:"FOO",INDEX_PAGE:"BAR"};
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.env={NODE_ENV:"production",CATALOG_API_ENDPOINT:void 0,PAGE_EXTENSION:void 0,INDEX_PAGE:void 0};
 },{}],"aL2q":[function(require,module,exports) {
 "use strict";var e=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var r={};if(null!=e)for(var o in e)Object.hasOwnProperty.call(e,o)&&(r[o]=e[o]);return r.default=e,r};Object.defineProperty(exports,"__esModule",{value:!0});var r=e(require("react")),o=e(require("react-dom")),l=require("react-cookie"),n=require("../env");console.log("Hello"),console.log(n.env.CATALOG_API_ENDPOINT),console.log(n.env.PAGE_EXTENSION),console.log(n.env.INDEX_PAGE),n.env.CATALOG_API_ENDPOINT||console.log("CATALOG_API_ENDPOINT is required");var t=function(){return r.createElement("div",null,"This is the app!")};o.render(r.createElement(l.CookiesProvider,null,r.createElement(t,null)),document.getElementById("app"));
 },{"react":"1n8/","react-dom":"NKHc","react-cookie":"Qw/v","../env":"8Tcw"}],"2E24":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),require("../shared"),require("../app/main");
 },{"../shared":"LcwX","../app/main":"aL2q"}]},{},["2E24"], null)
-//# sourceMappingURL=/app.7f264dfd.js.map
+//# sourceMappingURL=/app.f2b6de9a.js.map
