@@ -11,13 +11,11 @@ pipeline {
                     submoduleCfg: [], 
                     userRemoteConfigs: [[url: 'https://github.com/jncc/scottish-lidar.git']]])
                 dir('./master') {
+                    sh 'yarn'
                     // set empty environment variables for live here, because Jenkins bug doesn't seem
                     // to allow empty strings to be set in Properties Content
                     // https://issues.jenkins-ci.org/browse/JENKINS-43632
-                    sh 'INDEX_PAGE=""'
-                    sh 'PAGE_EXTENSION=""'
-                    sh 'yarn'
-                    sh 'yarn build'
+                    sh 'INDEX_PAGE="" PAGE_EXTENSION="" yarn build'
                 }
             }
         }
