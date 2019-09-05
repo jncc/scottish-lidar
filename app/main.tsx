@@ -12,6 +12,10 @@ import { CookiesProvider } from 'react-cookie'
 
 import { env } from '../env'
 
+console.log('Hello')
+console.log(env.CATALOG_API_ENDPOINT)
+console.log(env.INDEX_PAGE)
+
 if (!env.CATALOG_API_ENDPOINT) {
   // tslint:disable-next-line
   console.log('CATALOG_API_ENDPOINT is required')
