@@ -16,26 +16,31 @@ You'll need Node (version 8 or above), with Yarn installed globally.
     yarn      # install packages
     yarn dev  # build and run a development server
 
-Workarounds for Parcel's limited support for multi-page apps
-------------------------------------------------------------
+Parcel.js
+---------
 
-Parcel.js is great but so far has only basic support for multi-page web applications.
+Parcel.js is great, but so far has very basic support for multi-page web applications.
 
 Due to [this issue](https://github.com/parcel-bundler/parcel/issues/1315) you'll need to open your browser manually at
 
     http://localhost:4000/index.html <-- note the `index.html`
 
-In production, the `.html` extension isn't needed (Github Pages searches for `.html` extensions, and `index.html` in particular, automatically).
+In production, the `.html` extension isn't needed (Github Pages serves `.html`, and `index.html`, automatically).
 
 Due to [this bug](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has to have its own bundle. This could be improved in the future - only two bundles are really needed; one shared bundle (with the styles imported) and one for the single-page React app.
 
 TODO: Leaflet CSS might need normal CSS box model. https://getbootstrap.com/docs/4.3/getting-started/introduction/#box-sizing
 
-Before you push new code, run
+Parcel errors, warnings and unexpectedness can often be fixed by **clearing its cache**.
+
+    yarn clean
+
+Code style
+----------
+
+Before you push new code, ensure your code passes the style rules.
 
     yarn lint
-
-to ensure your code passes the style rules.
 
 Jenkins
 -------
@@ -44,16 +49,15 @@ When building on Jenkins, set environment variables like so:
 
     SOME_VAR=some_val parcel index.html (or hopefully: SOME_VAR=some_val yarn dev)
 
-
-Application structure 
----------------------
+Page structure
+--------------
 
 - /index.html (`/`) - home page
 - /app.html         - react app
-    - `/app#/list`
-    - `/app#/list?group=lidar%2Fphase-1`
-    - `/app#/map`
-    - `/app#/download`
+  - `/app#/list`
+  - `/app#/list?group=lidar%2Fphase-1`
+  - `/app#/map`
+  - `/app#/download`
 - /about.html (`/about`)           - about page
 - /contribute.html (`/contribute`) - how to contribute page
 - /cookies.html (`/cookies`)       - cookies page
