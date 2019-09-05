@@ -12,8 +12,13 @@ import { CookiesProvider } from 'react-cookie'
 
 import { env } from '../env'
 
+// tslint:disable-next-line
 console.log('Hello')
+// tslint:disable-next-line
 console.log(env.CATALOG_API_ENDPOINT)
+// tslint:disable-next-line
+console.log(env.PAGE_EXTENSION)
+// tslint:disable-next-line
 console.log(env.INDEX_PAGE)
 
 if (!env.CATALOG_API_ENDPOINT) {
