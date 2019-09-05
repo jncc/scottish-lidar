@@ -11,9 +11,12 @@ pipeline {
                     submoduleCfg: [], 
                     userRemoteConfigs: [[url: 'https://github.com/jncc/scottish-lidar.git']]])
                 dir('./master') {
+                    // set environment variables for live here because Jenkins bug doesn't seem
+                    // to allow empty strings https://issues.jenkins-ci.org/browse/JENKINS-43632
+                    sh 'INDEX_PAGE=""'
+                    sh 'PAGE_EXTENSION=""'
                     sh 'yarn'
                     sh 'yarn build'
-                    // sh 'dotnet run -- -g -s $AWS_ELASTICSEARCH_INDEX -a $GOOGLE_ANALYTICS_ID -t $GOOGLE_TAG_MANAGER_ID'
                 }
             }
         }
