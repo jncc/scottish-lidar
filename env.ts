@@ -1,4 +1,8 @@
 
+// The parcel bundler makes environment variables available
+// **in the browser** at runtime via the `process.env` object.
+// See https://parceljs.org/env.html
+
 /**
  * Provides the environment variables.
  */

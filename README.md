@@ -1,8 +1,8 @@
 
-Scottish Remote Sensing Data Portal
-===================================
+Scottish Remote Sensing Portal
+==============================
 
-The [Scottish Remote Sensing Data Portal](https://remotesensingdata.gov.scot/) is designed, developed and supported by JNCC.
+The [Scottish Remote Sensing Portal](https://remotesensingdata.gov.scot/) is designed, developed and supported by JNCC.
 
 > The repository is named `scottish-lidar` for historical reasons.
 
@@ -59,22 +59,15 @@ Before you push new code, ensure your code passes the style rules.
 
     yarn lint
 
-Jenkins
--------
-
-When building on Jenkins, set environment variables like so:
-
-    SOME_VAR=some_val parcel index.html (or hopefully: SOME_VAR=some_val yarn dev)
-
 Page structure
 --------------
 
 - /index.html (`/`) - home page
-- /app.html         - react app
-  - `/app#/list`
-  - `/app#/list?group=lidar%2Fphase-1`
-  - `/app#/map`
-  - `/app#/download`
+- /data.html        - the react app
+  - `/data#/list`
+  - `/data#/list?group=lidar%2Fphase-1`
+  - `/data#/map`
+  - `/data#/download`
 - /about.html (`/about`)           - about page
 - /contribute.html (`/contribute`) - how to contribute page
 - /cookies.html (`/cookies`)       - cookies page

@@ -2,7 +2,7 @@
 extends ../layout.pug
 
 block head
-  title Scottish Remote Sensing Portal - Home
+  title Scottish Remote Data Sensing Portal - Home
 
 block content
   h1 Home page
@@ -10,6 +10,6 @@ block content
   each petName in pets
     p #{petName}
   div
-    a(href='/app' + process.env.PAGE_EXTENSION) Go to app
+    a(href='/data' + process.env.PAGE_EXTENSION) Go to app
 block scripts
   script(src='../bundles/index.ts')
