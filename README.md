@@ -11,7 +11,9 @@ Development
 
 Please enable [EditorConfig](https://EditorConfig.org) before you do anything else. For VS Code, install the extension.
 
-You'll need Node (version 8 or above), with Yarn installed globally.
+Create an `.env` file by copying `.example.env`.
+
+You'll need Node (version 8+), with Yarn installed.
 
     yarn      # install packages
     yarn dev  # build and run a development server
@@ -21,19 +23,34 @@ Parcel.js
 
 Parcel.js is great, but so far has very basic support for multi-page web applications.
 
-Due to [this issue](https://github.com/parcel-bundler/parcel/issues/1315) you'll need to open your browser manually at
+(1) Due to [this issue](https://github.com/parcel-bundler/parcel/issues/1315) you'll need to open your browser manually at
 
-    http://localhost:4000/index.html <-- note the `index.html`
+    http://localhost:4000/index.html  <-- note the `index.html`
 
-In production, the `.html` extension isn't needed (Github Pages serves `.html`, and `index.html`, automatically).
+In production, the `.html` extension isn't needed. Github Pages serves `.html`, and `index.html`, automatically.
 
-Due to [this bug](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has to have its own bundle. This could be improved in the future - only two bundles are really needed; one shared bundle (with the styles imported) and one for the single-page React app.
+This means we need a workaround for ugly local development URLs. Variables are appended to page URLs so that in-app links work at development time:
 
-TODO: Leaflet CSS might need normal CSS box model. https://getbootstrap.com/docs/4.3/getting-started/introduction/#box-sizing
+    PAGE_EXTENSION=".pug"
+    INDEX_PAGE=index
 
-Parcel errors, warnings and unexpectedness can often be fixed by **clearing its cache**.
+These variables are both set to the empty string in production, and HTML links are constructed like so:
 
-    yarn clean
+    a(href='/about' + process.env.PAGE_EXTENSION) Go to the About page
+        ->  /about       # prod
+        ->  /about.pug   # dev
+
+    a(href='/' + process.env.INDEX_PAGE + process.env.PAGE_EXTENSION) Go to the home page
+        ->  /            # prod
+        ->  /index.pug   # dev
+
+(But note that Parcel *then* converts .pug templates into .html files!)
+
+(2) Due to [this bug](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has to have its own bundle. This could be improved in the future - only two bundles are really needed; one shared bundle with the styles imported and one for the single-page React app.
+
+> Parcel errors, warnings and unexpectedness can often be fixed by **clearing its cache**.
+
+    yarn clean   # cleans all build output, including the Parcel cache
 
 Code style
 ----------
@@ -67,7 +84,7 @@ Page structure
 Server-side API
 ---------------
 
-We're going to expose the existing "Catalog" database API on the Internet, removing the need for a backend web server or cloud functions. This is also a significant additional deliverable.
+We're going to expose the existing "Catalog" database API on the Internet, removing the need for a backend web server or cloud functions. This also creates the possibility of a significant future deliverable.
 
 The Catalog database has two basic concepts: *collections* and *products*. In this application, a collection is visualized with a *layer* on the map.
 
@@ -151,3 +168,8 @@ Project plan
 - Task: Map page [the rest of the time] https://github.com/jncc/scottish-lidar/issues/13
 - Task: Feedback [1 week] https://github.com/jncc/scottish-lidar/issues/14
 - Task (Stretch): Gazetteer https://github.com/jncc/scottish-lidar/issues/15
+
+Notes
+-----
+
+TODO: Leaflet CSS might need normal CSS box model. https://getbootstrap.com/docs/4.3/getting-started/introduction/#box-sizing
