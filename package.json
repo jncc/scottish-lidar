@@ -16,6 +16,7 @@
     "@types/node": "12.7.4",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
+    "@types/react-router-dom": "4.3.5",
     "less": "3.10.3",
     "parcel-bundler": "1.12.3",
     "pug": "^2.0.4",
@@ -32,6 +33,7 @@
     "leaflet": "1.5.1",
     "popper.js": "1.15.0",
     "react-cookie": "4.0.1",
+    "react-router-dom": "5.0.1",
     "ts-polyfill": "3.5.3",
     "whatwg-fetch": "3.0.0"
   }

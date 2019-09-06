@@ -59,8 +59,17 @@ Before you push new code, ensure your code passes the style rules.
 
     yarn lint
 
+Packages
+--------
+
+Upgrade all library packages to their latest versions with
+
+    yarn upgrade --latest
+
 Page structure
 --------------
+
+The web application consists of several html 'content' pages and a page that holds the React single-page app. It has been designed to be hosted in production on a static website host service. There is no dynamic web server, and we make direct calls to the JNCC Catalog database API.
 
 - /index.html (`/`) - home page
 - /data.html        - the react app
@@ -77,7 +86,7 @@ Page structure
 Server-side API
 ---------------
 
-We're going to expose the existing "Catalog" database API on the Internet, removing the need for a backend web server or cloud functions. This also creates the possibility of a significant future deliverable.
+We expose the existing "Catalog" database API on the Internet, removing the need for a backend web server or cloud functions. This also creates the possibility of a significant future deliverable.
 
 The Catalog database has two basic concepts: *collections* and *products*. In this application, a collection is visualized with a *layer* on the map.
 
