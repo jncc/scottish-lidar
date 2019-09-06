@@ -2,16 +2,16 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { CookiesProvider } from 'react-cookie'
-import { HashRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom'
 
 // polyfills
+import 'whatwg-fetch'
 // import 'ts-polyfill/lib/es2016-array-include'
 // import 'ts-polyfill/lib/es2017-object'
 // import 'ts-polyfill/lib/es2017-string'
-
 // import 'url-search-params-polyfill'
 
 import { env } from '../env'
+import { Routing } from './Routing'
 
 // tslint:disable-next-line
 console.log('Hello')
@@ -27,52 +27,10 @@ const MyComponent = () => {
   return <div>This is the app!</div>
 }
 
-function ListComponent() {
-  return <h2>This is the List page</h2>
-}
-
-function MapComponent() {
-  return <h2>This is the Map page</h2>
-}
-
-function NotFoundComponent() {
-  return (
-    <div>
-      <h1>Not found</h1>
-      <p>Please check the URL you entered.</p>
-    </div>
-  )
-}
-
-function MenuNav() {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/list">List</Link>
-            </li>
-            <li>
-              <Link to="/map">Map</Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Redirect from="/" exact to="/list" />
-          <Route path="/list" component={ListComponent} />
-          <Route path="/map" component={MapComponent} />
-          <Route component={NotFoundComponent} />
-        </Switch>
-      </div>
-    </Router>
-  )
-}
-
 ReactDOM.render(
   <CookiesProvider>
     <MyComponent />
-    <MenuNav />
+    <Routing />
   </CookiesProvider>,
   document.getElementById('app')
 )
