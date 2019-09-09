@@ -10,14 +10,14 @@ html(lang='en')
   body
     div.header
       div.container
-        i(class='fas fa-ellipsis-h')
+        i.fas.fa-ellipsis-h
         span.heading-text
           | Scottish Remote Sensing Portal
         img(alt='Scottish Government Remote Sensing Portal' src='../assets/scotgovlogo.svg' width='240' height='44')
     div.container
       block content
       hr
-      div.some-class#some-id(some-attribute='some-value')
+      div.class1.class2#some-id(some-attribute='some-value')
         | Hello there from 
         = process.env.NODE_ENV
       hr
