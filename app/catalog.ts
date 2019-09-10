@@ -9,7 +9,7 @@ async function fetchAs<T>(request: Request) {
   throw new Error(`${response.status}. ${response.statusText}`)
 }
 
-export async function getCollections() {
+export async function loadCollections() {
   return await fetchAs<GetCollectionsResult>(
     new Request(env.CATALOG_API_ENDPOINT + '/search/collection/scotland-gov/*')
   )

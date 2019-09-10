@@ -1,7 +1,6 @@
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { CookiesProvider } from 'react-cookie'
 
 // polyfills
 import 'whatwg-fetch'
@@ -11,7 +10,7 @@ import 'whatwg-fetch'
 // import 'url-search-params-polyfill'
 
 import { env } from '../env'
-import { Routing } from './Routing'
+import { App } from './App'
 
 // tslint:disable-next-line
 console.log('Hello')
@@ -23,18 +22,7 @@ if (!env.CATALOG_API_ENDPOINT) {
   console.log('CATALOG_API_ENDPOINT is required')
 }
 
-const MyComponent = () => {
-  return <div>This is the app!</div>
-}
-
 ReactDOM.render(
-  <CookiesProvider>
-    <MyComponent />
-    <Routing />
-  </CookiesProvider>,
+  <App />,
   document.getElementById('app')
 )
-
-// draw the leaflet map in the div
-// let div = document.getElementById('map') as HTMLElement
-// createMap(div, config)

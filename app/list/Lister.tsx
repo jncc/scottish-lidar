@@ -1,57 +1,32 @@
 
 import * as React from 'react'
 
-import { getCollections, Collection } from '../catalog'
+import { Collection } from '../catalog'
 
-interface ListerState {
+interface Props {
   collections: Collection[]
-  pending: number
 }
+// interface DispatchProps {
+//   doFoo: () => Promise<void>
+// }
 
-export class Lister extends React.Component<any, ListerState> {
-
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      collections: [] as Collection[],
-      pending: 0
-    }
-  }
-  
-  render() {
-
-    let collectionsListUI = this.state.collections.map((c) => {
-      return (
-        <li key={c.id}>
-          <div>{c.metadata.title}</div>
-          <div>{c.name}</div>
-          <div>{c.metadata.abstract}</div>
-        </li>
-      )
-    })
-
+export const Lister = (props: Props) => {
+  let collectionsListUI = props.collections.map((c) => {
     return (
-      <div>
-        <h1>List of collections!!</h1>
-        <ul>
-          {collectionsListUI}
-        </ul>
-      </div>
+      <li key={c.id}>
+        <div>{c.metadata.title}</div>
+        <div>{c.name}</div>
+        <div>{c.metadata.abstract}</div>
+      </li>
     )
-  }
-  
-  componentDidMount() {
-    this.loadCollections()
-  }
+  })
 
-  loadCollections() {
-    this.setState((prev: any) => ({ pending: prev.pending + 1 }))
-    getCollections()
-      .then(r => {
-        this.setState({ collections: r.result })
-      })
-      .finally(() => {
-        this.setState((prev: any) => ({ pending: prev.pending - 1 }))
-      })
-  }
+  return (
+    <div>
+      <h1>List of collections!!</h1>
+      <ul>
+        {collectionsListUI}
+      </ul>
+    </div>
+  )
 }

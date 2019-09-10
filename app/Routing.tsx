@@ -3,10 +3,8 @@ import * as React from 'react'
 import { HashRouter, Route, Redirect, Switch } from 'react-router-dom'
 
 import { Lister } from './list/Lister'
-
-function MapComponent() {
-  return <h2>This is the Map page</h2>
-}
+import { Mapper } from './map/Mapper'
+import { State } from './state'
 
 function NotFoundComponent() {
   return (
@@ -17,14 +15,14 @@ function NotFoundComponent() {
   )
 }
 
-export function Routing() {
+export function Routing(props: State) {
   return (
     <HashRouter>
       <div>
         <Switch>
           <Redirect from="/" exact to="/list" />
-          <Route path="/list" component={Lister} />
-          <Route path="/map" component={MapComponent} />
+          <Route path="/list" render={() => <Lister collections={props.collections} />} />
+          <Route path="/map" component={Mapper} />
           <Route component={NotFoundComponent} />
         </Switch>
       </div>
