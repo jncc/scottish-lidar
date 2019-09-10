@@ -10,7 +10,7 @@ async function fetchAs<T>(request: Request) {
 }
 
 export async function loadCollections() {
-  return await fetchAs<GetCollectionsResult>(
+  return await fetchAs<LoadCollectionsResult>(
     new Request(env.CATALOG_API_ENDPOINT + '/search/collection/scotland-gov/*')
   )
 }
@@ -22,7 +22,7 @@ export async function loadCollections() {
 
 // Types for the Catalog API.
 
-export interface GetCollectionsResult {
+export interface LoadCollectionsResult {
   query: any
   result: Collection[]
 }

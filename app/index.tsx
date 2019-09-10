@@ -1,4 +1,7 @@
 
+// The React app entrypoint.
+// Import polyfills and render the app into the DOM.
+
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
@@ -12,14 +15,13 @@ import 'whatwg-fetch'
 import { env } from '../env'
 import { App } from './App'
 
-// tslint:disable-next-line
-console.log('Hello')
-// tslint:disable-next-line
-console.log(env.CATALOG_API_ENDPOINT)
-
+if (env.NODE_ENV === 'development') {
+  // tslint:disable-next-line
+  console.log('App is starting up...')
+}
 if (!env.CATALOG_API_ENDPOINT) {
   // tslint:disable-next-line
-  console.log('CATALOG_API_ENDPOINT is required')
+  console.log('CATALOG_API_ENDPOINT is required.')
 }
 
 ReactDOM.render(

@@ -59,6 +59,13 @@ Before you push new code, ensure your code passes the style rules.
 
     yarn lint
 
+Tests
+-----
+
+Jest has a nice interactive runner which you can leave running in a console.
+
+    yarn test:watch
+
 Packages
 --------
 
@@ -87,6 +94,8 @@ Server-side API
 ---------------
 
 We expose the existing "Catalog" database API on the Internet, removing the need for a backend web server or cloud functions. This also creates the possibility of a significant future deliverable.
+
+See the `jncc/catalog` repository. You can run a full local instance of the database and API with Docker.
 
 The Catalog database has two basic concepts: *collections* and *products*. In this application, a collection is visualized with a *layer* on the map.
 
