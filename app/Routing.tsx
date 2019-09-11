@@ -23,10 +23,11 @@ export function Routing(props: State) {
           <Redirect from="/" exact to="/list" />
           <Route path="/list/:filter?" render={(routeProps) => {
             let filter = routeProps.location.search.replace(/\?/, '') // remove leading '?'
-            console.log(filter)
-            return <Lister collections={props.collections} filter={filter} />
-          }
-          } />
+            let setQuery = (s: string) => {
+              routeProps.history.push(routeProps.location.pathname + '?' + s)
+            }
+            return <Lister collections={props.collections} filter={filter} setQuery={setQuery} />
+          }} />
           <Route path="/map" component={Mapper} />
           <Route component={NotFoundComponent} />
         </Switch>

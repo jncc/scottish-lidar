@@ -7,10 +7,6 @@ export let initialState = {
   /** The set of collections, stored once for use throughout the app.
    *  It's convenient to store pairs of { Collection, ParsedCollectionName } */
   collections: [] as { collection: Collection, name: ParsedCollectionName }[],
-  /** The state for the Lister component. */
-  lister     : {
-    filter: ''
-  },
   /** The state for the Mapper component. */
   mapper     : {
     collection: ''
