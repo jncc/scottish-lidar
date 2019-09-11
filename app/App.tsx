@@ -1,11 +1,11 @@
 
 import * as React from 'react'
 import { CookiesProvider } from 'react-cookie'
-// import partition from 'lodash/partition'
 
 import { initialState, State } from './state'
 import { loadCollections } from './catalog'
 import { Routing } from './Routing'
+import { parseCollectionName } from './utility/collectionUtility'
 
 export class App extends React.Component<{}, State> {
 
@@ -30,10 +30,15 @@ export class App extends React.Component<{}, State> {
     this.setState((prev) => ({ loading: prev.loading + 1 }))
     loadCollections()
       .then(r => {
-        // discard the "OGC" collection that only exists to contain the WMS products
-        // (this is just how the catalog data has been structured)
-        let collections = r.result.filter(c => !c.name.endsWith('/ogc'))
-        this.setState({ collections: collections })
+        let collections = r.result
+          // discard the "OGC" collection that only exists to contain the WMS products
+          // (this is just how the catalog data has been structured)
+          .filter(c => !c.name.endsWith('/ogc'))
+          .map(c => ({
+            collection: c,
+            name: parseCollectionName(c.name)
+          }))
+        this.setState({ collections })
       })
       .finally(() => {
         this.setState((prev) => ({ loading: prev.loading - 1 }))

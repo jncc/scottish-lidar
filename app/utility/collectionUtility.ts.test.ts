@@ -21,8 +21,9 @@ describe('parseCollectionName specs', () => {
 
   test('should throw when collection name too short', () => {
 
-    expect(() =>{
+    expect(() => {
       parseCollectionName(`scotland-gov/dsm`)
     }).toThrow()
   })
+  
 })

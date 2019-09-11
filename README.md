@@ -46,25 +46,22 @@ These variables are both set to the empty string in production, and HTML links a
 
 (But note that Parcel *then* converts .pug templates into .html files!)
 
-(2) Due to [this bug](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has to have its own bundle. This could be improved in the future - only two bundles are really needed; one shared bundle with the styles imported and one for the single-page React app.
+(2) Due to [this bug](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has its own bundle. This could be improved significantly in the future - only two bundles are really needed; one shared bundle with the styles imported, and one for the single-page React app.
 
 > Parcel errors, warnings and unexpectedness can often be fixed by **clearing its cache**.
 
     yarn clean   # cleans all build output, including the Parcel cache
 
-Code style
-----------
+Tests, code style, building
+---------------------------
 
-Before you push new code, ensure your code passes the style rules.
-
-    yarn lint
-
-Tests
------
-
-Jest has a nice interactive runner which you can leave running in a console.
+Ensure your code passes the TSLint style rules. Jest is the test framework, and has a nice interactive runner which you can leave running in a console.
 
     yarn test:watch
+
+To avoid build server failures, run the whole build pipeline everything before pushing.
+
+    yarn build
 
 Packages
 --------
@@ -76,19 +73,22 @@ Upgrade all library packages to their latest versions with
 Page structure
 --------------
 
-The web application consists of several html 'content' pages and a page that holds the React single-page app. It has been designed to be hosted in production on a static website host service. There is no dynamic web server, and we make direct calls to the JNCC Catalog database API.
+The web application consists of several html 'content' pages plus a page that holds the React single-page app. It has been designed to be hosted in production on static web hosting. There is no dynamic web server, and we make do with direct calls to the JNCC Catalog database API.
 
-- /index.html (`/`) - home page
-- /data.html        - the react app
-  - `/data#/list`
-  - `/data#/list?group=lidar%2Fphase-1`
-  - `/data#/map`
-  - `/data#/download`
-- /about.html (`/about`)           - about page
-- /contribute.html (`/contribute`) - how to contribute page
-- /cookies.html (`/cookies`)       - cookies page
-- /privacy.html (`/privacy`)       - privacy page
-- /404.html (`/notthere`)          - 404 page
+    - /                         - home page       (index.html)
+    - /data                     - the react app   (data.html)
+    - /data#/list                 - the list screen
+    - /data#/list?lidar/phase-1   - the list screen, filtered
+    - /data#/map                  - the map screen
+    - /data#/map?c=lidar/phase-1  - the map screen (?not sure yet?)
+    - /data#/download             - the download screen
+    - /about                    - about page      (about.html)
+    - /contribute               - contribute page (contribute.html)
+    - /cookies                  - cookies page    (cookies.html)
+    - /privacy                  - privacy page    (privacy.html)
+    - /404                      - 404 page        (404.html)
+
+Note that we use the react-router `HashRouter` to ensure that the app behaves as expected in a static hosting envirnoment. You can navigate directly to deep links and refresh the browser within the app because the static `data.html` page will be (re)fetched from the server, then allowing the the client-side routing to take over.
 
 Server-side API
 ---------------
@@ -103,16 +103,16 @@ The Catalog database has two basic concepts: *collections* and *products*. In th
 
 We are not expecting to need to use server-side paging for this call (collection data can fit into memory easily and be fetched in one request). We'll keep this collection in memory as it's used by all the application pages.
 
-Collections are filterable by *group* (by the first 3 segments) in the List page, e.g.
+Collections are filterable by *group* in the list page, e.g.
 
-- `scotland-gov/lidar/phase-1` (group)
+- `scotland-gov/lidar/phase-1`
 - `scotland-gov/lidar/phase-2`
 - `scotland-gov/lidar/phase-3`
 
-Collections are also grouped in the Map UI in the same way, e.g.
+Collections are also grouped in the map page in the same way, e.g.
 
-- lidar/phase-1 (group)
-  - dsm `scotland-gov/lidar/phase-1/dsm` (collection)
+- lidar/phase-1 (*group*)
+  - dsm `scotland-gov/lidar/phase-1/dsm` (*collection*)
   - dtm `scotland-gov/lidar/phase-1/dtm`
   - laz `scotland-gov/lidar/phase-1/laz`
 
@@ -132,15 +132,13 @@ As the OGC WMS service URLs for the collections are stored as products in separa
 
     POST search/product
     {
-        "collection": "scotland-gov/lidar/ogc",  // we might rename this collection?
+        "collection": "scotland-gov/lidar/ogc",
     }
 
 This query gives a list of OGC products. Then client-side, we need to match on the product name:
 
 `scotland-gov/lidar/phase-1/dtm` for this collection..
 `scotland-gov-lidar-phase-1-dtm` get the product with the equivalent productName
-
-TODO: These need to be renamed to match the collection *substituting slashes for dashes*.
 
 The List page can also be filtered to e.g. a group by querystring value e.g. `lidar/phase-1`.
 This would be a client-side filter of the collections lookup if single-page app.

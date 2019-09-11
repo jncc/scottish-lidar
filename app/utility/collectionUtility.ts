@@ -1,5 +1,5 @@
 
-interface ParsedCollectionName {
+export interface ParsedCollectionName {
   Owner: string  // e.g. `scotland-gov`
   Group: string  // e.g. `lidar/phase-1`
   Name : string  // e.g. `dsm`

@@ -21,7 +21,12 @@ export function Routing(props: State) {
       <div>
         <Switch>
           <Redirect from="/" exact to="/list" />
-          <Route path="/list" render={() => <Lister collections={props.collections} />} />
+          <Route path="/list/:filter?" render={(routeProps) => {
+            let filter = routeProps.location.search.replace(/\?/, '') // remove leading '?'
+            console.log(filter)
+            return <Lister collections={props.collections} filter={filter} />
+          }
+          } />
           <Route path="/map" component={Mapper} />
           <Route component={NotFoundComponent} />
         </Switch>
