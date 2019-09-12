@@ -5,71 +5,47 @@ import { useCookies } from 'react-cookie'
 type Props = {
 } 
 
-export const DownloadScreen = (props: Props) => {
-  const [cookies, setCookie] = useCookies(['name'])
+const BASKET_COOKIE_NAME = 'basket'
 
-  function onChange(newName: any) {
-    setCookie('name', newName, { path: '/' })
+export const DownloadScreen = (props: Props) => {
+  
+  // let basket = new Basket()
+
+  let [cookies, setCookie] = useCookies([BASKET_COOKIE_NAME])
+
+  let setCookieValue = (value: string) => {
+    setCookie(BASKET_COOKIE_NAME, value, { path: '/' })
   }
+
+  let cookieValue = cookies[BASKET_COOKIE_NAME]
 
   return (
     <div>
-      <NameForm name={cookies.name} onChange={onChange} />
-      {cookies.name && <h2>Hello {cookies.name}!</h2>}
+      <TemporaryForm name={cookieValue} onChange={setCookieValue} />
+      {cookieValue &&
+        <pre>Hello {cookieValue}</pre>
+      }
     </div>
   )
 }
 
-
-// export const DownloadScreen = (props: Props) => {
-
-//   let [cookies, setCookie] = useCookies(['name'])
-
-//   function onChange(e: any) {
-//     let newName = e.target.value
-//     console.log(e.target)
-//     setCookie('name', newName, { path: '/' })
-//     e.preventDefault()
-//   }
-
-
-
-//   return (
-//     <div>
-//       <h1>Downloads</h1>
-//       <div>
-//         <form onSubmit={onChange}>
-//           <label>
-//             Name: <input type="text" name="name" value={cookies.name} />
-//           </label>
-//           <input type="submit" value="Go"  />
-//         </form>
-                
-//         {cookies.name && <h1>Hello {cookies.name}!</h1>}
-//       </div>
-//     </div>
-//   )
-
-// }
-
-class NameForm extends React.Component<any, any> {
+class TemporaryForm extends React.Component<any, any> {
   constructor(props: any) {
-    super(props);
-    this.state = {value: ''};
+    super(props)
+    this.state = {value: ''}
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event: any) {
-    this.setState({value: event.target.value});
+    this.setState({value: event.target.value})
     this.props.onChange(event.target.value)
-    console.log(event.target.value)
   }
 
   handleSubmit(event: any) {
-    // alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
+    // alert('A name was submitted: ' + this.state.value)
+    event.preventDefault()
   }
 
   render() {
@@ -81,6 +57,6 @@ class NameForm extends React.Component<any, any> {
         </label>
         <input type="submit" value="Submit" />
       </form>
-    );
+    )
   }
 }

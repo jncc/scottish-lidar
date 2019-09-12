@@ -1,3 +1,11 @@
+
+/**
+ * The global application state's initial values, and types thereof.
+ * Note that the application also stores appropriate state in:
+ * - the list screen URL querystring
+ * - the basket cookie.
+ */
+
 import { Collection, Product } from './catalog/types'
 import { ParsedCollectionName } from './utility/collectionUtility'
 
