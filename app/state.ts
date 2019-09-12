@@ -5,7 +5,7 @@ export let initialState = {
   /** The number of in-progress network requests. */
   loading    : 0,
   /** The set of collections, stored once for use throughout the app.
-   *  It's convenient to store pairs of { Collection, ParsedCollectionName } */
+   *  It's convenient to store tuples of { collection + parsed name + OGC product,  } */
   collections: [] as {
     collection: Collection,
     name: ParsedCollectionName,

@@ -2,9 +2,10 @@
 import * as React from 'react'
 import { HashRouter, Route, Redirect, Switch } from 'react-router-dom'
 
-import { Lister } from './list/Lister'
-import { Mapper } from './map/Mapper'
 import { State } from './state'
+import { ListScreen } from './screens/list/ListScreen'
+import { MapScreen } from './screens/map/MapScreen'
+import { DownloadScreen } from './screens/download/DownloadScreeen'
 
 function NotFoundComponent() {
   return (
@@ -26,9 +27,10 @@ export function Routing(props: State) {
             let setFilter = (s: string) => {
               routeProps.history.push(routeProps.location.pathname + '?' + s)
             }
-            return <Lister collections={props.collections} filter={filter} setFilter={setFilter} />
+            return <ListScreen collections={props.collections} filter={filter} setFilter={setFilter} />
           }} />
-          <Route path="/map" component={Mapper} />
+          <Route path="/map" component={MapScreen} />
+          <Route path="/download" component={DownloadScreen} />
           <Route component={NotFoundComponent} />
         </Switch>
       </div>

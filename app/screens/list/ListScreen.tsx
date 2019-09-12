@@ -2,7 +2,7 @@
 import * as React from 'react'
 import _ from 'lodash'
 
-import { State } from '../state'
+import { State } from '../../state'
 
 type Props = {
   collections: State['collections']
@@ -14,7 +14,7 @@ type Props = {
 //   doFoo: () => Promise<void>
 // }
 
-export const Lister = (props: Props) => {
+export const ListScreen = (props: Props) => {
 
   let filterDropdownElements = _(props.collections)
     .groupBy(c => c.name.Group)

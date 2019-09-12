@@ -5,7 +5,7 @@ import * as React from 'react'
 // let div = document.getElementById('map') as HTMLElement
 // createMap(div, config)
 
-export const Mapper = (props: any) => {
+export const MapScreen = (props: any) => {
   return (
     <div>This is the mapper</div>
   )
