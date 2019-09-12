@@ -52,8 +52,8 @@ These variables are both set to the empty string in production, and HTML links a
 
     yarn clean   # cleans all build output, including the Parcel cache
 
-Tests, code style, building
----------------------------
+Code style, testing and building
+--------------------------------
 
 Ensure your code passes the TSLint style rules. Jest is the test framework, and has a nice interactive runner which you can leave running in a console.
 
@@ -77,39 +77,48 @@ The web application consists of several html 'content' pages plus a page that ho
 
     - /                         - home page       (index.html)
     - /data                     - the react app   (data.html)
-    - /data#/list                 - the list screen
-    - /data#/list?lidar/phase-1   - the list screen, filtered
-    - /data#/map                  - the map screen
-    - /data#/map?c=lidar/phase-1  - the map screen (?not sure yet?)
-    - /data#/download             - the download screen
+    - /data#/list                   - the list screen
+    - /data#/list?lidar/phase-1     - the list screen, filtered
+    - /data#/map                    - the map screen
+    - /data#/map?c=lidar/phase-1    - the map screen (?not sure yet?)
+    - /data#/download               - the download screen
     - /about                    - about page      (about.html)
     - /contribute               - contribute page (contribute.html)
     - /cookies                  - cookies page    (cookies.html)
     - /privacy                  - privacy page    (privacy.html)
     - /404                      - 404 page        (404.html)
 
-Note that we use the react-router `HashRouter` to ensure that the app behaves as expected in a static hosting envirnoment. You can navigate directly to deep links and refresh the browser within the app because the static `data.html` page will be (re)fetched from the server, then allowing the the client-side routing to take over.
+Note that we use the react-router `HashRouter` to ensure the app behaves itself in a static hosting envirnoment. You can navigate directly to deep links and refresh the browser within the app because the static `data.html` page will be (re)fetched from the server, then allowing the the client-side router to take over.
 
-Server-side API
----------------
+Data model and server-side API
+------------------------------
 
-We expose the existing "Catalog" database API on the Internet, removing the need for a backend web server or cloud functions. This also creates the possibility of a significant future deliverable.
+We expose the existing "Catalog" database API on the Internet, removing the need for any backend web server or cloud functions. This also creates the possibility of a significant future deliverable.
 
-See the `jncc/catalog` repository. You can run a full local instance of the database and API with Docker.
+See the `jncc/catalog` repository. You can run a full local instance of the database and API with Docker. 🐳
 
-The Catalog database has two basic concepts: *collections* and *products*. In this application, a collection is visualized with a *layer* on the map.
+The Catalog database has two basic concepts: *collections* and *products*. In this application, a collection is a *dataset*, visualized with a *layer* on the map.
 
-`GET search/collection/scotland-gov/*` for the List page and the Map sidebar.
+Get all collection metadata (for `scotland-gov`):
 
-We are not expecting to need to use server-side paging for this call (collection data can fit into memory easily and be fetched in one request). We'll keep this collection in memory as it's used by all the application pages.
+    GET search/collection/scotland-gov/*
 
-Collections are filterable by *group* in the list page, e.g.
+- `scotland-gov/lidar/phase-1/dsm`
+- `scotland-gov/lidar/phase-1/dtm`
+- `scotland-gov/lidar/phase-1/laz`
+- `scotland-gov/lidar/phase-2/dsm`
+- `scotland-gov/lidar/phase-2/dtm`
+- etc...
+
+There are currently 9 collections, so an assumption of the app design is that this collection metadata can fit into memory easily and be fetched in one request. We'll keep this collection in memory, as it's used by both the list screen and the map sidebar.
+
+Collections are filterable by *group* in the list screen, e.g.
 
 - `scotland-gov/lidar/phase-1`
 - `scotland-gov/lidar/phase-2`
 - `scotland-gov/lidar/phase-3`
 
-Collections are also grouped in the map page in the same way, e.g.
+Collections are also grouped in the map screen in the same way, e.g.
 
 - lidar/phase-1 (*group*)
   - dsm `scotland-gov/lidar/phase-1/dsm` (*collection*)
@@ -119,41 +128,36 @@ Collections are also grouped in the map page in the same way, e.g.
 Clearly we need a helper function `parseCollectionName(collectionName: string): ParsedCollectionName`, where:
 
     interface ParsedCollectionName {
-        Owner: string  // `scotland-gov`
-        Group: string  // `lidar/phase-1`
-        Name:  string  // `dsm`
+        Owner:   string  // `scotland-gov`
+        Group:   string  // `lidar/phase-1`
+        Dataset: string  // `dsm`
     }
 
-- `getGroup(collectionName: string): Group`
-- `getAllGroups(): Group[]`
-- `getCollectionsInGroup(groupName: string): Collection[]`
-
-As the OGC WMS service URLs for the collections are stored as products in separate collections, we'll have to join them on the client.
+One oddity is that the OGC WMS service URLs for the collections are stored as products (in a separate, special collection). We'll have to join them on the client.
 
     POST search/product
     {
         "collection": "scotland-gov/lidar/ogc",
     }
 
-This query gives a list of OGC products. Then client-side, we need to match on the product name:
+This query gives a list of OGC products which we can identify using the product name:
 
-`scotland-gov/lidar/phase-1/dtm` for this collection..
-`scotland-gov-lidar-phase-1-dtm` get the product with the equivalent productName
+`scotland-gov/lidar/phase-1/dtm` for this collection...  
+`scotland-gov-lidar-phase-1-dtm` the OGC product has a corresponding product name
 
 The List page can also be filtered to e.g. a group by querystring value e.g. `lidar/phase-1`.
-This would be a client-side filter of the collections lookup if single-page app.
-(Server-side alternative is `GET search/collection/scotland-gov/lidar/phase-1/*`)
+This is client-side filter of the collections lookup. (By the way, the server-side alternative would be `GET search/collection/scotland-gov/lidar/phase-1/*`)
 
-`GET search/product`
+    GET search/product
 
 Map page needs to know which collections are currently matching bbox:
 
-`POST search/collectionscontainingproducts` // or whatever it's called exactly
-    {
-        footprint
-        spatial-op
-        [collection1,collection2]
-    }
+    `POST search/collectionscontainingproducts` // or whatever it's called exactly
+        {
+            footprint
+            spatial-op
+            [collection1,collection2]
+        }
 Returns [(collection-name, count)]
 
 Note: Will need to send all collections from the in-memory collection list.

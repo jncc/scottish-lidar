@@ -9,14 +9,14 @@ describe('parseCollectionName specs', () => {
   
     expect(parsed.Owner).toBe('scotland-gov')
     expect(parsed.Group).toBe('lidar/phase-1')
-    expect(parsed.Name).toBe('dsm')
+    expect(parsed.Dataset).toBe('dsm')
   })
   
   test('should handle longer collection name just in case', () => {
     
     let parsed = parseCollectionName(`scotland-gov/lidar/phase-1/dsm/something-else`)
   
-    expect(parsed.Name).toBe('dsm/something-else')
+    expect(parsed.Dataset).toBe('dsm/something-else')
   })
 
   test('should throw when collection name too short', () => {

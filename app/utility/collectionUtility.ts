@@ -1,8 +1,8 @@
 
-export interface ParsedCollectionName {
-  Owner: string  // e.g. `scotland-gov`
-  Group: string  // e.g. `lidar/phase-1`
-  Name : string  // e.g. `dsm`
+export type ParsedCollectionName = {
+  Owner  : string  // e.g. `scotland-gov`
+  Group  : string  // e.g. `lidar/phase-1`
+  Dataset: string  // e.g. `dsm`
 }
 
 export function parseCollectionName(collectionName: string): ParsedCollectionName {
@@ -16,6 +16,6 @@ export function parseCollectionName(collectionName: string): ParsedCollectionNam
   return {
     Owner: segments[0],
     Group: segments[1] + '/' + segments[2],
-    Name : segments.slice(3).join('/') // remainder, just in case there are additional segments in future
+    Dataset : segments.slice(3).join('/') // remainder, just in case there are additional segments in future
   }
 }

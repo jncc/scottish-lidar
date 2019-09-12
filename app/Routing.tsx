@@ -21,12 +21,12 @@ export function Routing(props: State) {
       <div>
         <Switch>
           <Redirect from="/" exact to="/list" />
-          <Route path="/list/:filter?" render={(routeProps) => {
-            let filter = routeProps.location.search.replace(/\?/, '') // remove leading '?'
-            let setQuery = (s: string) => {
+          <Route path="/list/:filter?" render={routeProps => {
+            let filter = routeProps.location.search.replace(/^\?/, '') // remove leading '?'
+            let setFilter = (s: string) => {
               routeProps.history.push(routeProps.location.pathname + '?' + s)
             }
-            return <Lister collections={props.collections} filter={filter} setQuery={setQuery} />
+            return <Lister collections={props.collections} filter={filter} setFilter={setFilter} />
           }} />
           <Route path="/map" component={Mapper} />
           <Route component={NotFoundComponent} />

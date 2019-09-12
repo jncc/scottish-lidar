@@ -3,12 +3,11 @@ import * as React from 'react'
 import _ from 'lodash'
 
 import { State } from '../state'
-import { Collection } from '../catalog'
 
 type Props = {
   collections: State['collections']
   filter: string
-  setQuery: (s: string) => void
+  setFilter: (s: string) => void
 } // & State['lister']
 
 // interface DispatchProps {
@@ -17,13 +16,13 @@ type Props = {
 
 export const Lister = (props: Props) => {
 
-  let collectionOptionsUI = _(props.collections)
+  let filterDropdownElements = _(props.collections)
     .groupBy(c => c.name.Group)
     .keys()
     .map(key => <option key={key} value={key}>{key}</option>)
     .value()
     
-  let collectionListUI = props.collections
+  let collectionListElements = props.collections
     // if there's a filter specified, filter the collections by that group
     .filter(c => !props.filter || c.name.Group === props.filter)
     .map(c =>
@@ -31,31 +30,40 @@ export const Lister = (props: Props) => {
         <div>{c.collection.metadata.title}</div>
         <div>{c.collection.name}</div>
         <div>{c.collection.metadata.abstract}</div>
+        {/* show the OGC WMS link */}
+        {c.ogcProduct && c.ogcProduct.data.product.wms &&
+          <div>
+            <div>{c.ogcProduct.data.product.wms.name}</div>
+            <div>{c.ogcProduct.data.product.wms.url}</div>
+          </div>          
+        }
       </li>
     )
 
   return (
     <div>
-      <h1>Collections</h1>
+      <h1>Datasets</h1>
+      <div>Browse the available datasets on the portal.</div>
+      <hr />
       <div>
-        <span>{collectionListUI.length} of {props.collections.length} datasets shown </span>
+        Showing {collectionListElements.length} of {props.collections.length} datasets
         {props.filter &&
-          <span>filtered by <span style={{fontWeight: 'bold'}}>{props.filter}</span></span>
+          <span> filtered by <span style={{fontWeight: 'bold'}}>{props.filter}</span></span>
         }
       </div>
       <hr />
       <div>
       <select
         value={props.filter}
-        onChange={(e) => { props.setQuery(e.target.value) } }
+        onChange={e => { props.setFilter(e.target.value) }}
         className="form-control" >
         <option key="all" value="">All</option>
-        {collectionOptionsUI}
+        {filterDropdownElements}
       </select>
       </div>
       <hr />
       <ul>
-        {collectionListUI}
+        {collectionListElements}
       </ul>
     </div>
   )
