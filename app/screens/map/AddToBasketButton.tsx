@@ -1,28 +1,21 @@
 
-import * as React from 'react'
-import { useCookies } from 'react-cookie'
-import { Basket, BasketItem } from '../../basket/Basket'
-
-const BASKET_COOKIE_NAME = 'basket'
+import React, { useState } from 'react'
+import { useBasket, Basket, BasketItem } from '../../basket/Basket'
 
 type Props = {
 }
 
 export const AddToBasketButton = (props: Props) => {
   
-  let [cookies, setCookie] = useCookies([BASKET_COOKIE_NAME])
-
-  let addItem = (item: BasketItem) => {
-    let cookie = cookies[BASKET_COOKIE_NAME]
-    let basket: Basket = cookie || { items: [] }
-    basket.items.push(item)
-    setCookie(BASKET_COOKIE_NAME, basket, { path: '/' })
-  }
+  let [count, setCount] = useState(0)
+  let [basket, addItemToBasket] = useBasket()
 
   return (
     <div>
-      <div>{JSON.stringify(cookies[BASKET_COOKIE_NAME])}</div>
-      <button onClick={() => addItem({ productId: 'blah'})}>Add to basket</button>
+      <pre>{JSON.stringify(basket)}</pre>
+      <div>{count}</div>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => addItemToBasket({ productId: 'product' + count })}>Add to basket</button>
     </div>
   )
 }
