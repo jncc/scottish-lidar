@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react'
-import { useBasket, Basket, BasketItem } from '../../basket/Basket'
+
+import { useBasket } from '../../basket'
 
 type Props = {
 }
