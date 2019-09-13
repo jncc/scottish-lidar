@@ -5,7 +5,7 @@ import { HashRouter, Route, Redirect, Switch } from 'react-router-dom'
 import { State } from './state'
 import { ListScreen } from './screens/list/ListScreen'
 import { MapScreen } from './screens/map/MapScreen'
-import { DownloadScreen } from './screens/download/DownloadScreeen'
+import { DownloadScreen } from './screens/download/DownloadScreen'
 
 function NotFoundComponent() {
   return (

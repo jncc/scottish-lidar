@@ -10,7 +10,7 @@ export const DownloadScreen = (props: Props) => {
   let [basket] = useBasket()
 
   let basketItemElements = basket.items.map(item =>
-    <li>
+    <li key={item.productId}>
       {item.productId}
     </li>  
   )
