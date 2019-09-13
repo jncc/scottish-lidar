@@ -19,7 +19,13 @@ export function useBasket() {
   let basket: Basket = cookie || { items: [] }
 
   let addItem = (item: BasketItem) => {
-    basket.items.push(item)
+
+    let existingItem = basket.items.find(i => i.productId === item.productId)
+
+    if (!existingItem) {
+      basket.items.push(item)
+    }
+
     setCookie(COOKIE_NAME, basket, { path: '/' })
   }
 
