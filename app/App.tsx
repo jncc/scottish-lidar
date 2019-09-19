@@ -29,16 +29,20 @@ export class App extends React.Component<{}, State> {
   async doLoadCollections() {
     this.setState((prev) => ({ loading: prev.loading + 1 }))
     try {
-      let collections = await loadCollections()
-      let ogcProducts = await loadOgcProducts()
+      let [collections, ogcProducts] = await Promise.all([
+        loadCollections(),
+        loadOgcProducts()
+      ])
+
       let tuples = collections.result
-        // discard the "OGC" collection that only exists to catalogue the OGC WMS products
+        // discard the "OGC" collection which only exists to catalogue the OGC WMS products
         // (this is just how the catalog data has been structured)
         .filter(c => !c.name.endsWith('/ogc'))
-        // create a tuple of { collection + its parsed collection name + its OGC product }
+        // create a tuple of { collection, its parsed collection name, its OGC product }
         .map(c => {
-          // `scotland-gov/lidar/phase-1/dtm` for this collection...
-          // `scotland-gov-lidar-phase-1-dtm` the OGC product has a corresponding product name
+          // each collection has a corresponding OGC product
+          // `scotland-gov/lidar/phase-1/dtm` (collection name)
+          // `scotland-gov-lidar-phase-1-dtm` (OGC product name)
           let ogcProductName = c.name.replace(new RegExp('\/', 'g'), '-')
           return {
             collection: c,
