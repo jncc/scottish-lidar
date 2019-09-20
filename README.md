@@ -46,7 +46,7 @@ These variables are both set to the empty string in production, and HTML links a
 
 (But note that Parcel *then* converts .pug templates into .html files!)
 
-(2) Due to [this bug](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has its own bundle. This could be improved significantly in the future - only two bundles are really needed; one shared bundle with the styles imported, and one for the single-page React app.
+(2) Due to [this bug](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has its own bundle. This could be improved significantly in the future - only three bundles are really needed; one for the static pages, one for the single-page React app, and one shared bundle.
 
 > Parcel errors, warnings and unexpectedness can often be fixed by **clearing its cache**.
 
@@ -59,16 +59,20 @@ Ensure your code passes the TSLint style rules. Jest is the test framework, and 
 
     yarn test:watch
 
-To avoid build server failures, run the whole build pipeline everything before pushing.
+To avoid failures at the build server, run the production build pipeline before pushing.
 
     yarn build
 
-Packages
---------
+Tips
+----
 
 Upgrade all library packages to their latest versions with
 
     yarn upgrade --latest
+
+The parcel-plugin-bundle-visualiser package creates a visual report on bundle size. Build without source maps so they don't confuse matters, and view the output file in `dist/report.html`.
+
+    yarn build --no-source-maps
 
 Page structure
 --------------

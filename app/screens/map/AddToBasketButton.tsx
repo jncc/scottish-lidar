@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react'
+import Button from 'react-bootstrap/Button'
 
 import { useBasket } from '../../basket'
 
@@ -15,8 +16,8 @@ export const AddToBasketButton = (props: Props) => {
     <div>
       <pre>{JSON.stringify(basket)}</pre>
       <div>{count}</div>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      <button onClick={() => addItemToBasket({ productId: 'product' + count })}>Add to basket</button>
+      <Button  variant="light"onClick={() => setCount(count + 1)}>Increment</Button>
+      <Button variant="primary" onClick={() => addItemToBasket({ productId: 'product' + count })}>Add to basket</Button>
     </div>
   )
 }
