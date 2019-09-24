@@ -32,6 +32,11 @@ pipeline {
                         sh 'cp -r ../master/dist/* .'
                         // Github Pages custom domain configured with a file called 'CNAME'
                         sh 'echo "dev-scottish-remote-sensing-portal.jncc.gov.uk" > CNAME'
+                        sh 'echo "BUILD_NUMBER" $BUILD_NUMBER'
+                        sh 'echo "BUILD_NUMBER" ' + env.BUILD_NUMBER
+                        sh 'echo "GIT_COMMIT" $GIT_COMMIT'
+                        sh 'echo "GIT_COMMIT" ' + env.GIT_COMMIT
+                        // sed -i 's/version-stamp/$GIT_COMMIT/g' *.html
                         sh 'ls -a'
                         sh 'git add --all'
                         sh 'git config user.name "Jenkins"'

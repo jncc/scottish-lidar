@@ -1,0 +1,33 @@
+div.footer
+  div.container
+    div.row
+      div.col-md-8
+        div.footer-title
+          span Scottish Remote Sensing Portal
+        div.footer-subtitle
+          | Find, share and reuse remote sensed data provided by Scottish public sector organisations.
+        ul.fa-ul
+          li
+            span.fa-li
+              i.fas.fa-terminal
+            a(href='/about' + process.env.PAGE_EXTENSION) Privacy
+          li
+            span.fa-li
+              i.fas.fa-terminal
+            a(href='/about' + process.env.PAGE_EXTENSION) Cookies
+          li
+            span.fa-li
+              i.fas.fa-terminal
+            a(href='/about' + process.env.PAGE_EXTENSION) Feedback
+            //- i.fas.fa-envelope.pad-right
+            //- | Feedback welcome  
+            //- a(href="mailto:gi-sat@gov.scot") gi-sat@gov.scot
+      div.col-md-4
+        img.jncc-logo(alt='JNCC logo' src='../assets/JNCCLogo_Black.png')
+        br
+        br
+        | Built in partnership with
+        br
+        | Joint Nature Conservation Committee
+        br
+        a(href="https://jncc.gov.uk") https://jncc.gov.uk

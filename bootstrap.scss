@@ -1,4 +1,106 @@
 
+  
 // customisations for bootstrap
 
-@import "~bootstrap/scss/bootstrap"
+// bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap";
+
+// Alternate suggestion, but navbar doesn't work
+// @import "~bootstrap/scss/_functions";
+// @import "~bootstrap/scss/_variables";
+// @import "~bootstrap/scss/_mixins";
+// // Optional
+// @import "~bootstrap/scss/_reboot";
+// @import "~bootstrap/scss/_type";
+// @import "~bootstrap/scss/_images";
+// @import "~bootstrap/scss/_code";
+// @import "~bootstrap/scss/_grid";
+
+$scot-gov-blue: #0065bd;
+
+// variable overrides
+$theme-colors: (
+"primary": $scot-gov-blue
+);
+
+$spot-muted: rgb(114, 114, 114);
+$header-font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+.pad-right {
+  margin-right: 0.4rem;
+}
+
+body {
+  font-family: Hind Madurai, "Helvetica Neue", Helvetica, Arial, sans-serif;;
+}
+
+h1 {
+    color: $scot-gov-blue;
+    font-family: $header-font-family;
+  }
+
+.my-select {
+    background-color: $scot-gov-blue;
+    color: white;
+    border: 0 none;
+    border-radius: 20px;
+    padding: 6px 20px;
+  }
+
+.header {
+  border-top: 0.4rem solid $scot-gov-blue;
+  margin-bottom: 3rem;
+  .container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .title-text {
+    color: $spot-muted;
+    font-family: $header-font-family;
+    font-size: 200%;
+    font-weight: 100;
+  }
+}
+    
+.footer {
+  background-color: $gray-700;
+  color: white; //$gray-100;
+  padding: 3rem 0;
+  margin-top: 4rem;
+  a {
+    color: white;
+    &:visited { color: white; }
+    &:hover { color: white; }
+    &:active { color: white; }
+  }
+  ul {
+    margin-left: 1.5rem;
+    li i {
+      font-size: 60%;
+    }
+  }
+  .footer-title {
+    margin: 0.3rem 0 3rem 0;
+    > span {
+      font-family: $header-font-family;
+      font-size: 150%;
+      font-weight: 300;
+      border-bottom: 1px dotted $gray-500;
+      padding-bottom: 1.4rem;
+    }
+  }
+  .footer-subtitle {
+    margin-bottom: 1rem;
+  }
+  
+  .jncc-logo {
+    filter: brightness(100);
+    height: 60px;
+  }
+
+  .jncc-logo-background {
+    background-image: url('assets/JNCCLogo_Black.png');
+    background-color: $gray-100;
+    background-blend-mode: screen;
+  }  
+}

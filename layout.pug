@@ -1,19 +1,16 @@
 doctype html
 html(lang='en')
   head
+    <!-- version-stamp -->
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='shortcut icon' href='../assets/favicon.ico')
     link(href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900,400italic' rel='stylesheet' type='text/css')
+    <link href="https://fonts.googleapis.com/css?family=Hind+Madurai&display=swap" rel="stylesheet">
     block head
       title Scottish Remote Sensing Portal
   body
-    div.header
-      div.container
-        i.fas.fa-ellipsis-h
-        span.heading-text
-          | Scottish Remote Sensing Portal
-        img(alt='Scottish Government Remote Sensing Portal' src='../assets/scotgovlogo.svg' width='240' height='44')
+    include ./templates/header
     div.container
       block content
       hr
@@ -21,4 +18,5 @@ html(lang='en')
         | Hello there from 
         = process.env.NODE_ENV
       hr
+    include ./templates/footer
     block scripts
