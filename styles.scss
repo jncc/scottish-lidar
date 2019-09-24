@@ -26,10 +26,6 @@ $theme-colors: (
 $spot-muted: rgb(114, 114, 114);
 $header-font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-.pad-right {
-  margin-right: 0.4rem;
-}
-
 body {
   font-family: Hind Madurai, "Helvetica Neue", Helvetica, Arial, sans-serif;;
 }
@@ -60,6 +56,22 @@ h1 {
     font-size: 200%;
     font-weight: 100;
   }
+  .navbar {
+    border-top: 1px solid $gray-200;
+    padding-bottom: 0;
+    font-size: 110%;
+    .container {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .nav-item {
+      margin-bottom: 0.3rem;
+      &.active {
+        margin-bottom: 0;
+        border-bottom: 0.3rem solid $scot-gov-blue;
+      }
+    }
+  }
 }
     
 .footer {
@@ -86,21 +98,18 @@ h1 {
       font-size: 150%;
       font-weight: 300;
       border-bottom: 1px dotted $gray-500;
-      padding-bottom: 1.4rem;
+      padding-bottom: 1.8rem;
     }
   }
   .footer-subtitle {
     margin-bottom: 1rem;
   }
   
-  .jncc-logo {
-    filter: brightness(100);
-    height: 60px;
+  .jncc-partnership {
+    padding-top: 0.2em;
+    .jncc-logo {
+      filter: brightness(100);
+      height: 60px;
+    }
   }
-
-  .jncc-logo-background {
-    background-image: url('assets/JNCCLogo_Black.png');
-    background-color: $gray-100;
-    background-blend-mode: screen;
-  }  
 }

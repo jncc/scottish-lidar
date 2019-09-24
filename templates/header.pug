@@ -2,37 +2,39 @@ div.header
   div.container
     div.row
       div.col-md-8
-        a.title-text
-          | Scottish Remote Sensing Portal
-          //- i.fas.fa-ellipsis-h
+        span.title-text Scottish Remote Sensing Portal
       div.col-md-4
-        img(alt='Scottish Government Remote Sensing Portal' src='../assets/scotgovlogo.svg' width='240' height='44')
+        a.title-text(href='https://gov.scot' target='blank')
+          img(alt='Scottish Government Remote Sensing Portal' src='../assets/scotgovlogo.svg' width='240' height='44')
+  
   nav.navbar.navbar-expand-lg.navbar-light.bg-light
     div.container
-      a.navbar-brand(href="#")
-        | Navbarrr
       button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
         span.navbar-toggler-icon
       div.collapse.navbar-collapse#navbarSupportedContent
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        ul.navbar-nav.mr-auto
+          li.nav-item.mr-4(class=(page_name === "index" ? "active" : undefined))
+            a.nav-link(href='/' + process.env.INDEX_PAGE + process.env.PAGE_EXTENSION)
+              if page_name === "index"
+                span.sr-only (current)
+              | Home
+          li.nav-item.mr-4(class=(page_name === "data" ? "active" : undefined))
+            a.nav-link(href='/data' + process.env.PAGE_EXTENSION)
+              if page_name === "data"
+                span.sr-only (current)
+              | Data
+          li.nav-item.mr-4(class=(page_name === "about" ? "active" : undefined))
+            a.nav-link(href='/about' + process.env.PAGE_EXTENSION)
+              if page_name === "about"
+                span.sr-only (current)
+              | About
+          li.nav-item.mr-4(class=(page_name === "list" ? "active" : undefined))
+            a.nav-link(href='/data' + process.env.PAGE_EXTENSION + '#list')
+              if page_name === "list"
+                span.sr-only (current)
+              | List
+
+
+          <li class="nav-item mr-4">
+            <a class="nav-link" href="#">Map</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>

@@ -6,7 +6,6 @@ import '@fortawesome/fontawesome-free/css/all.css'
 
 // Both the static html pages and react-bootstrap use the bootstrap css.
 // The static html pages currently don't use bootstrap's javascript.
-import './bootstrap.scss'
-import './styles.less'
+import './styles.scss'
 
 // import 'leaflet/dist/leaflet.css'

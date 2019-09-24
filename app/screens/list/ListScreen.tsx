@@ -68,8 +68,6 @@ export const ListScreen = (props: Props) => {
       <hr />
       <div>
 
-
-
         {/* <DropdownButton  id="dataset-filter-select" title="All"   onSelect={function(e:any){console.log(e)}}>
           <Dropdown.Item eventKey="all">All</Dropdown.Item>
           <Dropdown.Divider />
@@ -88,7 +86,6 @@ export const ListScreen = (props: Props) => {
       <div>
 
       <div>
-
 
   <InputGroup className="mb-3">
     <FormControl
@@ -128,7 +125,6 @@ export const ListScreen = (props: Props) => {
     <FormControl as="textarea" aria-label="With textarea" />
   </InputGroup>
 </div>
-
 
       </div>
       <hr />

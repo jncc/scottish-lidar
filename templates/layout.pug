@@ -1,3 +1,4 @@
+block variables
 doctype html
 html(lang='en')
   head
@@ -10,7 +11,7 @@ html(lang='en')
     block head
       title Scottish Remote Sensing Portal
   body
-    include ./templates/header
+    include ./header
     div.container
       block content
       hr
@@ -18,5 +19,5 @@ html(lang='en')
         | Hello there from 
         = process.env.NODE_ENV
       hr
-    include ./templates/footer
+    include ./footer
     block scripts
