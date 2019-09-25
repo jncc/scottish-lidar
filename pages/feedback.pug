@@ -1,0 +1,16 @@
+
+extends ../templates/layout.pug
+
+block content
+  div.container.normal-page-container
+    h1.mb-3 Feedback
+    p
+      | Your feedback is welcome. Please send us an email.
+    p
+      div.card.bg-light.p-3
+        p.mb-0
+          i.fas.fa-envelope.fa-lg.text-muted.mr-2.align-middle
+          a(href="mailto:gi-sat@gov.scot") gi-sat@gov.scot
+
+block scripts
+  script(src='../bundles/feedback.ts')

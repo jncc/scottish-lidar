@@ -5,11 +5,7 @@ block head
   title Scottish Remote Data Sensing Portal
 
 block content
-  div.container.normal-page-container
-    h1 App page
-    p
-      a(href='/' + process.env.INDEX_PAGE + process.env.PAGE_EXTENSION) Go to home page
-    div#app
+  div.app#app
 
 block scripts
   script(src='../bundles/data.ts')

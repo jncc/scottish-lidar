@@ -55,17 +55,44 @@ export const ListScreen = (props: Props) => {
     )
 
   return (
-    <div>
-      <h1>Datasets</h1>
-      <div>Browse the available datasets on the portal.</div>
-      <hr />
-      <div>
-        Showing {collectionListElements.length} of {props.collections.length} datasets
-        {props.filter &&
-          <span> filtered by <span style={{fontWeight: 'bold'}}>{props.filter}</span></span>
-        }
+    <div className="container normal-page-container full-height-container">
+      <div className="mb-4">
+        <h1 className="inline mr-3">Datasets</h1>
+        {/* <span className="raised">Browse the available datasets on the portal.</span> */}
       </div>
-      <hr />
+      <div className="card card-body bg-light">
+        <div className="row align-items-center">
+          <div className="col">
+            <span>
+              Showing {collectionListElements.length} of {props.collections.length} datasets
+              {props.filter &&
+                <span> filtered by <span style={{fontWeight: 'bold'}}>{props.filter}</span></span>
+              }
+            </span>
+          </div>
+          <div className="col-auto">
+            <select
+              value={props.filter}
+              onChange={e => { props.setFilter(e.target.value) }}
+              className="custom-select my-select" >
+              <option key="all" value="">All</option>
+              {filterDropdownElements}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div className="card">
+        <div className="card-header">
+          Featured
+        </div>
+        <div className="card-body">
+          <h5 className="card-title">Special title treatment</h5>
+          <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" className="btn btn-primary">Go somewhere</a>
+        </div>
+        </div>
+
       <div>
 
         {/* <DropdownButton  id="dataset-filter-select" title="All"   onSelect={function(e:any){console.log(e)}}>
@@ -75,58 +102,8 @@ export const ListScreen = (props: Props) => {
           <Dropdown.Item eventKey="foo2">Another action</Dropdown.Item>
         </DropdownButton> */}
 
-        <select
-          value={props.filter}
-          onChange={e => { props.setFilter(e.target.value) }}
-          className="custom-select my-select" >
-          <option key="all" value="">All</option>
-          {filterDropdownElements}
-        </select>
       </div>
-      <div>
 
-      <div>
-
-  <InputGroup className="mb-3">
-    <FormControl
-      placeholder="Recipient's username"
-      aria-label="Recipient's username"
-      aria-describedby="basic-addon2"
-    />
-    <InputGroup.Append>
-      <InputGroup.Text id="basic-addon2">@example.com</InputGroup.Text>
-    </InputGroup.Append>
-  </InputGroup>
-
-  <label htmlFor="basic-url">Your vanity URL</label>
-  <InputGroup className="mb-3">
-    <InputGroup.Prepend>
-      <InputGroup.Text id="basic-addon3">
-        https://example.com/users/
-      </InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl id="basic-url" aria-describedby="basic-addon3" />
-  </InputGroup>
-
-  <InputGroup className="mb-3">
-    <InputGroup.Prepend>
-      <InputGroup.Text>$</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl aria-label="Amount (to the nearest dollar)" />
-    <InputGroup.Append>
-      <InputGroup.Text>.00</InputGroup.Text>
-    </InputGroup.Append>
-  </InputGroup>
-
-  <InputGroup>
-    <InputGroup.Prepend>
-      <InputGroup.Text>With textarea</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl as="textarea" aria-label="With textarea" />
-  </InputGroup>
-</div>
-
-      </div>
       <hr />
       <ul>
         {collectionListElements}
