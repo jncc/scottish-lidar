@@ -12,12 +12,10 @@ html(lang='en')
       title Scottish Remote Sensing Portal
   body
     include ./header
-    div.container
-      block content
-      hr
-      div.class1.class2#some-id(some-attribute='some-value')
-        | Hello there from 
-        = process.env.NODE_ENV
-      hr
+    block content
+    //- div.container
+    //-   div.class1.class2#some-id(some-attribute='some-value')
+    //-     | Hello there from 
+    //-     = process.env.NODE_ENV
     include ./footer
     block scripts

@@ -8,10 +8,17 @@ block head
   title Scottish Remote Data Sensing Portal - Home
 
 block content
-  h1 Find, share and reuse remote sensed data provided by Scottish public sector organisations
-  br
-  br
-  div
-    a(href='/data' + process.env.PAGE_EXTENSION) Go to app
+
+  header
+    section.header-content
+      h1.header-title Find, share and reuse 
+        h3.header-subtitle remote sensed data provided by Scottish public sector organisations
+        a.btn.btn-dark.mr-1(href='/data' + process.env.PAGE_EXTENSION + '#list')
+          //- i.fas.fa-ellipsis-v 
+          | Browse the data
+        a.btn.btn-primary.ml-1(href='/data' + process.env.PAGE_EXTENSION + '#map')
+          //- i.fas.fa-map-marker-alt 
+          | Explore the map
+
 block scripts
   script(src='../bundles/index.ts')

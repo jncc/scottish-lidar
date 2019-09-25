@@ -2,7 +2,9 @@ div.header
   div.container
     div.row
       div.col-md-8
-        span.title-text Scottish Remote Sensing Portal
+        span.title-text
+          // i.fas.fa-ellipsis-v
+          | Scottish Remote Sensing Portal
       div.col-md-4
         a.title-text(href='https://gov.scot' target='blank')
           img(alt='Scottish Government Remote Sensing Portal' src='../assets/scotgovlogo.svg' width='240' height='44')
@@ -14,27 +16,27 @@ div.header
       div.collapse.navbar-collapse#navbarSupportedContent
         ul.navbar-nav.mr-auto
           li.nav-item.mr-4(class=(page_name === "index" ? "active" : undefined))
-            a.nav-link(href='/' + process.env.INDEX_PAGE + process.env.PAGE_EXTENSION)
+            a.nav-link.text-dark(href='/' + process.env.INDEX_PAGE + process.env.PAGE_EXTENSION)
               if page_name === "index"
                 span.sr-only (current)
               | Home
-          li.nav-item.mr-4(class=(page_name === "data" ? "active" : undefined))
-            a.nav-link(href='/data' + process.env.PAGE_EXTENSION)
-              if page_name === "data"
-                span.sr-only (current)
-              | Data
           li.nav-item.mr-4(class=(page_name === "about" ? "active" : undefined))
-            a.nav-link(href='/about' + process.env.PAGE_EXTENSION)
+            a.nav-link.text-dark(href='/about' + process.env.PAGE_EXTENSION)
               if page_name === "about"
                 span.sr-only (current)
               | About
           li.nav-item.mr-4(class=(page_name === "list" ? "active" : undefined))
-            a.nav-link(href='/data' + process.env.PAGE_EXTENSION + '#list')
+            a.nav-link.text-dark(href='/data' + process.env.PAGE_EXTENSION + '#list')
               if page_name === "list"
                 span.sr-only (current)
               | List
-
-
-          <li class="nav-item mr-4">
-            <a class="nav-link" href="#">Map</a>
-          </li>
+          li.nav-item.mr-4(class=(page_name === "map" ? "active" : undefined))
+            a.nav-link.text-dark(href='/data' + process.env.PAGE_EXTENSION + '#map')
+              if page_name === "map"
+                span.sr-only (current)
+              | Map
+          li.nav-item.mr-4(class=(page_name === "contribute" ? "active" : undefined))
+            a.nav-link.text-dark(href='/about' + process.env.PAGE_EXTENSION)
+              if page_name === "contribute"
+                span.sr-only (current)
+              | Contribute

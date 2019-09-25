@@ -4,8 +4,12 @@ import '@fortawesome/fontawesome-free/css/all.css'
 // import { faAirFreshener} from '@fortawesome/free-solid-svg-icons'
 // console.log(faAirFreshener)
 
+// Bootstrap scripts
+import 'bootstrap'
+
 // Both the static html pages and react-bootstrap use the bootstrap css.
 // The static html pages currently don't use bootstrap's javascript.
 import './styles.scss'
+import './animation.scss'
 
 // import 'leaflet/dist/leaflet.css'

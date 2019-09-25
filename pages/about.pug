@@ -8,8 +8,32 @@ block head
   title About the Scottish Remote Sensing Portal
 
 block content
-  h1 What is Lidar?
-  p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  div.container.normal-page-container
+    h1.mb-3 About
+    p 
+      | The  Scottish Remote Sensing Portal has been developed as a partnership between 
+      a(href='https://gov.scot') Scottish Government 
+      | and 
+      a(href='https://jncc.gov.uk') Joint Nature Conservation Committee 
+      | (JNCC).
+    p
+      | The portal currently contains Scottish Public Sector LiDAR data which you can download by 10km tiles and
+      | via WMS web services.
+    p
+      | For more information on the LiDAR data, please contact 
+      a(href="mailto:gi-sat@gov.scot") gi-sat@gov.scot
+      | . For more information on a particular dataset, please use the contact information
+      | provided in the full metadata.
+    p
+      | All data is made available under the 
+      a(href='http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/') Open Government Licence v3
+      | , unless otherwise stated.
+    p
+      br
+      a.btn.btn-dark.mr-2(href='/data' + process.env.PAGE_EXTENSION + '#list')
+        | Browse the data
+      a.btn.btn-primary(href='/data' + process.env.PAGE_EXTENSION + '#map')
+        | Explore the map
 
 block scripts
   script(src='../bundles/about.ts')
