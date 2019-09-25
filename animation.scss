@@ -16,7 +16,7 @@ header:before {
   /* rgba(255,255,255,0.5) */
   animation: fade-slide-down 2s cubic-bezier(0, 0.5, 0, 1) forwards;
   background: linear-gradient(to bottom,  rgba(0,0,0,0), rgba(0,0,0,.5)),
-              url(assets/screenshot.png) no-repeat bottom;
+              url(assets/screenshot.jpg) no-repeat bottom;
   background-size: cover;
   content: "";
   position: absolute;

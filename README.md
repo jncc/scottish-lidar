@@ -74,10 +74,17 @@ The parcel-plugin-bundle-visualiser package creates a visual report on bundle si
 
     yarn build --no-source-maps
 
+Deployment
+----------
+
+The site is automatically to Github Pages by Jenkins using the script in `deploy/`. You can see the currently deployed build in the custom `x-version` meta tag at the top of the HTML pages, with the format `{build-number}.{git-commit}` . For example,
+
+    <meta name="x-version" content="43.320b45076e0c0ffc3016944f66754f32af85a6cf">
+
 Page structure
 --------------
 
-The web application consists of several html 'content' pages plus a page that holds the React single-page app. It has been designed to be hosted in production on static web hosting. There is no dynamic web server, and we make do with direct calls to the JNCC Catalog database API.
+The web application consists of several html "content" pages plus a page that holds the single-page React app. It has been designed to be hosted in production on a static web host service; there is no dynamic web server, and we make do with direct calls to the JNCC Catalog database API.
 
     - /                         - home page       (index.html)
     - /data                     - the react app   (data.html)
