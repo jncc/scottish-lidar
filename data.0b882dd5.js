@@ -19,7 +19,7 @@ var t,e=arguments[3];function n(t){return(n="function"==typeof Symbol&&"symbol"=
 
 },{}],"PvwA":[function(require,module,exports) {
 
-},{"./assets/screenshot.png":[["screenshot.0faf84bc.png","hZrp"],"hZrp"]}],"LcwX":[function(require,module,exports) {
+},{"./assets/screenshot.jpg":[["screenshot.1085b9a5.jpg","BJqV"],"BJqV"]}],"LcwX":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),require("@fortawesome/fontawesome-free/css/all.css"),require("bootstrap"),require("./styles.scss"),require("./animation.scss");
 },{"@fortawesome/fontawesome-free/css/all.css":"jE9z","bootstrap":"BQpi","./styles.scss":"/+Hb","./animation.scss":"PvwA"}],"J4Nk":[function(require,module,exports) {
 "use strict";var r=Object.getOwnPropertySymbols,t=Object.prototype.hasOwnProperty,e=Object.prototype.propertyIsEnumerable;function n(r){if(null==r)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(r)}function o(){try{if(!Object.assign)return!1;var r=new String("abc");if(r[5]="de","5"===Object.getOwnPropertyNames(r)[0])return!1;for(var t={},e=0;e<10;e++)t["_"+String.fromCharCode(e)]=e;if("0123456789"!==Object.getOwnPropertyNames(t).map(function(r){return t[r]}).join(""))return!1;var n={};return"abcdefghijklmnopqrst".split("").forEach(function(r){n[r]=r}),"abcdefghijklmnopqrst"===Object.keys(Object.assign({},n)).join("")}catch(o){return!1}}module.exports=o()?Object.assign:function(o,c){for(var a,i,s=n(o),f=1;f<arguments.length;f++){for(var u in a=Object(arguments[f]))t.call(a,u)&&(s[u]=a[u]);if(r){i=r(a);for(var b=0;b<i.length;b++)e.call(a,i[b])&&(s[i[b]]=a[i[b]])}}return s};
@@ -531,4 +531,4 @@ function e(){if("function"!=typeof WeakMap)return null;var r=new WeakMap;return 
 },{"react":"1n8/","react-dom":"NKHc","ts-polyfill":"r6TH","whatwg-fetch":"MCp7","../env":"8Tcw","./App":"hu8U"}],"KAAg":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),require("../shared"),require("../app/index");
 },{"../shared":"LcwX","../app/index":"oLVY"}]},{},["KAAg"], null)
-//# sourceMappingURL=/data.86988324.js.map
+//# sourceMappingURL=/data.0b882dd5.js.map
