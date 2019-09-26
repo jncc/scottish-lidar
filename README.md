@@ -52,6 +52,14 @@ These variables are both set to the empty string in production, and HTML links a
 
     yarn clean   # cleans all build output, including the Parcel cache
 
+Database
+--------
+
+See the `jncc/catalog` repository. You can run a full local instance of the database and API with Docker. 🐳
+
+Launch a database instance with an API and check http://localhost:6080/alive
+
+
 Code style, testing and building
 --------------------------------
 
@@ -105,8 +113,6 @@ Data model and server-side API
 ------------------------------
 
 We expose the existing "Catalog" database API on the Internet, removing the need for any backend web server or cloud functions. This also creates the possibility of a significant future deliverable.
-
-See the `jncc/catalog` repository. You can run a full local instance of the database and API with Docker. 🐳
 
 The Catalog database has two basic concepts: *collections* and *products*. In this application, a collection is a *dataset*, visualized with a *layer* on the map.
 
