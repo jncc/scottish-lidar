@@ -21,7 +21,7 @@ var t,e=arguments[3];function n(t){return(n="function"==typeof Symbol&&"symbol"=
 
 },{"./assets/screenshot.jpg":[["screenshot.1085b9a5.jpg","BJqV"],"BJqV"]}],"LcwX":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),require("@fortawesome/fontawesome-free/css/all.css"),require("bootstrap"),require("./styles.scss"),require("./animation.scss");
-},{"@fortawesome/fontawesome-free/css/all.css":"jE9z","bootstrap":"BQpi","./styles.scss":"/+Hb","./animation.scss":"PvwA"}],"CcBK":[function(require,module,exports) {
+},{"@fortawesome/fontawesome-free/css/all.css":"jE9z","bootstrap":"BQpi","./styles.scss":"/+Hb","./animation.scss":"PvwA"}],"OzXR":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),require("../shared");
-},{"../shared":"LcwX"}]},{},["CcBK"], null)
-//# sourceMappingURL=/feedback.49b31547.js.map
+},{"../shared":"LcwX"}]},{},["OzXR"], null)
+//# sourceMappingURL=/about.20d8f23a.js.map
