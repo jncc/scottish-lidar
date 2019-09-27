@@ -3,7 +3,8 @@ $scot-gov-blue: #0065bd;
 
 // variable overrides
 $theme-colors: (
-  "primary": $scot-gov-blue
+  "primary": $scot-gov-blue,
+  "danger": #E03997
   );
   
 // bootstrap and its default variables
@@ -33,36 +34,24 @@ h1 {
     font-family: $header-font-family;
   }
 
-.inline {
-  display: inline;  
-}
-.raised {
-  vertical-align: 8%;
-}
-
-.my-select {
-    background-color: $scot-gov-blue;
-    color: white;
-    border: 0 none;
-    border-radius: 20px;
-    padding: 6px 20px;
-    min-width: 15rem;
-  }
-
- .custom-select {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='white' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E")
+.custom-select {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='white' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+  background-color: $scot-gov-blue;
+  color: white;
+  border: 0 none;
+  border-radius: 20px;
+  padding: 6px 20px;
+  min-width: 15rem;
 }
 
 .header {
   border-top: 0.4rem solid $scot-gov-blue;
-  // margin-bottom: 3rem;
   .container {
     padding-top: 1rem;
     padding-bottom: 1rem;
     .portal-icon {
       color: $scot-gov-blue;
       width: 1.5rem;
-      // vertical-align: 6%;
     }
   }
   .title-text {
@@ -72,9 +61,7 @@ h1 {
     font-weight: 100;
   }
   .navbar {
-    // border-top: 1px solid $gray-300;
-    // padding-bottom: 0;
-    // font-size: 110%;
+    font-size: 115%;
     .container {
       padding-top: 0;
       padding-bottom: 0;
@@ -107,13 +94,16 @@ h1 {
     }
   }
   .footer-title {
-    margin: 0.2rem 0 2rem 0;
+    margin: 0.5rem 0 1.3rem 0;
     > span {
       font-family: $header-font-family;
       font-size: 150%;
       font-weight: 300;
-      border-bottom: 1px dotted $gray-500;
-      padding-bottom: 1rem;
+      // border-bottom: 1px dotted $gray-500;
+      // padding-bottom: 1rem;
+    }
+    .portal-icon {
+      width: 1.2rem;
     }
   }
   
@@ -127,7 +117,7 @@ h1 {
 }
 
 .normal-page-container {
-  margin-top: 3rem;
+  margin-top: 1.3rem;
   margin-bottom: 4rem;
 }
 
@@ -144,4 +134,74 @@ h1 {
 
 .app {
   min-height: 80vh;
+}
+
+.list-screen {
+  .filter-bar {
+    font-size: 115%;
+    .badge {
+      font-weight: normal;
+      font-size: 100%;
+    }
+  }
+  .list-item {
+    .list-item-title {
+      font-size: 140%;
+      display: inline-flex; /* make element size relative to content */
+      align-items: center
+    }
+    .list-item-abstract {
+    }
+  }
+}
+
+.moreable {
+  a.collapsed:after {
+    content: '+ Show More';
+    float: right;
+  }
+  a:not(.collapsed):after {
+    content: '- Show Less';
+    float: right;
+  }
+  .moreable-content.collapse:not(.show) {
+    display: block;
+    height: 2.9rem;
+    overflow: hidden;
+    // text-overflow: ellipsis;
+    // white-space: nowrap;
+  }
+
+  .moreable-content.collapsing {
+    height: 2.9rem;
+  }  
+}
+
+.wms-modal {
+  .modal-body {
+    padding: 3rem;
+  }
+  .gutter-line {
+    border-right: 1px solid $gray-300;
+  }
+  .wms-link {
+    // @include badge;
+    // @include badge-pill;
+    // @include badge-secondary;
+    font-size: 90%;
+  }
+}
+
+.dataset-name {
+  font-weight: bold;
+  font-family: $header-font-family;
+  font-size: 110%;
+  .dataset-name-segment {
+    color: $gray-600;
+  }
+  .dataset-name-separator {
+    padding: 0 0.2rem;
+    // color: map-get($theme-colors, "primary");
+    color: $gray-400;
+  }
 }

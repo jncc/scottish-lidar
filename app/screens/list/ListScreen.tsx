@@ -31,48 +31,44 @@ export const ListScreen = (props: Props) => {
     .map(c => <ListItem collection={c}/>)
 
   return (
-    <div className="container normal-page-container full-height-container">
-      <div className="mb-4">
-        <h1 className="inline mr-3">Datasets</h1>
-        {/* <span className="raised">Browse the available datasets on the portal.</span> */}
-      </div>
-      <div className="card card-body bg-light">
-        <div className="row align-items-center">
-          <div className="col">
-            <span>
-              Showing {listItemElements.length} of {props.collections.length} datasets
-              {props.filter &&
-                <span> filtered by <span style={{fontWeight: 'bold'}}>{props.filter}</span></span>
-              }
-            </span>
-          </div>
-          <div className="col-auto">
-            <select
-              value={props.filter}
-              onChange={e => { props.setFilter(e.target.value) }}
-              className="custom-select my-select" >
-              <option key="all" value="">All</option>
-              {filterDropdownElements}
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div className="card">
-        <div className="card-header">
-          Featured
-        </div>
-        <div className="card-body">
-          <h5 className="card-title">Special title treatment</h5>
-          <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" className="btn btn-primary">Go somewhere</a>
-        </div>
-        </div>
-
+    <div className="container normal-page-container list-screen">
+      <h1>Datasets</h1>
       <hr />
-      <ul>
+      <div className="row align-items-center filter-bar">
+        <div className="col">
+          <span>
+            Showing 
+            {listItemElements.length == props.collections.length &&
+              <span> all</span>
+            }
+            <span className="badge badge-pill badge-light">
+              <span className="badge badge-pill badge-secondary mr-1">
+                {listItemElements.length}
+              </span>
+              of {props.collections.length}
+            </span>
+          </span> datasets
+        </div>
+
+        <div className="col-auto">
+          {props.filter &&
+            <span>Filtered by</span>
+          }
+        </div>
+        <div className="col-auto">
+          <select
+            value={props.filter}
+            onChange={e => { props.setFilter(e.target.value) }}
+            className="custom-select" >
+            <option key="all" value="">All</option>
+            {filterDropdownElements}
+          </select>
+        </div>
+      </div>
+      <hr />
+      <div className="list-items">
         {listItemElements}
-      </ul>
+      </div>
     </div>
   )
 }

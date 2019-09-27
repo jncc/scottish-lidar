@@ -57,8 +57,7 @@ Database
 
 See the `jncc/catalog` repository. You can run a full local instance of the database and API with Docker. 🐳
 
-Launch a database instance with an API and check http://localhost:6080/alive
-
+Launch a database instance with an API and check `http://localhost:6080/alive`.
 
 Code style, testing and building
 --------------------------------

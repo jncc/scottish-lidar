@@ -1,60 +1,108 @@
 
-import * as React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Button, Collapse } from 'react-bootstrap'
 import _ from 'lodash'
 
 import { State } from '../../state'
 import { getLicenceDetailsFromUseConstraints } from '../../utility/licenseUtility'
+import { DatasetName } from '../../shared/DatasetName'
+import { WmsModal } from '../../shared/WmsModal'
 
 type Props = {
   collection: State['collections'][0]
 }
 
 export const ListItem = (props: Props) => {
+
   let c = props.collection
+  let abstractId = 'abstract-' + c.collection.id
+  let [modalShow, setModalShow] = useState(false)
+
   return (
-    <li key={c.collection.id}>
-    <div>{c.collection.metadata.title}</div>
-    <div>{c.collection.name}</div>
-    <br />
-    <div>{c.collection.metadata.abstract}</div>
-    {/* external metadata link */}
-    {c.collection.metadata.additionalInformationSource &&
-      <div>
-        {makeExternalMetadataLinkElement(c.collection.metadata.additionalInformationSource)}
+    <div key={c.collection.id} className="list-item mb-4">
+      <div className="list-item-title">
+        <i className="fas fa-th fa-xs text-secondary mr-2" />
+        {c.collection.metadata.title}
+      </div>      
+
+      <div className="mb-3">
+        <DatasetName dataset={c.name.Dataset} />
       </div>
-    }
-    {/* OGC WMS link */}
-    {c.ogcProduct && c.ogcProduct.data.product.wms &&
-      <div>
-        {/* <WmsModalButton
-            url={c.data.wms.base_url + '?service=wms&version=1.3.0&request=GetCapabilities'}
-            buttonProps={{content: 'WMS' }}
-        /> */}
-        <div>{c.ogcProduct.data.product.wms.url} {c.ogcProduct.data.product.wms.name}</div>
-      </div>          
-    }
-    {/* licence */}
-    {makeLicenceElement(c.collection.metadata.useConstraints)}
-  </li>
+
+      <div className="list-item-abstract moreable">
+        <p
+          className="collapse moreable-content"
+          id={abstractId}
+          aria-expanded="false">
+          {c.collection.metadata.abstract}
+        </p>
+        <a role="button" className="collapsed"
+        data-toggle="collapse" href={'#' + abstractId}
+        aria-expanded="false" aria-controls="collapseExample"></a>
+      </div>
+
+      <div className="card-body">
+        <div className="card-title"></div>
+        <div className="card-subtitle mb-2 text-muted">
+
+        </div>
+      </div>
+
+      {/* external metadata link */}
+      {c.collection.metadata.additionalInformationSource &&
+        <div>
+          {makeExternalMetadataLinkElement(c.collection.metadata.additionalInformationSource)}
+        </div>
+      }
+
+      {/* licence */}
+      {makeLicenceElement(c.collection.metadata.useConstraints)}
+
+      {/* OGC WMS link */}
+      {c.ogcProduct && c.ogcProduct.data.product.wms &&
+        <div>
+          <Button variant="dark" onClick={() => setModalShow(true)}>
+            <i className="fas fa-globe mr-2" />
+            WMS
+          </Button>
+
+          <WmsModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            wmsLink={c.ogcProduct.data.product.wms.url}
+          />
+        </div>
+      }
+
+      <Link
+        to={{
+          pathname: '/map',
+          search: c.name.Dataset
+        }}
+        className="btn btn-primary"
+      >View on map</Link>
+
+    </div>
 
   )
 }
 
 let makeLicenceElement = (useConstraints: string) => {
 
-  let l = getLicenceDetailsFromUseConstraints(useConstraints)
+  let licence = getLicenceDetailsFromUseConstraints(useConstraints)
 
   return (
     <div className="licence">
       <div>
-        <a href={l.url} target="_blank" >
-        {l.name} {/* <Icon name="external" /> */}
+        <a href={licence.url} target="_blank" >
+        {licence.name} {/* <Icon name="external" /> */}
         </a>
       </div>
-      {l.image &&
+      {licence.image &&
       <div>
-        <a href={l.url} target="_blank" >
-          <img src={l.image} width="80" height="33" />
+        <a href={licence.url} target="_blank" >
+          <img src={licence.image} width="80" height="33" />
         </a>
       </div>
       }
