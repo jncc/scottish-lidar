@@ -51,45 +51,45 @@ export const ListItem = (props: Props) => {
         </div>        
       </div>
 
-      <div className="col-lg-2 d-flex flex-lg-column align-items-end">
+      <div className="col-lg-3">
 
-        {/* Licence */}
-        <div className="mb-lg-2 mr-lg-0 mr-2">
-          {makeLicenceElement(c.collection.metadata.useConstraints, c.collection.id)}
-        </div>
-
-        {/* Metadata */}
-        {c.collection.metadata.additionalInformationSource &&
-          <div className="mb-lg-2 mr-lg-0 mr-2">
-            {makeExternalMetadataLinkElement(c.collection.metadata.additionalInformationSource, c.collection.id)}
+          {/* Licence */}
+          <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
+            {makeLicenceElement(c.collection.metadata.useConstraints, c.collection.id)}
           </div>
-        }
 
-        {/* WMS */}
-        {c.ogcProduct && c.ogcProduct.data.product.wms &&
-          <div className="mb-lg-2 mr-lg-0 mr-2">
-            <Button variant="light" onClick={() => setModalShow(true)}>
-              WMS
-              <i className="fas fa-globe text-secondary ml-2" />
-            </Button>
-            <WmsModal
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-              wmsLink={c.ogcProduct.data.product.wms.url}
-            />
+          {/* Metadata */}
+          <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
+            {c.collection.metadata.additionalInformationSource &&
+                makeExternalMetadataLinkElement(c.collection.metadata.additionalInformationSource, c.collection.id)
+            }
           </div>
-        }
 
-        {/* View on map */}
-        <div className="mb-lg-2 mr-lg-0 mr-2">
-          <Link
-            to={{
-              pathname: '/map',
-              search: c.name.Dataset
-            }}
-            className="btn btn-primary"
-          >View on map</Link>
-        </div>
+          {/* WMS */}
+          {c.ogcProduct && c.ogcProduct.data.product.wms &&
+            <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
+              <Button variant="light" onClick={() => setModalShow(true)}>
+                WMS
+                <i className="fas fa-globe text-secondary ml-2" />
+              </Button>
+              <WmsModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                wmsLink={c.ogcProduct.data.product.wms.url}
+              />
+            </div>
+          }
+
+          {/* View on map */}
+          <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
+            <Link
+              to={{
+                pathname: '/map',
+                search: c.name.Dataset
+              }}
+              className="btn btn-primary"
+            >View on map</Link>
+          </div>
 
       </div>
     </div>

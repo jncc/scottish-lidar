@@ -50,7 +50,7 @@ export const ListScreen = (props: Props) => {
         </div>
 
         {props.filter &&
-        <div className="col-md-auto   d-lg-flex d-none">
+        <div className="col-md-auto d-lg-flex d-none">
             <span>Filtered by</span>
         </div>
         }
