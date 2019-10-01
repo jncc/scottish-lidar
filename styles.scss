@@ -80,7 +80,6 @@ h1 {
   background-color: $gray-700;
   color: white;
   padding: 3rem 0;
-  // margin-top: 4rem;
   a {
     color: white;
     &:visited { color: white; }
@@ -97,10 +96,8 @@ h1 {
     margin: 0.5rem 0 1.3rem 0;
     > span {
       font-family: $header-font-family;
-      font-size: 150%;
+      font-size: 160%;
       font-weight: 300;
-      // border-bottom: 1px dotted $gray-500;
-      // padding-bottom: 1rem;
     }
     .portal-icon {
       width: 1.2rem;

@@ -33,8 +33,8 @@ export const ListScreen = (props: Props) => {
     <div className="container normal-page-container list-screen">
       <h1>Datasets</h1>
       <hr />
-      <div className="row align-items-center filter-bar">
-        <div className="col">
+      <div className="filter-bar row align-items-center">
+        <div className="col mb-md-0 mb-3">
           <span>
             Showing 
             {listItemElements.length == props.collections.length &&
@@ -49,12 +49,13 @@ export const ListScreen = (props: Props) => {
           </span> datasets
         </div>
 
-        <div className="col-auto">
-          {props.filter &&
+        {props.filter &&
+        <div className="col-md-auto   d-lg-flex d-none">
             <span>Filtered by</span>
-          }
         </div>
-        <div className="col-auto">
+        }
+
+        <div className="col-md-auto mb-md-0 mb-2">
           <select
             value={props.filter}
             onChange={e => { props.setFilter(e.target.value) }}
