@@ -191,17 +191,17 @@ Mapper
 Project plan
 ------------
 
-- [0.?] Task: Make the new Geoserver https://github.com/jncc/scottish-lidar/issues/3
+- [1.0] Task: Make the new Geoserver https://github.com/jncc/scottish-lidar/issues/3
 - [1.0] Task: Planning and design iteration [1 week] https://github.com/jncc/scottish-lidar/issues/4
-- [0.8] Task: Change SQL library (maintenance) https://github.com/jncc/scottish-lidar/issues/5
-- [0.8] Task: Make the public Lidar Catalog API https://github.com/jncc/scottish-lidar/issues/6
+- [1.0] Task: Change SQL library (maintenance) https://github.com/jncc/scottish-lidar/issues/5
+- [1.0] Task: Make the public Lidar Catalog API https://github.com/jncc/scottish-lidar/issues/6
 - [1.0] Task: Infrastructure and Deployment https://github.com/jncc/scottish-lidar/issues/7
 - [1.0] Task: Basic web app with empty Home, Map and About pages (Pete) [1 week] https://github.com/jncc/scottish-lidar/issues/8
-- [0.8] Task: List page [1 week] https://github.com/jncc/scottish-lidar/issues/9
+- [1.0] Task: List page [1 week] https://github.com/jncc/scottish-lidar/issues/9
 - [1.0] Task: Basket functionality [1 week] https://github.com/jncc/scottish-lidar/issues/10
-- [0.3] Task: Download page [1 week] https://github.com/jncc/scottish-lidar/issues/11
-- [0.0] Task: Styling [1 week]
-- [0.0] Task: Map page [the rest of the time] https://github.com/jncc/scottish-lidar/issues/13
+- [0.4] Task: Download page [1 week] https://github.com/jncc/scottish-lidar/issues/11
+- [1.0] Task: Styling [1 week]
+- [0.0] Task: Map page [3-4 weeks] https://github.com/jncc/scottish-lidar/issues/13
 - [0.2] Task: Aggregate outline layer [1 week] https://github.com/jncc/scottish-lidar/issues/17
 - [0.0] Task: Web essentials [1 week] https://github.com/jncc/scottish-lidar/issues/12
 - [0.0] Task: Feedback [1 week] https://github.com/jncc/scottish-lidar/issues/14

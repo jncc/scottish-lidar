@@ -25,15 +25,11 @@ div.header
               if page_name === "about"
                 span.sr-only (current)
               | About
-          li.nav-item.mr-4(class=(page_name === "list" ? "active" : undefined))
+          li.nav-item.mr-4#list-screen-nav-item
             a.nav-link.text-dark(href='/data' + process.env.PAGE_EXTENSION + '#list')
-              if page_name === "list"
-                span.sr-only (current)
               | Datasets
-          li.nav-item.mr-4(class=(page_name === "map" ? "active" : undefined))
+          li.nav-item.mr-4#map-screen-nav-item
             a.nav-link.text-dark(href='/data' + process.env.PAGE_EXTENSION + '#map')
-              if page_name === "map"
-                span.sr-only (current)
               | Map
           li.nav-item.mr-4(class=(page_name === "contribute" ? "active" : undefined))
             a.nav-link.text-dark(href='/about' + process.env.PAGE_EXTENSION)

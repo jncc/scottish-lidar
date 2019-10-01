@@ -117,7 +117,7 @@ h1 {
 }
 
 .normal-page-container {
-  margin-top: 1.3rem;
+  margin-top: 1.5rem;
   margin-bottom: 4rem;
 }
 
@@ -144,6 +144,9 @@ h1 {
       font-size: 100%;
     }
   }
+  .filter-bar-hr {
+    margin-bottom: 1.7rem;
+  }
   .list-item {
     .list-item-title {
       font-size: 140%;
@@ -164,16 +167,21 @@ h1 {
     content: '- Show Less';
     float: right;
   }
+  .moreable-content {
+    margin-bottom: 0;
+
+  }
   .moreable-content.collapse:not(.show) {
     display: block;
-    height: 2.9rem;
+    height: 4.7rem;
     overflow: hidden;
+    margin-bottom: 0;
     // text-overflow: ellipsis;
     // white-space: nowrap;
   }
 
   .moreable-content.collapsing {
-    height: 2.9rem;
+    height: 4.7rem;
   }  
 }
 

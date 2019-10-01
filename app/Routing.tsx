@@ -1,6 +1,6 @@
 
-import * as React from 'react'
-import { HashRouter, Route, Redirect, Switch } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { HashRouter, Route, Redirect, Switch, withRouter } from 'react-router-dom'
 
 import { State } from './state'
 import { ListScreen } from './screens/list/ListScreen'
@@ -33,18 +33,37 @@ export function Routing(props: State) {
           <Route path="/download" component={DownloadScreen} />
           <Route component={NotFoundComponent} />
         </Switch>
+        <ActivateCurrentNavItem />
       </div>
     </HashRouter>
   )
 }
 
-{/* <nav>
-<ul>
-  <li>
-    <Link to="/list">List</Link>
-  </li>
-  <li>
-    <Link to="/map">Map</Link>
-  </li>
-</ul>
-</nav> */}
+/**
+ * Reaches outside the React app to the static header HTML
+ * to apply the 'active' class to the current `nav-item`.
+ * This side-effecting code is necessary because the HTML header is
+ * completely outside the React app.
+ */
+const ActivateCurrentNavItem = withRouter((props: any) => {
+
+  // withRouter gives us the current location from react-router
+  let { location } = props
+
+  useEffect(() => {
+    // deactivate any currently active nav-item
+    let header = document.querySelector('.header') as HTMLElement
+    header.querySelectorAll('.nav-item').forEach(e => {
+      e.classList.remove('active')
+    })
+    // activate the current screen's nav-item if it exists
+    let screenName = location.pathname.substring(1) // remove the leading '/' from e.g. '/map'
+    let navItem = document.getElementById(screenName + '-screen-nav-item')
+    if (navItem) {
+      navItem.classList.add('active')
+    }
+  }, [location]) // side-effect dependency
+
+  // there's no UI to render
+  return null
+})

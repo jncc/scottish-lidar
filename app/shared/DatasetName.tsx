@@ -12,13 +12,13 @@ export const DatasetName = (props: Props) => {
   function* elements() {
     for (let i = 0; i < segments.length; i++) {
       
-      yield <span className="dataset-name-segment">
+      yield <span className="dataset-name-segment" key={i.toString()}>
               {segments[i]}
             </span>
 
       // joining slash separator, if not the last segment
       if (i !== segments.length - 1) {
-        yield <span className="dataset-name-separator">
+        yield <span className="dataset-name-separator" key={i + '-separator'}>
                 /
               </span>
       }

@@ -22,13 +22,12 @@ export const ListScreen = (props: Props) => {
     .groupBy(c => c.name.Group)
     .keys()
     .map(key => <option key={key} value={key}>{key}</option>)
-    // .map(key => <Dropdown.Item href="#/action-1">Action</Dropdown.Item>)
     .value()
     
   let listItemElements = props.collections
     // if there's a filter specified, filter the collections by that group
     .filter(c => !props.filter || c.name.Group === props.filter)
-    .map(c => <ListItem collection={c}/>)
+    .map(c => <ListItem collection={c} key={c.collection.id} />)
 
   return (
     <div className="container normal-page-container list-screen">
@@ -65,7 +64,7 @@ export const ListScreen = (props: Props) => {
           </select>
         </div>
       </div>
-      <hr />
+      <hr className="filter-bar-hr"/>
       <div className="list-items">
         {listItemElements}
       </div>
