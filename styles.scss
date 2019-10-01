@@ -150,8 +150,6 @@ h1 {
       display: inline-flex; /* make element size relative to content */
       align-items: center
     }
-    .list-item-abstract {
-    }
   }
 }
 
@@ -173,8 +171,6 @@ h1 {
     height: 4.7rem;
     overflow: hidden;
     margin-bottom: 0;
-    // text-overflow: ellipsis;
-    // white-space: nowrap;
   }
 
   .moreable-content.collapsing {
@@ -197,16 +193,16 @@ h1 {
   }
 }
 
-.dataset-name {
+.dataset-path {
   font-weight: bold;
-  font-family: $header-font-family;
-  font-size: 110%;
-  .dataset-name-segment {
+  font-size: 115%;
+  .dataset-path-segment {
     color: $gray-600;
   }
-  .dataset-name-separator {
-    padding: 0 0.2rem;
+  .dataset-path-separator {
+    padding: 0 0.15rem;
     // color: map-get($theme-colors, "primary");
-    color: $gray-400;
+    color: $gray-300;
+    font-weight: normal;
   }
 }

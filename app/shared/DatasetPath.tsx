@@ -5,20 +5,20 @@ type Props = {
   dataset: string
 }
 
-export const DatasetName = (props: Props) => {
+export const DatasetPath = (props: Props) => {
   
   let segments = props.dataset.split('/')
 
   function* elements() {
     for (let i = 0; i < segments.length; i++) {
       
-      yield <span className="dataset-name-segment" key={i.toString()}>
+      yield <span className="dataset-path-segment" key={i.toString()}>
               {segments[i]}
             </span>
 
       // joining slash separator, if not the last segment
       if (i !== segments.length - 1) {
-        yield <span className="dataset-name-separator" key={i + '-separator'}>
+        yield <span className="dataset-path-separator" key={i + '-separator'}>
                 /
               </span>
       }
@@ -26,7 +26,7 @@ export const DatasetName = (props: Props) => {
   }
 
   return (
-    <span className="dataset-name" title="blah">
+    <span className="dataset-path">
       {Array.from(elements())}
     </span>
   )

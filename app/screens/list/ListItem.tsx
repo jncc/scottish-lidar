@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 import { State } from '../../state'
 import { getLicenceDetailsFromUseConstraints } from '../../utility/licenseUtility'
-import { DatasetName } from '../../shared/DatasetName'
+import { DatasetPath } from '../../shared/DatasetPath'
 import { WmsModal } from '../../shared/WmsModal'
 import { Tip } from '../../shared/Tip'
 
@@ -25,15 +25,20 @@ export const ListItem = (props: Props) => {
 
       <div className="col mb-lg-0 mb-3">
 
+        {/* Title */}
         <div className="list-item-title">
-          <i className="fas fa-th fa-xs text-secondary mr-2" />
-          {c.collection.metadata.title}
+          <i className="fas fa-th fa-lg text-primary mr-2" />
+          <span className="ml-1">
+            {c.collection.metadata.title}
+          </span>
         </div>      
 
-        <div className="list-item-dataset-name mb-3">
-          <DatasetName dataset={c.name.Dataset} />
+        {/* Path */}
+        <div className="list-item-dataset-name mb-2">
+          <DatasetPath dataset={c.name.Dataset} />
         </div>
 
+        {/* Abstract */}
         <div className="list-item-abstract moreable">
           <p id={abstractElementId}
             className="collapse moreable-content"
@@ -50,7 +55,7 @@ export const ListItem = (props: Props) => {
 
         {/* Licence */}
         <div className="mb-lg-2 mr-lg-0 mr-2">
-          {makeLicenceElement(c.collection.metadata.useConstraints)}
+          {makeLicenceElement(c.collection.metadata.useConstraints, c.collection.id)}
         </div>
 
         {/* Metadata */}
@@ -91,21 +96,17 @@ export const ListItem = (props: Props) => {
   )
 }
 
-let makeLicenceElement = (useConstraints: string) => {
+let makeLicenceElement = (useConstraints: string, collectionId: string) => {
   let licence = getLicenceDetailsFromUseConstraints(useConstraints)
   return (
-    <div className="licence">
+    <a href={licence.url} target="_blank" className="btn btn-light" >
       { licence.image
-        ?
-        (<a href={licence.url} target="_blank" >
-          <img src={licence.image} width="80" height="33" />
-        </a>)
-        : 
-        (<a href={licence.url} target="_blank" >
-          {licence.name} {/* <Icon name="external" /> */}
-          </a>)
+        ? <Tip identifier={'lic' + collectionId} content="Licence details">
+            <img src={licence.image} width="56" height="23" />
+          </Tip>
+        : <span>{licence.name}</span>
       }
-    </div>
+    </a>
   )
 }
 
