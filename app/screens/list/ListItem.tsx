@@ -1,13 +1,14 @@
 
-import React, { useState } from 'react'
+import React, { useState, FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Collapse } from 'react-bootstrap'
+import { Button, Collapse, OverlayTrigger, Tooltip, Popover } from 'react-bootstrap'
 import _ from 'lodash'
 
 import { State } from '../../state'
 import { getLicenceDetailsFromUseConstraints } from '../../utility/licenseUtility'
 import { DatasetName } from '../../shared/DatasetName'
 import { WmsModal } from '../../shared/WmsModal'
+import { Tip } from '../../shared/Tip'
 
 type Props = {
   collection: State['collections'][0]
@@ -53,7 +54,7 @@ export const ListItem = (props: Props) => {
         {/* external metadata link */}
         {c.collection.metadata.additionalInformationSource &&
           <div>
-            {makeExternalMetadataLinkElement(c.collection.metadata.additionalInformationSource)}
+            {makeExternalMetadataLinkElement(c.collection.metadata.additionalInformationSource, c.collection.id)}
           </div>
         }
 
@@ -92,7 +93,6 @@ let makeLicenceElement = (useConstraints: string) => {
 
   let licence = getLicenceDetailsFromUseConstraints(useConstraints)
 
-  
   return (
     <div className="licence">
       { licence.image ?
@@ -110,22 +110,14 @@ let makeLicenceElement = (useConstraints: string) => {
   )
 }
 
-let makeExternalMetadataLinkElement = (metadataExternalLink: string) => {
+let makeExternalMetadataLinkElement = (metadataExternalLink: string, collectionId: string) => {
 
-  let linkUI =(
+  return (
+    <Tip identifier={collectionId} content="More information about this dataset">
       <a className="btn btn-light" href={metadataExternalLink} target="_blank">
         Metadata
         <i className="fas fa-cog text-secondary ml-2" />
       </a>
+    </Tip>
   )
-
-  // return (
-  //   <Tooltip
-  //     position='left center'
-  //     content='More information about this data collection'
-  //     trigger={linkUI}
-  //   />
-  // )
-
-  return linkUI
 }
