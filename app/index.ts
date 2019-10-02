@@ -8,6 +8,7 @@ import * as ReactDOM from 'react-dom'
 // polyfills
 import 'ts-polyfill'
 import 'whatwg-fetch'
+import 'nodelist-foreach-polyfill' // needed for IE11
 
 import { env } from '../env'
 import { App } from './App'
