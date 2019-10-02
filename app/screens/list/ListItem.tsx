@@ -51,7 +51,9 @@ export const ListItem = (props: Props) => {
         </div>        
       </div>
 
-      <div className="col-lg-3">
+      <div className="col-lg-3 d-flex align-items-lg-center">
+
+        <div className="">
 
           {/* Licence */}
           <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
@@ -69,8 +71,8 @@ export const ListItem = (props: Props) => {
           {c.ogcProduct && c.ogcProduct.data.product.wms &&
             <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
               <Button variant="light" onClick={() => setModalShow(true)}>
+                <i className="fas fa-globe text-secondary mr-2" />
                 WMS
-                <i className="fas fa-globe text-secondary ml-2" />
               </Button>
               <WmsModal
                 show={modalShow}
@@ -90,6 +92,7 @@ export const ListItem = (props: Props) => {
               className="btn btn-primary"
             >View on map</Link>
           </div>
+        </div>
 
       </div>
     </div>
@@ -114,8 +117,8 @@ let makeExternalMetadataLinkElement = (metadataExternalLink: string, collectionI
   return (
     <Tip identifier={collectionId} content="More information about this dataset">
       <a className="btn btn-light" href={metadataExternalLink} target="_blank">
+        <i className="fas fa-cog text-secondary mr-2" />
         Metadata
-        <i className="fas fa-cog text-secondary ml-2" />
       </a>
     </Tip>
   )
