@@ -207,5 +207,23 @@ h1 {
   }
 }
 
-.map-wrapper { width: 100%; height:100%; position: fixed;}
-.map { width: 100%; height:100%; position: relative;}
+.map-wrapper { width: 100%; height:100%; position: fixed; }
+.map { width: 100%; height:100%; position: relative; }
+
+.left-bar {
+  z-index: 100000;
+  position: absolute;
+  top: 3rem;
+  left: 4rem;
+  width: 17rem;
+  max-height: 70vh;
+  background-color: white;
+  overflow: scroll;
+  border: 1rem solid white;
+  // border-radius: 0.3rem;
+  box-shadow: 0 10px 6px -6px #777;  
+}
+
+.no-scroll {
+  margin: 0; height: 100%; overflow: hidden;
+}
