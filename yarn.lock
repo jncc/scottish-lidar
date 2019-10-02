@@ -1152,6 +1152,13 @@
   dependencies:
     "@types/jest-diff" "*"
 
+"@types/leaflet@*":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.5.2.tgz#3f3964642a68a36f3d4ef669e1595062cc2d4b2d"
+  integrity sha512-P6Ldzmu0UKE+nbQlEQb4+jukpAVFp4Xc8xkIwUJWft2KXvlFux+ofRMbFxHQhqRyW1+kh/q8g4WgoJCq/gjRVA==
+  dependencies:
+    "@types/geojson" "*"
+
 "@types/leaflet@1.5.1":
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.5.1.tgz#cc502e77a27542696372ddd3b88fc5a9038f0f93"
@@ -1189,6 +1196,14 @@
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.0.tgz#ba6ddb00bf5de700b0eb91daa452081ffccbfdea"
   integrity sha512-OL2lk7LYGjxn4b0efW3Pvf2KBVP0y1v3wip1Bp7nA79NkOpElH98q3WdCEdDj93b2b0zaeBG9DvriuKjIK5xDA==
   dependencies:
+    "@types/react" "*"
+
+"@types/react-leaflet@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@types/react-leaflet/-/react-leaflet-2.4.0.tgz#15f55f2635917e05e9d040fe9728b40d5b92ce2a"
+  integrity sha512-kDZ2Ky6FQxXRODBEFlq25Lu80Nc7UsDSHCmHTa22UQn2RIJxe3O443K0vzOrFyzWPpVEOmqBpfDkX9QSTBoFxg==
+  dependencies:
+    "@types/leaflet" "*"
     "@types/react" "*"
 
 "@types/react-router-dom@4.3.5":
@@ -6326,6 +6341,16 @@ react-is@^16.3.2, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
   integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
+
+react-leaflet@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-2.4.0.tgz#9cef74e14aeeb094bfe662b46de1682623c090ea"
+  integrity sha512-ex9MAz2cUAmdUucsjv180OYszdqxHIyEwzWAuMOOuxE7yUmRscxZKR5h0f+vG4shR+SekZYUBk0+gCv8apRADQ==
+  dependencies:
+    "@babel/runtime" "^7.4.5"
+    fast-deep-equal "^2.0.1"
+    hoist-non-react-statics "^3.3.0"
+    warning "^4.0.3"
 
 react-overlays@^1.2.0:
   version "1.2.0"

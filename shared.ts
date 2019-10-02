@@ -11,5 +11,3 @@ import 'bootstrap'
 // The static html pages currently don't use bootstrap's javascript.
 import './styles.scss'
 import './animation.scss'
-
-// import 'leaflet/dist/leaflet.css'

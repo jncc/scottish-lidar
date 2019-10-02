@@ -10,6 +10,9 @@ import 'ts-polyfill'
 import 'whatwg-fetch'
 import 'nodelist-foreach-polyfill' // needed for IE11
 
+// 
+import 'leaflet/dist/leaflet.css'
+
 import { env } from '../env'
 import { App } from './App'
 
