@@ -199,10 +199,10 @@ Project plan
 - [1.0] Task: Basic web app with empty Home, Map and About pages (Pete) [1 week] https://github.com/jncc/scottish-lidar/issues/8
 - [1.0] Task: List page [1 week] https://github.com/jncc/scottish-lidar/issues/9
 - [1.0] Task: Basket functionality [1 week] https://github.com/jncc/scottish-lidar/issues/10
-- [0.4] Task: Download page [1 week] https://github.com/jncc/scottish-lidar/issues/11
 - [1.0] Task: Styling [1 week]
-- [0.0] Task: Map page [3-4 weeks] https://github.com/jncc/scottish-lidar/issues/13
+- [0.2] Task: Download page [1 week] https://github.com/jncc/scottish-lidar/issues/11
+- [0.1] Task: Map page [3-4 weeks] https://github.com/jncc/scottish-lidar/issues/13
 - [0.2] Task: Aggregate outline layer [1 week] https://github.com/jncc/scottish-lidar/issues/17
-- [0.0] Task: Web essentials [1 week] https://github.com/jncc/scottish-lidar/issues/12
+- [0.1] Task: Web essentials [1 week] https://github.com/jncc/scottish-lidar/issues/12
 - [0.0] Task: Feedback [1 week] https://github.com/jncc/scottish-lidar/issues/14
 - [0.0] Task (Stretch): Gazetteer https://github.com/jncc/scottish-lidar/issues/15
