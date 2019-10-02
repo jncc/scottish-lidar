@@ -25,7 +25,7 @@ export const MapScreen = (props: Props) => {
   const mapElement = React.useRef(null)
 
   React.useEffect(() => {
-    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+    var mymap = L.map('mapid').setView([51.505, -0.09], 13)
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: config.attribution,
       maxZoom: config.maximumZoom,
