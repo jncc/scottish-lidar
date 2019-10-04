@@ -24,4 +24,4 @@ var t,e=arguments[3];function n(t){return(n="function"==typeof Symbol&&"symbol"=
 },{"@fortawesome/fontawesome-free/css/all.css":"jE9z","bootstrap":"BQpi","./styles.scss":"/+Hb","./animation.scss":"PvwA"}],"OzXR":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),require("../shared");
 },{"../shared":"LcwX"}]},{},["OzXR"], null)
-//# sourceMappingURL=/about.7b810009.js.map
+//# sourceMappingURL=/about.06df16b1.js.map
