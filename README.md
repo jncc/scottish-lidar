@@ -184,6 +184,7 @@ Could use collectionscontainingproducts with the maximal bounding box to get all
 Mapper
 ------
 
+- Leaflet seems to flicker with transparent tiles https://github.com/Leaflet/Leaflet/issues/2822 
 - Consider react-leafet. https://react-leaflet.js.org/docs/en/intro.html#limitations
 - Want almost full-screen Leaflet https://github.com/Leaflet/Leaflet/issues/1266
 - Leaflet CSS might need normal CSS box model. https://getbootstrap.com/docs/4.3/getting-started/introduction/#box-sizing
