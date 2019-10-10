@@ -19,22 +19,20 @@ function NotFoundComponent() {
 export function Routing(props: State) {
   return (
     <HashRouter>
-      <div>
-        <Switch>
-          <Redirect from="/" exact to="/list" />
-          <Route path="/list/:filter?" render={routeProps => {
-            let filter = routeProps.location.search.replace(/^\?/, '') // remove leading '?'
-            let setFilter = (s: string) => {
-              routeProps.history.push(routeProps.location.pathname + '?' + s)
-            }
-            return <ListScreen collections={props.collections} filter={filter} setFilter={setFilter} />
-          }} />
-          <Route path="/map" component={MapScreen} />
-          <Route path="/download" component={DownloadScreen} />
-          <Route component={NotFoundComponent} />
-        </Switch>
-        <ActivateCurrentNavItem />
-      </div>
+      <Switch>
+        <Redirect from="/" exact to="/list" />
+        <Route path="/list/:filter?" render={routeProps => {
+          let filter = routeProps.location.search.replace(/^\?/, '') // remove leading '?'
+          let setFilter = (s: string) => {
+            routeProps.history.push(routeProps.location.pathname + '?' + s)
+          }
+          return <ListScreen collections={props.collections} filter={filter} setFilter={setFilter} />
+        }} />
+        <Route path="/map" component={MapScreen} />
+        <Route path="/download" component={DownloadScreen} />
+        <Route component={NotFoundComponent} />
+      </Switch>
+      <ActivateCurrentNavItem />
     </HashRouter>
   )
 }

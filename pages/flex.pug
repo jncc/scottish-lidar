@@ -1,0 +1,22 @@
+
+extends ../templates/flexout.pug
+
+block content
+    div
+      | COOKIES!
+    div.b.c
+      h1 Hello from Flex
+      p.b Stretchy
+      div Bottom inside
+    div
+      | Footer
+
+block scripts
+  script(src='../bundles/flex.ts')
+  //- script.
+  //-   var mymap = L.map('mapid').setView(config.defaultCenter, config.defaultZoom)
+  //-   L.tileLayer(config.baseLayerUrlTemplate, {
+  //-     attribution: config.attribution,
+  //-     maxZoom: config.maximumZoom,
+  //-   }).addTo(mymap)
+

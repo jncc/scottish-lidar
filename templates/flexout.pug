@@ -10,15 +10,13 @@ html(lang='en')
     <link href="https://fonts.googleapis.com/css?family=Hind+Madurai&display=swap" rel="stylesheet">
     block head
       title Scottish Remote Sensing Portal
-  body.full-height
-    div.d-flex.flex-column
+  body
+    div.a
       include ./header
-      div.cookie-banner.p-2.text-center.text-secondary.align-center.border-bottom.border-top
-        | This site uses cookies to make the site simpler. 
-        a(href="#") Find out more 
-        | about cookies 
-        a.btn.btn-light.btn-sm.text-secondary(href="#").ml-2
-          i.fas.fa-check-circle.mr-1
-          | OK
       block content
-  block scripts
+      //- div.container
+      //-   div.class1.class2#some-id(some-attribute='some-value')
+      //-     | Hello there from 
+      //-     = process.env.NODE_ENV
+      //- include ./footer
+    block scripts

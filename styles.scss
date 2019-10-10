@@ -1,12 +1,19 @@
 
-$scot-gov-blue: #0065bd;
+// /* Hide all content while the icons and typefaces are loading */
+// html.fa-events-icons-loading body,
+// html.fa-events-typefaces-lato-loading body,
+// html.fa-events-typefaces-orbitron-loading body {
+//   display: none;
+// }
 
-// variable overrides
+$enable-responsive-font-sizes: true;
+
+$scot-gov-blue: #0065bd;
 $theme-colors: (
   "primary": $scot-gov-blue,
   "danger": #E03997
   );
-  
+
 // bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap";
 
@@ -34,6 +41,11 @@ h1 {
     font-family: $header-font-family;
   }
 
+@mixin white-background {
+  background-color: white;
+}
+
+  
 .custom-select {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='white' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
   background-color: $scot-gov-blue;
@@ -45,6 +57,7 @@ h1 {
 }
 
 .header {
+  @include white-background; 
   border-top: 0.4rem solid $scot-gov-blue;
   .container {
     padding-top: 1rem;
@@ -75,7 +88,12 @@ h1 {
     }
   }
 }
-    
+
+.cookie-banner {
+  @include white-background;
+  opacity: 0.8;
+}
+
 .footer {
   background-color: $gray-700;
   color: white;
@@ -93,7 +111,9 @@ h1 {
     }
   }
   .footer-title {
-    margin: 0.5rem 0 1.3rem 0;
+    height: 3.3rem;
+    padding-top: 0.4rem;
+    // margin: 0.5rem 0 1.3rem 0;
     > span {
       font-family: $header-font-family;
       font-size: 160%;
@@ -105,10 +125,10 @@ h1 {
   }
   
   .jncc-partnership {
-    padding-top: 0.2em;
+    // padding-top: 0.2em;
     .jncc-logo {
       filter: brightness(100);
-      height: 60px;
+      height: 3.3rem;
     }
   }
 }
@@ -131,6 +151,7 @@ h1 {
 
 .app {
   min-height: 80vh;
+  // background-color: aliceblue;
 }
 
 .list-screen {
@@ -210,24 +231,75 @@ h1 {
 .map-wrapper { width: 100%; height:100%; position: fixed; }
 .map { width: 100%; height:100%; position: relative; }
 
-.left-bar {
-  z-index: 100000;
-  position: absolute;
-  top: 3rem;
-  left: 4rem;
-  bottom: 3rem;
-  width: 17rem;
-  // max-height: 70vh;
-  .panel {
-    background-color: white;
-    overflow: scroll;
-    border: 1rem solid white;
-    // border-radius: 0.3rem;
-    box-shadow: 0 10px 6px -6px #777;
-    
-  }
+.map-container {
+
+}
+.map {
+  // position: fixed;
+  // top:0;
+  // left:0;
+  // z-index:-1000;
+  height: 100%;
+  width: 100%;
 }
 
-.no-scroll {
-  margin: 0; height: 100%; overflow: hidden;
+.map-controls {
+  // height:100%;
+  // min-height: 100%;
+  .map-main-area {
+    flex: 1;
+
+  }
+  .map-bottom-area {
+    background-color: aquamarine
+  }
+  .map-panel {
+    z-index: 100000;
+  }
+}
+// .left-bar {
+//   z-index: 100000;
+//   position: absolute;
+//   top: 3rem;
+//   left: 4rem;
+//   bottom: 3rem;
+//   width: 17rem;
+//   // max-height: 70vh;
+//   .panel {
+//     background-color: white;
+//     overflow: scroll;
+//     border: 1rem solid white;
+//     box-shadow: 0 10px 6px -6px #777;
+    
+//   }
+// }
+
+// .no-scroll {
+//   margin: 0; height: 100%; overflow: hidden;
+// }
+
+.full-height {
+  min-height: 100vh;
+}
+// .flexmap {
+//   height:100%;
+// }
+
+// flex experiments
+.bordr {
+  border: 3px solid red;
+}
+.a {
+  border: 3px solid goldenrod;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.b {
+  flex: 1;
+}
+.c {
+  border: 3px solid paleturquoise;
+  display: flex;
+  flex-direction: column;
 }

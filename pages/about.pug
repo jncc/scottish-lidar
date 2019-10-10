@@ -8,7 +8,7 @@ block head
   title About the Scottish Remote Sensing Portal
 
 block content
-  div.container.normal-page-container
+  div.container.normal-page-container.flex-grow-1
     h1.mb-3 About
     p 
       | The  Scottish Remote Sensing Portal has been developed as a partnership between 
@@ -34,6 +34,8 @@ block content
         | Browse datasets
       a.btn.btn-primary(href='/data' + process.env.PAGE_EXTENSION + '#map')
         | Explore the map
+
+  include ../templates/footer
 
 block scripts
   script(src='../bundles/about.ts')

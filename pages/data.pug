@@ -2,7 +2,8 @@
 extends ../templates/layout.pug
 
 block content
-  div.app#app
+  div.flex-grow-1.app.d-flex.flex-column#app
+  //- include ../templates/footer
 
 block scripts
   script(src='../bundles/data.ts')

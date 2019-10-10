@@ -29,33 +29,44 @@ L.Marker.prototype.options.icon = DefaultIcon
 
 export const MapScreen = (props: Props) => {
   
-  React.useEffect(() => {
-    var mymap = L.map('mapid').setView(config.defaultCenter, config.defaultZoom)
-    L.tileLayer(config.baseLayerUrlTemplate, {
-      attribution: config.attribution,
-      maxZoom: config.maximumZoom,
-    }).addTo(mymap)
+  // React.useEffect(() => {
+  //   var mymap = L.map('mapid').setView(config.defaultCenter, config.defaultZoom)
+  //   L.tileLayer(config.baseLayerUrlTemplate, {
+  //     attribution: config.attribution,
+  //     maxZoom: config.maximumZoom,
+  //   }).addTo(mymap)
     
-    L.marker(config.defaultCenter).addTo(mymap)
+  //   L.marker(config.defaultCenter).addTo(mymap)
     
-    var aggregateLayer = L.tileLayer.wms('https://srsp-ows.jncc.gov.uk:443/scotland/wms', {
-      layers: 'scotland:lidar-aggregate',
-      format: 'image/png',
-      opacity: 0.6,
-      transparent: true,
-    }).addTo(mymap)
+  //   var aggregateLayer = L.tileLayer.wms('https://srsp-ows.jncc.gov.uk:443/scotland/wms', {
+  //     layers: 'scotland:lidar-aggregate',
+  //     format: 'image/png',
+  //     opacity: 0.6,
+  //     transparent: true,
+  //   }).addTo(mymap)
 
-  }, [])
+  // }, [])
 
   React.useEffect(() => {
     let body = document.querySelector('body') as HTMLElement
     body.classList.add('no-scroll')
   }, [])
 
+  return <div></div>
   return (
-    <div className="map-wrapper">
-      <div className="left-bar">
-        <div className="panel">
+    <>
+    <div className="flex-grow-1">Grow</div>
+    <div className="">Normal</div>
+    {/* {makeSmallScreenWarningUI()} */}
+    {/* <div className="map-wrapper">
+      <div id="mapid" className="map" />
+    </div> */}
+    {/* <div className="map-controls">
+      <div className="map-main-area">
+        <div className="map-panel">
+          TOp stuff
+        </div>
+        <div className="map-panel">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
           magna aliqua. Dui accumsan sit amet nulla facilisi morbi tempus. Tincidunt id aliquet risus feugiat in ante 
           metus dictum. Velit euismod in pellentesque massa placerat duis. Lorem dolor sed viverra ipsum. Dui faucibus 
@@ -64,15 +75,14 @@ export const MapScreen = (props: Props) => {
           est pellentesque elit ullamcorper dignissim cras.
         </div>
       </div>
-      <div id="mapid" className="map">
-        {/* <Map center={config.defaultCenter} zoom={config.defaultZoom}>
-          <TileLayer
-            attribution={config.attribution}
-            url={config.baseLayerUrlTemplate}
-          />
-        </Map> */}
+    </div> */}
+    {/* <div className="map-bottom-area">
+      <div className="map-panel">
+        Bottom stuff
       </div>
-    </div>
+    </div> */}
+
+    </>
   )
 }
 
@@ -86,3 +96,10 @@ export const MapScreen = (props: Props) => {
 //   bboxArea:    13679,
 //   total:       0
 // }
+
+const makeSmallScreenWarningUI = () =>
+  <div className="d-lg-none text-center text-danger p-2">
+    The map is made for desktop devices.
+    <br />
+    Please increase your screen size to use the map.
+  </div>
