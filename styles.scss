@@ -34,6 +34,16 @@ $body-font-family: Hind Madurai, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 body {
   font-family: $body-font-family;
+  
+  // fix ie 11 flexbox bug by adding display:flex to parent
+  display: flex;
+  flex-direction: column;
+}
+
+#layout-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
@@ -111,7 +121,7 @@ h1 {
     }
   }
   .footer-title {
-    height: 3.3rem;
+    min-height: 3.3rem;
     padding-top: 0.4rem;
     // margin: 0.5rem 0 1.3rem 0;
     > span {
@@ -228,35 +238,14 @@ h1 {
   }
 }
 
-.map-wrapper { width: 100%; height:100%; position: fixed; }
-.map { width: 100%; height:100%; position: relative; }
-
-.map-container {
-
-}
-.map {
-  // position: fixed;
-  // top:0;
-  // left:0;
-  // z-index:-1000;
-  height: 100%;
-  width: 100%;
+// .map-wrapper { width: 100%; height:100%; position: fixed; }
+// .map { width: 100%; height:100%; position: relative; }
+.map { width: 100%; height: 100%; position: absolute; left:0; top:0; right:0; bottom:0; }
+#themap {
+  border: 3px solid greenyellow;
 }
 
-.map-controls {
-  // height:100%;
-  // min-height: 100%;
-  .map-main-area {
-    flex: 1;
 
-  }
-  .map-bottom-area {
-    background-color: aquamarine
-  }
-  .map-panel {
-    z-index: 100000;
-  }
-}
 // .left-bar {
 //   z-index: 100000;
 //   position: absolute;
@@ -281,13 +270,13 @@ h1 {
 .full-height {
   min-height: 100vh;
 }
-// .flexmap {
-//   height:100%;
-// }
 
 // flex experiments
 .bordr {
   border: 3px solid red;
+}
+.fullheight {
+  min-height: 100vh;
 }
 .a {
   border: 3px solid goldenrod;
@@ -302,4 +291,32 @@ h1 {
   border: 3px solid paleturquoise;
   display: flex;
   flex-direction: column;
+}
+.d {
+  display: flex;
+  flex-direction: row;
+}
+.f {
+  z-index: 1000;
+}
+.g {
+  z-index: 10000;
+}
+.h {
+  z-index: 100000;
+}
+
+.np {
+  pointer-events: none;
+}
+.p {
+  pointer-events: unset;
+}
+
+.panel {
+  width: 15rem;
+  background-color: white;
+  overflow: scroll;
+  // border: 1rem solid white;
+  box-shadow: 0 10px 6px -6px #777;
 }
