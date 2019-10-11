@@ -314,9 +314,29 @@ h1 {
 }
 
 .panel {
-  width: 15rem;
+  max-height: 35rem;
   background-color: white;
-  overflow: scroll;
-  // border: 1rem solid white;
+  overflow-y: scroll;
+  padding: 1rem;
   box-shadow: 0 10px 6px -6px #777;
+}
+
+// absolute experiments
+.scrollable {
+  
+}
+.left-panel {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  max-width: 18rem;
+}
+.right-panel {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  max-width: 18rem;
+}
+.r {
+  position:relative;
 }
