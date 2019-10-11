@@ -1,0 +1,17 @@
+
+script.
+  // implement cookie consent with smooth, classic javascript
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var ok = document.querySelector('#cookie-consent-ok');
+    var banner = document.querySelector('.cookie-banner');
+    var hideBanner = function() { banner.style.display = "none"; }
+    ok.onclick = function() {
+      var date = new Date();
+      date.setMonth(date.getMonth() + 1)
+      document.cookie = "cookie-consent=all;expires=" + date.toUTCString();
+      hideBanner();
+    }
+    if (document.cookie.indexOf('cookie-consent=') >= 0) {
+      hideBanner();
+    }
+  });

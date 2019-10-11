@@ -103,10 +103,17 @@ h1 {
   }
 }
 
+.cookie-banner-wrapper {
+  @include above-map;
+  position: relative;
+}
 .cookie-banner {
   @include white-background;
   @include above-map;  
   opacity: 0.8;
+  // width: 100%;
+  // position: absolute;
+  // top:0;left:0;
 }
 
 .footer {
