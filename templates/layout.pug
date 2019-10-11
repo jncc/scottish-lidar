@@ -13,12 +13,22 @@ html(lang='en')
   body
     div#layout-container
       include ./header
-      div.cookie-banner.p-2.text-center.text-secondary.align-center.border-bottom.border-top
-        | This site uses cookies to make the site simpler. 
-        a(href="#") Find out more 
-        | about cookies 
-        a.btn.btn-light.btn-sm.text-secondary(href="#").ml-2
-          i.fas.fa-check-circle.mr-1
-          | OK
+      include ./cookie-consent
       block content
     block scripts
+    script.
+      // implement cookie consent with smooth, classic javascript
+      document.addEventListener("DOMContentLoaded", function(event) {
+        var ok = document.querySelector('#cookie-consent-ok');
+        var banner = document.querySelector('.cookie-banner');
+        var hideBanner = function() { banner.classList.add('d-none'); }
+        ok.onclick = function() {
+          var date = new Date();
+          date.setMonth(date.getMonth() + 1)
+          document.cookie = "cookie-consent=all;expires=" + date.toUTCString();
+          hideBanner();
+        }
+        if (document.cookie.indexOf('cookie-consent=') >= 0) {
+          hideBanner();
+        }
+      });

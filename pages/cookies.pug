@@ -1,0 +1,16 @@
+
+extends ../templates/layout.pug
+
+block head
+  title Cookies
+
+block content
+  div.container.normal-page-container.flex-grow-1
+    h1 Cookies
+    p
+    | All about cookies...
+
+  include ../templates/footer
+
+block scripts
+  script(src='../bundles/cookies.ts')
