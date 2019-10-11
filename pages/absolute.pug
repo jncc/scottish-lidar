@@ -5,15 +5,19 @@ block head
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
   
 block content
+  div.control-group.bottom-left-control-group
+    | Bottom left controls
+  //- div.bottom-right-control-group
+  //-   | Bottom right controls
   div.r
-    div.right-panel.g.panel
+    div.panel.right-panel
         | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
         | magna aliqua. Dui accumsan sit amet nulla facilisi morbi tempus. Tincidunt id aliquet risus feugiat in ante 
         | metus dictum. Velit euismod in pellentesque massa placerat duis. Lorem dolor sed viverra ipsum. Dui faucibus 
         | in ornare quam viverra. Mauris augue neque gravida in. Ac tortor dignissim convallis aenean et tortor at.
         | Tortor consequat id porta nibh venenatis cras sed felis. Sollicitudin tempor id eu nisl nunc. Vestibulum
         | est pellentesque elit ullamcorper dignissim cras.
-    div.left-panel.g.panel
+    div.panel.left-panel
       h4 Heading
       div.mb-2
         span
@@ -32,8 +36,6 @@ block content
         | in ornare quam viverra. Mauris augue neque gravida in. Ac tortor dignissim convallis aenean et tortor at.
         | Tortor consequat id porta nibh venenatis cras sed felis. Sollicitudin tempor id eu nisl nunc. Vestibulum
         | est pellentesque elit ullamcorper dignissim cras.
-  div.bordr
-    | Bottom left controls
   div.map#themap
 
 block scripts
