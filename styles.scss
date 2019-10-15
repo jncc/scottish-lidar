@@ -111,6 +111,7 @@ h1 {
   @include white-background;
   @include above-map;  
   opacity: 0.8;
+  display: none;
   // width: 100%;
   // position: absolute;
   // top:0;left:0;
