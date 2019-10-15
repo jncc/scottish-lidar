@@ -48,7 +48,7 @@ These variables are both set to the empty string in production, and HTML links a
 
 (2) Due to [this bug](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has its own bundle. This could be improved significantly in the future - only three bundles are really needed; one for the static pages, one for the single-page React app, and one shared bundle.
 
-> Parcel errors, warnings and unexpectedness can often be fixed by **clearing its cache**.
+If something breaks after a change (especially of `.env` values), **clear the Parcel cache**.
 
     yarn clean   # cleans all build output, including the Parcel cache
 
@@ -91,7 +91,7 @@ The site is automatically to Github Pages by Jenkins using the script in `deploy
 Page structure
 --------------
 
-The web application consists of several html "content" pages plus a page that holds the single-page React app. It has been designed to be hosted in production on a static web host service; there is no dynamic web server, and we make do with direct calls to the JNCC Catalog database API.
+The web application consists of several html "content" pages plus a page that holds the single-page React app. It has been designed to be hosted in production on a static web host. There is no dynamic web server, and we make do with direct calls to the JNCC Catalog database API.
 
     - /                         - home page       (index.html)
     - /data                     - the react app   (data.html)
@@ -153,7 +153,7 @@ One oddity is that the OGC WMS service URLs for the collections are stored as pr
 
     POST search/product
     {
-        "collection": "scotland-gov/lidar/ogc",
+        "collections": "scotland-gov/lidar/ogc"
     }
 
 This query gives a list of OGC products which we can identify using the product name:
@@ -162,21 +162,19 @@ This query gives a list of OGC products which we can identify using the product 
 `scotland-gov-lidar-phase-1-dtm` the OGC product has a corresponding product name
 
 The List page can also be filtered to e.g. a group by querystring value e.g. `lidar/phase-1`.
-This is client-side filter of the collections lookup. (By the way, the server-side alternative would be `GET search/collection/scotland-gov/lidar/phase-1/*`)
+This is client-side filter of the collections lookup. (As an aside, the server-side alternative would be `GET search/collection/scotland-gov/lidar/phase-1/*`)
 
-    GET search/product
+The map screen needs to know which collections are currently matching bbox:
 
-Map page needs to know which collections are currently matching bbox:
-
-    `POST search/collectionscontainingproducts` // or whatever it's called exactly
+    POST search/product/countByCollection
         {
             footprint
             spatial-op
-            [collection1,collection2]
+            [collection1, collection2]
         }
 Returns [(collection-name, count)]
 
-Note: Will need to send all collections from the in-memory collection list.
+Note: We need to send all collections from the in-memory collection list.
 
 Future home page summary stats?
 Could use collectionscontainingproducts with the maximal bounding box to get all collections and their product count.

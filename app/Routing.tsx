@@ -28,7 +28,7 @@ export function Routing(props: State) {
           }
           return <ListScreen collections={props.collections} filter={filter} setFilter={setFilter} />
         }} />
-        <Route path="/map" component={MapScreen} />
+        <Route path="/map" render={() => <MapScreen collections={props.collections} />} />
         <Route path="/download" component={DownloadScreen} />
         <Route component={NotFoundComponent} />
       </Switch>
