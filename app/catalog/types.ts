@@ -13,6 +13,16 @@ export type SearchProductsResult = {
   result: Product[]
 }
 
+export type ProductCountByCollectionQuery = {
+  collections: string[],
+  bbox: [number, number, number, number],
+}
+
+export type ProductCountByCollectionResult = {
+  query: any
+  result: { products: number, collectionName: string }[]
+}
+
 export type Collection = {
   id            : string
   name          : string
