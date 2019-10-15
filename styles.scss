@@ -241,23 +241,32 @@ h1 {
 
 .panel {
   @include above-map;
-  max-height: 35rem;
   background-color: white;
   overflow-y: scroll;
   padding: 1rem;
   box-shadow: 0 10px 6px -6px #777;
+  margin-bottom: 1rem;
 }
-.left-panel {
+.left-panel-container {
   position: absolute;
   top: 2rem;
   left: 2rem;
+  @include above-map;
   max-width: 18rem;
+  // max-height: 35rem;
+  .left-panel-a {
+    max-height: 15rem;
+  }
+  .left-panel-b {
+    max-height: 15rem;
+  }
 }
 .right-panel {
   position: absolute;
   top: 2rem;
   right: 2rem;
   max-width: 18rem;
+  max-height: 35rem;
 }
 .control-group {
   @include above-map;
