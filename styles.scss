@@ -103,10 +103,6 @@ h1 {
   }
 }
 
-.cookie-banner-wrapper {
-  @include above-map;
-  position: relative;
-}
 .cookie-banner {
   @include white-background;
   @include above-map;  
