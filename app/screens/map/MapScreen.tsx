@@ -3,17 +3,15 @@ import * as React from 'react'
 import L from 'leaflet'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 
-import icon from 'leaflet/dist/images/marker-icon.png'
-import iconShadow from 'leaflet/dist/images/marker-shadow.png'
-
 // import { AddToBasketButton } from './AddToBasketButton'
-import { State } from '../../state'
+import { CollectionTuple } from '../../state'
+import { ProductCountByCollectionResult } from '../../catalog/types'
 import Counter from './Counter'
 import { loadProductCountByCollection } from '../../catalog/api'
 import { DatasetList } from './DatasetList'
 
 type Props = {
-  collections: State['collections']
+  collections: CollectionTuple[]
 }
 
 let config = {
@@ -32,72 +30,77 @@ let config = {
   }
 }
 
-let DefaultIcon = L.icon({
-  iconUrl: icon,
-  shadowUrl: iconShadow
-})
-L.Marker.prototype.options.icon = DefaultIcon
-
 export const MapScreen = (props: Props) => {
   
-  let [productCountByCollection, setProductCountByCollection] = React.useState()
+  let [productCountByCollection, setProductCountByCollection]
+    = React.useState({ query: {}, result: [] } as ProductCountByCollectionResult)
+    
   React.useEffect(() => {
-
-    let query = {
-      collections: [
-        'scotland-gov/lidar/phase-1/dsm',
-        'scotland-gov/lidar/phase-1/dtm',
-        'scotland-gov/lidar/phase-1/laz',
-        'scotland-gov/lidar/phase-2/dsm',
-        'scotland-gov/lidar/phase-2/dtm',
-        'scotland-gov/lidar/phase-2/laz',
-      ],
-      bbox: config.defaultQuery.bbox
-    }
-    loadProductCountByCollection(query).then((result) => {
-      // console.log(result)
-      setProductCountByCollection(result)
-    })
-  }, [])
-
+    if (props.collections.length) { // wait until collections are loaded
+      let query = {
+        collections: props.collections.map(c => c.collection.name),
+        bbox: config.defaultQuery.bbox
+      }
+      loadProductCountByCollection(query).then((result) => {
+        setProductCountByCollection(result)
+      })
+    }    
+  }, [props.collections])
+  
   // React.useEffect(() => {
-  //   var mymap = L.map('mapid').setView(config.defaultCenter, config.defaultZoom)
-  //   L.tileLayer(config.baseLayerUrlTemplate, {
-  //     attribution: config.attribution,
-  //     maxZoom: config.maximumZoom,
-  //   }).addTo(mymap)
-    
-  //   L.marker(config.defaultCenter).addTo(mymap)
-    
-  //   var aggregateLayer = L.tileLayer.wms('https://srsp-ows.jncc.gov.uk:443/scotland/wms', {
-  //     layers: 'scotland:lidar-aggregate',
-  //     format: 'image/png',
-  //     opacity: 0.6,
-  //     transparent: true,
-  //   }).addTo(mymap)
-
-  // }, [])
-
-  // React.useEffect(() => {
-  //   let body = document.querySelector('body') as HTMLElement
-  //   body.classList.add('no-scroll')
-  // }, [])
-
-  return (
-    <>
+    //   var mymap = L.map('mapid').setView(config.defaultCenter, config.defaultZoom)
+    //   L.tileLayer(config.baseLayerUrlTemplate, {
+      //     attribution: config.attribution,
+      //     maxZoom: config.maximumZoom,
+      //   }).addTo(mymap)
+      
+      //   L.marker(config.defaultCenter).addTo(mymap)
+      
+      //   var aggregateLayer = L.tileLayer.wms('https://srsp-ows.jncc.gov.uk:443/scotland/wms', {
+        //     layers: 'scotland:lidar-aggregate',
+        //     format: 'image/png',
+        //     opacity: 0.6,
+        //     transparent: true,
+        //   }).addTo(mymap)
+        
+        // }, [])
+        
+        // React.useEffect(() => {
+          //   let body = document.querySelector('body') as HTMLElement
+          //   body.classList.add('no-scroll')
+          // }, [])
+          
+          return (
+            <>
     {makeSmallScreenWarningUI()}
     <div className="container normal-page-container">
       This is the map. There are {props.collections.length} collections.
+      <DatasetList
+        collections={props.collections}
+        productCountByCollectionForCurrentQuery={productCountByCollection.result}
+      />
+      <hr />
       <Counter />
-      <DatasetList collections={props.collections} />
     </div>
     </>
   )
 }
 
 const makeSmallScreenWarningUI = () =>
-  <div className="d-lg-none text-center text-danger p-2">
+<div className="d-lg-none text-center text-danger p-2">
     The map is made for desktop devices.
     <br />
     Please increase your screen size to use the map.
   </div>
+
+// import icon from 'leaflet/dist/images/marker-icon.png'
+// import iconShadow from 'leaflet/dist/images/marker-shadow.png'
+// let DefaultIcon = L.icon({
+//   iconUrl: icon,
+//   shadowUrl: iconShadow
+// })
+// L.Marker.prototype.options.icon = DefaultIcon
+
+    const loadProductCountByCollectionX = (collections: CollectionTuple[]) => {
+
+    }

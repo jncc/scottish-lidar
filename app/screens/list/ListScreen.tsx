@@ -3,11 +3,11 @@ import * as React from 'react'
 import _ from 'lodash'
 import { DropdownButton, Dropdown, InputGroup, FormControl, Form } from 'react-bootstrap'
 
-import { State } from '../../state'
+import { CollectionTuple } from '../../state'
 import { ListItem } from './ListItem'
 
 type Props = {
-  collections: State['collections']
+  collections: CollectionTuple[]
   filter: string
   setFilter: (s: string) => void
 } // & State['lister']

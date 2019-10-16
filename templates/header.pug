@@ -22,7 +22,7 @@ div.header
               | Home
           li.nav-item.mr-4(class=(page_name === "about" ? "active" : undefined))
             a.nav-link.text-dark(href='/about' + process.env.PAGE_EXTENSION)
-              if page_name === "about"
+              if page_name ===  "about"
                 span.sr-only (current)
               | About
           li.nav-item.mr-4#list-screen-nav-item

@@ -20,7 +20,7 @@ export type ProductCountByCollectionQuery = {
 
 export type ProductCountByCollectionResult = {
   query: any
-  result: { products: number, collectionName: string }[]
+  result: { collectionName: string, products: number }[]
 }
 
 export type Collection = {

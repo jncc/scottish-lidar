@@ -26,3 +26,4 @@ export let initialState = {
 }
 
 export type State = typeof initialState
+export type CollectionTuple = State['collections'][0] // named typed for convenience

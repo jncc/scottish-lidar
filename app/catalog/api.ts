@@ -20,7 +20,7 @@ export async function loadOgcProducts() {
 }
 
 export async function loadProductCountByCollection(query: ProductCountByCollectionQuery) {
-  return await post<ProductCountByCollectionResult[]>('/search/product/countByCollection', {
+  return await post<ProductCountByCollectionResult>('/search/product/countByCollection', {
     collections: query.collections,
     footprint: bboxToWkt(query.bbox),
     spatialOp: 'overlaps',

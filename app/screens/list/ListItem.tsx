@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 import { Button, Collapse, OverlayTrigger, Tooltip, Popover } from 'react-bootstrap'
 import _ from 'lodash'
 
-import { State } from '../../state'
+import { CollectionTuple } from '../../state'
 import { getLicenceDetailsFromUseConstraints } from '../../utility/licenseUtility'
 import { DatasetPath } from '../../shared/DatasetPath'
 import { WmsModal } from '../../shared/WmsModal'
 import { Tip } from '../../shared/Tip'
 
 type Props = {
-  collection: State['collections'][0]
+  collection: CollectionTuple
 }
 
 export const ListItem = (props: Props) => {
