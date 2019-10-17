@@ -50,8 +50,9 @@ export const MapScreen = (props: Props) => {
 
   return <MapScreenLayout
     collections={props.collections}
-    currentBbox={currentBbox}
-    currentCollection={currentCollection}
+    bbox={currentBbox}
+    collection={currentCollection}
+    setBbox={setCurrentBbox}
     products={products.result}
     productCountByCollection={productCountByCollection.result}
     />

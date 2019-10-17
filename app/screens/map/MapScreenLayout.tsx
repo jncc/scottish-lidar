@@ -2,18 +2,19 @@
 import * as React from 'react'
 
 import { CollectionTuple } from '../../state'
-import { ProductResult, ProductCountByCollectionResult, ProductQuery, Product } from '../../catalog/types'
-import { DatasetList } from './DatasetList'
+import { Product } from '../../catalog/types'
 import Counter from './Counter'
 import { LeafletMap } from './LeafletMap'
 import { DatasetListPanels } from './DatasetListPanels'
+import { Bbox } from './types'
 
 // import { AddToBasketButton } from './AddToBasketButton'
 
 type Props = {
   collections: CollectionTuple[]
-  currentBbox: number[]
-  currentCollection: string
+  collection: string
+  bbox: Bbox
+  setBbox: (bbox: Bbox) => void
   products: Product[]
   productCountByCollection: { collectionName: string, products: number }[]
 }
@@ -46,7 +47,7 @@ export const MapScreenLayout = (props: Props) => {
         />
       </div>
     </div>
-    <LeafletMap bbox={props.currentBbox} />
+    <LeafletMap bbox={props.bbox} setBbox={props.setBbox} />
   </>
 }
 
