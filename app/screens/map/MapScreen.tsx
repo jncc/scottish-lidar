@@ -13,8 +13,8 @@ type Props = {
 
 export const MapScreen = (props: Props) => {
   
-  let [currentBbox, setCurrentBbox] = React.useState(config.defaultQuery.bbox)
-  let [currentCollection, setCurrentCollection] = React.useState(config.defaultQuery.collections[0])
+  let [bbox, setBbox] = React.useState(config.defaultQuery.bbox)
+  let [collection, setCollection] = React.useState(config.defaultQuery.collections[0])
 
   let [products, setProducts] = React.useState(
     { query: config.defaultQuery, result: [] } as ProductResult
@@ -29,13 +29,13 @@ export const MapScreen = (props: Props) => {
     if (props.collections.length) {
       
       let productQuery = {
-        collections: [currentCollection],
-        bbox: currentBbox
+        collections: [collection],
+        bbox: bbox
       }
         
       let productCountByCollectionQuery = {
         collections: props.collections.map(c => c.collection.name),
-        bbox: currentBbox
+        bbox: bbox
       }
         
       Promise.all([
@@ -46,13 +46,19 @@ export const MapScreen = (props: Props) => {
           setProductCountByCollection(productCountByCollection)
         })
     }    
-  }, [props.collections, currentBbox, currentCollection])
+  }, [props.collections, bbox, collection])
+
+  let currentCollection = props.collections.find(c => c.collection.name === collection)
+  let wmsLayer = currentCollection && currentCollection.ogcProduct
+    ? currentCollection!.ogcProduct!.data!.product!.wms
+    : undefined
 
   return <MapScreenLayout
     collections={props.collections}
-    bbox={currentBbox}
-    collection={currentCollection}
-    setBbox={setCurrentBbox}
+    bbox={bbox}
+    wmsLayer={wmsLayer}
+    collection={collection}
+    setBbox={setBbox}
     products={products.result}
     productCountByCollection={productCountByCollection.result}
     />

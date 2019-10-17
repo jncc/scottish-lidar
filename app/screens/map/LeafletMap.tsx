@@ -12,13 +12,14 @@ import { Bbox } from './types'
 type Props = {
   bbox: Bbox
   setBbox: (bbox: Bbox) => void
+  wmsLayer: { url: string, name: string } | undefined
 }
 
 export const LeafletMap = (props: Props) => {
 
   React.useEffect(() => {
 
-    var map = L.map('themap', {
+    var map = L.map('leaflet-map', {
       minZoom: 2,
       maxZoom: config.maximumZoom,
       editable: true, // enable leaflet.editable pluginleag
@@ -30,16 +31,16 @@ export const LeafletMap = (props: Props) => {
     map.setView(config.defaultCenter, config.defaultZoom)
 
     L.tileLayer(config.baseLayerUrlTemplate, {
-        attribution: config.attribution,
-        maxZoom: config.maximumZoom,
-      }).addTo(map)
-    
-    L.tileLayer.wms('https://srsp-ows.jncc.gov.uk:443/scotland/wms', {
-        layers: 'scotland:lidar-aggregate',
-        format: 'image/png',
-        opacity: 0.6,
-        transparent: true,
-      }).addTo(map)
+      attribution: config.attribution,
+      maxZoom: config.maximumZoom,
+    }).addTo(map)
+  
+    L.tileLayer.wms(config.aggregateLayer.baseUrl, {
+      layers: config.aggregateLayer.layer,
+      format: config.aggregateLayer.format,
+      opacity: config.aggregateLayer.opacity,
+      transparent: config.aggregateLayer.transparent
+    }).addTo(map)
 
     // add layer groups
     let productFootprintLayerGroup = L.layerGroup([]).addTo(map)
@@ -64,7 +65,19 @@ export const LeafletMap = (props: Props) => {
     })
   }, [])
 
+  // React.us
+
+  if (props.wmsLayer) {
+    console.log(props.wmsLayer.url)
+    console.log(props.wmsLayer.name)
+
+  }
+
   // react has nothing to do with the leaflet map;
-  // map manipulation is handled with side-effects
-  return <div id="themap" className="map"></div>
+  // map manipulation is performed via side-effects
+  return <div id="leaflet-map"></div>
+}
+
+let useLeafletMap = () => {
+
 }

@@ -21,7 +21,7 @@ block content
     div.g.bordr
       | Bottom left controls
       span
-    div.map#themap
+    div.map#leaflet-map
 
 block scripts
   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>      
@@ -34,7 +34,7 @@ block scripts
       baseLayerUrlTemplate: `https://{s}.tiles.mapbox.com/v4/petmon.lp99j25j/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGV0bW9uIiwiYSI6ImdjaXJLTEEifQ.cLlYNK1-bfT0Vv4xUHhDBA`,
       attribution: `Backdrop &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>`,
     };
-    var mymap = L.map('themap').setView(config.defaultCenter, config.defaultZoom)
+    var mymap = L.map('leaflet-map').setView(config.defaultCenter, config.defaultZoom)
     L.tileLayer(config.baseLayerUrlTemplate, {
       attribution: config.attribution,
       maxZoom: config.maximumZoom,

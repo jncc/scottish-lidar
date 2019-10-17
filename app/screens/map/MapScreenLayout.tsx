@@ -15,6 +15,7 @@ type Props = {
   collection: string
   bbox: Bbox
   setBbox: (bbox: Bbox) => void
+  wmsLayer: { url: string, name: string } | undefined
   products: Product[]
   productCountByCollection: { collectionName: string, products: number }[]
 }
@@ -47,7 +48,7 @@ export const MapScreenLayout = (props: Props) => {
         />
       </div>
     </div>
-    <LeafletMap bbox={props.bbox} setBbox={props.setBbox} />
+    <LeafletMap bbox={props.bbox} setBbox={props.setBbox} wmsLayer={props.wmsLayer} />
   </>
 }
 
