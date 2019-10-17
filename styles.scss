@@ -264,10 +264,8 @@ h1 {
   max-width: 18rem;
   max-height: 35rem;
 }
-.control-group {
-  @include above-map;
-}
 .bottom-left-control-group {
+  @include above-map;
   position: absolute;
   bottom: 2rem;
   left: 2rem;
