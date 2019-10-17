@@ -7,7 +7,7 @@ import { get, post } from './methods'
 import {
   CollectionResult, ProductResult,
   ProductQuery, ProductCountByCollectionResult } from './types'
-import { bboxToWkt } from '../utility/wktUtility'
+import { bboxToWkt } from '../utility/geospatialUtility'
 
 export async function loadCollections() {
   return await get<CollectionResult>('/search/collection/scotland-gov/*')
@@ -19,16 +19,16 @@ export async function loadOgcProducts() {
   })
 }
 
-export async function loadProductCountByCollection(query: ProductQuery) {
-  return await post<ProductCountByCollectionResult>('/search/product/countByCollection', {
+export async function loadProducts(query: ProductQuery) {
+  return await post<ProductResult>('/search/product', {
     collections: query.collections,
     footprint: bboxToWkt(query.bbox),
     spatialOp: 'overlaps',
   })
 }
 
-export async function loadProducts(query: ProductQuery) {
-  return await post<ProductResult>('/search/product', {
+export async function loadProductCountByCollection(query: ProductQuery) {
+  return await post<ProductCountByCollectionResult>('/search/product/countByCollection', {
     collections: query.collections,
     footprint: bboxToWkt(query.bbox),
     spatialOp: 'overlaps',

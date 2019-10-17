@@ -12,31 +12,47 @@ type Props = {
 }
 
 export const MapScreen = (props: Props) => {
-      
-  let [products, setProducts]
-    = React.useState({ query: {}, result: [] } as ProductResult)
+  
+  let [currentBbox, setCurrentBbox] = React.useState(config.defaultQuery.bbox)
+  let [currentCollection, setCurrentCollection] = React.useState(config.defaultQuery.collections[0])
 
-  let [productCountByCollection, setProductCountByCollection]
-    = React.useState({ query: {}, result: [] } as ProductCountByCollectionResult)
-    
+  let [products, setProducts] = React.useState(
+    { query: config.defaultQuery, result: [] } as ProductResult
+  )
+
+  let [productCountByCollection, setProductCountByCollection] = React.useState(
+    { query: config.defaultQuery, result: [] } as ProductCountByCollectionResult
+  )
+
   React.useEffect(() => {
-    if (props.collections.length) { // wait until collections are loaded
-      // the two api calls we need to make have the same query
-      let query = {
-        collections: props.collections.map(c => c.collection.name),
-        bbox: config.defaultQuery.bbox
+
+    if (props.collections.length) {
+      
+      let productQuery = {
+        collections: [currentCollection],
+        bbox: currentBbox
       }
-      Promise.all([loadProducts(query), loadProductCountByCollection(query)])
+        
+      let productCountByCollectionQuery = {
+        collections: props.collections.map(c => c.collection.name),
+        bbox: currentBbox
+      }
+        
+      Promise.all([
+        loadProducts(productQuery),
+        loadProductCountByCollection(productCountByCollectionQuery)])
         .then(([products, productCountByCollection]) => {
           setProducts(products)
           setProductCountByCollection(productCountByCollection)
         })
     }    
-  }, [props.collections])
+  }, [props.collections, currentBbox, currentCollection])
 
   return <MapScreenLayout
     collections={props.collections}
-    products={products}
-    productCountByCollection={productCountByCollection}
+    currentBbox={currentBbox}
+    currentCollection={currentCollection}
+    products={products.result}
+    productCountByCollection={productCountByCollection.result}
     />
 }
