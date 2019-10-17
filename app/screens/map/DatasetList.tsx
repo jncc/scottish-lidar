@@ -2,7 +2,6 @@
 import React from 'react'
 import _ from 'lodash'
 import { CollectionTuple } from '../../state'
-import { ProductCountByCollectionResult } from '../../catalog/types'
 
 type Props = {
   collections: CollectionTuple[]
@@ -10,7 +9,7 @@ type Props = {
 }
 
 export const DatasetList = (props: Props) => {
-
+  
   let collectionList = props.collections.map(c => {
     let productCountResult = props.productCountByCollectionForCurrentQuery
       .find(x => x.collectionName === c.collection.name)

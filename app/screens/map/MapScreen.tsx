@@ -3,35 +3,22 @@ import * as React from 'react'
 import L from 'leaflet'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 
+import { config } from './config'
 // import { AddToBasketButton } from './AddToBasketButton'
 import { CollectionTuple } from '../../state'
-import { ProductCountByCollectionResult } from '../../catalog/types'
+import { ProductResult, ProductCountByCollectionResult } from '../../catalog/types'
 import Counter from './Counter'
-import { loadProductCountByCollection } from '../../catalog/api'
+import { loadProductCountByCollection, loadProducts } from '../../catalog/api'
 import { DatasetList } from './DatasetList'
 
 type Props = {
   collections: CollectionTuple[]
 }
 
-let config = {
-  defaultZoom: 7,
-  maximumZoom: 13,
-  defaultCenter: [56.00, -4.5] as [number, number],
-  baseLayerUrlTemplate: `https://{s}.tiles.mapbox.com/v4/petmon.lp99j25j/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGV0bW9uIiwiYSI6ImdjaXJLTEEifQ.cLlYNK1-bfT0Vv4xUHhDBA`,
-  attribution: `Backdrop &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>`,
-  defaultQuery: {
-    collections: [`7d96723a-49c9-4d17-8df1-2a96932112d4`], // Phase 1 DSM collection
-    bbox:        [-4.5, 56.1, -3.5, 56.7] as [number, number, number, number],
-  },
-  defaultQueryResultInfo: {
-    bboxArea:    13679,
-    total:       0
-  }
-}
-
 export const MapScreen = (props: Props) => {
-  
+      
+  let [products, setProducts]
+    = React.useState({ query: {}, result: [] } as ProductResult)  
   let [productCountByCollection, setProductCountByCollection]
     = React.useState({ query: {}, result: [] } as ProductCountByCollectionResult)
     
@@ -41,12 +28,14 @@ export const MapScreen = (props: Props) => {
         collections: props.collections.map(c => c.collection.name),
         bbox: config.defaultQuery.bbox
       }
-      loadProductCountByCollection(query).then((result) => {
-        setProductCountByCollection(result)
-      })
+      Promise.all([loadProducts(query), loadProductCountByCollection(query)])
+        .then(([products, productCountByCollection]) => {
+          setProducts(products)
+          setProductCountByCollection(productCountByCollection)
+        })
     }    
   }, [props.collections])
-  
+
   // React.useEffect(() => {
     //   var mymap = L.map('mapid').setView(config.defaultCenter, config.defaultZoom)
     //   L.tileLayer(config.baseLayerUrlTemplate, {
@@ -79,6 +68,8 @@ export const MapScreen = (props: Props) => {
         collections={props.collections}
         productCountByCollectionForCurrentQuery={productCountByCollection.result}
       />
+      <hr />
+      {console.log(products)}
       <hr />
       <Counter />
     </div>

@@ -3,20 +3,20 @@
  * Type definitions for the Catalog API.
  */
 
-export type SearchCollectionsResult = {
+export type CollectionResult = {
   query: any
   result: Collection[]
 }
 
-export type SearchProductsResult = {
-  query: any
-  result: Product[]
-}
-
-export type ProductCountByCollectionQuery = {
+export type ProductQuery = {
   collections: string[],
   bbox: [number, number, number, number],
 }
+
+export type ProductResult = {
+  query: any
+  result: Product[]
+}  
 
 export type ProductCountByCollectionResult = {
   query: any
