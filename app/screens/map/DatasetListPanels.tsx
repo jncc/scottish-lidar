@@ -2,6 +2,7 @@
 import React from 'react'
 import _ from 'lodash'
 import { CollectionTuple } from '../../state'
+import { DatasetListItem } from './DatasetListItem'
 
 type Props = {
   collections: CollectionTuple[]
@@ -10,28 +11,29 @@ type Props = {
 
 export const DatasetListPanels = (props: Props) => {
   
-  let collectionList = props.collections.map(c => {
-    let productCountResult = props.productCountByCollection
-      .find(x => x.collectionName === c.collection.name)
-    let productCountForCurrentQuery = productCountResult ? productCountResult.products : 0
-    return { ...c, productCount: productCountForCurrentQuery }
+  // join the collections with their product count for the current query
+  // (should this be done at the map container level?)
+  let collections = props.collections.map(c => {
+    let count = props.productCountByCollection.find(x => x.collectionName === c.collection.name)
+    return {
+      ...c,
+      productCountForCurrentQuery: count ? count.products : 0
+    }
   })
 
-  let datasetGroupElements = _(collectionList)
+  let datasetGroupElements = _(collections)
     .groupBy(c => c.name.Group)
     .toPairs()
     .map(g => {
       let [key, collections] = g
-      return <div key={key}>
-        
-        <div>key {key}</div>
-        {collections.map(c => {
-          return <div key={c.collection.name}>
-            <div>{c.collection.name} {c.productCount}</div>
-            <div></div>
-          </div>
-        })}
-      </div>
+      return (
+        <div key={key}>
+          <div>{key}</div>
+          {collections.map(c => {
+            return <DatasetListItem key={c.collection.name} collection={c}  />
+          })}
+        </div>
+      )
     })
     .value()
 

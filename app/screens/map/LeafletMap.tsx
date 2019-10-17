@@ -15,9 +15,15 @@ type Props = {
   wmsLayer: { url: string, name: string } | undefined
 }
 
+var footprintLayerGroup: L.LayerGroup
+var visualLayerGroup: L.LayerGroup
+
 export const LeafletMap = (props: Props) => {
 
   React.useEffect(() => {
+
+    // tslint:disable-next-line: no-console
+    console.log('in init')
 
     var map = L.map('leaflet-map', {
       minZoom: 2,
@@ -30,11 +36,17 @@ export const LeafletMap = (props: Props) => {
 
     map.setView(config.defaultCenter, config.defaultZoom)
 
+    // add layer groups
+    footprintLayerGroup = L.layerGroup([]).addTo(map)
+    visualLayerGroup = L.layerGroup([]).addTo(map)
+
+    // base layer
     L.tileLayer(config.baseLayerUrlTemplate, {
       attribution: config.attribution,
       maxZoom: config.maximumZoom,
     }).addTo(map)
   
+    // aggregate layer
     L.tileLayer.wms(config.aggregateLayer.baseUrl, {
       layers: config.aggregateLayer.layer,
       format: config.aggregateLayer.format,
@@ -46,6 +58,19 @@ export const LeafletMap = (props: Props) => {
     let productFootprintLayerGroup = L.layerGroup([]).addTo(map)
     let productWmsLayerGroup = L.layerGroup([]).addTo(map)
     let collectionWmsLayerGroup = L.layerGroup([]).addTo(map)
+
+    // test hardcoded WMS layer using same options as existing Deli
+    // currently Geoserver appears to return no data  
+    // the catalog has these details:
+    // {url: "https://srsp-ows.jncc.gov.uk/ows", name: "scotland:scotland-lidar-1-dsm"}
+    // the aggregate layer has url of https://srsp-ows.jncc.gov.uk:443/scotland/wms
+    let wmsOptions = {
+      layers: 'scotland:scotland-lidar-1-dsm',
+      format: 'image/png',
+      transparent: true,
+      // tiled: true - how to set?
+    }
+    L.tileLayer.wms('https://srsp-ows.jncc.gov.uk/ows', wmsOptions).addTo(map)
 
     // add the bbox rectangle
     let bboxRect = L.rectangle(
@@ -65,19 +90,24 @@ export const LeafletMap = (props: Props) => {
     })
   }, [])
 
-  // React.us
+  // React.useEffect(() => {
+  //   console.log('in update')
+  //   console.log(props.wmsLayer)
+  //   console.log(visualLayerGroup)
+  //   if (props.wmsLayer && visualLayerGroup) {
 
-  if (props.wmsLayer) {
-    console.log(props.wmsLayer.url)
-    console.log(props.wmsLayer.name)
-
-  }
+  //     console.log('HELLO')
+  //       let wmsOptions = {
+  //         layers: props.wmsLayer.name,
+  //         format: 'image/png',
+  //         transparent: true
+  //       }
+  //       let layer = L.tileLayer.wms(props.wmsLayer.url, wmsOptions)
+  //       visualLayerGroup.addLayer(layer)
+  //     }
+  // }, [props.wmsLayer])
 
   // react has nothing to do with the leaflet map;
   // map manipulation is performed via side-effects
   return <div id="leaflet-map"></div>
-}
-
-let useLeafletMap = () => {
-
 }
