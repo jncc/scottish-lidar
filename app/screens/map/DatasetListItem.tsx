@@ -10,7 +10,7 @@ type Props = {
 export const DatasetListItem = (props: Props) => {
   return (
     <div>
-      <div>{props.collection.collection.name} - {props.collection.productCountForCurrentQuery}</div>
+      <div>{props.collection.name.Dataset} - {props.collection.productCountForCurrentQuery}</div>
     </div>
   )
 }

@@ -21,41 +21,54 @@ export const DatasetListPanels = (props: Props) => {
     }
   })
 
-  let datasetGroupElements = _(collections)
+  let matchingDatasetsListUI = _(collections)
+    .filter(c => c.productCountForCurrentQuery > 0)
     .groupBy(c => c.name.Group)
     .toPairs()
     .map(g => {
       let [key, collections] = g
       return (
         <div key={key}>
-          <div>{key}</div>
+          <h5>{key}</h5>
+          {collections.map(c => {
+            return <DatasetListItem key={c.collection.name} collection={c}  />
+          })}
+          <hr />
+        </div>
+      )
+    })
+    .value()
+
+  let nonMatchingDatasetsListUI = _(collections)
+    .filter(c => c.productCountForCurrentQuery === 0)
+    .groupBy(c => c.name.Group)
+    .toPairs()
+    .map(g => {
+      let [key, collections] = g
+      return (
+        <div key={key}>
+          <h5>{key}</h5>
           {collections.map(c => {
             return <DatasetListItem key={c.collection.name} collection={c}  />
           })}
         </div>
       )
     })
-    .value()
-
+    .value()    
   return <>
     <div className="panel left-panel-a">
       <h4>Matching datasets</h4>
       <div>Datasets that match your query</div>
-      <div className="mb-2">
-        <span><i className="fas fa-globe mr-1" />Something</span>
-      </div>
+      <hr />
       <div>
-        {datasetGroupElements}
+        {matchingDatasetsListUI}
       </div>
     </div>
     <div className="panel left-panel-b">
       <h4>Non-matching datasets</h4>
       <div>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-        dolore magna aliqua. Dui accumsan sit amet nulla facilisi morbi tempus. Tincidunt id aliquet risus
-        feugiat in ante metus dictum. Velit euismod in pellentesque massa placerat duis. Lorem dolor sed
-        viverra ipsum. Dui faucibus 
+        {nonMatchingDatasetsListUI}
       </div>
     </div>
-  </>
+  </> 
 }
