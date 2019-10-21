@@ -3,8 +3,8 @@ import * as React from 'react'
 
 import { CollectionTuple } from '../../state'
 import { Product } from '../../catalog/types'
-import Counter from './Counter'
 import { LeafletMap } from './LeafletMap'
+import { ProductListPanel } from './ProductListPanel'
 import { DatasetListPanels } from './DatasetListPanels'
 import { Bbox } from './types'
 
@@ -22,6 +22,9 @@ type Props = {
 
 export const MapScreenLayout = (props: Props) => {
 
+  // console.log(props.collections.length)
+  // console.log(props.productCountByCollection.length)
+
   return <>
     {makeSmallScreenWarningUI()}
     <div className="bottom-left-control-group">
@@ -32,14 +35,7 @@ export const MapScreenLayout = (props: Props) => {
     </div>
     <div className="r">
       <div className="panel right-panel">
-        <Counter />
-        <hr />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
-        magna aliqua. Dui accumsan sit amet nulla facilisi morbi tempus. Tincidunt id aliquet risus feugiat in ante 
-        metus dictum. Velit euismod in pellentesque massa placerat duis. Lorem dolor sed viverra ipsum. Dui faucibus 
-        in ornare quam viverra. Mauris augue neque gravida in. Ac tortor dignissim convallis aenean et tortor at.
-        Tortor consequat id porta nibh venenatis cras sed felis. Sollicitudin tempor id eu nisl nunc. Vestibulum
-        est pellentesque elit ullamcorper dignissim cras.
+        <ProductListPanel products={props.products} />
       </div>
       <div className="left-panel-container">
         <DatasetListPanels

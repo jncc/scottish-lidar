@@ -1,8 +1,10 @@
 
 import React from 'react'
 import _ from 'lodash'
+
 import { CollectionTuple } from '../../state'
 import { DatasetListItem } from './DatasetListItem'
+import { splitVerticalSpace } from '../../utility/verticalSpaceUtility'
 
 type Props = {
   collections: CollectionTuple[]
@@ -21,8 +23,11 @@ export const DatasetListPanels = (props: Props) => {
     }
   })
 
-  let matchingDatasetsListUI = _(collections)
+  let matchingDatasets = _(collections)
     .filter(c => c.productCountForCurrentQuery > 0)
+    .value()
+
+  let matchingDatasetsListUI = _(matchingDatasets)
     .groupBy(c => c.name.Group)
     .toPairs()
     .map(g => {
@@ -39,8 +44,11 @@ export const DatasetListPanels = (props: Props) => {
     })
     .value()
 
-  let nonMatchingDatasetsListUI = _(collections)
+  let nonMatchingDatasets = _(collections)
     .filter(c => c.productCountForCurrentQuery === 0)
+    .value()
+
+  let nonMatchingDatasetsListUI = _(nonMatchingDatasets)
     .groupBy(c => c.name.Group)
     .toPairs()
     .map(g => {
@@ -54,18 +62,24 @@ export const DatasetListPanels = (props: Props) => {
         </div>
       )
     })
-    .value()    
+    .value()
+  
+  let [heightForMatching, heightForNonMatching] = splitVerticalSpace(
+    matchingDatasets.length, nonMatchingDatasets.length, 25
+  ) 
+  
   return <>
-    <div className="panel left-panel-a">
+    <div className="panel" style={{maxHeight: heightForMatching + 'rem'}}>
       <h4>Matching datasets</h4>
-      <div>Datasets that match your query</div>
+      <div>{matchingDatasets.length} datasets match your query</div>
       <hr />
       <div>
         {matchingDatasetsListUI}
       </div>
     </div>
-    <div className="panel left-panel-b">
-      <h4>Non-matching datasets</h4>
+    <div className="panel" style={{maxHeight: heightForNonMatching + 'rem'}}>
+      <h4 className="mr-2">Non-matching datasets</h4>
+      <div>{nonMatchingDatasets.length} datasets don't match your query</div>
       <div>
         {nonMatchingDatasetsListUI}
       </div>

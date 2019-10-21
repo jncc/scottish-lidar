@@ -242,20 +242,14 @@ h1 {
   padding: 1rem;
   box-shadow: 0 10px 6px -6px #777;
   margin-bottom: 1rem;
+  border-radius: 0.3rem;
 }
 .left-panel-container {
   position: absolute;
   top: 2rem;
   left: 2rem;
   @include above-map;
-  max-width: 18rem;
-  // max-height: 35rem;
-  .left-panel-a {
-    max-height: 15rem;
-  }
-  .left-panel-b {
-    max-height: 15rem;
-  }
+  max-width: 19rem;
 }
 .right-panel {
   position: absolute;
