@@ -1,10 +1,10 @@
 
-export function splitVerticalSpace(a: number, b: number, max: number) {
+export function splitVerticalSpace(a: number, b: number) {
 
   if (a ==0 || b === 0) {
-    return [max, max]
+    return [25, 25]
   }
   else {
-    return [max / 2, max / 2]
+    return [20, 20]
   }
 }

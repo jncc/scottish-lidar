@@ -13,6 +13,7 @@ import { Bbox } from './types'
 type Props = {
   collections: CollectionTuple[]
   collection: string
+  setCollection: (collectionName: string) => void
   bbox: Bbox
   setBbox: (bbox: Bbox) => void
   wmsLayer: { url: string, name: string } | undefined
@@ -40,7 +41,9 @@ export const MapScreenLayout = (props: Props) => {
       <div className="left-panel-container">
         <DatasetListPanels
           collections={props.collections}
-          productCountByCollection={props.productCountByCollection}          
+          productCountByCollection={props.productCountByCollection}   
+          collection={props.collection}
+          setCollection={props.setCollection}       
         />
       </div>
     </div>

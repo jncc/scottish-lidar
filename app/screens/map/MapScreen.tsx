@@ -58,6 +58,7 @@ export const MapScreen = (props: Props) => {
     bbox={bbox}
     wmsLayer={wmsLayer}
     collection={collection}
+    setCollection={setCollection}
     setBbox={setBbox}
     products={products.result}
     productCountByCollection={productCountByCollection.result}

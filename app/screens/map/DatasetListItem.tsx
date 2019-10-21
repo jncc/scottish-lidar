@@ -6,6 +6,8 @@ import { Form } from 'react-bootstrap'
 
 type Props = {
   collection: CollectionTuple & { productCountForCurrentQuery: number }
+  checked: boolean
+  onCheck: (collectionId: string) => void
 }
 
 export const DatasetListItem = (props: Props) => {
@@ -13,11 +15,14 @@ export const DatasetListItem = (props: Props) => {
     <div>
       <Form.Check 
         custom
-        type={'checkbox'}
+        inline
+        type={'radio'}
         id={`radio-` + props.collection.name.Dataset}
         label={props.collection.name.Dataset}
+        checked={props.checked}
+        onChange={() => props.onCheck(props.collection.collection.name)}
       />
-      <div>{} - {props.collection.productCountForCurrentQuery}</div>
+      {props.collection.productCountForCurrentQuery}
     </div>
   )
 }

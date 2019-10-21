@@ -9,6 +9,8 @@ import { splitVerticalSpace } from '../../utility/verticalSpaceUtility'
 type Props = {
   collections: CollectionTuple[]
   productCountByCollection: { collectionName: string, products: number }[]
+  collection: string
+  setCollection: (collectionName: string) => void
 }
 
 export const DatasetListPanels = (props: Props) => {
@@ -36,8 +38,12 @@ export const DatasetListPanels = (props: Props) => {
         <div key={key}>
           <h5>{key}</h5>
           {collections.map(c => {
-            return <DatasetListItem key={c.collection.name} collection={c}  />
-          })}
+            return <DatasetListItem key={c.collection.name}
+            collection={c}
+            checked={c.collection.name === props.collection}
+            onCheck={props.setCollection}
+            />
+        })}
           <hr />
         </div>
       )
@@ -57,7 +63,11 @@ export const DatasetListPanels = (props: Props) => {
         <div key={key}>
           <h5>{key}</h5>
           {collections.map(c => {
-            return <DatasetListItem key={c.collection.name} collection={c}  />
+            return <DatasetListItem key={c.collection.name}
+              collection={c}
+              checked={c.collection.name === props.collection}
+              onCheck={props.setCollection}
+              />
           })}
         </div>
       )
@@ -65,7 +75,7 @@ export const DatasetListPanels = (props: Props) => {
     .value()
   
   let [heightForMatching, heightForNonMatching] = splitVerticalSpace(
-    matchingDatasets.length, nonMatchingDatasets.length, 25
+    matchingDatasets.length, nonMatchingDatasets.length
   ) 
   
   return <>
