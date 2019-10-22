@@ -19,14 +19,14 @@ type Props = {
 export const ListScreen = (props: Props) => {
 
   let filterDropdownElements = _(props.collections)
-    .groupBy(c => c.name.Group)
+    .groupBy(c => c.path.Group)
     .keys()
     .map(key => <option key={key} value={key}>{key}</option>)
     .value()
     
   let listItemElements = props.collections
     // if there's a filter specified, filter the collections by that group
-    .filter(c => !props.filter || c.name.Group === props.filter)
+    .filter(c => !props.filter || c.path.Group === props.filter)
     .map(c => <ListItem collection={c} key={c.collection.id} />)
 
   return (

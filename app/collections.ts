@@ -26,7 +26,7 @@ export let loadAndParseCollections = async () => {
         let ogcProductName = c.name.replace(new RegExp('\/', 'g'), '-')
         return {
           collection: c,
-          name: parseCollectionName(c.name),
+          path: parseCollectionName(c.name),
           ogcProduct: ogcProducts.result.find(p => p.name === ogcProductName)
         }
       })

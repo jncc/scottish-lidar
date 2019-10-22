@@ -7,7 +7,7 @@
  */
 
 import { Collection, Product } from './catalog/types'
-import { ParsedCollectionName } from './utility/collectionUtility'
+import { ParsedCollectionPath } from './utility/collectionUtility'
 
 export let initialState = {
   /** The number of in-progress network requests. */
@@ -16,7 +16,7 @@ export let initialState = {
    *  It's convenient to store tuples of { collection + parsed name + OGC product,  } */
   collections: [] as {
     collection: Collection,
-    name: ParsedCollectionName,
+    path: ParsedCollectionPath,
     ogcProduct?: Product
   }[],
   /** The state for the Mapper component. */

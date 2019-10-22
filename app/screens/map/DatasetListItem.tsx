@@ -17,8 +17,8 @@ export const DatasetListItem = (props: Props) => {
         custom
         inline
         type={'radio'}
-        id={`radio-` + props.collection.name.Dataset}
-        label={props.collection.name.Dataset}
+        id={`radio-` + props.collection.path.Dataset}
+        label={props.collection.path.Dataset}
         checked={props.checked}
         onChange={() => props.onCheck(props.collection.collection.name)}
       />

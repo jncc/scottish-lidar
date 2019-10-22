@@ -35,7 +35,7 @@ export const ListItem = (props: Props) => {
 
         {/* Path */}
         <div className="list-item-dataset-name mb-2">
-          <DatasetPath dataset={c.name.Dataset} />
+          <DatasetPath dataset={c.path.Dataset} />
         </div>
 
         {/* Abstract */}
@@ -87,7 +87,7 @@ export const ListItem = (props: Props) => {
             <Link
               to={{
                 pathname: '/map',
-                search: c.name.Dataset
+                search: c.path.Dataset
               }}
               className="btn btn-primary"
             >View on map</Link>

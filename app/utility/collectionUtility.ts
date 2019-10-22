@@ -1,11 +1,12 @@
 
-export type ParsedCollectionName = {
+export type ParsedCollectionPath = {
   Owner  : string  // e.g. `scotland-gov`
   Group  : string  // e.g. `lidar/phase-1`
   Dataset: string  // e.g. `lidar/phase-1/dsm`
+  shortName: string 
 }
 
-export function parseCollectionName(collectionName: string): ParsedCollectionName {
+export function parseCollectionName(collectionName: string): ParsedCollectionPath {
 
   let segments = collectionName.split('/')
 
@@ -19,6 +20,7 @@ export function parseCollectionName(collectionName: string): ParsedCollectionNam
   return {
     Owner: segments[0],
     Group: group,
-    Dataset : group + '/' + rest
+    Dataset : group + '/' + rest,
+    shortName: rest
   }
 }

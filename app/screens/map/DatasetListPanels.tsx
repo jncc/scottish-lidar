@@ -29,8 +29,39 @@ export const DatasetListPanels = (props: Props) => {
     .filter(c => c.productCountForCurrentQuery > 0)
     .value()
 
-  let matchingDatasetsListUI = _(matchingDatasets)
-    .groupBy(c => c.name.Group)
+  let nonMatchingDatasets = _(collections)
+    .filter(c => c.productCountForCurrentQuery === 0)
+    .value()
+
+  let [heightForMatching, heightForNonMatching] = splitVerticalSpace(
+    matchingDatasets.length, nonMatchingDatasets.length
+  ) 
+  
+  return <>
+    <div className="panel" style={{maxHeight: heightForMatching + 'rem'}}>
+      <h4>Matching datasets</h4>
+      <div>{matchingDatasets.length} datasets match your query</div>
+      <hr />
+      <div>
+        {makeDatasetListUI(props, matchingDatasets)}
+      </div>
+    </div>
+    <div className="panel" style={{maxHeight: heightForNonMatching + 'rem'}}>
+      <h4 className="mr-2">Non-matching datasets</h4>
+      <div>{nonMatchingDatasets.length} datasets don't match your query</div>
+      <div>
+        {makeDatasetListUI(props, nonMatchingDatasets)}
+      </div>
+    </div>
+  </> 
+}
+
+let makeDatasetListUI = (
+  props: Props,
+  datasets: (CollectionTuple & {productCountForCurrentQuery: number})[]) => {
+
+  return _(datasets)
+    .groupBy(c => c.path.Group)
     .toPairs()
     .map(g => {
       let [key, collections] = g
@@ -49,50 +80,4 @@ export const DatasetListPanels = (props: Props) => {
       )
     })
     .value()
-
-  let nonMatchingDatasets = _(collections)
-    .filter(c => c.productCountForCurrentQuery === 0)
-    .value()
-
-  let nonMatchingDatasetsListUI = _(nonMatchingDatasets)
-    .groupBy(c => c.name.Group)
-    .toPairs()
-    .map(g => {
-      let [key, collections] = g
-      return (
-        <div key={key}>
-          <h5>{key}</h5>
-          {collections.map(c => {
-            return <DatasetListItem key={c.collection.name}
-              collection={c}
-              checked={c.collection.name === props.collection}
-              onCheck={props.setCollection}
-              />
-          })}
-        </div>
-      )
-    })
-    .value()
-  
-  let [heightForMatching, heightForNonMatching] = splitVerticalSpace(
-    matchingDatasets.length, nonMatchingDatasets.length
-  ) 
-  
-  return <>
-    <div className="panel" style={{maxHeight: heightForMatching + 'rem'}}>
-      <h4>Matching datasets</h4>
-      <div>{matchingDatasets.length} datasets match your query</div>
-      <hr />
-      <div>
-        {matchingDatasetsListUI}
-      </div>
-    </div>
-    <div className="panel" style={{maxHeight: heightForNonMatching + 'rem'}}>
-      <h4 className="mr-2">Non-matching datasets</h4>
-      <div>{nonMatchingDatasets.length} datasets don't match your query</div>
-      <div>
-        {nonMatchingDatasetsListUI}
-      </div>
-    </div>
-  </> 
 }
