@@ -12,22 +12,27 @@ block content
     h1.mb-3 About
     p 
       | The  Scottish Remote Sensing Portal has been developed as a partnership between 
-      a(href='https://gov.scot') Scottish Government 
+      a(href='https://gov.scot', target="_blank")
+        | Scottish Government
+      i.fas.fa-external-link-alt.fa-xs.mx-1.align-top
       | and 
-      a(href='https://jncc.gov.uk') Joint Nature Conservation Committee 
+      a(href='https://jncc.gov.uk')
+        | Joint Nature Conservation Committee
+      i.fas.fa-external-link-alt.fa-xs.mx-1.align-top
       | (JNCC).
     p
       | The portal currently contains Scottish Public Sector LiDAR data which you can download by 10km tiles and
       | via WMS web services.
     p
-      | For more information on the LiDAR data, please contact 
-      a(href="mailto:gi-sat@gov.scot") gi-sat@gov.scot
-      | . For more information on a particular dataset, please use the contact information
+      | For more information on the LiDAR data, please 
+      a(href='/feedback' + process.env.PAGE_EXTENSION) contact us. 
+      | For more information on a particular dataset, please use the contact information
       | provided in the full metadata.
     p
       | All data is made available under the 
       a(href='http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/') Open Government Licence v3
-      | , unless otherwise stated.
+      i.fas.fa-external-link-alt.fa-xs.mx-1.align-top
+      | unless otherwise stated.
     p
       br
       a.btn.btn-dark.mr-2(href='/data' + process.env.PAGE_EXTENSION + '#list')
