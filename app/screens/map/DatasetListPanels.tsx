@@ -25,12 +25,8 @@ export const DatasetListPanels = (props: Props) => {
     }
   })
 
-  let matchingDatasets = _(collections)
-    .filter(c => c.productCountForCurrentQuery > 0)
-    .value()
-
-  let nonMatchingDatasets = _(collections)
-    .filter(c => c.productCountForCurrentQuery === 0)
+  let [matchingDatasets, nonMatchingDatasets] = _(collections)
+    .partition(c => c.productCountForCurrentQuery > 0)
     .value()
 
   let [heightForMatching, heightForNonMatching] = splitVerticalSpace(
@@ -69,10 +65,11 @@ let makeDatasetListUI = (
         <div key={key} className="mb-3">
           <h5>{key}</h5>
           {collections.map(c => {
-            return <DatasetListItem key={c.collection.name}
-            collection={c}
-            checked={c.collection.name === props.collection}
-            onCheck={props.setCollection}
+            return <DatasetListItem
+              key={c.collection.name}
+              collection={c}
+              checked={c.collection.name === props.collection}
+              onCheck={props.setCollection}
             />
           })}
         </div>
