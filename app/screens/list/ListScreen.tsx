@@ -5,6 +5,7 @@ import { DropdownButton, Dropdown, InputGroup, FormControl, Form } from 'react-b
 
 import { CollectionTuple } from '../../state'
 import { ListItem } from './ListItem'
+import { Delayed } from '../../shared/Delayed'
 
 type Props = {
   collections: CollectionTuple[]
@@ -66,9 +67,11 @@ export const ListScreen = (props: Props) => {
         </div>
       </div>
       <hr className="filter-bar-hr"/>
-      <div className="list-items">
-        {listItemElements}
-      </div>
+      <Delayed delayInMilliseconds={300}>
+        <div className="list-items">
+          {listItemElements}
+        </div>
+      </Delayed>
     </div>
   )
 }

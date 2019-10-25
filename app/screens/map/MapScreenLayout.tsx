@@ -7,6 +7,7 @@ import { LeafletMap } from './LeafletMap'
 import { ProductListPanel } from './ProductListPanel'
 import { DatasetListPanels } from './DatasetListPanels'
 import { Bbox } from './types'
+import { Delayed } from '../../shared/Delayed'
 
 // import { AddToBasketButton } from './AddToBasketButton'
 
@@ -35,22 +36,24 @@ export const MapScreenLayout = (props: Props) => {
       Bottom right controls
     </div>
     <div className="r">
-      {currentCollection &&
-      <div className="panel right-panel">
-        <ProductListPanel
-          products={props.products}
-          collection={currentCollection}
-        />
-      </div>
-      }
-      <div className="left-panel-container">
-        <DatasetListPanels
-          collections={props.collections}
-          productCountByCollection={props.productCountByCollection}   
-          collection={props.collection}
-          setCollection={props.setCollection}       
-        />
-      </div>
+      <Delayed delayInMilliseconds={800}>
+        <div className="panel right-panel">
+          <ProductListPanel
+            products={props.products}
+            collection={currentCollection}
+          />
+        </div>
+      </Delayed>        
+      <Delayed delayInMilliseconds={300}>
+        <div className="left-panel-container">
+          <DatasetListPanels
+            collections={props.collections}
+            productCountByCollection={props.productCountByCollection}   
+            collection={props.collection}
+            setCollection={props.setCollection}       
+          />
+        </div>        
+      </Delayed>
     </div>
     <LeafletMap bbox={props.bbox} setBbox={props.setBbox} wmsLayer={props.wmsLayer} />
   </>
