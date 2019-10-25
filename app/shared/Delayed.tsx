@@ -6,7 +6,7 @@ type Props = {
   delayInMilliseconds: number
 }
 
-/** Delays the initial render of the child components
+/** Delays the initial render of child components
  *  for the specified duration, after which they are
  *  faded in. */
 export const Delayed: FunctionComponent<Props> = (props) => {

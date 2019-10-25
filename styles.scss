@@ -255,7 +255,7 @@ h1 {
   position: absolute;
   top: 2rem;
   right: 2rem;
-  width: 20rem;
+  width: 22rem;
   max-height: 35rem;
 }
 .bottom-left-control-group {
@@ -296,7 +296,7 @@ h1 {
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
-    width: 16rem; // 2 less than container width
+    width: 20rem; // 2 less than container width
   }
   .product-list-item {
     display: flex;

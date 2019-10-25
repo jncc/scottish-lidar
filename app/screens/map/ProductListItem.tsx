@@ -14,7 +14,7 @@ export const ProductListItem = (props: Props) => {
         {props.product.data.product.title}
       </div>
       <div>
-        <i className="fas fa-info-circle" />
+        add
       </div>
       {/* {props.product.data.product!.http!.size}
       {props.product.data.product!.http!.type}

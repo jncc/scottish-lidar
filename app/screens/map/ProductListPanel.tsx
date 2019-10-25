@@ -18,12 +18,16 @@ export const ProductListPanel = (props: Props) => {
   if (props.collection) {
     return (
       <div className="product-list-panel">
-        <h5>{props.collection.collection.metadata.title}</h5>
+        <h5>
+          <i className="fas fa-th text-primary mr-2" />
+          {props.collection.collection.metadata.title}
+        </h5>
         <div className="mb-2">
           <DatasetPath dataset={props.collection.path.dataset} />
         </div>
         
         <div className="product-list-panel-abstract">
+          <i className="fas fa-info-circle text-secondary mr-2" />
           {props.collection.collection.metadata.abstract}
         </div>
         {props.products.map(p => <ProductListItem key={p.id} product={p} />)}
