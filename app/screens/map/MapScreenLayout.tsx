@@ -23,9 +23,9 @@ type Props = {
 
 export const MapScreenLayout = (props: Props) => {
 
-  // console.log(props.collections.length)
-  // console.log(props.productCountByCollection.length)
-
+  let currentCollection = props.collections
+    .find(c => c.collection.name === props.collection)
+    
   return <>
     {makeSmallScreenWarningUI()}
     <div className="bottom-left-control-group">
@@ -35,9 +35,14 @@ export const MapScreenLayout = (props: Props) => {
       Bottom right controls
     </div>
     <div className="r">
+      {currentCollection &&
       <div className="panel right-panel">
-        <ProductListPanel products={props.products} />
+        <ProductListPanel
+          products={props.products}
+          collection={currentCollection}
+        />
       </div>
+      }
       <div className="left-panel-container">
         <DatasetListPanels
           collections={props.collections}

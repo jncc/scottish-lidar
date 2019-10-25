@@ -205,3 +205,9 @@ Project plan
 - [0.6] Task: Web essentials [1 week] https://github.com/jncc/scottish-lidar/issues/12
 - [0.0] Task: Feedback [1 week] https://github.com/jncc/scottish-lidar/issues/14
 - [0.0] Task (Stretch): Gazetteer https://github.com/jncc/scottish-lidar/issues/15
+
+Demo
+----
+
+- Overriding reason for redesign - Answer the question, "What data do you have here?"
+- Ready for more data! Map screen future-proofed.

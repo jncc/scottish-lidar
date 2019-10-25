@@ -255,7 +255,7 @@ h1 {
   position: absolute;
   top: 2rem;
   right: 2rem;
-  max-width: 18rem;
+  width: 20rem;
   max-height: 35rem;
 }
 .bottom-left-control-group {
@@ -271,4 +271,40 @@ h1 {
 }
 .r {
   position:relative;
+}
+
+.dataset-list-item {
+  display: flex;
+  :first-child {
+    flex: 1;
+  }
+  i {
+    color: $gray-600;
+  }
+}
+// .popover.show {
+//   @include above-map;    
+// }
+// div[role=tooltip] {
+//   @include above-map;    
+// }  
+
+.product-list-panel {
+
+  .product-list-panel-abstract {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    width: 16rem; // 2 less than container width
+  }
+  .product-list-item {
+    display: flex;
+    :first-child {
+      flex: 1;
+    }
+    i {
+      color: $gray-600;
+    }
+  }
 }

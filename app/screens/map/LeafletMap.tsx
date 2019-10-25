@@ -22,9 +22,6 @@ export const LeafletMap = (props: Props) => {
 
   React.useEffect(() => {
 
-    // tslint:disable-next-line: no-console
-    console.log('in init')
-
     var map = L.map('leaflet-map', {
       minZoom: 2,
       maxZoom: config.maximumZoom,

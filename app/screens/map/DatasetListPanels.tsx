@@ -66,7 +66,7 @@ let makeDatasetListUI = (
     .map(g => {
       let [key, collections] = g
       return (
-        <div key={key}>
+        <div key={key} className="mb-3">
           <h5>{key}</h5>
           {collections.map(c => {
             return <DatasetListItem key={c.collection.name}
@@ -74,8 +74,7 @@ let makeDatasetListUI = (
             checked={c.collection.name === props.collection}
             onCheck={props.setCollection}
             />
-        })}
-          <hr />
+          })}
         </div>
       )
     })
