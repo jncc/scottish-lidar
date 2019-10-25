@@ -1,7 +1,7 @@
 
-import React, { useState, FunctionComponent } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Collapse, OverlayTrigger, Tooltip, Popover } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import _ from 'lodash'
 
 import { CollectionTuple } from '../../state'
@@ -18,7 +18,7 @@ export const ListItem = (props: Props) => {
 
   let c = props.collection
   let abstractElementId = 'abstract-' + c.collection.id
-  let [modalShow, setModalShow] = useState(false)
+  let [modalOpen, setModalOpen] = React.useState(false)
 
   return (
     <div className="list-item row mb-lg-3 mb-5">
@@ -35,7 +35,7 @@ export const ListItem = (props: Props) => {
 
         {/* Path */}
         <div className="list-item-dataset-name mb-2">
-          <DatasetPath dataset={c.path.Dataset} />
+          <DatasetPath dataset={c.path.dataset} />
         </div>
 
         {/* Abstract */}
@@ -70,13 +70,13 @@ export const ListItem = (props: Props) => {
           {/* WMS */}
           {c.ogcProduct && c.ogcProduct.data.product.wms &&
             <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
-              <Button variant="light" onClick={() => setModalShow(true)}>
+              <Button variant="light" onClick={() => setModalOpen(true)}>
                 <i className="fas fa-globe text-secondary mr-2" />
                 WMS
               </Button>
               <WmsModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
+                show={modalOpen}
+                onHide={() => setModalOpen(false)}
                 wmsLink={c.ogcProduct.data.product.wms.url}
               />
             </div>
@@ -87,7 +87,7 @@ export const ListItem = (props: Props) => {
             <Link
               to={{
                 pathname: '/map',
-                search: c.path.Dataset
+                search: c.path.dataset
               }}
               className="btn btn-primary"
             >View on map</Link>

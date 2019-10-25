@@ -61,7 +61,7 @@ let makeDatasetListUI = (
   datasets: (CollectionTuple & {productCountForCurrentQuery: number})[]) => {
 
   return _(datasets)
-    .groupBy(c => c.path.Group)
+    .groupBy(c => c.path.group)
     .toPairs()
     .map(g => {
       let [key, collections] = g

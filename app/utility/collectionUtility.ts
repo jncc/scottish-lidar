@@ -1,8 +1,8 @@
 
 export type ParsedCollectionPath = {
-  Owner  : string  // e.g. `scotland-gov`
-  Group  : string  // e.g. `lidar/phase-1`
-  Dataset: string  // e.g. `lidar/phase-1/dsm`
+  owner  : string  // e.g. `scotland-gov`
+  group  : string  // e.g. `lidar/phase-1`
+  dataset: string  // e.g. `lidar/phase-1/dsm`
   shortName: string 
 }
 
@@ -18,9 +18,9 @@ export function parseCollectionName(collectionName: string): ParsedCollectionPat
   let rest = segments.slice(3).join('/') // remainder, just in case there are additional segments in future
 
   return {
-    Owner: segments[0],
-    Group: group,
-    Dataset : group + '/' + rest,
+    owner: segments[0],
+    group: group,
+    dataset : group + '/' + rest,
     shortName: rest
   }
 }

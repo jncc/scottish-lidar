@@ -20,7 +20,7 @@ export const ProductListPanel = (props: Props) => {
       <div className="product-list-panel">
         <h5>{props.collection.collection.metadata.title}</h5>
         <div className="mb-2">
-          <DatasetPath dataset={props.collection.path.Dataset} />
+          <DatasetPath dataset={props.collection.path.dataset} />
         </div>
         
         <div className="product-list-panel-abstract">
