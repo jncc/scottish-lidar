@@ -2,15 +2,15 @@
 import React from 'react'
 import _ from 'lodash'
 
-import Counter from './Counter'
-import { Product } from '../../catalog/types'
+import { ProductResult } from '../../catalog/types'
 import { ProductListItem } from './ProductListItem'
 import { DatasetPath } from '../../shared/DatasetPath'
 import { CollectionTuple } from '../../state'
 
 type Props = {
-  products: Product[]
+  products: ProductResult
   collection: CollectionTuple | undefined
+  productCountForCurrentCollection: number | undefined
 }
 
 export const ProductListPanel = (props: Props) => {
@@ -30,7 +30,14 @@ export const ProductListPanel = (props: Props) => {
           <i className="fas fa-info-circle text-secondary mr-2" />
           {props.collection.collection.metadata.abstract}
         </div>
-        {props.products.map(p => <ProductListItem key={p.id} product={p} />)}
+
+        {props.productCountForCurrentCollection &&
+        <div>
+          Showing {props.products.result.length} of {props.productCountForCurrentCollection} matching products
+          {/* Actually want: Showing 11 to 20 of 36 matching products */}
+        </div>
+        }
+        {props.products.result.map(p => <ProductListItem key={p.id} product={p} />)}
       </div>
     )
   }

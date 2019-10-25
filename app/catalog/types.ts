@@ -9,17 +9,23 @@ export type CollectionResult = {
 }
 
 export type ProductQuery = {
-  collections: string[],
-  bbox: [number, number, number, number],
+  offset?: number
+  limit?: number
+  collections: string[]
+  footprint: string
+  spatialop: string
+  // terms?: ITerm[]
+  // types?: any
+  // productName?: string
 }
 
 export type ProductResult = {
-  query: any
+  query: ProductQuery
   result: Product[]
 }  
 
 export type ProductCountByCollectionResult = {
-  query: any
+  query: ProductQuery
   result: { collectionName: string, products: number }[]
 }
 

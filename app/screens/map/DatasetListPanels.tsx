@@ -5,6 +5,7 @@ import _ from 'lodash'
 import { CollectionTuple } from '../../state'
 import { DatasetListItem } from './DatasetListItem'
 import { splitVerticalSpace } from '../../utility/verticalSpaceUtility'
+import { DatasetPath } from '../../shared/DatasetPath'
 
 type Props = {
   collections: CollectionTuple[]
@@ -37,7 +38,7 @@ export const DatasetListPanels = (props: Props) => {
     <div className="panel" style={{maxHeight: heightForMatching + 'rem'}}>
       <h4>Matching datasets</h4>
       <div>{matchingDatasets.length} datasets match your query</div>
-      <hr />
+      {matchingDatasets.length && <hr />}
       <div>
         {makeDatasetListUI(props, matchingDatasets)}
       </div>
@@ -45,6 +46,7 @@ export const DatasetListPanels = (props: Props) => {
     <div className="panel" style={{maxHeight: heightForNonMatching + 'rem'}}>
       <h4 className="mr-2">Non-matching datasets</h4>
       <div>{nonMatchingDatasets.length} datasets don't match your query</div>
+      {matchingDatasets.length && <hr />}
       <div>
         {makeDatasetListUI(props, nonMatchingDatasets)}
       </div>

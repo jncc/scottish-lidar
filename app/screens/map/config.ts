@@ -21,7 +21,7 @@ export const config = {
     // collections: [`7d96723a-49c9-4d17-8df1-2a96932112d4`], // Phase 1 DSM collection
     // bbox:        [-3.6, 56.65, -3.5, 56.7] as [number, number, number, number],
     bbox:        [-4.5, 56.1, -3.5, 56.7] as [number, number, number, number],
-  } as ProductQuery,
+  },
   defaultQueryResultInfo: {
     bboxArea:    13679,
     total:       0

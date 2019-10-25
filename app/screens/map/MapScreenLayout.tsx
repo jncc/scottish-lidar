@@ -2,7 +2,7 @@
 import * as React from 'react'
 
 import { CollectionTuple } from '../../state'
-import { Product } from '../../catalog/types'
+import { ProductResult } from '../../catalog/types'
 import { LeafletMap } from './LeafletMap'
 import { ProductListPanel } from './ProductListPanel'
 import { DatasetListPanels } from './DatasetListPanels'
@@ -18,7 +18,7 @@ type Props = {
   bbox: Bbox
   setBbox: (bbox: Bbox) => void
   wmsLayer: { url: string, name: string } | undefined
-  products: Product[]
+  products: ProductResult
   productCountByCollection: { collectionName: string, products: number }[]
 }
 
@@ -26,6 +26,11 @@ export const MapScreenLayout = (props: Props) => {
 
   let currentCollection = props.collections
     .find(c => c.collection.name === props.collection)
+
+  let productCountForCurrentCollection = props.productCountByCollection
+    .filter(x => x.collectionName === props.collection)
+    .map(x => x.products)
+    .find(() => true)
     
   return <>
     {makeSmallScreenWarningUI()}
@@ -41,10 +46,11 @@ export const MapScreenLayout = (props: Props) => {
           <ProductListPanel
             products={props.products}
             collection={currentCollection}
+            productCountForCurrentCollection={productCountForCurrentCollection}
           />
         </div>
       </Delayed>        
-      <Delayed delayInMilliseconds={300}>
+      <Delayed delayInMilliseconds={800}>
         <div className="left-panel-container">
           <DatasetListPanels
             collections={props.collections}

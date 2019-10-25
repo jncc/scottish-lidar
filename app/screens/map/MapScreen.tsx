@@ -3,12 +3,21 @@ import * as React from 'react'
 
 import { config } from './config'
 import { CollectionTuple } from '../../state'
-import { ProductResult, ProductCountByCollectionResult } from '../../catalog/types'
+import { ProductResult, ProductCountByCollectionResult, ProductQuery } from '../../catalog/types'
 import { loadProductCountByCollection, loadProducts } from '../../catalog/api'
 import { MapScreenLayout } from './MapScreenLayout'
+import { bboxToWkt } from '../../utility/geospatialUtility'
 
 type Props = {
   collections: CollectionTuple[]
+}
+
+let defaultQuery: ProductQuery = {
+  collections: config.defaultQuery.collections,
+  footprint: bboxToWkt(config.defaultQuery.bbox),
+  // offset: 0,
+  // limit: 10,
+  spatialop: 'overlaps',
 }
 
 export const MapScreen = (props: Props) => {
@@ -17,25 +26,34 @@ export const MapScreen = (props: Props) => {
   let [collection, setCollection] = React.useState(config.defaultQuery.collections[0])
 
   let [products, setProducts] = React.useState(
-    { query: config.defaultQuery, result: [] } as ProductResult
+    { query: defaultQuery, result: [] } as ProductResult
   )
 
   let [productCountByCollection, setProductCountByCollection] = React.useState(
-    { query: config.defaultQuery, result: [] } as ProductCountByCollectionResult
+    { query: defaultQuery, result: [] } as ProductCountByCollectionResult
   )
 
   React.useEffect(() => {
 
     if (props.collections.length) {
       
-      let productQuery = {
+      let footprint = bboxToWkt(bbox)
+
+      let productQuery: ProductQuery = {
         collections: [collection],
-        bbox: bbox
+        footprint,
+        // offset: 0, // todo
+        // limit: 10,
+        spatialop: 'overlaps',
       }
         
-      let productCountByCollectionQuery = {
+      let productCountByCollectionQuery: ProductQuery = {
         collections: props.collections.map(c => c.collection.name),
-        bbox: bbox
+        footprint,
+        // offset: 0,
+        // limit: 100000,
+        spatialop: 'overlaps'
+        // what to offset and limit do here?
       }
         
       Promise.all([
@@ -60,7 +78,7 @@ export const MapScreen = (props: Props) => {
     collection={collection}
     setCollection={setCollection}
     setBbox={setBbox}
-    products={products.result}
+    products={products}
     productCountByCollection={productCountByCollection.result}
     />
 }
