@@ -62,7 +62,12 @@ export const MapScreenLayout = (props: Props) => {
           </div>        
         </Delayed>
       </div>
-      <LeafletMap bbox={props.bbox} setBbox={props.setBbox} wmsLayer={props.wmsLayer} />
+      <LeafletMap
+        bbox={props.bbox}
+        setBbox={props.setBbox}
+        products={props.products.result}
+        wmsLayer={props.wmsLayer}
+      />
     </div>
   </>
 }

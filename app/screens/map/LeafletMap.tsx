@@ -8,10 +8,13 @@ import { config } from './config'
 import { bboxFlatArrayToCoordArray } from '../../utility/geospatialUtility'
 import { roundTo3Decimals } from '../../utility/numberUtility'
 import { Bbox } from './types'
+import { Product } from '../../catalog/types'
+import { GeoJsonObject } from 'geojson'
 
 type Props = {
   bbox: Bbox
   setBbox: (bbox: Bbox) => void
+  products: Product[]  
   wmsLayer: { url: string, name: string } | undefined
 }
 
@@ -69,7 +72,7 @@ export const LeafletMap = (props: Props) => {
     })
   }, [])
 
-  // set the collection wms layer when it changes
+  // draw the collection wms layer when it changes
   React.useEffect(() => {
     if (props.wmsLayer && collectionWmsLayerGroup) {
 
@@ -90,7 +93,40 @@ export const LeafletMap = (props: Props) => {
     }
   }, [props.wmsLayer])
 
+  // draw the product footprints when the products change
+  React.useEffect(() => {
+    productFootprintLayerGroup.clearLayers()
+    
+    if (props.products.length) {
+
+      let makeProductFootprintLayer = (p: Product) => {
+        let footprint = L.geoJSON(p.footprint as GeoJsonObject, { style: productFootprintStyleOff } )
+
+        footprint.on('mouseout', () => {
+          footprint.setStyle(() => productFootprintStyleOff)
+          // this.props.productUnhovered(p)
+        })
+
+        footprint.on('mouseover', () => {
+          footprint.setStyle(() => productFootprintStyleOn)
+          // this.props.productHovered(p)
+        })
+
+        return footprint
+      }
+
+      props.products.forEach(p => {
+        let footprint = makeProductFootprintLayer(p)
+        footprint.addTo(productFootprintLayerGroup)
+      })
+    }
+  }, [props.products.map(p => p.id).join(',')]) // make a comparator string for React
+
   // react has nothing to do with the leaflet map;
   // map manipulation is performed via side-effects
   return <div id="leaflet-map"></div>
 }
+
+// can't get className to work right now, so use literal styles
+let productFootprintStyleOff = { fillOpacity: 0, weight: 1, color: '#555' }
+let productFootprintStyleOn =  { fillOpacity: 0, weight: 2, color: '#444' }
