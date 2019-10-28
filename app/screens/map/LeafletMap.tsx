@@ -25,7 +25,7 @@ export const LeafletMap = (props: Props) => {
     var map = L.map('leaflet-map', {
       minZoom: 2,
       maxZoom: config.maximumZoom,
-      editable: true, // enable leaflet.editable pluginleag
+      editable: true, // enable leaflet.editable plugin
     })
 
     // enable leaflet.fullscreen plugin

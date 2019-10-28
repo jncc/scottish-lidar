@@ -44,7 +44,7 @@ export const MapScreen = (props: Props) => {
         footprint,
         // offset: 0, // todo
         // limit: 10,
-        spatialop: 'overlaps',
+        spatialop: 'intersects',
       }
         
       let productCountByCollectionQuery: ProductQuery = {
@@ -52,8 +52,8 @@ export const MapScreen = (props: Props) => {
         footprint,
         // offset: 0,
         // limit: 100000,
-        spatialop: 'overlaps'
-        // what to offset and limit do here?
+        // todo: what do offset and limit do here?
+        spatialop: 'intersects'
       }
         
       Promise.all([
@@ -63,7 +63,7 @@ export const MapScreen = (props: Props) => {
           setProducts(products)
           setProductCountByCollection(productCountByCollection)
         })
-    }    
+    } 
   }, [props.collections, bbox, collection])
 
   let currentCollection = props.collections.find(c => c.collection.name === collection)

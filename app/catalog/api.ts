@@ -20,13 +20,13 @@ export async function loadOgcProducts() {
 }
 
 export async function loadProducts(query: ProductQuery) {
-  return await post<ProductResult>('/search/product',
-    query
+  return await post<ProductResult>(
+    '/search/product', query
   )
 }
 
 export async function loadProductCountByCollection(query: ProductQuery) {
-  return await post<ProductCountByCollectionResult>('/search/product/countByCollection',
-    query
+  return await post<ProductCountByCollectionResult>(
+    '/search/product/countByCollection', query
   )
 }
