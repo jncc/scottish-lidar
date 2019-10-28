@@ -72,19 +72,18 @@ export const LeafletMap = (props: Props) => {
   // set the collection wms layer when it changes
   React.useEffect(() => {
     if (props.wmsLayer && collectionWmsLayerGroup) {
-      let wmsOptions = {
-        layers: props.wmsLayer.name,
-        format: 'image/png',
-        transparent: true,
-        // tiled: true - how to set?
-      }
 
       // currently Geoserver appears to return no data  
       // the catalog has these details:
       // {url: "https://srsp-ows.jncc.gov.uk/ows", name: "scotland:scotland-lidar-1-dsm"}
 
-      // let layer = L.tileLayer.wms(props.wmsLayer.url, wmsOptions)
-      let layer = L.tileLayer.wms('https://eo.jncc.gov.uk/geoserver/scotland/wms', wmsOptions)
+      // let layer = L.tileLayer.wms(props.wmsLayer.url, {
+      let layer = L.tileLayer.wms('https://eo.jncc.gov.uk/geoserver/scotland/wms', {
+        layers: props.wmsLayer.name,
+        format: 'image/png',
+        transparent: true,
+        // tiled: true - how to set?
+      })
       
       collectionWmsLayerGroup.clearLayers()
       collectionWmsLayerGroup.addLayer(layer)
