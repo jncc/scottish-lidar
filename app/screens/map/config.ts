@@ -4,7 +4,7 @@ import { ProductQuery } from '../../catalog/types'
 /** Config for the map */
 
 export const config = {
-  defaultZoom: 7,
+  defaultZoom: 8,
   maximumZoom: 13,
   defaultCenter: [56.4, -4] as [number, number],
   baseLayerUrlTemplate: `https://{s}.tiles.mapbox.com/v4/petmon.lp99j25j/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGV0bW9uIiwiYSI6ImdjaXJLTEEifQ.cLlYNK1-bfT0Vv4xUHhDBA`,

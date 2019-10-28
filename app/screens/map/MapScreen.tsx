@@ -3,7 +3,7 @@ import * as React from 'react'
 
 import { config } from './config'
 import { CollectionTuple } from '../../state'
-import { ProductResult, ProductCountByCollectionResult, ProductQuery } from '../../catalog/types'
+import { ProductResult, ProductCountByCollectionResult, ProductQuery, Product } from '../../catalog/types'
 import { loadProductCountByCollection, loadProducts } from '../../catalog/api'
 import { MapScreenLayout } from './MapScreenLayout'
 import { bboxToWkt } from '../../utility/geospatialUtility'
@@ -32,6 +32,8 @@ export const MapScreen = (props: Props) => {
   let [productCountByCollection, setProductCountByCollection] = React.useState(
     { query: defaultQuery, result: [] } as ProductCountByCollectionResult
   )
+
+  let [hovered, setHovered] = React.useState<Product | undefined>(undefined)
 
   React.useEffect(() => {
 
@@ -70,6 +72,18 @@ export const MapScreen = (props: Props) => {
   let wmsLayer = currentCollection && currentCollection.ogcProduct
     ? currentCollection!.ogcProduct!.data!.product!.wms
     : undefined
+    
+  let handleProductHovered = (p: Product) => {
+    setHovered(p) 
+  }
+  let handleProductUnhovered = (p: Product) => {
+    // only unset the hovered product if the supplied product is currently the hovered product
+    setHovered((prev) => {
+      if (prev === p) {
+        return undefined
+      }
+    }) 
+  }
 
   return <MapScreenLayout
     collections={props.collections}
@@ -80,5 +94,8 @@ export const MapScreen = (props: Props) => {
     setBbox={setBbox}
     products={products}
     productCountByCollection={productCountByCollection.result}
-    />
+    hoveredProduct={hovered}
+    productHovered={handleProductHovered}
+    productUnhovered={handleProductUnhovered}
+  />
 }

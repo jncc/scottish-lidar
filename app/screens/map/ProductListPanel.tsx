@@ -2,7 +2,7 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { ProductResult } from '../../catalog/types'
+import { ProductResult, Product } from '../../catalog/types'
 import { ProductListItem } from './ProductListItem'
 import { DatasetPath } from '../../shared/DatasetPath'
 import { CollectionTuple } from '../../state'
@@ -11,6 +11,9 @@ type Props = {
   products: ProductResult
   collection: CollectionTuple | undefined
   productCountForCurrentCollection: number | undefined
+  hoveredProduct?: Product
+  productHovered: (p: Product) => void
+  productUnhovered: (p: Product) => void
 }
 
 export const ProductListPanel = (props: Props) => {
@@ -48,7 +51,13 @@ export const ProductListPanel = (props: Props) => {
           {/* Actually want: Showing 11 to 20 of 36 matching products */}
         </div>
         }
-        {props.products.result.map(p => <ProductListItem key={p.id} product={p} />)}
+        {props.products.result.map(p => <ProductListItem
+          key={p.id}
+          product={p}
+          hovered={props.hoveredProduct === p}
+          productHovered={props.productHovered}
+          productUnhovered={props.productUnhovered}
+        />)}
       </div>
     )
   }

@@ -2,7 +2,7 @@
 import * as React from 'react'
 
 import { CollectionTuple } from '../../state'
-import { ProductResult } from '../../catalog/types'
+import { ProductResult, Product } from '../../catalog/types'
 import { LeafletMap } from './LeafletMap'
 import { ProductListPanel } from './ProductListPanel'
 import { DatasetListPanels } from './DatasetListPanels'
@@ -17,9 +17,12 @@ type Props = {
   setCollection: (collectionName: string) => void
   bbox: Bbox
   setBbox: (bbox: Bbox) => void
-  wmsLayer: { url: string, name: string } | undefined
+  wmsLayer?: { url: string, name: string }
   products: ProductResult
   productCountByCollection: { collectionName: string, products: number }[]
+  hoveredProduct?: Product
+  productHovered: (p: Product) => void
+  productUnhovered: (p: Product) => void
 }
 
 export const MapScreenLayout = (props: Props) => {
@@ -48,6 +51,9 @@ export const MapScreenLayout = (props: Props) => {
               products={props.products}
               collection={currentCollection}
               productCountForCurrentCollection={productCountForCurrentCollection}
+              hoveredProduct={props.hoveredProduct}
+              productHovered={props.productHovered}
+              productUnhovered={props.productUnhovered}
             />
           </div>
         </Delayed>        
@@ -67,6 +73,9 @@ export const MapScreenLayout = (props: Props) => {
         setBbox={props.setBbox}
         products={props.products.result}
         wmsLayer={props.wmsLayer}
+        hoveredProduct={props.hoveredProduct}
+        productHovered={props.productHovered}
+        productUnhovered={props.productUnhovered}
       />
     </div>
   </>

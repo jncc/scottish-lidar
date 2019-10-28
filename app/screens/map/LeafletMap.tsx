@@ -15,11 +15,15 @@ type Props = {
   bbox: Bbox
   setBbox: (bbox: Bbox) => void
   products: Product[]  
-  wmsLayer: { url: string, name: string } | undefined
+  wmsLayer?: { url: string, name: string }
+  hoveredProduct?: Product
+  productHovered: (p: Product) => void
+  productUnhovered: (p: Product) => void
 }
 
-var productFootprintLayerGroup: L.LayerGroup
 var collectionWmsLayerGroup: L.LayerGroup
+var productFootprintLayerGroup: L.LayerGroup
+var currentProducts: { product: Product, footprint: L.GeoJSON<any> }[]
 
 export const LeafletMap = (props: Props) => {
 
@@ -104,29 +108,47 @@ export const LeafletMap = (props: Props) => {
 
         footprint.on('mouseout', () => {
           footprint.setStyle(() => productFootprintStyleOff)
-          // this.props.productUnhovered(p)
+          props.productUnhovered(p)
         })
 
         footprint.on('mouseover', () => {
           footprint.setStyle(() => productFootprintStyleOn)
-          // this.props.productHovered(p)
+          props.productHovered(p)
         })
 
         return footprint
       }
 
-      props.products.forEach(p => {
-        let footprint = makeProductFootprintLayer(p)
-        footprint.addTo(productFootprintLayerGroup)
+      currentProducts = props.products.map(p => ({
+          product: p,
+          footprint: makeProductFootprintLayer(p)
+        })
+      )
+      currentProducts.forEach(x => {
+        x.footprint.addTo(productFootprintLayerGroup)
       })
     }
   }, [props.products.map(p => p.id).join(',')]) // make a comparator string for React
+
+  // highlight the currently hovered product
+  React.useEffect(() => {
+
+    if (currentProducts) {
+      // unhighlight any previously hovered product
+      currentProducts.forEach(x => {
+        x.footprint.setStyle(() => productFootprintStyleOff)
+      })
+      let hovered = currentProducts.find(x => x.product === props.hoveredProduct)
+      if (hovered) {
+        hovered.footprint.setStyle(() => productFootprintStyleOn)
+      }
+  }
+  }, [props.hoveredProduct])
 
   // react has nothing to do with the leaflet map;
   // map manipulation is performed via side-effects
   return <div id="leaflet-map"></div>
 }
 
-// can't get className to work right now, so use literal styles
 let productFootprintStyleOff = { fillOpacity: 0, weight: 1, color: '#555' }
 let productFootprintStyleOn =  { fillOpacity: 0, weight: 2, color: '#444' }
