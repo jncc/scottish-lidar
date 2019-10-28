@@ -34,40 +34,43 @@ export const MapScreenLayout = (props: Props) => {
     
   return <>
     {makeSmallScreenWarningUI()}
-    <div className="bottom-left-control-group">
-      Bottom left controls
+    <div className="d-none d-lg-block">
+      <div className="bottom-left-control-group d-lg">
+        Bottom left controls
+      </div>
+      <div className="bottom-right-control-group">
+        Bottom right controls
+      </div>
+      <div className="r">
+        <Delayed delayInMilliseconds={800}>
+          <div className="panel right-panel">
+            <ProductListPanel
+              products={props.products}
+              collection={currentCollection}
+              productCountForCurrentCollection={productCountForCurrentCollection}
+            />
+          </div>
+        </Delayed>        
+        <Delayed delayInMilliseconds={800}>
+          <div className="left-panel-container">
+            <DatasetListPanels
+              collections={props.collections}
+              productCountByCollection={props.productCountByCollection}   
+              collection={props.collection}
+              setCollection={props.setCollection}       
+            />
+          </div>        
+        </Delayed>
+      </div>
+      <LeafletMap bbox={props.bbox} setBbox={props.setBbox} wmsLayer={props.wmsLayer} />
     </div>
-    <div className="bottom-right-control-group">
-      Bottom right controls
-    </div>
-    <div className="r">
-      <Delayed delayInMilliseconds={800}>
-        <div className="panel right-panel">
-          <ProductListPanel
-            products={props.products}
-            collection={currentCollection}
-            productCountForCurrentCollection={productCountForCurrentCollection}
-          />
-        </div>
-      </Delayed>        
-      <Delayed delayInMilliseconds={800}>
-        <div className="left-panel-container">
-          <DatasetListPanels
-            collections={props.collections}
-            productCountByCollection={props.productCountByCollection}   
-            collection={props.collection}
-            setCollection={props.setCollection}       
-          />
-        </div>        
-      </Delayed>
-    </div>
-    <LeafletMap bbox={props.bbox} setBbox={props.setBbox} wmsLayer={props.wmsLayer} />
   </>
 }
 
 const makeSmallScreenWarningUI = () => {
   return (
     <div className="d-lg-none text-center text-danger p-2">
+      <br />
       The map is made for desktop devices.
       <br />
       Please increase your screen size to use the map.
