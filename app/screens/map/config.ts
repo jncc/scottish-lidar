@@ -10,10 +10,10 @@ export const config = {
   baseLayerUrlTemplate: `https://{s}.tiles.mapbox.com/v4/petmon.lp99j25j/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGV0bW9uIiwiYSI6ImdjaXJLTEEifQ.cLlYNK1-bfT0Vv4xUHhDBA`,
   attribution: `Backdrop &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>`,
   aggregateLayer: {
-    baseUrl: `https://srsp-ows.jncc.gov.uk:443/scotland/wms`,
+    baseUrl: `https://srsp-ows.jncc.gov.uk/scotland/wms`,
     layer: `scotland:lidar-aggregate`,
     format: 'image/png',
-    opacity: 0.6,
+    opacity: 0.7,
     transparent: true,
   },
   defaultQuery: {

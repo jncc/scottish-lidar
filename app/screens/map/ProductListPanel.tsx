@@ -31,6 +31,17 @@ export const ProductListPanel = (props: Props) => {
           {props.collection.collection.metadata.abstract}
         </div>
 
+        {props.products.result.length === 0 &&
+        <div>
+          <div>
+            No products in this dataset matched your query. 
+          </div>
+          <div>
+            Perhaps select a different dataset.
+          </div>
+        </div>
+        }
+
         {props.productCountForCurrentCollection &&
         <div>
           Showing {props.products.result.length} of {props.productCountForCurrentCollection} matching products

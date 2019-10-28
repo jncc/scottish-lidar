@@ -43,7 +43,7 @@ export const MapScreen = (props: Props) => {
         collections: [collection],
         footprint,
         // offset: 0, // todo
-        // limit: 10,
+        limit: 10,
         spatialop: 'intersects',
       }
         

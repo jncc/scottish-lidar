@@ -15,8 +15,8 @@ type Props = {
   wmsLayer: { url: string, name: string } | undefined
 }
 
-var footprintLayerGroup: L.LayerGroup
-var visualLayerGroup: L.LayerGroup
+var productFootprintLayerGroup: L.LayerGroup
+var collectionWmsLayerGroup: L.LayerGroup
 
 export const LeafletMap = (props: Props) => {
 
@@ -34,8 +34,8 @@ export const LeafletMap = (props: Props) => {
     map.setView(config.defaultCenter, config.defaultZoom)
 
     // add layer groups
-    footprintLayerGroup = L.layerGroup([]).addTo(map)
-    visualLayerGroup = L.layerGroup([]).addTo(map)
+    productFootprintLayerGroup = L.layerGroup([]).addTo(map)
+    collectionWmsLayerGroup = L.layerGroup([]).addTo(map)
 
     // base layer
     L.tileLayer(config.baseLayerUrlTemplate, {
@@ -50,24 +50,6 @@ export const LeafletMap = (props: Props) => {
       opacity: config.aggregateLayer.opacity,
       transparent: config.aggregateLayer.transparent
     }).addTo(map)
-
-    // add layer groups
-    let productFootprintLayerGroup = L.layerGroup([]).addTo(map)
-    let productWmsLayerGroup = L.layerGroup([]).addTo(map)
-    let collectionWmsLayerGroup = L.layerGroup([]).addTo(map)
-
-    // test hardcoded WMS layer using same options as existing Deli
-    // currently Geoserver appears to return no data  
-    // the catalog has these details:
-    // {url: "https://srsp-ows.jncc.gov.uk/ows", name: "scotland:scotland-lidar-1-dsm"}
-    // the aggregate layer has url of https://srsp-ows.jncc.gov.uk:443/scotland/wms
-    let wmsOptions = {
-      layers: 'scotland:scotland-lidar-1-dsm',
-      format: 'image/png',
-      transparent: true,
-      // tiled: true - how to set?
-    }
-    L.tileLayer.wms('https://srsp-ows.jncc.gov.uk/ows', wmsOptions).addTo(map)
 
     // add the bbox rectangle
     let bboxRect = L.rectangle(
@@ -87,22 +69,27 @@ export const LeafletMap = (props: Props) => {
     })
   }, [])
 
-  // React.useEffect(() => {
-  //   console.log('in update')
-  //   console.log(props.wmsLayer)
-  //   console.log(visualLayerGroup)
-  //   if (props.wmsLayer && visualLayerGroup) {
+  // set the collection wms layer when it changes
+  React.useEffect(() => {
+    if (props.wmsLayer && collectionWmsLayerGroup) {
+      let wmsOptions = {
+        layers: props.wmsLayer.name,
+        format: 'image/png',
+        transparent: true,
+        // tiled: true - how to set?
+      }
 
-  //     console.log('HELLO')
-  //       let wmsOptions = {
-  //         layers: props.wmsLayer.name,
-  //         format: 'image/png',
-  //         transparent: true
-  //       }
-  //       let layer = L.tileLayer.wms(props.wmsLayer.url, wmsOptions)
-  //       visualLayerGroup.addLayer(layer)
-  //     }
-  // }, [props.wmsLayer])
+      // currently Geoserver appears to return no data  
+      // the catalog has these details:
+      // {url: "https://srsp-ows.jncc.gov.uk/ows", name: "scotland:scotland-lidar-1-dsm"}
+
+      // let layer = L.tileLayer.wms(props.wmsLayer.url, wmsOptions)
+      let layer = L.tileLayer.wms('https://eo.jncc.gov.uk/geoserver/scotland/wms', wmsOptions)
+      
+      collectionWmsLayerGroup.clearLayers()
+      collectionWmsLayerGroup.addLayer(layer)
+    }
+  }, [props.wmsLayer])
 
   // react has nothing to do with the leaflet map;
   // map manipulation is performed via side-effects

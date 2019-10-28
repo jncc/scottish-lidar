@@ -38,15 +38,20 @@ export const DatasetListPanels = (props: Props) => {
     <div className="panel" style={{maxHeight: heightForMatching + 'rem'}}>
       <h4>Matching datasets</h4>
       <div>{matchingDatasets.length} datasets match your query</div>
-      {matchingDatasets.length && <hr />}
+      {matchingDatasets.length > 0 && <hr />}
       <div>
         {makeDatasetListUI(props, matchingDatasets)}
       </div>
     </div>
     <div className="panel" style={{maxHeight: heightForNonMatching + 'rem'}}>
-      <h4 className="mr-2">Non-matching datasets</h4>
+      <h4 className="mr-2">Other datasets</h4>
+      {nonMatchingDatasets.length === 0 &&
+      <div>All available datasets match your query</div>
+      }
+      {nonMatchingDatasets.length > 0 &&
       <div>{nonMatchingDatasets.length} datasets don't match your query</div>
-      {matchingDatasets.length && <hr />}
+      }
+      {nonMatchingDatasets.length > 0 && <hr />}
       <div>
         {makeDatasetListUI(props, nonMatchingDatasets)}
       </div>
