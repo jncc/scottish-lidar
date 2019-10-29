@@ -17,6 +17,7 @@ type Props = {
   setCollection: (collectionName: string) => void
   bbox: Bbox
   setBbox: (bbox: Bbox) => void
+  setPage: (n: number) => void
   wmsLayer?: { url: string, name: string }
   products: ProductResult
   productCountByCollection: { collectionName: string, products: number }[]
@@ -51,6 +52,7 @@ export const MapScreenLayout = (props: Props) => {
               products={props.products}
               collection={currentCollection}
               productCountForCurrentCollection={productCountForCurrentCollection}
+              setPage={props.setPage}
               hoveredProduct={props.hoveredProduct}
               productHovered={props.productHovered}
               productUnhovered={props.productUnhovered}

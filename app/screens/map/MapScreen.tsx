@@ -89,6 +89,7 @@ export const MapScreen = (props: Props) => {
   return <MapScreenLayout
     collections={props.collections}
     bbox={bbox}
+    setPage={setPage}
     wmsLayer={wmsLayer}
     collection={collection}
     setCollection={setCollection}
