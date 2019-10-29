@@ -20,7 +20,7 @@ export const Pager = (props: Props) => {
         {/* previous page */}
         <Pagination.Prev
           disabled={pager.currentPage === 1}
-          onClick={() => props.setPage(1)}
+          onClick={() => props.setPage(pager.currentPage - 1)}
         />
         {/* first page */}
         {pager.startPage > 1 &&
