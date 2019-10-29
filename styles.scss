@@ -300,8 +300,24 @@ h1 {
   }
   .product-list-item {
     display: flex;
-    :first-child {
+    .product-list-item-highlight {
+      position: relative;
+      left: -9px;
+      width: 4px;
+      margin-right: -4px;
+      background-color: $gray-700;
+    }
+    .product-list-item-title {
       flex: 1;
+    }
+    .product-list-item-title-highlight {
+      background-color: $gray-100;
+    }
+    .product-list-item-cart {
+      i {
+        color: $gray-300;
+
+      }
     }
     i {
       color: $gray-600;

@@ -11,23 +11,26 @@ type Props = {
 
 export const ProductListItem = (props: Props) => {
 
+  let titleCssClass = props.hovered ? 'product-list-item-title-highlight': ''
+
   return (
     <div
       className="product-list-item"
       onMouseOver={() => props.productHovered(props.product)}
       onMouseOut={() => props.productUnhovered(props.product)}
-    >
-      <div>
+      >
+      {props.hovered &&
+      <div className="product-list-item-highlight" />
+      }
+      <div
+        className={'product-list-item-title ' + titleCssClass}
+        
+      >
         {props.product.data.product.title}
       </div>
-      <div>
-        add
+      <div className="product-list-item-cart">
+        <i className="fas fa-shopping-cart" />
       </div>
-      {props.hovered &&
-      <div>
-        !
-      </div>
-      }
       {/* {props.product.data.product!.http!.size}
       {props.product.data.product!.http!.type}
       {props.product.data.product!.http!.url} */}
