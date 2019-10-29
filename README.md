@@ -84,7 +84,7 @@ The parcel-plugin-bundle-visualiser package creates a visual report on bundle si
 Deployment
 ----------
 
-The site is automatically to Github Pages by Jenkins using the script in `deploy/`. You can see the currently deployed build in the custom `x-version` meta tag at the top of the HTML pages, with the format `{build-number}.{git-commit}` . For example,
+The site is automatically deployed to Github Pages by Jenkins using the script in `deploy/`. You can see the currently deployed build in the custom `x-version` meta tag at the top of the HTML pages, with the format `{build-number}.{git-commit}` . For example,
 
     <meta name="x-version" content="43.320b45076e0c0ffc3016944f66754f32af85a6cf">
 
@@ -106,7 +106,7 @@ The web application consists of several html "content" pages plus a page that ho
     - /privacy                  - privacy page    (privacy.html)
     - /404                      - 404 page        (404.html)
 
-Note that we use the react-router `HashRouter` to ensure the app behaves itself in a static hosting envirnoment. You can navigate directly to deep links and refresh the browser within the app because the static `data.html` page will be (re)fetched from the server, then allowing the the client-side router to take over.
+Note that we use the react-router `HashRouter` to ensure the app behaves itself in a static hosting environment. You can navigate directly to deep links and refresh the browser within the app because the static `data.html` page will be (re)fetched from the server, then allowing the the client-side router to take over.
 
 Data model and server-side API
 ------------------------------

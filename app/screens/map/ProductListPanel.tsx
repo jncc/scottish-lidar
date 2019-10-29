@@ -51,6 +51,7 @@ export const ProductListPanel = (props: Props) => {
           {/* Actually want: Showing 11 to 20 of 36 matching products */}
         </div>
         }
+        <hr />
         {props.products.result.map(p => <ProductListItem
           key={p.id}
           product={p}
@@ -58,6 +59,8 @@ export const ProductListPanel = (props: Props) => {
           productHovered={props.productHovered}
           productUnhovered={props.productUnhovered}
         />)}
+        <hr />
+        foo
       </div>
     )
   }

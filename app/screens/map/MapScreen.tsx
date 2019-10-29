@@ -7,6 +7,7 @@ import { ProductResult, ProductCountByCollectionResult, ProductQuery, Product } 
 import { loadProductCountByCollection, loadProducts } from '../../catalog/api'
 import { MapScreenLayout } from './MapScreenLayout'
 import { bboxToWkt } from '../../utility/geospatialUtility'
+import { getOffsetFromPageNumber, PAGE_SIZE } from '../../utility/pagerUtility'
 
 type Props = {
   collections: CollectionTuple[]
@@ -15,8 +16,6 @@ type Props = {
 let defaultQuery: ProductQuery = {
   collections: config.defaultQuery.collections,
   footprint: bboxToWkt(config.defaultQuery.bbox),
-  // offset: 0,
-  // limit: 10,
   spatialop: 'overlaps',
 }
 
@@ -24,6 +23,8 @@ export const MapScreen = (props: Props) => {
   
   let [bbox, setBbox] = React.useState(config.defaultQuery.bbox)
   let [collection, setCollection] = React.useState(config.defaultQuery.collections[0])
+
+  let [page, setPage] = React.useState(1)
 
   let [products, setProducts] = React.useState(
     { query: defaultQuery, result: [] } as ProductResult
@@ -44,8 +45,8 @@ export const MapScreen = (props: Props) => {
       let productQuery: ProductQuery = {
         collections: [collection],
         footprint,
-        // offset: 0, // todo
-        limit: 10,
+        offset: getOffsetFromPageNumber(page),
+        limit: PAGE_SIZE,
         spatialop: 'intersects',
       }
         
