@@ -2,14 +2,14 @@
 import { range } from 'lodash'
 
 export const PAGE_SIZE = 10
-export const MAX_PAGES = 10
+export const MAX_PAGES = 5
 
 export function getOffsetFromPageNumber(page: number) {
-  return (page - 1) * 10
+  return (page - 1) * PAGE_SIZE
 }
 
 export function getPageNumberFromOffset(offset: number) {
-  return (offset / 10) + 1
+  return (offset / PAGE_SIZE) + 1
 }
 
 export function getPager(currentPage: number, total: number) {

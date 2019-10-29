@@ -21,10 +21,10 @@ let defaultQuery: ProductQuery = {
 
 export const MapScreen = (props: Props) => {
   
-  let [bbox, setBbox] = React.useState(config.defaultQuery.bbox)
-  let [collection, setCollection] = React.useState(config.defaultQuery.collections[0])
-
   let [page, setPage] = React.useState(1)
+  let [bbox, setBbox] = React.useState(config.defaultQuery.bbox)
+
+  let [collection, setCollection] = React.useState(config.defaultQuery.collections[0])
 
   let [products, setProducts] = React.useState(
     { query: defaultQuery, result: [] } as ProductResult
@@ -67,7 +67,7 @@ export const MapScreen = (props: Props) => {
           setProductCountByCollection(productCountByCollection)
         })
     } 
-  }, [props.collections, bbox, collection])
+  }, [props.collections, bbox, page, collection])
 
   let currentCollection = props.collections.find(c => c.collection.name === collection)
   let wmsLayer = currentCollection && currentCollection.ogcProduct

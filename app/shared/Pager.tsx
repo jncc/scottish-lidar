@@ -1,83 +1,64 @@
 
 import React from 'react'
 import { getPager, getPageNumberFromOffset } from '../utility/pagerUtility'
+import { Pagination } from 'react-bootstrap'
 
 type Props = {
   offset: number
   total: number
   setPage: (n: number) => void
 }
+
 export const Pager = (props: Props) => {
 
   let currentPage = getPageNumberFromOffset(props.offset)
   let pager = getPager(currentPage, props.total)
   
   return (
-    <nav aria-label="Pagination" className="results-pager">
-      <ul className="pagination">
+    <nav aria-label="Pagination" className="">
+      <Pagination size="sm" className="justify-content-center">
         {/* previous page */}
-        {pager.currentPage === 1
-          ? <li className="pagination-previous disabled">Previous <span className="show-for-sr">page</span></li>
-          : <li className="pagination-previous">
-              <a href="#">
-                  Previous <span className="show-for-sr">page</span>
-              </a>
-            </li>
-        }
+        <Pagination.Prev
+          disabled={pager.currentPage === 1}
+          onClick={() => props.setPage(1)}
+        />
         {/* first page */}
         {pager.startPage > 1 &&
-          <li>
-            <a href="#"
-                aria-label="Page 1">
-                1
-            </a>
-          </li>
+          <Pagination.Item 
+            onClick={() => props.setPage(1)}>
+            {1}
+          </Pagination.Item>
         }
-        {/* show the ellipsis '...' unless it would be redundant */}
-        {pager.startPage !== 2 &&
-          <li className="ellipsis" aria-hidden="true"></li>
+        {/* '...' unless redundant */}
+        {pager.startPage > 2 &&
+          <Pagination.Ellipsis disabled />
         }
-
-        {/* range of pages e.g. 3, 4, 5, 6, 7 */}
-        {pager.pages.map(p => {
-          let current = p === pager.currentPage
-
-          return (
-            <li className={current ? 'current' : ''}>
-              <a href="#"
-                aria-label={'Page ' + p}>
-                {current &&                  <span className="show-for-sr">You are on page {p}</span>
-                }
-                {p}
-              </a>
-            </li>
-          )
-        })}
-
-        {/* @* last page *@
-        @if (Model.Pager.EndPage < Model.Pager.TotalPages) {
-            // show the ellipsis '...' unless it would be redundant
-            if (Model.Pager.EndPage != Model.Pager.TotalPages - 1) {
-                <li class="ellipsis" aria-hidden="true"></li>
-            }
-            <li>
-                <a href="@($"/search?q={Model.SearchParams.q}&p={Model.Pager.TotalPages}{keywordQueryString}")"
-                    aria-label="Page @Model.Pager.TotalPages">
-                    @Model.Pager.TotalPages
-                </a>
-            </li>
+        {/* range of pages, e.g. 3, 4, 5, 6, 7 */}
+        {pager.pages.map(n =>
+          <Pagination.Item
+            key={n}
+            active={n === pager.currentPage}
+            onClick={() => props.setPage(n)}>
+            {n}
+          </Pagination.Item>
+        )}
+        {/* '...' unless redundant */}
+        {pager.endPage < pager.totalPages - 1 &&
+          <Pagination.Ellipsis disabled />
         }
-        @* next page *@
-        @if (Model.Pager.CurrentPage == Model.Pager.EndPage) {
-            <li class="pagination-next disabled">Next <span class="show-for-sr">page</span></li>
-        } else {
-            <li class="pagination-next">
-                <a href="@($"/search?q={Model.SearchParams.q}&p={Model.SearchParams.p + 1}{keywordQueryString}")">
-                    Next <span class="show-for-sr">page</span>
-                </a>
-            </li>
-        } */}
-      </ul>
+        {/* last page */}
+        {pager.endPage < pager.totalPages &&
+          <Pagination.Item
+            onClick={() => props.setPage(pager.totalPages)}>
+            {pager.totalPages}
+          </Pagination.Item>
+        }
+        {/* next page */}
+        <Pagination.Next
+          disabled={pager.currentPage === pager.endPage}
+          onClick={() => props.setPage(pager.currentPage + 1)}
+        />
+      </Pagination>
     </nav>
   )
 }

@@ -46,8 +46,8 @@ describe('getPager specs', () => {
 
   test('should work for (11, 120)', () => {
     let pager = getPager(11, 120)
-    expect(pager.pages.length).toBe(10)
-    expect(pager.startPage).toBe(3)
+    expect(pager.pages.length).toBe(5)
+    expect(pager.startPage).toBe(8)
     expect(pager.endPage).toBe(12)
   })
 
