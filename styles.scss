@@ -290,13 +290,18 @@ h1 {
 // }  
 
 .product-list-panel {
-
+  display: flex;
+  flex-direction: column;
   .product-list-panel-abstract {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
     width: 20rem; // 2 less than container width
+  }
+  .product-list-items {
+    flex: 1;
+    min-height:18rem;
   }
   .product-list-item {
     display: flex;
