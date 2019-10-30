@@ -55,8 +55,9 @@ export const LeafletMap = (props: Props) => {
       layers: config.aggregateLayer.layer,
       format: config.aggregateLayer.format,
       opacity: config.aggregateLayer.opacity,
-      transparent: config.aggregateLayer.transparent
-    }).addTo(map)
+      transparent: config.aggregateLayer.transparent,
+      tiled: true // custom parameter for Geoserver tilecache
+    } as TileLayerOptions).addTo(map)
 
     // add the bbox rectangle
     let bboxRect = L.rectangle(
