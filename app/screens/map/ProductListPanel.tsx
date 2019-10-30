@@ -40,10 +40,7 @@ export const ProductListPanel = (props: Props) => {
           {props.products.result.length === 0 &&
           <div>
             <div>
-              No products in this dataset matched your query. 
-            </div>
-            <div>
-              Perhaps select a different dataset.
+              No products in this dataset matched your query. (You might need to select a different dataset?)
             </div>
           </div>
           }

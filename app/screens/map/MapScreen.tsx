@@ -8,6 +8,7 @@ import { loadProductCountByCollection, loadProducts } from '../../catalog/api'
 import { MapScreenLayout } from './MapScreenLayout'
 import { bboxToWkt } from '../../utility/geospatialUtility'
 import { getOffsetFromPageNumber, PAGE_SIZE } from '../../utility/pagerUtility'
+import { MapStoreProvider, useMapStore, Actions } from './store'
 
 type Props = {
   collections: CollectionTuple[]
@@ -20,11 +21,14 @@ let defaultQuery: ProductQuery = {
 }
 
 export const MapScreen = (props: Props) => {
-  
-  let [page, setPage] = React.useState(1)
-  let [bbox, setBbox] = React.useState(config.defaultQuery.bbox)
 
-  let [collection, setCollection] = React.useState(config.defaultQuery.collections[0])
+  let { state, dispatch } = useMapStore()
+
+  // console.log(state)
+
+  // let [page, setPage] = React.useState(1)
+  // let [bbox, setBbox] = React.useState(config.defaultQuery.bbox)
+  // let [collection, setCollection] = React.useState(config.defaultQuery.collections[0])
 
   let [products, setProducts] = React.useState(
     { query: defaultQuery, result: [] } as ProductResult
@@ -40,12 +44,12 @@ export const MapScreen = (props: Props) => {
 
     if (props.collections.length) {
       
-      let footprint = bboxToWkt(bbox)
+      let footprint = bboxToWkt(state.bbox)
 
       let productQuery: ProductQuery = {
-        collections: [collection],
+        collections: [state.collection],
         footprint,
-        offset: getOffsetFromPageNumber(page),
+        offset: getOffsetFromPageNumber(state.page),
         limit: PAGE_SIZE,
         spatialop: 'intersects',
       }
@@ -67,9 +71,9 @@ export const MapScreen = (props: Props) => {
           setProductCountByCollection(productCountByCollection)
         })
     } 
-  }, [props.collections, bbox, page, collection])
+  }, [props.collections, state.bbox, state.page, state.collection])
 
-  let currentCollection = props.collections.find(c => c.collection.name === collection)
+  let currentCollection = props.collections.find(c => c.collection.name === state.collection)
   let wmsLayer = currentCollection && currentCollection.ogcProduct
     ? currentCollection!.ogcProduct!.data!.product!.wms
     : undefined
@@ -88,12 +92,12 @@ export const MapScreen = (props: Props) => {
 
   return <MapScreenLayout
     collections={props.collections}
-    bbox={bbox}
-    setPage={setPage}
+    bbox={state.bbox}
+    setPage={(n) => dispatch(Actions.setPage(n))}
     wmsLayer={wmsLayer}
-    collection={collection}
-    setCollection={setCollection}
-    setBbox={setBbox}
+    collection={state.collection}
+    setCollection={(c) => dispatch(Actions.setCollection(c))}
+    setBbox={(bbox) => dispatch(Actions.setBbox(bbox))}
     products={products}
     productCountByCollection={productCountByCollection.result}
     hoveredProduct={hovered}
