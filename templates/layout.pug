@@ -10,8 +10,10 @@ html(lang='en')
     <link href="https://fonts.googleapis.com/css?family=Hind+Madurai&display=swap" rel="stylesheet">
     block head
       title Scottish Remote Sensing Portal
-    include ./google-tag-manager-head.html
   body
+    //- cannot put the Google Tag Manager script in the document head
+    //- because Parcel munches it; sure it'll be ok here in the body
+    include ./google-tag-manager-head.html
     include ./google-tag-manager-body.html
     div#layout-container
       include ./header
