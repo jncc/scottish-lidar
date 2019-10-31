@@ -6,8 +6,8 @@ import { ProductResult, Product } from '../../catalog/types'
 import { LeafletMap } from './LeafletMap'
 import { ProductListPanel } from './ProductListPanel'
 import { DatasetListPanels } from './DatasetListPanels'
-import { Bbox } from './types'
 import { Delayed } from '../../shared/Delayed'
+import { MapState } from './store'
 
 // import { AddToBasketButton } from './AddToBasketButton'
 
@@ -15,8 +15,8 @@ type Props = {
   collections: CollectionTuple[]
   collection: string
   setCollection: (collectionName: string) => void
-  bbox: Bbox
-  setBbox: (bbox: Bbox) => void
+  bbox: MapState['bbox']
+  setBbox: (bbox: MapState['bbox']) => void
   setPage: (n: number) => void
   wmsLayer?: { url: string, name: string }
   products: ProductResult
