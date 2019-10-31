@@ -8,7 +8,7 @@ import { loadProductCountByCollection, loadProducts } from '../../catalog/api'
 import { MapScreenLayout } from './MapScreenLayout'
 import { bboxToWkt } from '../../utility/geospatialUtility'
 import { getOffsetFromPageNumber, PAGE_SIZE } from '../../utility/pagerUtility'
-import { MapStoreProvider, useMapStore, Actions } from './store'
+import { useMapStore, MapActions } from './store'
 
 type Props = {
   collections: CollectionTuple[]
@@ -31,8 +31,6 @@ export const MapScreen = (props: Props) => {
   let [productCountByCollection, setProductCountByCollection] = React.useState(
     { query: defaultQuery, result: [] } as ProductCountByCollectionResult
   )
-
-  let [hovered, setHovered] = React.useState<Product | undefined>(undefined)
 
   // (re)load the products whenever relevant state changes
   React.useEffect(() => {
@@ -71,30 +69,18 @@ export const MapScreen = (props: Props) => {
     ? currentCollection!.ogcProduct!.data!.product!.wms
     : undefined
     
-  let handleProductHovered = (p: Product) => {
-    setHovered(p) 
-  }
-  let handleProductUnhovered = (p: Product) => {
-    // only unset the hovered product if the supplied product is currently the hovered product
-    setHovered((prev) => {
-      if (prev === p) {
-        return undefined
-      }
-    }) 
-  }
-
   return <MapScreenLayout
     collections={props.collections}
     bbox={state.bbox}
-    setPage={(n) => dispatch(Actions.setPage(n))}
+    setPage={(n) => dispatch(MapActions.setPage(n))}
     wmsLayer={wmsLayer}
     collection={state.collection}
-    setCollection={(c) => dispatch(Actions.setCollection(c))}
-    setBbox={(bbox) => dispatch(Actions.setBbox(bbox))}
+    setCollection={(c) => dispatch(MapActions.setCollection(c))}
+    setBbox={(bbox) => dispatch(MapActions.setBbox(bbox))}
     products={products}
     productCountByCollection={productCountByCollection.result}
-    hoveredProduct={hovered}
-    productHovered={handleProductHovered}
-    productUnhovered={handleProductUnhovered}
+    hoveredProduct={state.hovered}
+    productHovered={(p) => dispatch(MapActions.productHovered(p))}
+    productUnhovered={(p) => dispatch(MapActions.productUnhovered(p))}
   />
 }

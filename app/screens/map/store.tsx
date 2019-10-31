@@ -1,12 +1,14 @@
 import React from 'react'
-import { ProductResult } from '../../catalog/types'
+import { ProductResult, Product } from '../../catalog/types'
 import { bboxToWkt } from '../../utility/geospatialUtility'
 import { config } from './config'
+import { createAction, ActionsUnion } from '../../utility/reducerUtility'
 
-export let initialState = {
+export let defaultMapState = {
   collection: 'scotland-gov/lidar/phase-1/dsm',
   bbox:       [-4.5, 56.1, -3.5, 56.7] as [number, number, number, number],
   page:       1,
+  hovered:    undefined as unknown as Product | undefined
   // products:   {
   //   query: {
   //     collections: config.defaultQuery.collections,
@@ -17,10 +19,9 @@ export let initialState = {
   // } as ProductResult
 }
 
-export type State = typeof initialState
+export type MapState = typeof defaultMapState
 
-/** Action-creating functions. */ 
-export let Actions = {
+export let MapActions = {
   setCollection: (collection: string) =>
     createAction('SET_COLLECTION', { collection }
   ),
@@ -29,12 +30,18 @@ export let Actions = {
   ),
   setPage: (page: number) =>
     createAction('SET_PAGE', { page }
-  )
+  ),
+  productHovered: (product: Product) =>
+    createAction('PRODUCT_HOVERED', { product }
+  ),
+  productUnhovered: (product: Product) =>
+    createAction('PRODUCT_UNHOVERED', { product }
+  ),
 }
 
-export type Actions = ActionsUnion<typeof Actions>
+export type MapAction = ActionsUnion<typeof MapActions>
 
-function reducer(state = initialState, a: Actions): State {
+function reducer(state = defaultMapState, a: MapAction): MapState {
   switch (a.type) {
     case 'SET_COLLECTION':
       return {
@@ -53,19 +60,34 @@ function reducer(state = initialState, a: Actions): State {
         ...state,
         page: a.payload.page
       }
+    case 'PRODUCT_HOVERED':
+      return {
+        ...state,
+        hovered: a.payload.product
+      }
+    case 'PRODUCT_UNHOVERED':
+      // only unset the hovered product if the product is currently hovered
+      if (state.hovered === a.payload.product) {
+        return {
+          ...state,
+          hovered: undefined
+        }
+      } else {
+        return state
+      }
     default:
       throw new Error()
   }
 }
 
 let MapStoreContext = React.createContext({
-  state: initialState,
-  dispatch: (a: Actions) => {}
+  state: defaultMapState,
+  dispatch: (a: MapAction) => {}
 })
 
 export let MapStoreProvider: React.FunctionComponent<{}> = ({ children }) => {
 
-  let [state, dispatch] = React.useReducer(reducer, initialState)
+  let [state, dispatch] = React.useReducer(reducer, defaultMapState)
 
   return <MapStoreContext.Provider value={{ state, dispatch }}>
            {children}
@@ -73,29 +95,3 @@ export let MapStoreProvider: React.FunctionComponent<{}> = ({ children }) => {
 }
 
 export let useMapStore = () => React.useContext(MapStoreContext)
-
-//
-//
-//
-// https://medium.com/@martin_hotell/improved-redux-type-safety-with-typescript-2-8-2c11a8062575
-//
-
-type FunctionType = (...args: any[]) => any
-
-type ActionCreatorsMapObject = { [actionCreator: string]: FunctionType }
-
-export type ActionsUnion<A extends ActionCreatorsMapObject> = ReturnType<A[keyof A]>
-
-export interface Action<T extends string> {
-  type: T
-}
-
-export interface ActionWithPayload<T extends string, P> extends Action<T> {
-  payload: P
-}
-
-export function createAction<T extends string>(type: T): Action<T>
-export function createAction<T extends string, P>(type: T, payload: P): ActionWithPayload<T, P>
-export function createAction<T extends string, P>(type: T, payload?: P) {
-  return payload === undefined ? { type } : { type, payload }
-}

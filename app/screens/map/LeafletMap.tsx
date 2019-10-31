@@ -7,13 +7,13 @@ import 'leaflet-editable'
 import { config } from './config'
 import { bboxFlatArrayToCoordArray } from '../../utility/geospatialUtility'
 import { roundTo3Decimals } from '../../utility/numberUtility'
-import { Bbox } from './types'
 import { Product } from '../../catalog/types'
 import { GeoJsonObject } from 'geojson'
+import { MapState } from './store'
 
 type Props = {
-  bbox: Bbox
-  setBbox: (bbox: Bbox) => void
+  bbox: MapState['bbox']
+  setBbox: (bbox: MapState['bbox']) => void
   products: Product[]  
   wmsLayer?: { url: string, name: string }
   hoveredProduct?: Product
@@ -71,7 +71,7 @@ export const LeafletMap = (props: Props) => {
       if (e.layer === bboxRect) { // e.layer property added by leaflet-editable
         let b = bboxRect.getBounds()
         let bbox = [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()]
-          .map(roundTo3Decimals) as Bbox
+          .map(roundTo3Decimals) as MapState['bbox']
         props.setBbox(bbox)
       }
     })
