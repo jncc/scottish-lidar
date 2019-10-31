@@ -1,9 +1,20 @@
 import React from 'react'
+import { ProductResult } from '../../catalog/types'
+import { bboxToWkt } from '../../utility/geospatialUtility'
+import { config } from './config'
 
 export let initialState = {
   collection: 'scotland-gov/lidar/phase-1/dsm',
   bbox:       [-4.5, 56.1, -3.5, 56.7] as [number, number, number, number],
-  page:       1
+  page:       1,
+  // products:   {
+  //   query: {
+  //     collections: config.defaultQuery.collections,
+  //     footprint: bboxToWkt(config.defaultQuery.bbox),
+  //     spatialop: 'overlaps'
+  //   },
+  //   result: []
+  // } as ProductResult
 }
 
 export type State = typeof initialState
@@ -34,7 +45,8 @@ function reducer(state = initialState, a: Actions): State {
     case 'SET_BBOX':
       return {
         ...state,
-        bbox: a.payload.bbox
+        bbox: a.payload.bbox,
+        page: 1 // reset paging whenever bbox changes
       }
     case 'SET_PAGE':
       return {
