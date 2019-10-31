@@ -6,11 +6,12 @@ script.
     var banner = document.querySelector('.cookie-banner');
     var hideBanner = function() { banner.style.display = "none"; }
     var showBanner = function() { banner.style.display = "block"; }
-    ok.onclick = function() {
+    ok.onclick = function(e) {
       var date = new Date();
       date.setMonth(date.getMonth() + 1)
       document.cookie = "cookie-consent=all;expires=" + date.toUTCString();
       hideBanner();
+      e.preventDefault();
     }
     if (document.cookie.indexOf('cookie-consent=') < 0) {
       showBanner();
