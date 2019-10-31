@@ -102,15 +102,15 @@ export const LeafletMap = (props: Props) => {
       let makeProductFootprintLayer = (p: Product) => {
         let footprint = L.geoJSON(p.footprint as GeoJsonObject, { style: productFootprintStyleOff } )
 
-        footprint.on('mouseout', () => {
-          footprint.setStyle(() => productFootprintStyleOff)
-          props.productUnhovered(p)
-        })
+        // footprint.on('mouseout', () => {
+        //   footprint.setStyle(() => productFootprintStyleOff)
+        //   props.productUnhovered(p)
+        // })
 
-        footprint.on('mouseover', () => {
-          footprint.setStyle(() => productFootprintStyleOn)
-          props.productHovered(p)
-        })
+        // footprint.on('mouseover', () => {
+        //   footprint.setStyle(() => productFootprintStyleOn)
+        //   props.productHovered(p)
+        // })
 
         return footprint
       }
@@ -146,5 +146,5 @@ export const LeafletMap = (props: Props) => {
   return <div id="leaflet-map"></div>
 }
 
-let productFootprintStyleOff = { fillOpacity: 0, weight: 1, color: '#555' }
+let productFootprintStyleOff = { fillOpacity: 0, weight: 0, color: '#555' }
 let productFootprintStyleOn =  { fillOpacity: 0, weight: 2, color: '#444' }
