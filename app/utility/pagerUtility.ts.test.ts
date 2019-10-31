@@ -1,5 +1,5 @@
 
-import { getOffsetFromPageNumber, getPageNumberFromOffset, getPager } from './pagerUtility'
+import { getOffsetFromPageNumber, getPageNumberFromOffset, getPagerInfo } from './pagerUtility'
 
 describe('getOffsetFromPageNumber specs', () => {
   
@@ -28,24 +28,24 @@ describe('getPageNumberFromOffset specs', () => {
   })
 })
 
-describe('getPager specs', () => {
+describe('getPagerInfo specs', () => {
   
   test('should work for (1, 28)', () => {
-    let pager = getPager(1, 28)
+    let pager = getPagerInfo(1, 28)
     expect(pager.pages.length).toBe(3)
     expect(pager.startPage).toBe(1)
     expect(pager.endPage).toBe(3)
   })
 
   test('should work for (2, 28)', () => {
-    let pager = getPager(2, 28)
+    let pager = getPagerInfo(2, 28)
     expect(pager.pages.length).toBe(3)
     expect(pager.startPage).toBe(1)
     expect(pager.endPage).toBe(3)
   })
 
   test('should work for (11, 120)', () => {
-    let pager = getPager(11, 120)
+    let pager = getPagerInfo(11, 120)
     expect(pager.pages.length).toBe(5)
     expect(pager.startPage).toBe(8)
     expect(pager.endPage).toBe(12)

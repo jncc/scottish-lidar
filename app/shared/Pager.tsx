@@ -1,18 +1,16 @@
 
 import React from 'react'
-import { getPager, getPageNumberFromOffset } from '../utility/pagerUtility'
+import { getPagerInfo, PagerInfo, getPageNumberFromOffset } from '../utility/pagerUtility'
 import { Pagination } from 'react-bootstrap'
 
 type Props = {
-  offset: number
-  total: number
+  pagerInfo: PagerInfo
   setPage: (n: number) => void
 }
 
 export const Pager = (props: Props) => {
 
-  let currentPage = getPageNumberFromOffset(props.offset)
-  let pager = getPager(currentPage, props.total)
+  let pager = props.pagerInfo
   
   return (
     <nav aria-label="Pagination" className="">

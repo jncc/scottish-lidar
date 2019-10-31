@@ -12,7 +12,7 @@ export function getPageNumberFromOffset(offset: number) {
   return (offset / PAGE_SIZE) + 1
 }
 
-export function getPager(currentPage: number, total: number) {
+export function getPagerInfo(currentPage: number, total: number) {
   
   let totalPages = Math.ceil(total / PAGE_SIZE)
 
@@ -73,3 +73,5 @@ export function getPager(currentPage: number, total: number) {
     pages,
   }
 }
+
+export type PagerInfo = ReturnType<typeof getPagerInfo>

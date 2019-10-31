@@ -24,12 +24,6 @@ export const MapScreen = (props: Props) => {
 
   let { state, dispatch } = useMapStore()
 
-  // console.log(state)
-
-  // let [page, setPage] = React.useState(1)
-  // let [bbox, setBbox] = React.useState(config.defaultQuery.bbox)
-  // let [collection, setCollection] = React.useState(config.defaultQuery.collections[0])
-
   let [products, setProducts] = React.useState(
     { query: defaultQuery, result: [] } as ProductResult
   )
@@ -40,8 +34,10 @@ export const MapScreen = (props: Props) => {
 
   let [hovered, setHovered] = React.useState<Product | undefined>(undefined)
 
+  // (re)load the products whenever relevant state changes
   React.useEffect(() => {
 
+    // wait for collections to be loaded
     if (props.collections.length) {
       
       let footprint = bboxToWkt(state.bbox)
@@ -57,9 +53,6 @@ export const MapScreen = (props: Props) => {
       let productCountByCollectionQuery: ProductQuery = {
         collections: props.collections.map(c => c.collection.name),
         footprint,
-        // offset: 0,
-        // limit: 100000,
-        // todo: what do offset and limit do here?
         spatialop: 'intersects'
       }
         

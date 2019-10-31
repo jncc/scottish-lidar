@@ -19,10 +19,6 @@ export let initialState = {
     path: ParsedCollectionPath,
     ogcProduct?: Product
   }[],
-  /** The state for the Mapper component. */
-  mapper     : {
-    collection: ''
-  }
 }
 
 export type State = typeof initialState

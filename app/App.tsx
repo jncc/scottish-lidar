@@ -2,8 +2,7 @@
 import * as React from 'react'
 import { CookiesProvider } from 'react-cookie'
 
-import { initialState, State } from './state'
-import { MyStoreProvider } from './mystore'
+import { initialState } from './state'
 import { Routing } from './Routing'
 import { loadAndParseCollections } from './collections'
 
@@ -18,10 +17,8 @@ export const App = () => {
   }, [])
   
   return (
-    <MyStoreProvider>
-      <CookiesProvider>
-        <Routing {...initialState} collections={collections} />
-      </CookiesProvider>
-    </MyStoreProvider>
+    <CookiesProvider>
+      <Routing {...initialState} collections={collections} />
+    </CookiesProvider>
   )
 }

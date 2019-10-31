@@ -7,6 +7,7 @@ import { ProductListItem } from './ProductListItem'
 import { DatasetPath } from '../../shared/DatasetPath'
 import { CollectionTuple } from '../../state'
 import { Pager } from '../../shared/Pager'
+import { getPagerInfo, getPageNumberFromOffset } from '../../utility/pagerUtility'
 
 type Props = {
   products: ProductResult
@@ -19,6 +20,8 @@ type Props = {
 }
 
 export const ProductListPanel = (props: Props) => {
+  let currentPage = getPageNumberFromOffset(props.products.query.offset || 0)
+  let pagerInfo = getPagerInfo(currentPage, props.productCountForCurrentCollection || 0)
 
   if (props.collection) {
     return (
@@ -60,13 +63,14 @@ export const ProductListPanel = (props: Props) => {
           <hr />
           {props.productCountForCurrentCollection &&
           <div>
-            Showing {props.products.result.length} of {props.productCountForCurrentCollection} matching products
-            {/* Actually want: Showing 11 to 20 of 36 matching products */}
+
+            Showing {pagerInfo.startIndex + 1} to {pagerInfo.endIndex + 1}
+            {' '}
+            of {props.productCountForCurrentCollection} matching products
             <br />
             <br />
             <Pager
-              offset={props.products.query.offset || 0}
-              total={props.productCountForCurrentCollection}
+              pagerInfo={pagerInfo}
               setPage={props.setPage}
             />
           </div>
