@@ -39,9 +39,9 @@ export const MapScreenLayout = (props: Props) => {
   return <>
     {makeSmallScreenWarningUI()}
     <div className="d-none d-lg-block">
-      <div className="bottom-left-control-group d-lg">
+      {/* <div className="bottom-left-control-group d-lg">
         Bottom left controls
-      </div>
+      </div> */}
       <div className="bottom-right-control-group">
         Bottom right controls
       </div>

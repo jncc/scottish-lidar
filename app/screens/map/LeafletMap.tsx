@@ -38,6 +38,9 @@ export const LeafletMap = (props: Props) => {
     // enable leaflet.fullscreen plugin
     // new L.Control.Fullscreen({ position: 'topright' }).addTo(map)
 
+    // zoom controls
+    new L.Control.Zoom({ position: 'bottomleft' }).addTo(map)
+
     map.setView(config.defaultCenter, config.defaultZoom)
 
     // add layer groups
