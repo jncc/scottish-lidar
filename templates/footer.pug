@@ -9,27 +9,31 @@ div.footer
         div
           | Find, share and reuse remote sensed data provided by Scottish public sector organisations.
         br
-        ul.fa-ul
-          li
-            span.fa-li
-              i.fas.fa-terminal
-            a(href='/about' + process.env.PAGE_EXTENSION) About
-          li
-            span.fa-li
-              i.fas.fa-terminal
-            a(href='/privacy' + process.env.PAGE_EXTENSION) Privacy
-          li
-            span.fa-li
-              i.fas.fa-terminal
-            a(href='/cookies' + process.env.PAGE_EXTENSION) Cookies
-          li
-            span.fa-li
-              i.fas.fa-terminal
-            a(href='/contribute' + process.env.PAGE_EXTENSION) Contribute
-          li
-            span.fa-li
-              i.fas.fa-terminal
-            a(href='/feedback' + process.env.PAGE_EXTENSION) Feedback
+        div.row
+          div.col-lg
+            ul.fa-ul
+              li
+                span.fa-li
+                  i.fas.fa-terminal
+                a(href='/about' + process.env.PAGE_EXTENSION) About
+              li
+                span.fa-li
+                  i.fas.fa-terminal
+                a(href='/contribute' + process.env.PAGE_EXTENSION) Contribute
+              li
+                span.fa-li
+                  i.fas.fa-terminal
+                a(href='/feedback' + process.env.PAGE_EXTENSION) Feedback
+          div.col-lg
+            ul.fa-ul
+              li
+                span.fa-li
+                  i.fas.fa-terminal
+                a(href='/privacy' + process.env.PAGE_EXTENSION) Privacy
+              li
+                span.fa-li
+                  i.fas.fa-terminal
+                a(href='/cookies' + process.env.PAGE_EXTENSION) Cookies
       div.col-md-4.jncc-partnership
         img.jncc-logo(alt='JNCC logo' src='../assets/JNCCLogo_Black.png')
         br
