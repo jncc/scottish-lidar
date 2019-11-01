@@ -297,7 +297,7 @@ h1 {
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
-    width: 20rem; // 2 less than container width
+    width: 19rem; // leave room for scrollbar on some platforms
   }
   .product-list-items {
     flex: 1;
