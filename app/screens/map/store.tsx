@@ -8,11 +8,11 @@ export let defaultMapState = {
   collection: 'scotland-gov/lidar/phase-1/dsm',
   bbox:       [-4.5, 56.1, -3.5, 56.7] as [number, number, number, number],
   page:       1,
-  hovered:    undefined as unknown as Product | undefined
+  hovered:    undefined as unknown as Product | undefined,
   // products:   {
   //   query: {
-  //     collections: config.defaultQuery.collections,
-  //     footprint: bboxToWkt(config.defaultQuery.bbox),
+  //     collections: [] as string[], //config.defaultQuery.collections,
+  //     footprint: '', // bboxToWkt(config.defaultQuery.bbox),
   //     spatialop: 'overlaps'
   //   },
   //   result: []
@@ -66,7 +66,7 @@ function reducer(state = defaultMapState, a: MapAction): MapState {
         hovered: a.payload.product
       }
     case 'PRODUCT_UNHOVERED':
-      // only unset the hovered product if the product is currently hovered
+      // only unset the hovered product if it's this product that's currently hovered
       if (state.hovered === a.payload.product) {
         return {
           ...state,

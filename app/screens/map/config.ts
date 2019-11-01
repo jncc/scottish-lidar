@@ -1,6 +1,4 @@
 
-import { ProductQuery } from '../../catalog/types'
-
 /** Config for the map */
 
 export const config = {
