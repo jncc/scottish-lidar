@@ -8,6 +8,7 @@ import { DatasetPath } from '../../shared/DatasetPath'
 import { CollectionTuple } from '../../state'
 import { Pager } from '../../shared/Pager'
 import { getPagerInfo, getPageNumberFromOffset } from '../../utility/pagerUtility'
+import { motion } from 'framer-motion'
 
 type Props = {
   products: ProductResult
@@ -17,6 +18,22 @@ type Props = {
   hoveredProduct?: Product
   productHovered: (p: Product) => void
   productUnhovered: (p: Product) => void
+}
+
+const list = {
+  visible: {
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.3,
+    },
+  },
+  hidden: {
+    opacity: 0,
+    transition: {
+      when: 'afterChildren',
+    },
+  },
 }
 
 export const ProductListPanel = (props: Props) => {
@@ -48,8 +65,12 @@ export const ProductListPanel = (props: Props) => {
           </div>
           }
         </div>
-        <div className="product-list-items">
-          <hr />
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={list}
+          className="product-list-items"
+        >
           {props.products.result.map(p => <ProductListItem
             key={p.id}
             product={p}
@@ -58,7 +79,7 @@ export const ProductListPanel = (props: Props) => {
             productUnhovered={props.productUnhovered}
           />)}
 
-        </div>
+        </motion.div>
         <div>
           <hr />
           {props.productCountForCurrentCollection &&

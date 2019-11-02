@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { Product } from '../../catalog/types'
+import { motion } from 'framer-motion'
 
 type Props = { 
   product: Product
@@ -9,12 +10,17 @@ type Props = {
   productUnhovered: (p: Product) => void
 }
 
+const item = {
+  visible: { opacity: 1, x: 0 },
+  hidden: { opacity: 0, x: 100 },
+}
+
 export const ProductListItem = (props: Props) => {
 
   let titleCssClass = props.hovered ? 'product-list-item-title-highlight': ''
 
   return (
-    <div
+    <motion.div variants={item} //animate={{ x: 0, opacity: 1 }} initial={{ x: 100, opacity: 0 }}
       className="product-list-item"
       onMouseOver={() => props.productHovered(props.product)}
       onMouseOut={() => props.productUnhovered(props.product)}
@@ -34,6 +40,6 @@ export const ProductListItem = (props: Props) => {
       {/* {props.product.data.product!.http!.size}
       {props.product.data.product!.http!.type}
       {props.product.data.product!.http!.url} */}
-    </div>
+    </motion.div>
   )
 }
