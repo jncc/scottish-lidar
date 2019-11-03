@@ -8,7 +8,7 @@ import { DatasetPath } from '../../shared/DatasetPath'
 import { CollectionTuple } from '../../state'
 import { Pager } from '../../shared/Pager'
 import { getPagerInfo, getPageNumberFromOffset } from '../../utility/pagerUtility'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 type Props = {
   products: ProductResult
@@ -18,22 +18,6 @@ type Props = {
   hoveredProduct?: Product
   productHovered: (p: Product) => void
   productUnhovered: (p: Product) => void
-}
-
-const list = {
-  visible: {
-    opacity: 1,
-    transition: {
-      when: 'beforeChildren',
-      staggerChildren: 0.3,
-    },
-  },
-  hidden: {
-    opacity: 0,
-    transition: {
-      when: 'afterChildren',
-    },
-  },
 }
 
 export const ProductListPanel = (props: Props) => {
@@ -68,7 +52,7 @@ export const ProductListPanel = (props: Props) => {
         <motion.div
           initial="hidden"
           animate="visible"
-          variants={list}
+          variants={animationVariants}
           className="product-list-items"
         >
           {props.products.result.map(p => <ProductListItem
@@ -103,4 +87,20 @@ export const ProductListPanel = (props: Props) => {
   else {
     return null
   }
+}
+
+let animationVariants = {
+  visible: {
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.3,
+    },
+  },
+  hidden: {
+    opacity: 0,
+    transition: {
+      when: 'afterChildren',
+    },
+  },
 }
