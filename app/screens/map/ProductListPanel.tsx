@@ -16,10 +16,6 @@ type Props = {
   products: ProductResult
   currentCollection: CollectionTuple | undefined
   productCountForCurrentCollection: number | undefined
-  // setPage: (n: number) => void
-  // hoveredProduct?: Product
-  // productHovered: (p: Product) => void
-  // productUnhovered: (p: Product) => void
 }
 type StateProps = State['mapScreen']
 type DispatchProps = {
@@ -29,6 +25,7 @@ type DispatchProps = {
 }
 
 export const ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
+
   let currentPage = getPageNumberFromOffset(props.products.query.offset || 0)
   let pagerInfo = getPagerInfo(currentPage, props.productCountForCurrentCollection || 0)
 
@@ -66,9 +63,6 @@ export const ProductListPanelComponent = (props: Props & StateProps & DispatchPr
           {props.products.result.map(p => <ProductListItem
             key={p.id}
             product={p}
-            hovered={props.hovered === p}
-            // productHovered={props.productHovered}
-            // productUnhovered={props.productUnhovered}
           />)}
 
         </motion.div>

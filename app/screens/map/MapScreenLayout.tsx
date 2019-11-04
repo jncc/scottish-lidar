@@ -8,23 +8,14 @@ import { LeafletMap } from './LeafletMap'
 import { ProductListPanel } from './ProductListPanel'
 import { DatasetListPanels } from './DatasetListPanels'
 import { Delayed } from '../../shared/Delayed'
-import { Dispatch } from 'redux'
 
 // import { AddToBasketButton } from './AddToBasketButton'
 
 type Props = {
   collections: CollectionTuple[]
-  // collection: string
-  // setCollection: (collectionName: string) => void
-  // bbox: MapState['bbox']
-  // setBbox: (bbox: MapState['bbox']) => void
-  // setPage: (n: number) => void
   wmsLayer?: { url: string, name: string }
   products: ProductResult
   productCountByCollection: { collectionName: string, products: number }[]
-  // hoveredProduct?: Product
-  // productHovered: (p: Product) => void
-  // productUnhovered: (p: Product) => void
 }
 
 type StateProps = State['mapScreen']
@@ -55,10 +46,6 @@ export const MapScreenLayoutComponent = (props: Props & StateProps) => {
               products={props.products}
               currentCollection={currentCollection}
               productCountForCurrentCollection={productCountForCurrentCollection}
-              // setPage={props.setPage}
-              // hoveredProduct={props.hovered}
-              // productHovered={props.productHovered}
-              // productUnhovered={props.productUnhovered}
             />
           </div>
         </Delayed>        
@@ -66,21 +53,14 @@ export const MapScreenLayoutComponent = (props: Props & StateProps) => {
           <div className="left-panel-container">
             <DatasetListPanels
               collections={props.collections}
-              productCountByCollection={props.productCountByCollection}   
-              // collection={props.collection}
-              // setCollection={props.setCollection}       
+              productCountByCollection={props.productCountByCollection}
             />
           </div>        
         </Delayed>
       </div>
       <LeafletMap
-        // bbox={props.bbox}
-        // setBbox={props.setBbox}
         products={props.products.result}
         wmsLayer={props.wmsLayer}
-        // hoveredProduct={props.hovered}
-        // productHovered={props.productHovered}
-        // productUnhovered={props.productUnhovered}
       />
     </div>
   </>

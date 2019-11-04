@@ -109,10 +109,7 @@ export function reducer(state = initialState, a: MapAction): State {
       } else {
         return state
       }
-    default: {
-      console.log(a)
+    default:
       return state
-
-    }
   }
 }

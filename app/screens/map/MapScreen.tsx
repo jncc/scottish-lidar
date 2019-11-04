@@ -27,6 +27,7 @@ export const MapScreenComponent = (props: Props & StateProps) => {
 
   // let { state, dispatch } = useMapStore()
 
+  // console.log(props.)
   let [products, setProducts] = React.useState(
     { query: defaultQuery, result: [] } as ProductResult
   )
@@ -74,17 +75,9 @@ export const MapScreenComponent = (props: Props & StateProps) => {
     
   return <MapScreenLayout
     collections={props.collections}
-    // bbox={props.bbox}
-    // setPage={(n) => dispatch(MapActions.setPage(n))}
     wmsLayer={wmsLayer}
-    // collection={state.collection}
-    // setCollection={(c) => dispatch(MapActions.setCollection(c))}
-    // setBbox={(bbox) => dispatch(MapActions.setBbox(bbox))}
     products={products}
     productCountByCollection={productCountByCollection.result}
-    // hoveredProduct={state.hovered}
-    // productHovered={(p) => dispatch(MapActions.productHovered(p))}
-    // productUnhovered={(p) => dispatch(MapActions.productUnhovered(p))}
   />
 }
 

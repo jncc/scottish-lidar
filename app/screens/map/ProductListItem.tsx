@@ -7,19 +7,20 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Product } from '../../catalog/types'
 import { State, MapActions } from '../../state'
 
-type Props = { 
+type OwnProps = { 
   product: Product
-  hovered: boolean
-  // productHovered: (p: Product) => void
-  // productUnhovered: (p: Product) => void
+}
+type StateProps = {
+  hovered: Product | undefined
 }
 type DispatchProps = {
   productHovered: (p: Product) => void
   productUnhovered: (p: Product) => void
 }
 
-export const ProductListItemComponent = (props: Props & DispatchProps) => {
+export const ProductListItemComponent = (props: OwnProps & StateProps & DispatchProps) => {
 
+  let isHovered = props.product === props.hovered
   let titleCssClass = props.hovered ? 'product-list-item-title-highlight': ''
 
   return (
@@ -32,7 +33,7 @@ export const ProductListItemComponent = (props: Props & DispatchProps) => {
         onMouseOver={() => props.productHovered(props.product)}
         onMouseOut={() => props.productUnhovered(props.product)}
         >
-        {props.hovered &&
+        {isHovered &&
         <div className="product-list-item-highlight" />
         }
         <div
@@ -58,8 +59,10 @@ let animationVariants = {
 }
 
 export const ProductListItem = reduxConnect(
-  (s: State): {} => {
-    return {}
+  (s: State): StateProps => {
+    return {
+      hovered: s.mapScreen.hovered
+    }
   },
   (d: Dispatch): DispatchProps => ({
     productHovered: (p: Product) => { d(MapActions.productHovered(p)) },
