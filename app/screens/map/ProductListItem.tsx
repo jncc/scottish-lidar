@@ -1,22 +1,31 @@
 
 import React from 'react'
-import { Product } from '../../catalog/types'
+import { Dispatch } from 'redux'
+import { connect as reduxConnect } from 'react-redux'
 import { motion, AnimatePresence } from 'framer-motion'
+
+import { Product } from '../../catalog/types'
+import { State, MapActions } from '../../state'
 
 type Props = { 
   product: Product
   hovered: boolean
+  // productHovered: (p: Product) => void
+  // productUnhovered: (p: Product) => void
+}
+type DispatchProps = {
   productHovered: (p: Product) => void
   productUnhovered: (p: Product) => void
 }
 
-export const ProductListItem = (props: Props) => {
+export const ProductListItemComponent = (props: Props & DispatchProps) => {
 
   let titleCssClass = props.hovered ? 'product-list-item-title-highlight': ''
 
   return (
     <AnimatePresence>
-      <motion.div variants={animationVariants}
+      <motion.div
+        variants={animationVariants}
         exit="hidden"
         positionTransition={{ type: 'tween' }}
         className="product-list-item"
@@ -47,3 +56,13 @@ let animationVariants = {
   visible: { opacity: 1, x: 0 },
   hidden: { opacity: 0, x: 80 },
 }
+
+export const ProductListItem = reduxConnect(
+  (s: State): {} => {
+    return {}
+  },
+  (d: Dispatch): DispatchProps => ({
+    productHovered: (p: Product) => { d(MapActions.productHovered(p)) },
+    productUnhovered: (p: Product) => { d(MapActions.productHovered(p)) }
+  })
+)(ProductListItemComponent)

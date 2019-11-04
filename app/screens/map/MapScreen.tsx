@@ -1,18 +1,21 @@
 
 import * as React from 'react'
+import { Dispatch } from 'redux'
+import { connect as reduxConnect } from 'react-redux'
 
 import { config } from './config'
-import { CollectionTuple } from '../../state'
+import { CollectionTuple, State } from '../../state'
 import { ProductResult, ProductCountByCollectionResult, ProductQuery, Product } from '../../catalog/types'
 import { loadProductCountByCollection, loadProducts } from '../../catalog/api'
 import { MapScreenLayout } from './MapScreenLayout'
 import { bboxToWkt } from '../../utility/geospatialUtility'
 import { getOffsetFromPageNumber, PAGE_SIZE } from '../../utility/pagerUtility'
-import { useMapStore, MapActions } from './store'
+// import { useMapStore, MapActions } from './store'
 
 type Props = {
   collections: CollectionTuple[]
 }
+type StateProps = State['mapScreen']
 
 let defaultQuery: ProductQuery = {
   collections: config.defaultQuery.collections,
@@ -20,9 +23,9 @@ let defaultQuery: ProductQuery = {
   spatialop: 'overlaps',
 }
 
-export const MapScreen = (props: Props) => {
+export const MapScreenComponent = (props: Props & StateProps) => {
 
-  let { state, dispatch } = useMapStore()
+  // let { state, dispatch } = useMapStore()
 
   let [products, setProducts] = React.useState(
     { query: defaultQuery, result: [] } as ProductResult
@@ -38,12 +41,12 @@ export const MapScreen = (props: Props) => {
     // wait for collections to be loaded
     if (props.collections.length) {
       
-      let footprint = bboxToWkt(state.bbox)
+      let footprint = bboxToWkt(props.bbox)
 
       let productQuery: ProductQuery = {
-        collections: [state.collection],
+        collections: [props.collection],
         footprint,
-        offset: getOffsetFromPageNumber(state.page),
+        offset: getOffsetFromPageNumber(props.page),
         limit: PAGE_SIZE,
         spatialop: 'intersects',
       }
@@ -62,25 +65,31 @@ export const MapScreen = (props: Props) => {
           setProductCountByCollection(productCountByCollection)
         })
     } 
-  }, [props.collections, state.bbox, state.page, state.collection])
+  }, [props.collections, props.bbox, props.page, props.collection])
 
-  let currentCollection = props.collections.find(c => c.collection.name === state.collection)
+  let currentCollection = props.collections.find(c => c.collection.name === props.collection)
   let wmsLayer = currentCollection && currentCollection.ogcProduct
     ? currentCollection!.ogcProduct!.data!.product!.wms
     : undefined
     
   return <MapScreenLayout
     collections={props.collections}
-    bbox={state.bbox}
-    setPage={(n) => dispatch(MapActions.setPage(n))}
+    // bbox={props.bbox}
+    // setPage={(n) => dispatch(MapActions.setPage(n))}
     wmsLayer={wmsLayer}
-    collection={state.collection}
-    setCollection={(c) => dispatch(MapActions.setCollection(c))}
-    setBbox={(bbox) => dispatch(MapActions.setBbox(bbox))}
+    // collection={state.collection}
+    // setCollection={(c) => dispatch(MapActions.setCollection(c))}
+    // setBbox={(bbox) => dispatch(MapActions.setBbox(bbox))}
     products={products}
     productCountByCollection={productCountByCollection.result}
-    hoveredProduct={state.hovered}
-    productHovered={(p) => dispatch(MapActions.productHovered(p))}
-    productUnhovered={(p) => dispatch(MapActions.productUnhovered(p))}
+    // hoveredProduct={state.hovered}
+    // productHovered={(p) => dispatch(MapActions.productHovered(p))}
+    // productUnhovered={(p) => dispatch(MapActions.productUnhovered(p))}
   />
 }
+
+export const MapScreen = reduxConnect(
+  (s: State): StateProps => {
+    return s.mapScreen
+  }
+)(MapScreenComponent)

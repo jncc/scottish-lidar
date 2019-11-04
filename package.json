@@ -21,6 +21,7 @@
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
     "@types/react-leaflet": "2.4.0",
+    "@types/react-redux": "7.1.5",
     "@types/react-router-dom": "4.3.5",
     "jest": "24.9.0",
     "parcel-bundler": "1.12.3",
@@ -51,7 +52,9 @@
     "react-copy-to-clipboard": "5.0.1",
     "react-dom": "16.9.0",
     "react-leaflet": "2.4.0",
+    "react-redux": "7.1.1",
     "react-router-dom": "5.0.1",
+    "redux": "4.0.4",
     "ts-polyfill": "3.5.3",
     "whatwg-fetch": "3.0.0"
   }

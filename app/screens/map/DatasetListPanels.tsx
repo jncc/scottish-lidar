@@ -1,8 +1,10 @@
 
 import React from 'react'
 import _ from 'lodash'
+import { Dispatch } from 'redux'
+import { connect as reduxConnect } from 'react-redux'
 
-import { CollectionTuple } from '../../state'
+import { CollectionTuple, State, MapActions } from '../../state'
 import { DatasetListItem } from './DatasetListItem'
 import { splitVerticalSpace } from '../../utility/verticalSpaceUtility'
 import { DatasetPath } from '../../shared/DatasetPath'
@@ -10,11 +12,15 @@ import { DatasetPath } from '../../shared/DatasetPath'
 type Props = {
   collections: CollectionTuple[]
   productCountByCollection: { collectionName: string, products: number }[]
-  collection: string
-  setCollection: (collectionName: string) => void
+  // collection: string
+  // setCollection: (collectionName: string) => void
+}
+type StateProps = State['mapScreen']
+type DispatchProps = {
+  setCollection: (c: string) => void
 }
 
-export const DatasetListPanels = (props: Props) => {
+export const DatasetListPanelsComponent = (props: Props & StateProps & DispatchProps) => {
   
   // join the collections with their product count for the current query
   // (should this be done at the map container level?)
@@ -40,7 +46,7 @@ export const DatasetListPanels = (props: Props) => {
       <div>{matchingDatasets.length} datasets match your query</div>
       {matchingDatasets.length > 0 && <hr />}
       <div>
-        {makeDatasetListUI(props, matchingDatasets)}
+        {makeDatasetListUI(props.collection, matchingDatasets)}
       </div>
     </div>
     <div className="panel" style={{maxHeight: heightForNonMatching + 'rem'}}>
@@ -53,14 +59,15 @@ export const DatasetListPanels = (props: Props) => {
       }
       {nonMatchingDatasets.length > 0 && <hr />}
       <div>
-        {makeDatasetListUI(props, nonMatchingDatasets)}
+        {makeDatasetListUI(props.collection, nonMatchingDatasets)}
       </div>
     </div>
   </> 
 }
 
 let makeDatasetListUI = (
-  props: Props,
+  // props: Props,
+  collection: string,
   datasets: (CollectionTuple & {productCountForCurrentQuery: number})[]) => {
 
   return _(datasets)
@@ -74,9 +81,9 @@ let makeDatasetListUI = (
           {collections.map(c => {
             return <DatasetListItem
               key={c.collection.name}
-              collection={c}
-              checked={c.collection.name === props.collection}
-              onCheck={props.setCollection}
+              currentCollection={c}
+              checked={c.collection.name === collection}
+              // onCheck={props.setCollection}
             />
           })}
         </div>
@@ -84,3 +91,12 @@ let makeDatasetListUI = (
     })
     .value()
 }
+
+export const DatasetListPanels = reduxConnect(
+  (s: State): StateProps => {
+    return s.mapScreen
+  },
+  (d: Dispatch): DispatchProps => ({
+    setCollection: (c: string) => { d(MapActions.setCollection(c)) },
+  })
+)(DatasetListPanelsComponent)

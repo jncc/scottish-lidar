@@ -1,44 +1,52 @@
 
 import React from 'react'
 import _ from 'lodash'
+import { Dispatch } from 'redux'
+import { connect as reduxConnect } from 'react-redux'
 
 import { ProductResult, Product } from '../../catalog/types'
 import { ProductListItem } from './ProductListItem'
 import { DatasetPath } from '../../shared/DatasetPath'
-import { CollectionTuple } from '../../state'
+import { CollectionTuple, State, MapActions } from '../../state'
 import { Pager } from '../../shared/Pager'
 import { getPagerInfo, getPageNumberFromOffset } from '../../utility/pagerUtility'
 import { motion, AnimatePresence } from 'framer-motion'
 
 type Props = {
   products: ProductResult
-  collection: CollectionTuple | undefined
+  currentCollection: CollectionTuple | undefined
   productCountForCurrentCollection: number | undefined
+  // setPage: (n: number) => void
+  // hoveredProduct?: Product
+  // productHovered: (p: Product) => void
+  // productUnhovered: (p: Product) => void
+}
+type StateProps = State['mapScreen']
+type DispatchProps = {
   setPage: (n: number) => void
-  hoveredProduct?: Product
   productHovered: (p: Product) => void
   productUnhovered: (p: Product) => void
 }
 
-export const ProductListPanel = (props: Props) => {
+export const ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
   let currentPage = getPageNumberFromOffset(props.products.query.offset || 0)
   let pagerInfo = getPagerInfo(currentPage, props.productCountForCurrentCollection || 0)
 
-  if (props.collection) {
+  if (props.currentCollection) {
     return (
       <div className="product-list-panel">
         <div className="">
           <h5>
             <i className="fas fa-th text-primary mr-2" />
-            {props.collection.collection.metadata.title}
+            {props.currentCollection.collection.metadata.title}
           </h5>
           <div className="mb-2">
-            <DatasetPath dataset={props.collection.path.dataset} />
+            <DatasetPath dataset={props.currentCollection.path.dataset} />
           </div>
           
           <div className="product-list-panel-abstract">
             <i className="fas fa-info-circle text-secondary mr-2" />
-            {props.collection.collection.metadata.abstract}
+            {props.currentCollection.collection.metadata.abstract}
           </div>
 
           {props.products.result.length === 0 &&
@@ -58,9 +66,9 @@ export const ProductListPanel = (props: Props) => {
           {props.products.result.map(p => <ProductListItem
             key={p.id}
             product={p}
-            hovered={props.hoveredProduct === p}
-            productHovered={props.productHovered}
-            productUnhovered={props.productUnhovered}
+            hovered={props.hovered === p}
+            // productHovered={props.productHovered}
+            // productUnhovered={props.productUnhovered}
           />)}
 
         </motion.div>
@@ -88,6 +96,17 @@ export const ProductListPanel = (props: Props) => {
     return null
   }
 }
+
+export const ProductListPanel = reduxConnect(
+  (s: State): StateProps => {
+    return s.mapScreen
+  },
+  (d: Dispatch): DispatchProps => ({
+    setPage: (n: number) => { d(MapActions.setPage(n)) },
+    productHovered: (p: Product) => { d(MapActions.productHovered(p)) },
+    productUnhovered: (p: Product) => { d(MapActions.productHovered(p)) }
+  })
+)(ProductListPanelComponent)
 
 let animationVariants = {
   visible: {

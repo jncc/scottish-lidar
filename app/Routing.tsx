@@ -6,7 +6,6 @@ import { State } from './state'
 import { ListScreen } from './screens/list/ListScreen'
 import { MapScreen } from './screens/map/MapScreen'
 import { DownloadScreen } from './screens/download/DownloadScreen'
-import { MapStoreProvider } from './screens/map/store'
 
 function NotFoundComponent() {
   return (
@@ -29,11 +28,7 @@ export function Routing(props: State) {
           }
           return <ListScreen collections={props.collections} filter={filter} setFilter={setFilter} />
         }} />
-        <Route path="/map" render={() =>
-          <MapStoreProvider>
-            <MapScreen collections={props.collections} />
-          </MapStoreProvider>}
-        />
+        <Route path="/map" render={() => <MapScreen collections={props.collections} /> } />
         <Route path="/download" component={DownloadScreen} />
         <Route component={NotFoundComponent} />
       </Switch>

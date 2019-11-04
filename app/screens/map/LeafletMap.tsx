@@ -1,5 +1,7 @@
 
 import React from 'react'
+import { Dispatch } from 'redux'
+import { connect as reduxConnect } from 'react-redux'
 import L, { TileLayerOptions } from 'leaflet'
 import 'leaflet-editable'
 // import 'leaflet-fullscreen'
@@ -9,14 +11,20 @@ import { bboxFlatArrayToCoordArray } from '../../utility/geospatialUtility'
 import { roundTo3Decimals } from '../../utility/numberUtility'
 import { Product } from '../../catalog/types'
 import { GeoJsonObject } from 'geojson'
-import { MapState } from './store'
+import { State, MapActions } from '../../state'
 
 type Props = {
-  bbox: MapState['bbox']
-  setBbox: (bbox: MapState['bbox']) => void
+  // bbox: MapState['bbox']
+  // setBbox: (bbox: MapState['bbox']) => void
   products: Product[]  
   wmsLayer?: { url: string, name: string }
-  hoveredProduct?: Product
+  // hoveredProduct?: Product
+  // productHovered: (p: Product) => void
+  // productUnhovered: (p: Product) => void
+}
+type StateProps = State['mapScreen']
+type DispatchProps = {
+  setBbox: (bbox: [number, number, number, number]) => void
   productHovered: (p: Product) => void
   productUnhovered: (p: Product) => void
 }
@@ -25,7 +33,7 @@ var collectionWmsLayerGroup: L.LayerGroup
 var productFootprintLayerGroup: L.LayerGroup
 var currentProducts: { product: Product, footprint: L.GeoJSON<any> }[]
 
-export const LeafletMap = (props: Props) => {
+const LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
   React.useEffect(() => {
 
@@ -74,7 +82,7 @@ export const LeafletMap = (props: Props) => {
       if (e.layer === bboxRect) { // e.layer property added by leaflet-editable
         let b = bboxRect.getBounds()
         let bbox = [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()]
-          .map(roundTo3Decimals) as MapState['bbox']
+          .map(roundTo3Decimals) as State['mapScreen']['bbox']
         props.setBbox(bbox)
       }
     })
@@ -137,17 +145,34 @@ export const LeafletMap = (props: Props) => {
       currentProducts.forEach(x => {
         x.footprint.setStyle(() => productFootprintStyleOff)
       })
-      let hovered = currentProducts.find(x => x.product === props.hoveredProduct)
+      let hovered = currentProducts.find(x => x.product === props.hovered)
       if (hovered) {
         hovered.footprint.setStyle(() => productFootprintStyleOn)
       }
   }
-  }, [props.hoveredProduct])
+  }, [props.hovered])
 
   // react has nothing to do with the leaflet map;
   // map manipulation is performed via side-effects
   return <div id="leaflet-map"></div>
 }
+
+export const LeafletMap = reduxConnect(
+  (s: State): StateProps => {
+    return s.mapScreen
+  },
+  (d: Dispatch): DispatchProps => ({
+    setBbox: (bbox: [number, number, number, number]) => {
+      d(MapActions.setBbox(bbox))
+    },
+    productHovered: (p: Product) => {
+      d(MapActions.productHovered(p))
+    },
+    productUnhovered: (p: Product) => {
+      d(MapActions.productHovered(p))
+    }
+  })
+)(LeafletMapComponent)
 
 let productFootprintStyleOff = { fillOpacity: 0, weight: 1, color: '#555' }
 let productFootprintStyleOn =  { fillOpacity: 0, weight: 2, color: '#444' }
