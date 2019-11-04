@@ -1,6 +1,5 @@
 
 import * as React from 'react'
-import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 
 import { config } from './config'
@@ -10,7 +9,6 @@ import { loadProductCountByCollection, loadProducts } from '../../catalog/api'
 import { MapScreenLayout } from './MapScreenLayout'
 import { bboxToWkt } from '../../utility/geospatialUtility'
 import { getOffsetFromPageNumber, PAGE_SIZE } from '../../utility/pagerUtility'
-// import { useMapStore, MapActions } from './store'
 
 type Props = {
   collections: CollectionTuple[]
@@ -23,11 +21,8 @@ let defaultQuery: ProductQuery = {
   spatialop: 'overlaps',
 }
 
-export const MapScreenComponent = (props: Props & StateProps) => {
+const MapScreenComponent = (props: Props & StateProps) => {
 
-  // let { state, dispatch } = useMapStore()
-
-  // console.log(props.)
   let [products, setProducts] = React.useState(
     { query: defaultQuery, result: [] } as ProductResult
   )
@@ -68,14 +63,8 @@ export const MapScreenComponent = (props: Props & StateProps) => {
     } 
   }, [props.collections, props.bbox, props.page, props.collection])
 
-  let currentCollection = props.collections.find(c => c.collection.name === props.collection)
-  let wmsLayer = currentCollection && currentCollection.ogcProduct
-    ? currentCollection!.ogcProduct!.data!.product!.wms
-    : undefined
-    
   return <MapScreenLayout
     collections={props.collections}
-    wmsLayer={wmsLayer}
     products={products}
     productCountByCollection={productCountByCollection.result}
   />

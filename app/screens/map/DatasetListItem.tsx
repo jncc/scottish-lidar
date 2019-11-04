@@ -12,14 +12,12 @@ import { Tip } from '../../shared/Tip'
 type Props = {
   currentCollection: CollectionTuple & { productCountForCurrentQuery: number }
   checked: boolean
-  // onCheck: (collectionId: string) => void
 }
-type StateProps = State['mapScreen']
 type DispatchProps = {
   setCollection: (c: string) => void
 }
 
-export const DatasetListItemComponent = (props: Props & StateProps & DispatchProps) => {
+export const DatasetListItemComponent = (props: Props & DispatchProps) => {
   return (
     <div className="dataset-list-item">
       <div>
@@ -36,7 +34,6 @@ export const DatasetListItemComponent = (props: Props & StateProps & DispatchPro
       <div>
         <span className="mr-2">
           {props.currentCollection.productCountForCurrentQuery} 
-
         </span>
         <Tip identifier={'info-tip-' + props.currentCollection.collection.id}
           content={getDatasetInfoTipUI(props.currentCollection.collection)}>
@@ -57,9 +54,7 @@ let getDatasetInfoTipUI = (c: Collection) => {
 }
 
 export const DatasetListItem = reduxConnect(
-  (s: State): StateProps => {
-    return s.mapScreen
-  },
+  null,
   (d: Dispatch): DispatchProps => ({
     setCollection: (c: string) => { d(MapActions.setCollection(c)) },
   })

@@ -3,24 +3,21 @@ import * as React from 'react'
 import { connect as reduxConnect } from 'react-redux'
 
 import { CollectionTuple, State } from '../../state'
-import { ProductResult, Product } from '../../catalog/types'
+import { ProductResult } from '../../catalog/types'
 import { LeafletMap } from './LeafletMap'
 import { ProductListPanel } from './ProductListPanel'
 import { DatasetListPanels } from './DatasetListPanels'
 import { Delayed } from '../../shared/Delayed'
 
-// import { AddToBasketButton } from './AddToBasketButton'
-
 type Props = {
   collections: CollectionTuple[]
-  wmsLayer?: { url: string, name: string }
   products: ProductResult
   productCountByCollection: { collectionName: string, products: number }[]
 }
 
 type StateProps = State['mapScreen']
 
-export const MapScreenLayoutComponent = (props: Props & StateProps) => {
+const MapScreenLayoutComponent = (props: Props & StateProps) => {
 
   let currentCollection = props.collections
     .find(c => c.collection.name === props.collection)
@@ -29,7 +26,11 @@ export const MapScreenLayoutComponent = (props: Props & StateProps) => {
     .filter(x => x.collectionName === props.collection)
     .map(x => x.products)
     .find(() => true)
-    
+
+  let wmsLayer = currentCollection && currentCollection.ogcProduct
+    ? currentCollection!.ogcProduct!.data!.product!.wms
+    : undefined
+  
   return <>
     {makeSmallScreenWarningUI()}
     <div className="d-none d-lg-block">
@@ -60,7 +61,7 @@ export const MapScreenLayoutComponent = (props: Props & StateProps) => {
       </div>
       <LeafletMap
         products={props.products.result}
-        wmsLayer={props.wmsLayer}
+        wmsLayer={wmsLayer}
       />
     </div>
   </>

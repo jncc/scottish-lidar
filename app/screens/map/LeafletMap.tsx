@@ -14,13 +14,8 @@ import { GeoJsonObject } from 'geojson'
 import { State, MapActions } from '../../state'
 
 type Props = {
-  // bbox: MapState['bbox']
-  // setBbox: (bbox: MapState['bbox']) => void
   products: Product[]  
   wmsLayer?: { url: string, name: string }
-  // hoveredProduct?: Product
-  // productHovered: (p: Product) => void
-  // productUnhovered: (p: Product) => void
 }
 type StateProps = State['mapScreen']
 type DispatchProps = {
@@ -33,7 +28,7 @@ var collectionWmsLayerGroup: L.LayerGroup
 var productFootprintLayerGroup: L.LayerGroup
 var currentProducts: { product: Product, footprint: L.GeoJSON<any> }[]
 
-const LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
+let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
   React.useEffect(() => {
 
@@ -88,7 +83,7 @@ const LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
     })
   }, [])
 
-  // draw the collection wms layer when it changes
+  // draw the wms layer when it changes
   React.useEffect(() => {
     if (props.wmsLayer && collectionWmsLayerGroup) {
 
@@ -162,15 +157,9 @@ export const LeafletMap = reduxConnect(
     return s.mapScreen
   },
   (d: Dispatch): DispatchProps => ({
-    setBbox: (bbox: [number, number, number, number]) => {
-      d(MapActions.setBbox(bbox))
-    },
-    productHovered: (p: Product) => {
-      d(MapActions.productHovered(p))
-    },
-    productUnhovered: (p: Product) => {
-      d(MapActions.productHovered(p))
-    }
+    setBbox: (bbox: [number, number, number, number]) => { d(MapActions.setBbox(bbox)) },
+    productHovered: (p: Product) => { d(MapActions.productHovered(p)) },
+    productUnhovered: (p: Product) => { d(MapActions.productHovered(p)) }
   })
 )(LeafletMapComponent)
 

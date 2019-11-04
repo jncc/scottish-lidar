@@ -1,30 +1,23 @@
 
 import React from 'react'
 import _ from 'lodash'
-import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
+import { motion } from 'framer-motion'
 
-import { ProductResult, Product } from '../../catalog/types'
+import { ProductResult } from '../../catalog/types'
 import { ProductListItem } from './ProductListItem'
 import { DatasetPath } from '../../shared/DatasetPath'
-import { CollectionTuple, State, MapActions } from '../../state'
-import { Pager } from '../../shared/Pager'
+import { CollectionTuple, State } from '../../state'
+import { Pager } from './Pager'
 import { getPagerInfo, getPageNumberFromOffset } from '../../utility/pagerUtility'
-import { motion, AnimatePresence } from 'framer-motion'
 
 type Props = {
   products: ProductResult
   currentCollection: CollectionTuple | undefined
   productCountForCurrentCollection: number | undefined
 }
-type StateProps = State['mapScreen']
-type DispatchProps = {
-  setPage: (n: number) => void
-  productHovered: (p: Product) => void
-  productUnhovered: (p: Product) => void
-}
 
-export const ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
+let ProductListPanelComponent = (props: Props) => {
 
   let currentPage = getPageNumberFromOffset(props.products.query.offset || 0)
   let pagerInfo = getPagerInfo(currentPage, props.productCountForCurrentCollection || 0)
@@ -55,31 +48,23 @@ export const ProductListPanelComponent = (props: Props & StateProps & DispatchPr
           }
         </div>
         <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={animationVariants}
           className="product-list-items"
+          initial="hidden" animate="visible" variants={animationVariants}
         >
-          {props.products.result.map(p => <ProductListItem
-            key={p.id}
-            product={p}
-          />)}
-
+          {props.products.result.map(p =>
+            <ProductListItem key={p.id} product={p} />
+          )}
         </motion.div>
         <div>
           <hr />
           {props.productCountForCurrentCollection &&
           <div>
-
             Showing {pagerInfo.startIndex + 1} to {pagerInfo.endIndex + 1}
             {' '}
             of {props.productCountForCurrentCollection} matching products
             <br />
             <br />
-            <Pager
-              pagerInfo={pagerInfo}
-              setPage={props.setPage}
-            />
+            <Pager pagerInfo={pagerInfo} />
           </div>
           }
         </div>
@@ -92,14 +77,6 @@ export const ProductListPanelComponent = (props: Props & StateProps & DispatchPr
 }
 
 export const ProductListPanel = reduxConnect(
-  (s: State): StateProps => {
-    return s.mapScreen
-  },
-  (d: Dispatch): DispatchProps => ({
-    setPage: (n: number) => { d(MapActions.setPage(n)) },
-    productHovered: (p: Product) => { d(MapActions.productHovered(p)) },
-    productUnhovered: (p: Product) => { d(MapActions.productHovered(p)) }
-  })
 )(ProductListPanelComponent)
 
 let animationVariants = {

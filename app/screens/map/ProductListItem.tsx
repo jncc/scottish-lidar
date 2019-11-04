@@ -7,18 +7,18 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Product } from '../../catalog/types'
 import { State, MapActions } from '../../state'
 
-type OwnProps = { 
+type Props = { 
   product: Product
 }
 type StateProps = {
   hovered: Product | undefined
 }
 type DispatchProps = {
-  productHovered: (p: Product) => void
+  productHovered  : (p: Product) => void
   productUnhovered: (p: Product) => void
 }
 
-export const ProductListItemComponent = (props: OwnProps & StateProps & DispatchProps) => {
+let ProductListItemComponent = (props: Props & StateProps & DispatchProps) => {
 
   let isHovered = props.product === props.hovered
   let titleCssClass = props.hovered ? 'product-list-item-title-highlight': ''
@@ -36,10 +36,7 @@ export const ProductListItemComponent = (props: OwnProps & StateProps & Dispatch
         {isHovered &&
         <div className="product-list-item-highlight" />
         }
-        <div
-          className={'product-list-item-title ' + titleCssClass}
-          
-        >
+        <div className={'product-list-item-title ' + titleCssClass} >
           {props.product.data.product.title}
         </div>
         <div className="product-list-item-cart">
@@ -55,7 +52,7 @@ export const ProductListItemComponent = (props: OwnProps & StateProps & Dispatch
 
 let animationVariants = {
   visible: { opacity: 1, x: 0 },
-  hidden: { opacity: 0, x: 80 },
+  hidden : { opacity: 0, x: 80 },
 }
 
 export const ProductListItem = reduxConnect(
@@ -65,7 +62,7 @@ export const ProductListItem = reduxConnect(
     }
   },
   (d: Dispatch): DispatchProps => ({
-    productHovered: (p: Product) => { d(MapActions.productHovered(p)) },
+    productHovered  : (p: Product) => { d(MapActions.productHovered(p)) },
     productUnhovered: (p: Product) => { d(MapActions.productHovered(p)) }
   })
 )(ProductListItemComponent)

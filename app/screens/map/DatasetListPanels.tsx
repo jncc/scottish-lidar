@@ -7,13 +7,10 @@ import { connect as reduxConnect } from 'react-redux'
 import { CollectionTuple, State, MapActions } from '../../state'
 import { DatasetListItem } from './DatasetListItem'
 import { splitVerticalSpace } from '../../utility/verticalSpaceUtility'
-import { DatasetPath } from '../../shared/DatasetPath'
 
 type Props = {
   collections: CollectionTuple[]
   productCountByCollection: { collectionName: string, products: number }[]
-  // collection: string
-  // setCollection: (collectionName: string) => void
 }
 type StateProps = State['mapScreen']
 type DispatchProps = {
@@ -66,7 +63,6 @@ export const DatasetListPanelsComponent = (props: Props & StateProps & DispatchP
 }
 
 let makeDatasetListUI = (
-  // props: Props,
   collection: string,
   datasets: (CollectionTuple & {productCountForCurrentQuery: number})[]) => {
 
@@ -78,14 +74,11 @@ let makeDatasetListUI = (
       return (
         <div key={key} className="mb-3">
           <h5>{key}</h5>
-          {collections.map(c => {
-            return <DatasetListItem
-              key={c.collection.name}
-              currentCollection={c}
-              checked={c.collection.name === collection}
-              // onCheck={props.setCollection}
-            />
-          })}
+          {collections.map(c => <DatasetListItem
+            key={c.collection.name}
+            currentCollection={c}
+            checked={c.collection.name === collection}
+          />)}
         </div>
       )
     })
