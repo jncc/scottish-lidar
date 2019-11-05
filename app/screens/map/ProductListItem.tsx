@@ -21,7 +21,7 @@ type DispatchProps = {
 let ProductListItemComponent = (props: Props & StateProps & DispatchProps) => {
 
   let isHovered = props.product === props.hovered
-  let titleCssClass = props.hovered ? 'product-list-item-title-highlight': ''
+  let titleCssClass = isHovered ? 'product-list-item-title-highlight': ''
 
   return (
     <AnimatePresence>
