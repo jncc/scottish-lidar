@@ -9,6 +9,7 @@
 import { Collection, Product } from './catalog/types'
 import { ParsedCollectionPath } from './utility/collectionUtility'
 import { createAction, ActionsUnion } from './utility/reducerUtility'
+import { config } from './screens/map/config'
 
 export let initialState = {
   /** The number of in-progress network requests. */
@@ -26,6 +27,7 @@ export let initialState = {
     bbox:       [-4.5, 56.1, -3.5, 56.7] as [number, number, number, number],
     page:       1,
     hovered:    undefined as unknown as Product | undefined,
+    leaflet:    { zoom: config.defaultZoom, center: config.defaultCenter },
     // products:   {
     //   query: {
     //     collections: [] as string[], //config.defaultQuery.collections,
@@ -55,6 +57,12 @@ export let MapActions = {
   ),
   productUnhovered: (product: Product) =>
     createAction('PRODUCT_UNHOVERED', { product }
+  ),
+  leafletZoomChanged: (zoom: number) =>
+    createAction('LEAFLET_ZOOM_CHANGED', { zoom }
+  ),
+  leafletCenterChanged: (center: [number, number]) =>
+    createAction('LEAFLET_CENTER_CHANGED', { center }
   ),
 }
 
@@ -108,6 +116,22 @@ export function reducer(state = initialState, a: MapAction): State {
         }
       } else {
         return state
+      }
+    case 'LEAFLET_ZOOM_CHANGED':
+      return {
+        ...state,
+        mapScreen:{
+          ...state.mapScreen,
+          leaflet: { ...state.mapScreen.leaflet, zoom: a.payload.zoom }
+        }
+      }
+    case 'LEAFLET_CENTER_CHANGED':
+      return {
+        ...state,
+        mapScreen:{
+          ...state.mapScreen,
+          leaflet: { ...state.mapScreen.leaflet, center: a.payload.center }
+        }
       }
     default:
       return state

@@ -22,6 +22,8 @@ type DispatchProps = {
   setBbox: (bbox: [number, number, number, number]) => void
   productHovered: (p: Product) => void
   productUnhovered: (p: Product) => void
+  leafletZoomChanged: (z: number) => void
+  leafletCenterChanged: (c: [number, number]) => void
 }
 
 var collectionWmsLayerGroup: L.LayerGroup
@@ -44,7 +46,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
     // zoom controls
     new L.Control.Zoom({ position: 'bottomleft' }).addTo(map)
 
-    map.setView(config.defaultCenter, config.defaultZoom)
+    map.setView(props.leaflet.center, props.leaflet.zoom)
 
     // add layer groups
     productFootprintLayerGroup = L.layerGroup([]).addTo(map)
@@ -81,6 +83,10 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
         props.setBbox(bbox)
       }
     })
+
+    // save the map view so we can come back to it from a different screen
+    map.on('zoomend', () => { props.leafletZoomChanged(map.getZoom()) })
+    map.on('moveend', () => { props.leafletCenterChanged([map.getCenter().lat, map.getCenter().lng]) })
   }, [])
 
   // draw the wms layer when it changes
@@ -159,7 +165,10 @@ export const LeafletMap = reduxConnect(
   (d: Dispatch): DispatchProps => ({
     setBbox: (bbox: [number, number, number, number]) => { d(MapActions.setBbox(bbox)) },
     productHovered: (p: Product) => { d(MapActions.productHovered(p)) },
-    productUnhovered: (p: Product) => { d(MapActions.productHovered(p)) }
+    productUnhovered: (p: Product) => { d(MapActions.productHovered(p)) },
+    leafletZoomChanged: (z: number) => { d(MapActions.leafletZoomChanged(z)) },
+    leafletCenterChanged: (c: [number, number]) => { d(MapActions.leafletCenterChanged(c)) },
+
   })
 )(LeafletMapComponent)
 

@@ -66,3 +66,4 @@ export const ProductListItem = reduxConnect(
     productUnhovered: (p: Product) => { d(MapActions.productHovered(p)) }
   })
 )(ProductListItemComponent)
+
