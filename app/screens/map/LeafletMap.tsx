@@ -11,20 +11,13 @@ import { bboxFlatArrayToCoordArray } from '../../utility/geospatialUtility'
 import { roundTo3Decimals } from '../../utility/numberUtility'
 import { Product } from '../../catalog/types'
 import { GeoJsonObject } from 'geojson'
-import { State, MapActions } from '../../state'
+import { State, MapActions, DispatchProps } from '../../state'
 
 type Props = {
   products: Product[]  
   wmsLayer?: { url: string, name: string }
 }
 type StateProps = State['mapScreen']
-type DispatchProps = {
-  setBbox: (bbox: [number, number, number, number]) => void
-  productHovered: (p: Product) => void
-  productUnhovered: (p: Product) => void
-  leafletZoomChanged: (z: number) => void
-  leafletCenterChanged: (c: [number, number]) => void
-}
 
 var collectionWmsLayerGroup: L.LayerGroup
 var productFootprintLayerGroup: L.LayerGroup
@@ -80,13 +73,17 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
         let b = bboxRect.getBounds()
         let bbox = [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()]
           .map(roundTo3Decimals) as State['mapScreen']['bbox']
-        props.setBbox(bbox)
+        props.dispatch(MapActions.setBbox(bbox))
       }
     })
 
     // save the map view so we can come back to it from a different screen
-    map.on('zoomend', () => { props.leafletZoomChanged(map.getZoom()) })
-    map.on('moveend', () => { props.leafletCenterChanged([map.getCenter().lat, map.getCenter().lng]) })
+    map.on('zoomend', () => {
+      props.dispatch(MapActions.leafletZoomChanged(map.getZoom()))
+    })
+    map.on('moveend', () => {
+      props.dispatch(MapActions.leafletCenterChanged([map.getCenter().lat, map.getCenter().lng]))
+    })
   }, [])
 
   // draw the wms layer when it changes
@@ -116,12 +113,12 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
         footprint.on('mouseout', () => {
           footprint.setStyle(() => productFootprintStyleOff)
-          props.productUnhovered(p)
+          props.dispatch(MapActions.productUnhovered(p))
         })
 
         footprint.on('mouseover', () => {
           footprint.setStyle(() => productFootprintStyleOn)
-          props.productHovered(p)
+          props.dispatch(MapActions.productHovered(p))
         })
 
         return footprint
@@ -161,15 +158,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 export const LeafletMap = reduxConnect(
   (s: State): StateProps => {
     return s.mapScreen
-  },
-  (d: Dispatch): DispatchProps => ({
-    setBbox: (bbox: [number, number, number, number]) => { d(MapActions.setBbox(bbox)) },
-    productHovered: (p: Product) => { d(MapActions.productHovered(p)) },
-    productUnhovered: (p: Product) => { d(MapActions.productHovered(p)) },
-    leafletZoomChanged: (z: number) => { d(MapActions.leafletZoomChanged(z)) },
-    leafletCenterChanged: (c: [number, number]) => { d(MapActions.leafletCenterChanged(c)) },
-
-  })
+  }
 )(LeafletMapComponent)
 
 let productFootprintStyleOff = { fillOpacity: 0, weight: 1, color: '#555' }

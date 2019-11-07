@@ -10,6 +10,10 @@ import { Collection, Product } from './catalog/types'
 import { ParsedCollectionPath } from './utility/collectionUtility'
 import { createAction, ActionsUnion } from './utility/reducerUtility'
 import { config } from './screens/map/config'
+import { Dispatch } from 'redux'
+
+/** The type of a React props object containing a Redux dispatch function. */
+export type DispatchProps = { dispatch: Dispatch }
 
 export let initialState = {
   /** The number of in-progress network requests. */

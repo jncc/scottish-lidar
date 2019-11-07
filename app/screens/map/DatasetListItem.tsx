@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 
-import { CollectionTuple, State, MapActions } from '../../state'
+import { CollectionTuple, State, MapActions, DispatchProps } from '../../state'
 import { Form } from 'react-bootstrap'
 import { Collection } from '../../catalog/types'
 import { Tip } from '../../shared/Tip'
@@ -12,9 +12,6 @@ import { Tip } from '../../shared/Tip'
 type Props = {
   currentCollection: CollectionTuple & { productCountForCurrentQuery: number }
   checked: boolean
-}
-type DispatchProps = {
-  setCollection: (c: string) => void
 }
 
 export const DatasetListItemComponent = (props: Props & DispatchProps) => {
@@ -28,7 +25,7 @@ export const DatasetListItemComponent = (props: Props & DispatchProps) => {
           id={`radio-` + props.currentCollection.path.dataset}
           label={props.currentCollection.path.shortName}
           checked={props.checked}
-          onChange={() => props.setCollection(props.currentCollection.collection.name)}
+          onChange={() => props.dispatch(MapActions.setCollection(props.currentCollection.collection.name))}
         />
       </div>
       <div>
@@ -53,9 +50,4 @@ let getDatasetInfoTipUI = (c: Collection) => {
   )
 }
 
-export const DatasetListItem = reduxConnect(
-  null,
-  (d: Dispatch): DispatchProps => ({
-    setCollection: (c: string) => { d(MapActions.setCollection(c)) },
-  })
-)(DatasetListItemComponent)
+export const DatasetListItem = reduxConnect()(DatasetListItemComponent)

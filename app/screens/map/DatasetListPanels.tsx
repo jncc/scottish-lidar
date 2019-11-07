@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 
-import { CollectionTuple, State, MapActions } from '../../state'
+import { CollectionTuple, State, MapActions, DispatchProps } from '../../state'
 import { DatasetListItem } from './DatasetListItem'
 import { splitVerticalSpace } from '../../utility/verticalSpaceUtility'
 
@@ -13,11 +13,8 @@ type Props = {
   productCountByCollection: { collectionName: string, products: number }[]
 }
 type StateProps = State['mapScreen']
-type DispatchProps = {
-  setCollection: (c: string) => void
-}
 
-export const DatasetListPanelsComponent = (props: Props & StateProps & DispatchProps) => {
+export const DatasetListPanelsComponent = (props: Props & StateProps) => {
   
   // join the collections with their product count for the current query
   // (should this be done at the map container level?)
@@ -88,8 +85,4 @@ let makeDatasetListUI = (
 export const DatasetListPanels = reduxConnect(
   (s: State): StateProps => {
     return s.mapScreen
-  },
-  (d: Dispatch): DispatchProps => ({
-    setCollection: (c: string) => { d(MapActions.setCollection(c)) },
-  })
-)(DatasetListPanelsComponent)
+  })(DatasetListPanelsComponent)

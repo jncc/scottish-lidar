@@ -4,13 +4,10 @@ import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 import { PagerInfo } from '../../utility/pagerUtility'
 import { Pagination } from 'react-bootstrap'
-import { MapActions } from '../../state'
+import { MapActions, DispatchProps } from '../../state'
 
 type Props = {
   pagerInfo: PagerInfo
-}
-type DispatchProps = {
-  setPage: (n: number) => void
 }
 
 const PagerComponent = (props: Props & DispatchProps) => {
@@ -23,12 +20,12 @@ const PagerComponent = (props: Props & DispatchProps) => {
         {/* previous page */}
         <Pagination.Prev
           disabled={p.currentPage === 1}
-          onClick={() => props.setPage(p.currentPage - 1)}
+          onClick={() => props.dispatch(MapActions.setPage(p.currentPage - 1))}
         />
         {/* first page */}
         {p.startPage > 1 &&
           <Pagination.Item 
-            onClick={() => props.setPage(1)}>
+            onClick={() => props.dispatch(MapActions.setPage(1))}>
             {1}
           </Pagination.Item>
         }
@@ -41,7 +38,7 @@ const PagerComponent = (props: Props & DispatchProps) => {
           <Pagination.Item
             key={n}
             active={n === p.currentPage}
-            onClick={() => props.setPage(n)}>
+            onClick={() => props.dispatch(MapActions.setPage(n))}>
             {n}
           </Pagination.Item>
         )}
@@ -52,23 +49,18 @@ const PagerComponent = (props: Props & DispatchProps) => {
         {/* last page */}
         {p.endPage < p.totalPages &&
           <Pagination.Item
-            onClick={() => props.setPage(p.totalPages)}>
+            onClick={() => props.dispatch(MapActions.setPage(p.totalPages))}>
             {p.totalPages}
           </Pagination.Item>
         }
         {/* next page */}
         <Pagination.Next
           disabled={p.currentPage === p.endPage}
-          onClick={() => props.setPage(p.currentPage + 1)}
+          onClick={() => props.dispatch(MapActions.setPage(p.currentPage + 1))}
         />
       </Pagination>
     </nav>
   )
 }
 
-export const Pager = reduxConnect(
-  null,
-  (d: Dispatch): DispatchProps => ({
-    setPage: (n: number) => { d(MapActions.setPage(n))}
-  })
-)(PagerComponent)
+export const Pager = reduxConnect()(PagerComponent)

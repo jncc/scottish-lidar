@@ -7,7 +7,7 @@ import { useBasket } from '../../basket'
 type Props = {
 }
 
-export const AddToBasketButton = (props: Props) => {
+export const AddToBasketButton = () => {
   
   let [count, setCount] = useState(0)
   let [basket, addItemToBasket] = useBasket()

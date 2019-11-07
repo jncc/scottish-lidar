@@ -5,17 +5,13 @@ import { connect as reduxConnect } from 'react-redux'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { Product } from '../../catalog/types'
-import { State, MapActions } from '../../state'
+import { State, MapActions, DispatchProps } from '../../state'
 
 type Props = { 
   product: Product
 }
 type StateProps = {
   hovered: Product | undefined
-}
-type DispatchProps = {
-  productHovered  : (p: Product) => void
-  productUnhovered: (p: Product) => void
 }
 
 let ProductListItemComponent = (props: Props & StateProps & DispatchProps) => {
@@ -30,8 +26,8 @@ let ProductListItemComponent = (props: Props & StateProps & DispatchProps) => {
         exit="hidden"
         positionTransition={{ type: 'tween' }}
         className="product-list-item"
-        onMouseOver={() => props.productHovered(props.product)}
-        onMouseOut={() => props.productUnhovered(props.product)}
+        onMouseOver={() => props.dispatch(MapActions.productHovered(props.product))}
+        onMouseOut={() => props.dispatch(MapActions.productUnhovered(props.product))}
         >
         {isHovered &&
         <div className="product-list-item-highlight" />
@@ -60,9 +56,5 @@ export const ProductListItem = reduxConnect(
     return {
       hovered: s.mapScreen.hovered
     }
-  },
-  (d: Dispatch): DispatchProps => ({
-    productHovered  : (p: Product) => { d(MapActions.productHovered(p)) },
-    productUnhovered: (p: Product) => { d(MapActions.productHovered(p)) }
-  })
+  }
 )(ProductListItemComponent)
