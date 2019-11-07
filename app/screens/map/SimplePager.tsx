@@ -19,18 +19,12 @@ const SimplePagerComponent = (props: Props & DispatchProps) => {
     <nav aria-label="Pagination" className="pager">
       <div>
         <Button
-          disabled={p.currentPage === 1}
+          disabled={p.currentPage <= 1}
           onClick={() => props.dispatch(MapActions.setPage(p.currentPage - 1))}
         ><i className="fas fa-chevron-left mr-1" /> Prev</Button>
       </div>
       <div className="pager-central">
-        <div>
-          {p.startIndex + 1}<span className="pager-dash">-</span>{p.endIndex + 1}
-          <span className="pager-of"> of </span>{props.totalItems}
-          {props.totalItems < 1000 &&
-          <span className="pager-of"> products</span>
-          }
-        </div>
+        {getProductSliceText(p)}
       </div>
       <div>
         <Button
@@ -42,4 +36,23 @@ const SimplePagerComponent = (props: Props & DispatchProps) => {
   )
 }
 
+let getProductSliceText = (p: PagerInfo) => {
+
+  if (p.total > 0) {
+    return (
+      <div>
+        {p.startIndex + 1}<span className="pager-dash">-</span>{p.endIndex + 1}
+        <span className="pager-of"> of </span>{p.total}
+        {p.total < 1000 &&
+        <span className="pager-of"> products</span>
+        }
+      </div>
+    )    
+  } else {
+    return (
+      <div>
+      </div>
+    )
+  }
+}
 export const SimplePager = reduxConnect()(SimplePagerComponent)

@@ -36,7 +36,10 @@ export const DatasetListPanelsComponent = (props: Props & StateProps) => {
   
   return <>
     <div className="panel" style={{maxHeight: heightForMatching + 'rem'}}>
-      <h4>Matching datasets</h4>
+      <h4>
+        <span className="mr-3">Matching datasets </span>
+        <span className="float-right badge badge-pill badge-secondary">{matchingDatasets.length}</span>
+      </h4>
       <div>{matchingDatasets.length} datasets match your query</div>
       {matchingDatasets.length > 0 && <hr />}
       <div>
@@ -44,9 +47,12 @@ export const DatasetListPanelsComponent = (props: Props & StateProps) => {
       </div>
     </div>
     <div className="panel" style={{maxHeight: heightForNonMatching + 'rem'}}>
-      <h4 className="mr-2">Other datasets</h4>
+      <h4>
+        <span className="mr-3">Other datasets </span>
+        <span className="float-right badge badge-pill badge-secondary">{nonMatchingDatasets.length}</span>
+      </h4>
       {nonMatchingDatasets.length === 0 &&
-      <div>All available datasets match your query</div>
+      <div>All datasets match your query</div>
       }
       {nonMatchingDatasets.length > 0 &&
       <div>{nonMatchingDatasets.length} datasets don't match your query</div>

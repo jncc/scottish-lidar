@@ -258,13 +258,6 @@ h1 {
   @include above-map;
   width: 22rem;
 }
-// .right-panel {
-//   position: absolute;
-//   top: 2rem;
-//   right: 2rem;
-//   width: 22rem;
-//   max-height: 35rem;
-// }
 .bottom-left-control-group {
   @include above-map;
   position: absolute;
@@ -280,6 +273,16 @@ h1 {
   position:relative;
 }
 
+// .dataset-list-header {
+//   display: flex;
+//   .dataset-list-header-text {
+//     flex: 1;
+//   }
+//   .dataset-list-header-count {
+//     font-size: 150%;
+//     padding-left: 0.3rem;
+//   }
+// }
 .dataset-list-item {
   display: flex;
   :first-child {
@@ -307,6 +310,10 @@ h1 {
     width: 19rem; // leave room for scrollbar on some platforms
   }
   .product-list-items {
+    flex: 1;
+    min-height:15rem;
+  }
+  .product-list-items-none {
     flex: 1;
     min-height:15rem;
   }

@@ -68,6 +68,8 @@ export let MapActions = {
   leafletCenterChanged: (center: [number, number]) =>
     createAction('LEAFLET_CENTER_CHANGED', { center }
   ),
+  resetToCenter: () =>
+    createAction('RESET_TO_CENTER'),
 }
 
 export type MapAction = ActionsUnion<typeof MapActions>
@@ -98,6 +100,15 @@ export function reducer(state = initialState, a: MapAction): State {
         mapScreen: {
           ...state.mapScreen,
           page: a.payload.page
+        }
+      }
+    case 'RESET_TO_CENTER':
+      return {
+        ...state,
+        mapScreen: {
+          // reset everything to default, apart from the current collection
+          ...initialState.mapScreen,
+          collection: state.mapScreen.collection
         }
       }
     case 'PRODUCT_HOVERED':

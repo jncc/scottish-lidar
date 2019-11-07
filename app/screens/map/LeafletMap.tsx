@@ -37,7 +37,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
     // new L.Control.Fullscreen({ position: 'topright' }).addTo(map)
 
     // zoom controls
-    new L.Control.Zoom({ position: 'bottomleft' }).addTo(map)
+    // new L.Control.Zoom({ position: 'bottomleft' }).addTo(map)
 
     map.setView(props.leaflet.center, props.leaflet.zoom)
 

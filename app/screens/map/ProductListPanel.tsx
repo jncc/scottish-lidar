@@ -24,36 +24,31 @@ let ProductListPanelComponent = (props: Props) => {
   if (props.currentCollection) {
     return (
       <div className="product-list-panel">
-        <div className="">
+        <div>
           <h5>
             <i className="fas fa-th text-primary mr-2" />
             {props.currentCollection.collection.metadata.title}
           </h5>
-          <div className="mb-2">
+          <div className="mb-1">
             <DatasetPath dataset={props.currentCollection.path.dataset} />
           </div>
-          
-          <div className="product-list-panel-abstract">
+          <div className="product-list-panel-abstract mb-2">
             <i className="fas fa-info-circle text-secondary mr-2" />
             {props.currentCollection.collection.metadata.abstract}
           </div>
-
+        </div>
+        <div className="product-list-items">
           {props.products.result.length === 0 &&
-          <div>
             <div>
               No products in this dataset matched your query. (You might need to select a different dataset?)
             </div>
-          </div>
           }
+          <motion.div initial="hidden" animate="visible" variants={animationVariants}>
+            {props.products.result.map(p =>
+              <ProductListItem key={p.id} product={p} />
+            )}
+          </motion.div>
         </div>
-        <motion.div
-          className="product-list-items"
-          initial="hidden" animate="visible" variants={animationVariants}
-        >
-          {props.products.result.map(p =>
-            <ProductListItem key={p.id} product={p} />
-          )}
-        </motion.div>
         <div className="mt-3">
           {/* // <div>
           //   Showing {pagerInfo.startIndex + 1} to {pagerInfo.endIndex + 1}
