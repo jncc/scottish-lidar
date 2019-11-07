@@ -48,6 +48,7 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
               <ProductListPanel
                 products={props.products}
                 currentCollection={currentCollection}
+                productCountByCollection={props.productCountByCollection}
                 productCountForCurrentCollection={productCountForCurrentCollection}
               />
             </div>

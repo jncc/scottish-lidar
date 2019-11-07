@@ -7,17 +7,19 @@ import { motion } from 'framer-motion'
 import { ProductResult } from '../../catalog/types'
 import { ProductListItem } from './ProductListItem'
 import { DatasetPath } from '../../shared/DatasetPath'
-import { CollectionTuple } from '../../state'
+import { CollectionTuple, State } from '../../state'
 import { SimplePager } from './SimplePager'
 import { getPageNumberFromOffset, getPagerInfo } from '../../utility/pagerUtility'
 
 type Props = {
   products: ProductResult
   currentCollection: CollectionTuple | undefined
+  productCountByCollection: { collectionName: string, products: number }[]
   productCountForCurrentCollection: number | undefined
 }
+type StateProps = State['mapScreen']
 
-let ProductListPanelComponent = (props: Props) => {
+let ProductListPanelComponent = (props: Props & StateProps) => {
 
   let currentResultPage = getPageNumberFromOffset(props.products.query.offset || 0)
 
@@ -39,9 +41,24 @@ let ProductListPanelComponent = (props: Props) => {
         </div>
         <div className="product-list-items">
           {props.products.result.length === 0 &&
-            <div>
-              No products in this dataset matched your query. (You might need to select a different dataset?)
+          <div className="card text-white bg-secondary mt-4">
+            <div className="card-body">
+              <h5 className="card-title">No products found</h5>
+              <div className="card-text">
+
+                {props.productCountByCollection.every(x => x.products === 0)
+                ?
+                <div>
+                  Try changing the box location - there are no products available here
+                </div>
+                :
+                <div>
+                  Try selecting a different dataset
+                </div>
+                }
+              </div>
             </div>
+          </div>
           }
           <motion.div initial="hidden" animate="visible" variants={animationVariants}>
             {props.products.result.map(p =>
@@ -50,14 +67,6 @@ let ProductListPanelComponent = (props: Props) => {
           </motion.div>
         </div>
         <div className="mt-3">
-          {/* // <div>
-          //   Showing {pagerInfo.startIndex + 1} to {pagerInfo.endIndex + 1}
-          //   {' '}
-          //   of {props.productCountForCurrentCollection} matching products
-          //   <br />
-          //   <br />
-          //   <Pager pagerInfo={pagerInfo} />
-          // </div> */}
           <SimplePager currentPage={currentResultPage} totalItems={props.productCountForCurrentCollection || 0} />
         </div>
       </div>
@@ -69,6 +78,9 @@ let ProductListPanelComponent = (props: Props) => {
 }
 
 export const ProductListPanel = reduxConnect(
+  (s: State): StateProps => {
+    return s.mapScreen
+  }
 )(ProductListPanelComponent)
 
 let animationVariants = {
