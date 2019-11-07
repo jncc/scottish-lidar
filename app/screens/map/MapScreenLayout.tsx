@@ -42,12 +42,18 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
       </div>
       <div className="r">
         <Delayed delayInMilliseconds={800}>
-          <div className="panel right-panel">
-            <ProductListPanel
-              products={props.products}
-              currentCollection={currentCollection}
-              productCountForCurrentCollection={productCountForCurrentCollection}
-            />
+          <div className="right-panel-container">
+
+            <div className="panel">
+              <ProductListPanel
+                products={props.products}
+                currentCollection={currentCollection}
+                productCountForCurrentCollection={productCountForCurrentCollection}
+              />
+            </div>
+            <div className="panel">
+              Hello hello
+            </div>
           </div>
         </Delayed>        
         <Delayed delayInMilliseconds={800}>

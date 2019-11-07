@@ -251,13 +251,20 @@ h1 {
   @include above-map;
   max-width: 19rem;
 }
-.right-panel {
+.right-panel-container {
   position: absolute;
   top: 2rem;
   right: 2rem;
+  @include above-map;
   width: 22rem;
-  max-height: 35rem;
 }
+// .right-panel {
+//   position: absolute;
+//   top: 2rem;
+//   right: 2rem;
+//   width: 22rem;
+//   max-height: 35rem;
+// }
 .bottom-left-control-group {
   @include above-map;
   position: absolute;
@@ -301,7 +308,7 @@ h1 {
   }
   .product-list-items {
     flex: 1;
-    min-height:18rem;
+    min-height:15rem;
   }
   .product-list-item {
     display: flex;
@@ -327,5 +334,27 @@ h1 {
     i {
       color: $gray-600;
     }
+  }
+}
+
+.pager {
+  display: flex;
+  flex-direction: row;
+  .pager-central {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $spot-muted;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .pager-dash {
+    margin: 0 0.1rem;
+    font-size: 90%;
+  }
+  .pager-of {
+    font-size: 90%;
   }
 }

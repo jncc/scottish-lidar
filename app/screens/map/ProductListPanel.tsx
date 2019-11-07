@@ -7,9 +7,9 @@ import { motion } from 'framer-motion'
 import { ProductResult } from '../../catalog/types'
 import { ProductListItem } from './ProductListItem'
 import { DatasetPath } from '../../shared/DatasetPath'
-import { CollectionTuple, State } from '../../state'
-import { Pager } from './Pager'
-import { getPagerInfo, getPageNumberFromOffset } from '../../utility/pagerUtility'
+import { CollectionTuple } from '../../state'
+import { SimplePager } from './SimplePager'
+import { getPageNumberFromOffset, getPagerInfo } from '../../utility/pagerUtility'
 
 type Props = {
   products: ProductResult
@@ -19,8 +19,7 @@ type Props = {
 
 let ProductListPanelComponent = (props: Props) => {
 
-  let currentPage = getPageNumberFromOffset(props.products.query.offset || 0)
-  let pagerInfo = getPagerInfo(currentPage, props.productCountForCurrentCollection || 0)
+  let currentResultPage = getPageNumberFromOffset(props.products.query.offset || 0)
 
   if (props.currentCollection) {
     return (
@@ -55,18 +54,16 @@ let ProductListPanelComponent = (props: Props) => {
             <ProductListItem key={p.id} product={p} />
           )}
         </motion.div>
-        <div>
-          <hr />
-          {props.productCountForCurrentCollection &&
-          <div>
-            Showing {pagerInfo.startIndex + 1} to {pagerInfo.endIndex + 1}
-            {' '}
-            of {props.productCountForCurrentCollection} matching products
-            <br />
-            <br />
-            <Pager pagerInfo={pagerInfo} />
-          </div>
-          }
+        <div className="mt-3">
+          {/* // <div>
+          //   Showing {pagerInfo.startIndex + 1} to {pagerInfo.endIndex + 1}
+          //   {' '}
+          //   of {props.productCountForCurrentCollection} matching products
+          //   <br />
+          //   <br />
+          //   <Pager pagerInfo={pagerInfo} />
+          // </div> */}
+          <SimplePager currentPage={currentResultPage} totalItems={props.productCountForCurrentCollection || 0} />
         </div>
       </div>
     )
