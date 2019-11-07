@@ -31,7 +31,11 @@ export let initialState = {
     bbox:       [-4.5, 56.1, -3.5, 56.7] as [number, number, number, number],
     page:       1,
     hovered:    undefined as unknown as Product | undefined,
-    leaflet:    { zoom: config.defaultZoom, center: config.defaultCenter },
+    leaflet:    {
+      zoom: config.defaultZoom,
+      center: config.defaultCenter,
+      redraw: 0,
+    },
     // products:   {
     //   query: {
     //     collections: [] as string[], //config.defaultQuery.collections,
@@ -108,7 +112,11 @@ export function reducer(state = initialState, a: MapAction): State {
         mapScreen: {
           // reset everything to default, apart from the current collection
           ...initialState.mapScreen,
-          collection: state.mapScreen.collection
+          collection: state.mapScreen.collection,
+          leaflet: {
+            ...state.mapScreen.leaflet,
+            redraw: state.mapScreen.leaflet.redraw + 1
+          }
         }
       }
     case 'PRODUCT_HOVERED':

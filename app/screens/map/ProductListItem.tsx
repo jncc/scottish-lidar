@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 import { Product } from '../../catalog/types'
 import { State, MapActions, DispatchProps } from '../../state'
+import { useBasket } from '../../basket'
 
 type Props = { 
   product: Product
@@ -16,8 +17,13 @@ type StateProps = {
 
 let ProductListItemComponent = (props: Props & StateProps & DispatchProps) => {
 
+  let [basket, addItemToBasket] = useBasket()
+
   let isHovered = props.product === props.hovered
   let titleCssClass = isHovered ? 'product-list-item-title-highlight': ''
+
+  let isInBasket = basket.items.some(item => item.productId === props.product.id)
+  let inBasketItemCssClass = isInBasket ? 'product-list-item-basket-in' : ''
 
   return (
     <AnimatePresence>
@@ -35,7 +41,9 @@ let ProductListItemComponent = (props: Props & StateProps & DispatchProps) => {
         <div className={'product-list-item-title ' + titleCssClass} >
           {props.product.data.product.title}
         </div>
-        <div className="product-list-item-cart">
+        <div className={'product-list-item-basket ' + inBasketItemCssClass}
+          onClick={() => addItemToBasket({ productId: props.product.id })}
+        >
           <i className="fas fa-shopping-cart" />
         </div>
         {/* {props.product.data.product!.http!.size}

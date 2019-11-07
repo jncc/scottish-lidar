@@ -8,6 +8,7 @@ import { LeafletMap } from './LeafletMap'
 import { ProductListPanel } from './ProductListPanel'
 import { DatasetListPanels } from './DatasetListPanels'
 import { Delayed } from '../../shared/Delayed'
+import { BasketSummary } from './BasketSummary'
 
 type Props = {
   collections: CollectionTuple[]
@@ -43,18 +44,16 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
       <div className="r">
         <Delayed delayInMilliseconds={800}>
           <div className="right-panel-container">
-
-            <div className="panel">
-              <ProductListPanel
-                products={props.products}
-                currentCollection={currentCollection}
-                productCountByCollection={props.productCountByCollection}
-                productCountForCurrentCollection={productCountForCurrentCollection}
-              />
-            </div>
-            <div className="panel">
+            <ProductListPanel
+              products={props.products}
+              currentCollection={currentCollection}
+              productCountByCollection={props.productCountByCollection}
+              productCountForCurrentCollection={productCountForCurrentCollection}
+            />
+            <BasketSummary />
+            {/* <div className="panel">
               Hello hello
-            </div>
+            </div> */}
           </div>
         </Delayed>        
         <Delayed delayInMilliseconds={800}>

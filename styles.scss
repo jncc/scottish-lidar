@@ -328,12 +328,23 @@ h1 {
     .product-list-item-title-highlight {
       background-color: $gray-100;
     }
-    .product-list-item-cart {
+    .product-list-item-basket {
+      // border: 1px solid red;
+      cursor: pointer;
       i {
         color: $gray-300;
-
+        &:hover {
+          color: $gray-400;
+        }
+      }
+      &.product-list-item-basket-in {
+        i {
+          // color: map-get($theme-colors, "danger");
+          color: $gray-600;
+        }  
       }
     }
+
     i {
       color: $gray-600;
     }

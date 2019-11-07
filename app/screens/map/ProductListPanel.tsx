@@ -7,9 +7,10 @@ import { motion } from 'framer-motion'
 import { ProductResult } from '../../catalog/types'
 import { ProductListItem } from './ProductListItem'
 import { DatasetPath } from '../../shared/DatasetPath'
-import { CollectionTuple, State } from '../../state'
+import { CollectionTuple, State, DispatchProps, MapActions } from '../../state'
 import { SimplePager } from './SimplePager'
 import { getPageNumberFromOffset, getPagerInfo } from '../../utility/pagerUtility'
+import { Button } from 'react-bootstrap'
 
 type Props = {
   products: ProductResult
@@ -19,13 +20,13 @@ type Props = {
 }
 type StateProps = State['mapScreen']
 
-let ProductListPanelComponent = (props: Props & StateProps) => {
+let ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
 
   let currentResultPage = getPageNumberFromOffset(props.products.query.offset || 0)
 
   if (props.currentCollection) {
     return (
-      <div className="product-list-panel">
+      <div className="panel product-list-panel">
         <div>
           <h5>
             <i className="fas fa-th text-primary mr-2" />
@@ -56,6 +57,11 @@ let ProductListPanelComponent = (props: Props & StateProps) => {
                   Try selecting a different dataset
                 </div>
                 }
+                {/* <div>
+                  <Button onClick={() => props.dispatch(MapActions.resetToCenter())}>
+                    Reset query location
+                  </Button>
+                </div> */}
               </div>
             </div>
           </div>

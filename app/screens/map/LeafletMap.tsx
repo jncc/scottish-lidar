@@ -84,7 +84,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
     map.on('moveend', () => {
       props.dispatch(MapActions.leafletCenterChanged([map.getCenter().lat, map.getCenter().lng]))
     })
-  }, [])
+  }, [props.leaflet.redraw])
 
   // draw the wms layer when it changes
   React.useEffect(() => {
