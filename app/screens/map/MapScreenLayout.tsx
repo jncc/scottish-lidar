@@ -9,6 +9,7 @@ import { ProductListPanel } from './ProductListPanel'
 import { DatasetListPanels } from './DatasetListPanels'
 import { Delayed } from '../../shared/Delayed'
 import { BasketSummary } from './BasketSummary'
+import { MapControls } from './MapControls'
 
 type Props = {
   collections: CollectionTuple[]
@@ -35,12 +36,10 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
   return <>
     {makeSmallScreenWarningUI()}
     <div className="d-none d-lg-block">
-      <div className="bottom-left-control-group d-lg">
-        Bottom left controls
-      </div>
-      <div className="bottom-right-control-group">
+      <MapControls />
+      {/* <div className="bottom-right-control-group">
         Bottom right controls
-      </div>
+      </div> */}
       <div className="r">
         <Delayed delayInMilliseconds={800}>
           <div className="right-panel-container">

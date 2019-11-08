@@ -1,6 +1,5 @@
 
 import React from 'react'
-import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 import { PagerInfo } from '../../utility/pagerUtility'
 import { Pagination } from 'react-bootstrap'

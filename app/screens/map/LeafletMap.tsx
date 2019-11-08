@@ -12,6 +12,7 @@ import { roundTo3Decimals } from '../../utility/numberUtility'
 import { Product } from '../../catalog/types'
 import { GeoJsonObject } from 'geojson'
 import { State, MapActions, DispatchProps } from '../../state'
+import { useBasket } from '../../basket'
 
 type Props = {
   products: Product[]  
@@ -24,6 +25,8 @@ var productFootprintLayerGroup: L.LayerGroup
 var currentProducts: { product: Product, footprint: L.GeoJSON<any> }[]
 
 let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
+
+  let [basket, toggleBasketItem] = useBasket()
 
   React.useEffect(() => {
 
@@ -112,14 +115,29 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
         let footprint = L.geoJSON(p.footprint as GeoJsonObject, { style: productFootprintStyleOff } )
 
         footprint.on('mouseout', () => {
-          footprint.setStyle(() => productFootprintStyleOff)
           props.dispatch(MapActions.productUnhovered(p))
         })
-
         footprint.on('mouseover', () => {
-          footprint.setStyle(() => productFootprintStyleOn)
           props.dispatch(MapActions.productHovered(p))
         })
+        footprint.on('click', () => {
+          const result = toggleBasketItem({
+            id: p.id,
+            name: p.name,
+            url: p.data.product!.http!.url,
+            type: p.data.product!.http!.type!,
+            size: p.data.product!.http!.size!,
+          })
+          if (result === 'added') {
+            footprint.setStyle(() => productFootprintStyleOn)
+          } else {
+            footprint.setStyle(() => productFootprintStyleOff)
+          }
+        })
+
+        if (basket.items.some(item => item.id === p.id)) {
+          footprint.setStyle(() => productFootprintStyleOn)
+        }
 
         return footprint
       }
@@ -140,15 +158,20 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
     if (currentProducts) {
       // unhighlight any previously hovered product
+      // (if it's not in the basket)
       currentProducts.forEach(x => {
-        x.footprint.setStyle(() => productFootprintStyleOff)
+        if (basket.items.some(item => item.id === x.product.id)) {
+          x.footprint.setStyle(() => productFootprintStyleOn)
+        } else {
+          x.footprint.setStyle(() => productFootprintStyleOff)
+        }
       })
       let hovered = currentProducts.find(x => x.product === props.hovered)
       if (hovered) {
         hovered.footprint.setStyle(() => productFootprintStyleOn)
       }
-  }
-  }, [props.hovered])
+    }
+  }, [props.hovered, basket.items.map(item => item.id).join(',')])
 
   // react has nothing to do with the leaflet map;
   // map manipulation is performed via side-effects

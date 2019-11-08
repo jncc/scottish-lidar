@@ -17,12 +17,12 @@ type StateProps = {
 
 let ProductListItemComponent = (props: Props & StateProps & DispatchProps) => {
 
-  let [basket, addItemToBasket] = useBasket()
+  let [basket, toggleBasketItem] = useBasket()
 
   let isHovered = props.product === props.hovered
   let titleCssClass = isHovered ? 'product-list-item-title-highlight': ''
 
-  let isInBasket = basket.items.some(item => item.productId === props.product.id)
+  let isInBasket = basket.items.some(item => item.id === props.product.id)
   let inBasketItemCssClass = isInBasket ? 'product-list-item-basket-in' : ''
 
   return (
@@ -41,14 +41,20 @@ let ProductListItemComponent = (props: Props & StateProps & DispatchProps) => {
         <div className={'product-list-item-title ' + titleCssClass} >
           {props.product.data.product.title}
         </div>
+        <div className="product-list-item-size">
+
+        </div>
         <div className={'product-list-item-basket ' + inBasketItemCssClass}
-          onClick={() => addItemToBasket({ productId: props.product.id })}
+          onClick={() => toggleBasketItem({
+            id: props.product.id,
+            name: props.product.name,
+            url: props.product.data.product!.http!.url,
+            type: props.product.data.product!.http!.type!,
+            size: props.product.data.product!.http!.size!,
+          })}
         >
           <i className="fas fa-shopping-cart" />
         </div>
-        {/* {props.product.data.product!.http!.size}
-        {props.product.data.product!.http!.type}
-        {props.product.data.product!.http!.url} */}
       </motion.div>
     </AnimatePresence>
   )

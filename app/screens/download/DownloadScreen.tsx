@@ -15,30 +15,16 @@ type Props = {
 
 export const DownloadScreen = (props: Props) => {
   
-  let [visible, setVisible] = React.useState(true)
   let [basket] = useBasket()
 
   let basketItemElements = basket.items.map(item =>
-    <li key={item.productId}>
-      {item.productId}
+    <li key={item.id}>
+      {item.size} {item.type} {item.name} {item.url}
     </li>  
   )
 
   return (
     <div>
-      <div>
-        <Button onClick={() => setVisible((prev => !prev))}>
-          Click me
-        </Button>
-      </div>
-      <motion.div
-        // initial="hidden"
-        animate={{ opacity: visible ? 1 : 0}}
-        // variants={variants}
-      >
-        Hello
-      </motion.div>
-
       <h1>Download</h1>
       <ul>
         {basketItemElements}

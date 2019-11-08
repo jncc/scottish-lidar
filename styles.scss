@@ -235,6 +235,8 @@ h1 {
 
 #leaflet-map { width: 100%; height: 100%; position: absolute; left:0; top:0; right:0; bottom:0; }
 
+$panel-gutter: 1.5rem;
+
 .panel {
   @include above-map;
   background-color: white;
@@ -246,28 +248,28 @@ h1 {
 }
 .left-panel-container {
   position: absolute;
-  top: 2rem;
-  left: 2rem;
+  top: $panel-gutter;
+  left: $panel-gutter;
   @include above-map;
   max-width: 19rem;
 }
 .right-panel-container {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: $panel-gutter;
+  right: $panel-gutter;
   @include above-map;
   width: 22rem;
 }
 .bottom-left-control-group {
   @include above-map;
   position: absolute;
-  bottom: 2rem;
-  left: 2rem;
+  bottom: $panel-gutter;
+  left: $panel-gutter;
 }
 .bottom-right-control-group {
   position: absolute;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: $panel-gutter;
+  right: $panel-gutter;
 }
 .r {
   position:relative;
@@ -324,9 +326,11 @@ h1 {
     }
     .product-list-item-title {
       flex: 1;
+      &.product-list-item-title-highlight {
+        background-color: $gray-100;
+      }
     }
-    .product-list-item-title-highlight {
-      background-color: $gray-100;
+    .product-list-item-size {
     }
     .product-list-item-basket {
       // border: 1px solid red;
@@ -344,7 +348,6 @@ h1 {
         }  
       }
     }
-
     i {
       color: $gray-600;
     }
@@ -360,15 +363,40 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $spot-muted;
+    // color: $spot-muted;
     overflow: hidden;
     white-space: nowrap;
+    .pager-dash {
+      margin: 0 0.1rem;
+      font-size: 90%;
+    }
+    .pager-of {
+      font-size: 90%;
+    }
   }
-  .pager-dash {
-    margin: 0 0.1rem;
-    font-size: 90%;
+}
+
+.basket-summary {
+  display: flex;
+  align-items: center;
+  padding: 0 -0.2rem;
+  >* {
+    padding:0 0.2rem;
   }
-  .pager-of {
-    font-size: 90%;
+  :first-child {
+    // margin-left: -0.2rem;
+    // color: red;
+  }
+  // :last-child {
+  //   margin-right: -0.2rem;
+  // }
+  i {
+    color: $gray-600;
+  }
+  .basket-summary-stretchy {
+    flex: 1;
+  }
+  .basket-summary-count {
+    font-size: 145%;
   }
 }

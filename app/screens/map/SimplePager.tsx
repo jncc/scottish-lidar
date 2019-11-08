@@ -49,10 +49,7 @@ let getProductSliceText = (p: PagerInfo) => {
       </div>
     )    
   } else {
-    return (
-      <div>
-      </div>
-    )
+    return <div></div>
   }
 }
 export const SimplePager = reduxConnect()(SimplePagerComponent)
