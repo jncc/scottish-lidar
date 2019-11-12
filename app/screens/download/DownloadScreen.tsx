@@ -32,15 +32,14 @@ export const DownloadScreen = (props: Props) => {
     return (
       <div className="container normal-page-container download-screen">
         <h1>Download</h1>
-        <div className="mb-3">
+        <div className="mb-4">
           You have nothing in your basket.
-          Add some products with the map.
+          Add some products using the map.
         </div>
         <div>
           <Link to={{ pathname: '/map' }} className="btn btn-primary">
-            Explore the Map
+            Explore the map
           </Link>
-
         </div>
       </div>
     )
@@ -49,10 +48,17 @@ export const DownloadScreen = (props: Props) => {
     return (
       <div className="container normal-page-container download-screen">
         <h1>Download</h1>
+
         <div>
           {basketItemElements}
         </div>
-  
+
+        <div>
+          <Link to={{ pathname: '/map' }} className="btn btn-primary">
+            Explore the map
+          </Link>
+
+        </div>
         {/* <table className="table table-hover">
     <thead>
       <tr>
