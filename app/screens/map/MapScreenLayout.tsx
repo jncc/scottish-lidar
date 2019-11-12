@@ -36,7 +36,7 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
   return <>
     {makeSmallScreenWarningUI()}
     <div className="d-none d-lg-block">
-      <MapControls />
+      {/* <MapControls /> */}
       {/* <div className="bottom-right-control-group">
         Bottom right controls
       </div> */}

@@ -124,6 +124,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
           const result = toggleBasketItem({
             id: p.id,
             name: p.name,
+            title: p.metadata.title,
             url: p.data.product!.http!.url,
             type: p.data.product!.http!.type!,
             size: p.data.product!.http!.size!,

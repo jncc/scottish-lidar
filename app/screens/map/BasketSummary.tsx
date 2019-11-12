@@ -6,6 +6,7 @@ import { CollectionTuple, State } from '../../state'
 import { ProductResult } from '../../catalog/types'
 import { useBasket } from '../../basket'
 import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 type Props = {
   // collections: CollectionTuple[]
@@ -22,20 +23,22 @@ const BasketSummaryComponent = (props: Props & StateProps) => {
   return (
     <div className="panel basket-summary">
       <div>
-        <i className="fas fa-shopping-cart fa-lg" />
+        <Link to={{ pathname: '/download' }} className="btn btn-primary">
+          Download
+        </Link>
+      </div>
+      <div>
+        <Button onClick={() => removeAll()} variant="secondary">Clear</Button>
+      </div>
+      <div className="basket-summary-stretchy">
       </div>
       <div className="basket-summary-count">
         <span className="float-right badge badge-pill badge-primary">
           {basket.items.length}
         </span>
       </div>
-      <div className="basket-summary-stretchy">
-      </div>
       <div>
-        <Button onClick={() => removeAll()}>Clear</Button>
-      </div>
-      <div>
-        <Button onClick={() => removeAll()}>Download</Button>
+        <i className="fas fa-shopping-cart fa-2x" />
       </div>
     </div>
   )

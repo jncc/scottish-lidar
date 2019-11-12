@@ -6,24 +6,22 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 import { Product } from '../../catalog/types'
 import { State, MapActions, DispatchProps } from '../../state'
-import { useBasket } from '../../basket'
+import { BasketItem } from '../../basket'
+// import { useBasket } from '../../basket'
 
 type Props = { 
   product: Product
-}
-type StateProps = {
   hovered: Product | undefined
+  isInBasket: boolean
+  toggleBasketItem: (item: BasketItem) => void
 }
 
-let ProductListItemComponent = (props: Props & StateProps & DispatchProps) => {
-
-  let [basket, toggleBasketItem] = useBasket()
+let ProductListItemComponent = (props: Props & DispatchProps) => {
 
   let isHovered = props.product === props.hovered
   let titleCssClass = isHovered ? 'product-list-item-title-highlight': ''
 
-  let isInBasket = basket.items.some(item => item.id === props.product.id)
-  let inBasketItemCssClass = isInBasket ? 'product-list-item-basket-in' : ''
+  let inBasketItemCssClass = props.isInBasket ? 'product-list-item-basket-in' : ''
 
   return (
     <AnimatePresence>
@@ -38,16 +36,18 @@ let ProductListItemComponent = (props: Props & StateProps & DispatchProps) => {
         {isHovered &&
         <div className="product-list-item-highlight" />
         }
-        <div className={'product-list-item-title ' + titleCssClass} >
+        <div className={'product-list-item-title ' + titleCssClass}>
+          <i className="fas fa-chevron-right fa-xs mr-1"/>
           {props.product.data.product.title}
         </div>
         <div className="product-list-item-size">
 
         </div>
         <div className={'product-list-item-basket ' + inBasketItemCssClass}
-          onClick={() => toggleBasketItem({
+          onClick={() => props.toggleBasketItem({
             id: props.product.id,
             name: props.product.name,
+            title: props.product.metadata.title,
             url: props.product.data.product!.http!.url,
             type: props.product.data.product!.http!.type!,
             size: props.product.data.product!.http!.size!,
@@ -65,10 +65,4 @@ let animationVariants = {
   hidden : { opacity: 0, x: 80 },
 }
 
-export const ProductListItem = reduxConnect(
-  (s: State): StateProps => {
-    return {
-      hovered: s.mapScreen.hovered
-    }
-  }
-)(ProductListItemComponent)
+export const ProductListItem = reduxConnect()(ProductListItemComponent)

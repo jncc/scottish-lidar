@@ -179,14 +179,6 @@ Note: We need to send all collections from the in-memory collection list.
 Future home page summary stats?
 Could use collectionscontainingproducts with the maximal bounding box to get all collections and their product count.
 
-Mapper
-------
-
-- Leaflet seems to flicker with transparent tiles https://github.com/Leaflet/Leaflet/issues/2822 
-- Consider react-leafet. https://react-leaflet.js.org/docs/en/intro.html#limitations
-- Want almost full-screen Leaflet https://github.com/Leaflet/Leaflet/issues/1266
-- Leaflet CSS might need normal CSS box model. https://getbootstrap.com/docs/4.3/getting-started/introduction/#box-sizing
-
 Project plan
 ------------
 
@@ -199,8 +191,8 @@ Project plan
 - [1.0] Task: List page [1 week] https://github.com/jncc/scottish-lidar/issues/9
 - [1.0] Task: Basket functionality [1 week] https://github.com/jncc/scottish-lidar/issues/10
 - [1.0] Task: Styling [1 week]
-- [0.2] Task: Download page [1 week] https://github.com/jncc/scottish-lidar/issues/11
-- [0.3] Task: Map page [3-4 weeks] https://github.com/jncc/scottish-lidar/issues/13
+- [0.5] Task: Download page [1 week] https://github.com/jncc/scottish-lidar/issues/11
+- [0.8] Task: Map page [3-4 weeks] https://github.com/jncc/scottish-lidar/issues/13
 - [1.0] Task: Aggregate outline layer [1 week] https://github.com/jncc/scottish-lidar/issues/17
 - [0.6] Task: Web essentials [1 week] https://github.com/jncc/scottish-lidar/issues/12
 - [0.0] Task: Feedback [1 week] https://github.com/jncc/scottish-lidar/issues/14

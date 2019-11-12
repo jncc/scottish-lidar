@@ -10,7 +10,7 @@ import { DatasetPath } from '../../shared/DatasetPath'
 import { CollectionTuple, State, DispatchProps, MapActions } from '../../state'
 import { SimplePager } from './SimplePager'
 import { getPageNumberFromOffset, getPagerInfo } from '../../utility/pagerUtility'
-import { Button } from 'react-bootstrap'
+import { useBasket } from '../../basket'
 
 type Props = {
   products: ProductResult
@@ -22,6 +22,7 @@ type StateProps = State['mapScreen']
 
 let ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
 
+  let [basket, toggleBasketItem] = useBasket()
   let currentResultPage = getPageNumberFromOffset(props.products.query.offset || 0)
 
   if (props.currentCollection) {
@@ -67,9 +68,13 @@ let ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
           </div>
           }
           <motion.div initial="hidden" animate="visible" variants={animationVariants}>
-            {props.products.result.map(p =>
-              <ProductListItem key={p.id} product={p} />
-            )}
+            {props.products.result.map(p => <ProductListItem
+              key={p.id}
+              product={p}
+              hovered={props.hovered}
+              isInBasket={basket.items.some(item => item.id === p.id)}
+              toggleBasketItem={toggleBasketItem}
+            /> )}
           </motion.div>
         </div>
         <div className="mt-3">

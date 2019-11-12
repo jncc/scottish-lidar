@@ -11,11 +11,7 @@ type Props = {
   collections: CollectionTuple[]
   filter: string
   setFilter: (s: string) => void
-} // & State['lister']
-
-// interface DispatchProps {
-//   doFoo: () => Promise<void>
-// }
+}
 
 export const ListScreen = (props: Props) => {
 
