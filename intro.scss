@@ -1,0 +1,47 @@
+
+/** Styles and anim for the home page intro. */
+
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 45vh;
+  font-size: 18px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  :before {
+    content: "";
+    animation: intro-fade-slide 2s cubic-bezier(0, 0.5, 0, 1) forwards;
+    background:
+      linear-gradient(to bottom,  rgba(0,0,0,0), rgba(0,0,0,.5)),
+      url(assets/screenshot.jpg) no-repeat bottom
+      #ccc;
+    background-size: cover;
+    position: absolute;
+      top: 0;
+      right: 0;
+      bottom: -4rem;
+      left: 0;
+    z-index: -1;
+  }
+  .intro-title {
+    color: #fff;
+  }
+  .intro-subtitle {
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+  }
+}
+
+@keyframes intro-fade-slide {
+  0% {
+    opacity: 0;
+    transform: translateY(-4rem);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
