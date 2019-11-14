@@ -237,14 +237,8 @@ h1 {
 
 $panel-gutter: 1.5rem;
 
-.panel {
-  @include above-map;
-  background-color: white;
-  overflow-y: scroll;
-  padding: 1rem;
-  box-shadow: 0 10px 6px -6px #777;
-  margin-bottom: 1rem;
-  border-radius: 0.3rem;
+.r {
+  position:relative;
 }
 .left-panel-container {
   position: absolute;
@@ -260,6 +254,19 @@ $panel-gutter: 1.5rem;
   @include above-map;
   width: 22rem;
 }
+.right-panel-container-toggle {
+  position: absolute;
+  left: -1rem;
+  top: 3rem;
+  background-color: white;
+  height: 3rem;
+  width: 1rem;
+  border-radius: 0.3rem 0 0 0.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .bottom-left-control-group {
   @include above-map;
   position: absolute;
@@ -271,37 +278,17 @@ $panel-gutter: 1.5rem;
   bottom: $panel-gutter;
   right: $panel-gutter;
 }
-.r {
-  position:relative;
+.panel {
+  @include above-map;
+  background-color: white;
+  overflow-y: scroll;
+  padding: 1rem;
+  box-shadow: 0 10px 6px -6px #777;
+  margin-bottom: 1rem;
+  border-radius: 0.3rem;
 }
-
-// .dataset-list-header {
-//   display: flex;
-//   .dataset-list-header-text {
-//     flex: 1;
-//   }
-//   .dataset-list-header-count {
-//     font-size: 150%;
-//     padding-left: 0.3rem;
-//   }
-// }
-.dataset-list-item {
-  display: flex;
-  :first-child {
-    flex: 1;
-  }
-  i {
-    color: $gray-600;
-  }
-}
-// .popover.show {
-//   @include above-map;    
-// }
-// div[role=tooltip] {
-//   @include above-map;    
-// }  
-
 .product-list-panel {
+  position: relative;
   display: flex;
   flex-direction: column;
   .product-list-panel-abstract {
@@ -331,7 +318,6 @@ $panel-gutter: 1.5rem;
       }
     }
     .product-list-item-basket {
-      // border: 1px solid red;
       cursor: pointer;
       i {
         color: $gray-300;
@@ -340,15 +326,20 @@ $panel-gutter: 1.5rem;
         }
       }
       &.product-list-item-basket-in {
-        i {
-          // color: map-get($theme-colors, "danger");
-          color: $gray-600;
-        }  
+        i { color: $gray-600; }  
       }
     }
-    i {
-      color: $gray-600;
-    }
+    i { color: $gray-600; }
+  }
+}
+
+.dataset-list-item {
+  display: flex;
+  :first-child {
+    flex: 1;
+  }
+  i {
+    color: $gray-600;
   }
 }
 

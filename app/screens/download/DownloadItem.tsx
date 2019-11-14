@@ -44,9 +44,9 @@ export const DownloadItem = (props: Props) => {
       </td>
       <td className="align-middle download-item-indicator">
       <motion.div
-      initial="invisible"
-      animate={downloaded ? 'visible' : 'invisible'}
-      variants={variants}
+        initial="invisible"
+        animate={downloaded ? 'visible' : 'invisible'}
+        variants={variants}
       >
         <i className="fas fa-cloud-download-alt fa-lg"></i>
       </motion.div>

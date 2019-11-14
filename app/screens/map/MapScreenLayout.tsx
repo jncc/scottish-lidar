@@ -10,16 +10,24 @@ import { DatasetListPanels } from './DatasetListPanels'
 import { Delayed } from '../../shared/Delayed'
 import { BasketSummary } from './BasketSummary'
 import { MapControls } from './MapControls'
+import { motion } from 'framer-motion'
 
 type Props = {
   collections: CollectionTuple[]
   products: ProductResult
   productCountByCollection: { collectionName: string, products: number }[]
 }
-
 type StateProps = State['mapScreen']
 
+const rightPanelAnimationVariants = {
+  open: { x: 0 },
+  closed: { x: '104%' }, // move right by slightly more than its width
+}
+
 const MapScreenLayoutComponent = (props: Props & StateProps) => {
+
+  let [rightPanelOpen, setRightPanelOpen] = React.useState(true)
+  let [leftPanelOpen, setLeftPanelOpen] = React.useState(true)
 
   let currentCollection = props.collections
     .find(c => c.collection.name === props.collection)
@@ -37,12 +45,19 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
     {makeSmallScreenWarningUI()}
     <div className="d-none d-lg-block">
       {/* <MapControls /> */}
-      {/* <div className="bottom-right-control-group">
-        Bottom right controls
-      </div> */}
       <div className="r">
         <Delayed delayInMilliseconds={800}>
-          <div className="right-panel-container">
+          <motion.div className="right-panel-container"
+            initial="open"
+            animate={rightPanelOpen ? 'open' : 'closed'}
+            variants={rightPanelAnimationVariants}
+          >
+            <div className="right-panel-container-toggle" onClick={() => setRightPanelOpen(!rightPanelOpen)}>
+              {rightPanelOpen
+                ? <i className="fas fa-chevron-right fa-xs"/>
+                : <i className="fas fa-chevron-left fa-xs"/>
+              }
+            </div>
             <ProductListPanel
               products={props.products}
               currentCollection={currentCollection}
@@ -50,10 +65,7 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
               productCountForCurrentCollection={productCountForCurrentCollection}
             />
             <BasketSummary />
-            {/* <div className="panel">
-              Hello hello
-            </div> */}
-          </div>
+          </motion.div>
         </Delayed>        
         <Delayed delayInMilliseconds={800}>
           <div className="left-panel-container">
