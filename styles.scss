@@ -330,8 +330,6 @@ $panel-gutter: 1.5rem;
         background-color: $gray-100;
       }
     }
-    .product-list-item-size {
-    }
     .product-list-item-basket {
       // border: 1px solid red;
       cursor: pointer;
@@ -383,13 +381,6 @@ $panel-gutter: 1.5rem;
   >* {
     padding:0 0.2rem;
   }
-  :first-child {
-    // margin-left: -0.2rem;
-    // color: red;
-  }
-  // :last-child {
-  //   margin-right: -0.2rem;
-  // }
   i {
     color: $gray-600;
   }
@@ -398,5 +389,22 @@ $panel-gutter: 1.5rem;
   }
   .basket-summary-count {
     font-size: 150%;
+  }
+}
+
+.download-screen {
+  .download-list {
+    max-width: 50rem;
+  }
+  .download-item {
+
+    &:hover {
+      background-color: $gray-100;
+    }
+    .download-item-title {
+      i {
+        color: $gray-600;
+      }
+    }
   }
 }
