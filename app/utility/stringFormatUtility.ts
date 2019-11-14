@@ -1,6 +1,6 @@
 
 // http://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
-export function formatBytesForHuman(bytes: number, decimals = 2) {
+export function formatBytesForHuman(bytes: number, decimals = 0) {
   if(bytes == 0) return '0 Bytes'
   var k = 1000,
       dm = decimals + 1 || 3,

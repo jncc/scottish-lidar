@@ -74,7 +74,7 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
 
 const makeSmallScreenWarningUI = () => {
   return (
-    <div className="d-lg-none text-center text-danger p-2">
+    <div className="d-lg-none text-center text-danger p-2 mb-4">
       <br />
       The map is made for desktop devices.
       <br />

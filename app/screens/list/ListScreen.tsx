@@ -1,7 +1,6 @@
 
 import * as React from 'react'
 import _ from 'lodash'
-import { DropdownButton, Dropdown, InputGroup, FormControl, Form } from 'react-bootstrap'
 
 import { CollectionTuple } from '../../state'
 import { ListItem } from './ListItem'

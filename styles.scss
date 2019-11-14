@@ -361,7 +361,6 @@ $panel-gutter: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    // color: $spot-muted;
     overflow: hidden;
     white-space: nowrap;
     .pager-dash {
@@ -393,18 +392,24 @@ $panel-gutter: 1.5rem;
 }
 
 .download-screen {
-  .download-list {
-    max-width: 50rem;
-  }
   .download-item {
-
     &:hover {
       background-color: $gray-100;
     }
     .download-item-title {
-      i {
-        color: $gray-600;
-      }
+      font-size: 110%;
+      i { color: $gray-600; }
+    }
+    .download-item-name {
+      color: $spot-muted;
+      font-weight: bold;;      
+    }
+    .download-item-type {
+      color: $spot-muted;
+      font-weight: bold;;      
+    }
+    .download-item-indicator {
+      i { color: $gray-600; }
     }
   }
 }

@@ -1,13 +1,11 @@
 
 import React from 'react'
-import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { Product } from '../../catalog/types'
-import { State, MapActions, DispatchProps } from '../../state'
+import { MapActions, DispatchProps } from '../../state'
 import { BasketItem } from '../../basket'
-// import { useBasket } from '../../basket'
 
 type Props = { 
   product: Product
