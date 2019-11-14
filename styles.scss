@@ -38,6 +38,11 @@ body {
   // fix ie 11 flexbox bug by adding display:flex to parent
   display: flex;
   flex-direction: column;
+
+  // don't allow horizontal scrollbar
+  // needed for the hidden panels on the map which move off to the
+  // left and right - on Windows this causes a horizontal scrollbar
+  overflow-x: hidden;
 }
 
 #layout-container {
@@ -233,10 +238,6 @@ h1 {
   }
 }
 
-.no-x-overflow {
-  overflow-x: hidden;
-}
-
 #leaflet-map { width: 100%; height: 100%; position: absolute; left:0; top:0; right:0; bottom:0; }
 
 $panel-gutter: 1.5rem;
@@ -263,7 +264,8 @@ $panel-gutter: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  // text-align: center;
+  background-color: $gray-100;
+  box-shadow: 0 10px 6px -6px #777;
 }
 .right-panel-container {
   position: absolute;
@@ -285,6 +287,8 @@ $panel-gutter: 1.5rem;
   align-items: center;
   justify-content: center;
   text-align: center;
+  background-color: $gray-100;
+  box-shadow: 0 10px 6px -6px #777;
 }
 .bottom-left-control-group {
   @include above-map;
