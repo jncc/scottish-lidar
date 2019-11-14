@@ -23,6 +23,10 @@ const rightPanelAnimationVariants = {
   open: { x: 0 },
   closed: { x: '104%' }, // move right by slightly more than its width
 }
+const leftPanelAnimationVariants = {
+  open: { x: 0 },
+  closed: { x: '-104%' }, // move left by slightly more than its width
+}
 
 const MapScreenLayoutComponent = (props: Props & StateProps) => {
 
@@ -43,7 +47,7 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
   
   return <>
     {makeSmallScreenWarningUI()}
-    <div className="d-none d-lg-block">
+    <div className="d-none d-lg-block ">
       {/* <MapControls /> */}
       <div className="r">
         <Delayed delayInMilliseconds={800}>
@@ -68,12 +72,22 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
           </motion.div>
         </Delayed>        
         <Delayed delayInMilliseconds={800}>
-          <div className="left-panel-container">
+          <motion.div className="left-panel-container"
+            initial="open"
+            animate={leftPanelOpen ? 'open' : 'closed'}
+            variants={leftPanelAnimationVariants}
+          >
+            <div className="left-panel-container-toggle" onClick={() => setLeftPanelOpen(!leftPanelOpen)}>
+              {leftPanelOpen
+                ? <i className="fas fa-chevron-left fa-xs"/>
+                : <i className="fas fa-chevron-right fa-xs"/>
+              }
+            </div>
             <DatasetListPanels
               collections={props.collections}
               productCountByCollection={props.productCountByCollection}
             />
-          </div>        
+          </motion.div>        
         </Delayed>
       </div>
       <LeafletMap

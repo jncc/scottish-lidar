@@ -233,6 +233,10 @@ h1 {
   }
 }
 
+.no-x-overflow {
+  overflow-x: hidden;
+}
+
 #leaflet-map { width: 100%; height: 100%; position: absolute; left:0; top:0; right:0; bottom:0; }
 
 $panel-gutter: 1.5rem;
@@ -247,6 +251,20 @@ $panel-gutter: 1.5rem;
   @include above-map;
   max-width: 19rem;
 }
+.left-panel-container-toggle {
+  position: absolute;
+  right: -1rem;
+  top: 4rem;
+  background-color: white;
+  height: 3rem;
+  width: 1rem;
+  border-radius: 0 0.3rem 0.3rem 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // text-align: center;
+}
 .right-panel-container {
   position: absolute;
   top: $panel-gutter;
@@ -257,7 +275,7 @@ $panel-gutter: 1.5rem;
 .right-panel-container-toggle {
   position: absolute;
   left: -1rem;
-  top: 3rem;
+  top: 4rem;
   background-color: white;
   height: 3rem;
   width: 1rem;
@@ -266,6 +284,7 @@ $panel-gutter: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 .bottom-left-control-group {
   @include above-map;
@@ -287,6 +306,17 @@ $panel-gutter: 1.5rem;
   margin-bottom: 1rem;
   border-radius: 0.3rem;
 }
+
+.dataset-list-item {
+  display: flex;
+  :first-child {
+    flex: 1;
+  }
+  i {
+    color: $gray-600;
+  }
+}
+
 .product-list-panel {
   position: relative;
   display: flex;
@@ -330,16 +360,6 @@ $panel-gutter: 1.5rem;
       }
     }
     i { color: $gray-600; }
-  }
-}
-
-.dataset-list-item {
-  display: flex;
-  :first-child {
-    flex: 1;
-  }
-  i {
-    color: $gray-600;
   }
 }
 
