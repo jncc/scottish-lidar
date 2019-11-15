@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
 
-import { useBasket } from '../../basket'
+import { useBasket, BasketItem } from '../../basket'
 import { DownloadItem } from './DownloadItem'
 import { orderBy } from 'lodash'
 
@@ -12,12 +12,29 @@ type Props = {
 }
 
 export const DownloadScreen = (props: Props) => {
-  
+
   let [basket, toggleItem, removeAll] = useBasket()
+
+  let [downloadingAll, setDownloadingAll] = React.useState(false)
+ 
+  React.useEffect(() => {
+    if (downloadingAll) {
+      let downloadFirstProductAndThenTheRest = (items: BasketItem[]) => {
+        if (items.length) {
+          window.location.assign(items[0].url) // causes browser to download the resource
+          setTimeout(() => {
+            // let's get recursive
+            downloadFirstProductAndThenTheRest(items.slice(1))
+          }, 1000)
+        }
+      }
+      downloadFirstProductAndThenTheRest(basket.items)
+    }
+  }, [downloadingAll])
 
   let basketItemElements = _(basket.items)
     .orderBy(item => item.name)
-    .map(item => <DownloadItem key={item.id}  item={item} />)
+    .map(item => <DownloadItem key={item.id} item={item} downloaded={false}/>)
     .value()
 
   if (!basketItemElements.length) {
@@ -50,11 +67,19 @@ export const DownloadScreen = (props: Props) => {
         </div>
 
         <div>
-          <Link to={{ pathname: '/map' }} className="btn btn-primary mr-1">
-            Add more products
-          </Link>
+          <div>
+            <Link to={{ pathname: '/map' }} className="btn btn-primary mr-1">
+              Add more products
+            </Link>
 
-          <Button onClick={() => removeAll()} variant="secondary">Clear basket</Button>
+            <Button onClick={() => removeAll()} variant="secondary">Clear basket</Button>
+          </div>
+          <div>
+            {downloadingAll
+              ? <Button onClick={() => setDownloadingAll(false)} variant="danger">Cancel</Button>
+              : <Button onClick={() => setDownloadingAll(true)}>Download all</Button>
+            }
+          </div>
         </div>
   
       </div>

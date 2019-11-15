@@ -8,6 +8,7 @@ import { formatBytesForHuman } from '../../utility/stringFormatUtility'
 
 type Props = {
   item: BasketItem
+  downloaded: boolean
 }
 
 const variants = {
@@ -17,7 +18,7 @@ const variants = {
 
 export const DownloadItem = (props: Props) => {
 
-  let [downloaded, setDownloaded] = React.useState(false)
+  let [downloaded, setDownloaded] = React.useState(props.downloaded)
 
   return (
     <tr className="download-item">
