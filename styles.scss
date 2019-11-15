@@ -264,7 +264,7 @@ $panel-gutter: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $gray-100;
+  // background-color: $gray-100;
   box-shadow: 0 10px 6px -6px #777;
 }
 .right-panel-container {
@@ -272,7 +272,7 @@ $panel-gutter: 1.5rem;
   top: $panel-gutter;
   right: $panel-gutter;
   @include above-map;
-  width: 22rem;
+  width: 21rem;
 }
 .right-panel-container-toggle {
   position: absolute;
@@ -287,7 +287,7 @@ $panel-gutter: 1.5rem;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: $gray-100;
+  // background-color: $gray-100;
   box-shadow: 0 10px 6px -6px #777;
 }
 .bottom-left-control-group {
@@ -304,11 +304,13 @@ $panel-gutter: 1.5rem;
 .panel {
   @include above-map;
   background-color: white;
-  overflow-y: scroll;
   padding: 1rem;
   box-shadow: 0 10px 6px -6px #777;
   margin-bottom: 1rem;
   border-radius: 0.3rem;
+}
+.scrollable-panel {
+  overflow-y: scroll;
 }
 
 .dataset-list-item {

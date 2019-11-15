@@ -35,7 +35,7 @@ export const DatasetListPanelsComponent = (props: Props & StateProps) => {
   ) 
   
   return <>
-    <div className="panel" style={{maxHeight: heightForMatching + 'rem'}}>
+    <div className="panel scrollable-panel" style={{maxHeight: heightForMatching + 'rem'}}>
       <h4>
         <span className="mr-3">Matching datasets </span>
         <span className="float-right badge badge-pill badge-primary">{matchingDatasets.length}</span>
@@ -46,7 +46,7 @@ export const DatasetListPanelsComponent = (props: Props & StateProps) => {
         {makeDatasetListUI(props.collection, matchingDatasets)}
       </div>
     </div>
-    <div className="panel" style={{maxHeight: heightForNonMatching + 'rem'}}>
+    <div className="panel scrollable-panel" style={{maxHeight: heightForNonMatching + 'rem'}}>
       <h4>
         <span className="mr-3">Other datasets </span>
         <span className="float-right badge badge-pill badge-primary">{nonMatchingDatasets.length}</span>

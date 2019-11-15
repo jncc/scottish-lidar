@@ -104,7 +104,7 @@ const makeSmallScreenWarningUI = () => {
       <br />
       The map is made for desktop devices.
       <br />
-      Please increase your screen size and ensure your browser zoom level is zero.
+      Please increase your screen size. Also check your browser zoom level is normal.
     </div>
   )
 }
