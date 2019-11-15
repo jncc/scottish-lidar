@@ -17,6 +17,7 @@ export const DownloadScreen = (props: Props) => {
 
   let [downloadingAll, setDownloadingAll] = React.useState(false)
  
+  // experimental...
   React.useEffect(() => {
     if (downloadingAll) {
       let downloadFirstProductAndThenTheRest = (items: BasketItem[]) => {
@@ -74,12 +75,12 @@ export const DownloadScreen = (props: Props) => {
 
             <Button onClick={() => removeAll()} variant="secondary">Clear basket</Button>
           </div>
-          <div>
+          {/* <div>
             {downloadingAll
               ? <Button onClick={() => setDownloadingAll(false)} variant="danger">Cancel</Button>
               : <Button onClick={() => setDownloadingAll(true)}>Download all</Button>
             }
-          </div>
+          </div> */}
         </div>
   
       </div>
