@@ -15,12 +15,3 @@ declare namespace L {
       enableEdit(): void
   }
 }
-
-// declare our own types for leaflet-fullscreen plugin
-// declare namespace L {
-//   namespace Control {
-//       class Fullscreen extends Control {
-//           constructor(options?: any);
-//       }
-//   }
-// }

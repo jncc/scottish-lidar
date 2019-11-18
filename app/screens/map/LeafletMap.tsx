@@ -4,7 +4,6 @@ import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 import L, { TileLayerOptions } from 'leaflet'
 import 'leaflet-editable'
-// import 'leaflet-fullscreen'
 
 import { config } from './config'
 import { bboxFlatArrayToCoordArray } from '../../utility/geospatialUtility'
@@ -35,9 +34,6 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
       maxZoom: config.maximumZoom,
       editable: true, // enable leaflet.editable plugin
     })
-
-    // enable leaflet.fullscreen plugin
-    // new L.Control.Fullscreen({ position: 'topright' }).addTo(map)
 
     // zoom controls
     // new L.Control.Zoom({ position: 'bottomleft' }).addTo(map)
