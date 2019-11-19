@@ -11,11 +11,13 @@ import { Delayed } from '../../shared/Delayed'
 import { BasketSummary } from './BasketSummary'
 import { MapControls } from './MapControls'
 import { motion } from 'framer-motion'
+// import { UseBasketResult } from '../../basket'
 
 type Props = {
   collections: CollectionTuple[]
   products: ProductResult
   productCountByCollection: { collectionName: string, products: number }[]
+  // useBasketResult: UseBasketResult
 }
 type StateProps = State['mapScreen']
 
@@ -67,6 +69,7 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
               currentCollection={currentCollection}
               productCountByCollection={props.productCountByCollection}
               productCountForCurrentCollection={productCountForCurrentCollection}
+              // useBasketResult={props.useBasketResult}
             />
             <BasketSummary />
           </motion.div>
@@ -93,6 +96,7 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
       <LeafletMap
         products={props.products.result}
         wmsLayer={wmsLayer}
+        // useBasketResult={props.useBasketResult}
       />
     </div>
   </>

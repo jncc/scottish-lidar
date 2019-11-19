@@ -4,6 +4,7 @@ import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 import L, { TileLayerOptions } from 'leaflet'
 import 'leaflet-editable'
+import { useCookies } from 'react-cookie'
 
 import { config } from './config'
 import { bboxFlatArrayToCoordArray } from '../../utility/geospatialUtility'
@@ -11,11 +12,12 @@ import { roundTo3Decimals } from '../../utility/numberUtility'
 import { Product } from '../../catalog/types'
 import { GeoJsonObject } from 'geojson'
 import { State, MapActions, DispatchProps } from '../../state'
-import { useBasket } from '../../basket'
+import { BasketItem, COOKIE_NAME, toggleBasketItem, getBasket } from '../../basket'
 
 type Props = {
   products: Product[]  
   wmsLayer?: { url: string, name: string }
+  // useBasketResult: UseBasketResult
 }
 type StateProps = State['mapScreen']
 
@@ -25,11 +27,12 @@ var currentProducts: { product: Product, footprint: L.GeoJSON<any> }[]
 
 let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
-  let [basket, toggleBasketItem] = useBasket()
+  let useCookiesResult = useCookies([COOKIE_NAME])
+  let basket = getBasket(useCookiesResult)
 
   React.useEffect(() => {
 
-    var map = L.map('leaflet-map', {
+    let map = L.map('leaflet-map', {
       minZoom: 2,
       maxZoom: config.maximumZoom,
       editable: true, // enable leaflet.editable plugin
@@ -108,7 +111,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
     if (props.products.length) {
 
       let makeProductFootprintLayer = (p: Product) => {
-        let footprint = L.geoJSON(p.footprint as GeoJsonObject, { style: productFootprintStyleOff } )
+        let footprint = L.geoJSON(p.footprint as GeoJsonObject, { style: footprintStyleOff } )
 
         footprint.on('mouseout', () => {
           props.dispatch(MapActions.productUnhovered(p))
@@ -117,7 +120,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
           props.dispatch(MapActions.productHovered(p))
         })
         footprint.on('click', () => {
-          const result = toggleBasketItem({
+          const result = toggleBasketItem(useCookiesResult, {
             id: p.id,
             name: p.name,
             title: p.metadata.title,
@@ -126,15 +129,11 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
             size: p.data.product!.http!.size!,
           })
           if (result === 'added') {
-            footprint.setStyle(() => productFootprintStyleOn)
+            footprint.setStyle(() => footprintStyleOn)
           } else {
-            footprint.setStyle(() => productFootprintStyleOff)
+            footprint.setStyle(() => footprintStyleOff)
           }
         })
-
-        if (basket.items.some(item => item.id === p.id)) {
-          footprint.setStyle(() => productFootprintStyleOn)
-        }
 
         return footprint
       }
@@ -147,27 +146,15 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
       currentProducts.forEach(x => {
         x.footprint.addTo(productFootprintLayerGroup)
       })
+
+      highlightFootprints(props.hovered, basket.items)
+
     }
   }, [props.products.map(p => p.id).join(',')]) // make a comparator string for React
 
-  // highlight the currently hovered product
+  // highlight the footprints (currently hovered product & the products in the basket)
   React.useEffect(() => {
-
-    if (currentProducts) {
-      // unhighlight any previously hovered product
-      // (if it's not in the basket)
-      currentProducts.forEach(x => {
-        if (basket.items.some(item => item.id === x.product.id)) {
-          x.footprint.setStyle(() => productFootprintStyleOn)
-        } else {
-          x.footprint.setStyle(() => productFootprintStyleOff)
-        }
-      })
-      let hovered = currentProducts.find(x => x.product === props.hovered)
-      if (hovered) {
-        hovered.footprint.setStyle(() => productFootprintStyleOn)
-      }
-    }
+    highlightFootprints(props.hovered, basket.items)
   }, [props.hovered, basket.items.map(item => item.id).join(',')])
 
   // react has nothing to do with the leaflet map;
@@ -181,5 +168,26 @@ export const LeafletMap = reduxConnect(
   }
 )(LeafletMapComponent)
 
-let productFootprintStyleOff = { fillOpacity: 0, weight: 1, color: '#555' }
-let productFootprintStyleOn =  { fillOpacity: 0, weight: 2, color: '#444' }
+const footprintStyleOff = { fillOpacity: 0, weight: 1, color: '#555' }
+const footprintStyleOn =  { fillOpacity: 0, weight: 2, color: '#444' }
+
+const highlightFootprints = (hovered: Product | undefined, basketItems: BasketItem[]) => {
+
+  if (currentProducts) {
+    // unhighlight any previously hovered product
+    // (if it's not in the basket)
+    currentProducts.forEach(x => {
+      if (basketItems.some(item => item.id === x.product.id)) {
+        x.footprint.setStyle(() => footprintStyleOn)
+      } else {
+        x.footprint.setStyle(() => footprintStyleOff)
+      }
+    })
+    let hoveredProduct = currentProducts.find(x => x.product === hovered)
+    if (hoveredProduct) {
+      hoveredProduct.footprint.setStyle(() => footprintStyleOn)
+    }
+  }
+
+
+}

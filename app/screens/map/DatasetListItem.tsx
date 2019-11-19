@@ -1,11 +1,10 @@
 
 import React from 'react'
 import _ from 'lodash'
-import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
-
-import { CollectionTuple, State, MapActions, DispatchProps } from '../../state'
 import { Form } from 'react-bootstrap'
+
+import { CollectionTuple, DispatchProps, MapActions } from '../../state'
 import { Collection } from '../../catalog/types'
 import { Tip } from '../../shared/Tip'
 
@@ -14,7 +13,7 @@ type Props = {
   checked: boolean
 }
 
-export const DatasetListItemComponent = (props: Props & DispatchProps) => {
+const DatasetListItemComponent = (props: Props & DispatchProps) => {
   return (
     <div className="dataset-list-item">
       <div>

@@ -9,6 +9,7 @@ import { loadProductCountByCollection, loadProducts } from '../../catalog/api'
 import { MapScreenLayout } from './MapScreenLayout'
 import { bboxToWkt } from '../../utility/geospatialUtility'
 import { getOffsetFromPageNumber, PAGE_SIZE } from '../../utility/pagerUtility'
+import { useBasket } from '../../basket'
 
 type Props = {
   collections: CollectionTuple[]
@@ -22,6 +23,8 @@ let defaultQuery: ProductQuery = {
 }
 
 const MapScreenComponent = (props: Props & StateProps) => {
+
+  // let useBasketResult = useBasket()
 
   let [products, setProducts] = React.useState(
     { query: defaultQuery, result: [] } as ProductResult
@@ -63,10 +66,13 @@ const MapScreenComponent = (props: Props & StateProps) => {
     } 
   }, [props.collections, props.bbox, props.page, props.collection])
 
+  // console.log(useBasketResult[0].items)
+
   return <MapScreenLayout
     collections={props.collections}
     products={products}
     productCountByCollection={productCountByCollection.result}
+    // useBasketResult={useBasketResult}
   />
 }
 

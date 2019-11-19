@@ -14,7 +14,7 @@ export type BasketItem = {
   size : number
 }
 
-const COOKIE_NAME = 'basket'
+export const COOKIE_NAME = 'basket'
 
 /**
  * The basket is not stored as application state, but serialized
@@ -62,31 +62,41 @@ export function useBasket() {
   return [basket, toggleItem, removeAll] as [typeof basket, typeof toggleItem, typeof removeAll]
 }
 
-// export const Basket2 = {
-//   toggleItem = (item: BasketItem, ) => {
+export type UseBasketResult = ReturnType<typeof useBasket>
 
-//     let existingItem = basket.items.find(x => x.id === item.id)
-    
-//     if (existingItem) {
-//       // remove item (thanks, javascript)
-//       let indexOfExistingItem = basket.items.indexOf(existingItem)
-//       basket.items.splice(indexOfExistingItem, 1)
-//     } else {
-//       // add item
-//       basket.items.push(item)
-//     }
+export type UseCookiesResult = ReturnType<typeof useCookies>
+export const toggleBasketItem = (useCookiesResult: UseCookiesResult, item: BasketItem) => {
 
-//     setCookie(COOKIE_NAME, basket, { path: '/' })
+  let [cookies, setCookie] = useCookiesResult
+  let cookie = cookies[COOKIE_NAME]
+  
+  let basket: Basket = cookie || { items: [] }
 
-//     // return whether we added or removed the item
-//     return existingItem ? 'removed' : 'added'
-//   }
+  let existingItem = basket.items.find(x => x.id === item.id)
+  
+  if (existingItem) {
+    // remove item (thanks, javascript)
+    let indexOfExistingItem = basket.items.indexOf(existingItem)
+    basket.items.splice(indexOfExistingItem, 1)
+  } else {
+    // add item
+    basket.items.push(item)
+  }
 
-//   const removeAll = () => {
-//     // console.log('removing all...')
-//     basket = { items: [] }
-//     setCookie(COOKIE_NAME, basket, { path: '/' })
-//     // console.log(basket)
-//   }
+  setCookie(COOKIE_NAME, basket, { path: '/' })
 
-// }
+  // return whether we added or removed the item
+  return existingItem ? 'removed' : 'added'
+}
+export const clearBasket = (useCookiesResult: UseCookiesResult) => {
+  let [cookies, setCookie] = useCookiesResult
+  let basket = { items: [] }
+  setCookie(COOKIE_NAME, basket, { path: '/' })
+}
+export const getBasket = (useCookiesResult: UseCookiesResult) => {
+  let [cookies, setCookie] = useCookiesResult
+  let cookie = cookies[COOKIE_NAME]
+  
+  let basket: Basket = cookie || { items: [] }
+  return basket
+}

@@ -3,6 +3,7 @@ import React from 'react'
 import _ from 'lodash'
 import { connect as reduxConnect } from 'react-redux'
 import { motion } from 'framer-motion'
+import { useCookies } from 'react-cookie'
 
 import { ProductResult } from '../../catalog/types'
 import { ProductListItem } from './ProductListItem'
@@ -10,27 +11,31 @@ import { DatasetPath } from '../../shared/DatasetPath'
 import { CollectionTuple, State, DispatchProps } from '../../state'
 import { SimplePager } from './SimplePager'
 import { getPageNumberFromOffset, getPagerInfo } from '../../utility/pagerUtility'
-import { useBasket } from '../../basket'
+import { UseBasketResult, getBasket, COOKIE_NAME, toggleBasketItem, BasketItem } from '../../basket'
 
 type Props = {
   products: ProductResult
   currentCollection: CollectionTuple | undefined
   productCountByCollection: { collectionName: string, products: number }[]
   productCountForCurrentCollection: number | undefined
+  // useBasketResult: UseBasketResult
 }
 type StateProps = State['mapScreen']
 
 let ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
 
-  let [basket, toggleBasketItem] = useBasket()
   let currentResultPage = getPageNumberFromOffset(props.products.query.offset || 0)
+
+  // let [basket, toggleBasketItem] = props.useBasketResult
+  let useCookiesResult = useCookies([COOKIE_NAME])
+  let basket = getBasket(useCookiesResult)
 
   if (props.currentCollection) {
     return (
       <div className="panel product-list-panel">
         <div>
           <h5>
-            <i className="fas fa-th text-primary mr-2" />
+            <i className="fas fa-th fa-xs text-primary mr-2" />
             {props.currentCollection.collection.metadata.title}
           </h5>
           <div className="mb-1">
@@ -73,7 +78,9 @@ let ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
               product={p}
               hovered={props.hovered}
               isInBasket={basket.items.some(item => item.id === p.id)}
-              toggleBasketItem={toggleBasketItem}
+              toggleBasketItem={(item: BasketItem) => {
+                toggleBasketItem(useCookiesResult, item)
+              }}
             /> )}
           </motion.div>
         </div>
