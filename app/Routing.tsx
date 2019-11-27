@@ -21,7 +21,7 @@ export function Routing(props: State) {
     <HashRouter>
       <Switch>
         <Redirect from="/" exact to="/list" />
-        <Route path="/list/:filter?" render={routeProps => {
+        <Route path="/list/:filter?" render={(routeProps: any) => {
           let filter = routeProps.location.search.replace(/^\?/, '') // remove leading '?'
           let setFilter = (s: string) => {
             routeProps.history.push(routeProps.location.pathname + '?' + s)

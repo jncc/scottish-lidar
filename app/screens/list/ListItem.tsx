@@ -1,10 +1,11 @@
 
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import _ from 'lodash'
+import { connect as reduxConnect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
-import { CollectionTuple } from '../../state'
+import { CollectionTuple, DispatchProps, MapActions } from '../../state'
 import { getLicenceDetailsFromUseConstraints } from '../../utility/licenseUtility'
 import { DatasetPath } from '../../shared/DatasetPath'
 import { WmsModal } from '../../shared/WmsModal'
@@ -14,8 +15,9 @@ type Props = {
   collection: CollectionTuple
 }
 
-export const ListItem = (props: Props) => {
+const ListItemComponent = (props: Props & DispatchProps) => {
 
+  let history = useHistory()
   let c = props.collection
   let abstractElementId = 'abstract-' + c.collection.id
   let [modalOpen, setModalOpen] = React.useState(false)
@@ -84,13 +86,11 @@ export const ListItem = (props: Props) => {
 
           {/* View on map */}
           <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
-            <Link
-              to={{
-                pathname: '/map',
-                search: c.path.dataset
-              }}
-              className="btn btn-primary"
-            >View on map</Link>
+            <Button onClick={() => {
+              props.dispatch(MapActions.resetToCenter())
+              props.dispatch(MapActions.setCollection(props.collection.collection.name))
+              history.push('/map')
+            }}>View on map</Button>
           </div>
         </div>
 
@@ -98,6 +98,8 @@ export const ListItem = (props: Props) => {
     </div>
   )
 }
+
+export const ListItem = reduxConnect()(ListItemComponent)
 
 let makeLicenceElement = (useConstraints: string, collectionId: string) => {
   let licence = getLicenceDetailsFromUseConstraints(useConstraints)
