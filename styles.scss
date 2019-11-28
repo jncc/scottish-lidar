@@ -242,6 +242,12 @@ h1 {
 
 $panel-gutter: 1.5rem;
 
+// tweak leaflet zoom control position
+.leaflet-control-zoom {
+  margin-left: $panel-gutter !important;
+  margin-bottom: $panel-gutter !important;
+}
+
 .r {
   position:relative;
 }

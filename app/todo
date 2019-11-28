@@ -3,10 +3,13 @@ Essential for testing
 ---------------------
 
 - basket bug
-- zoom controls
 - tooltips
 
 In Pid
 ------
 - reset
 --add all to basket (< 100)--
+
+Other
+-----
+- monitoring on DB

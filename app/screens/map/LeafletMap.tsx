@@ -1,6 +1,5 @@
 
 import React from 'react'
-import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 import L, { TileLayerOptions } from 'leaflet'
 import 'leaflet-editable'
@@ -29,14 +28,14 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
   React.useEffect(() => {
 
-    var map = L.map('leaflet-map', {
+    let map = L.map('leaflet-map', {
       minZoom: 2,
       maxZoom: config.maximumZoom,
       editable: true, // enable leaflet.editable plugin
     })
 
     // zoom controls
-    // new L.Control.Zoom({ position: 'bottomleft' }).addTo(map)
+    new L.Control.Zoom({ position: 'bottomleft' }).addTo(map)
 
     map.setView(props.leaflet.center, props.leaflet.zoom)
 
