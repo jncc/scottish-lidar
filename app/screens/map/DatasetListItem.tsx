@@ -5,9 +5,10 @@ import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 
 import { CollectionTuple, State, MapActions, DispatchProps } from '../../state'
-import { Form } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import { Collection } from '../../catalog/types'
 import { Tip } from '../../shared/Tip'
+import { WmsModal } from '../../shared/WmsModal'
 
 type Props = {
   currentCollection: CollectionTuple & { productCountForCurrentQuery: number }
@@ -15,6 +16,9 @@ type Props = {
 }
 
 export const DatasetListItemComponent = (props: Props & DispatchProps) => {
+
+  let [modalOpen, setModalOpen] = React.useState(false)
+
   return (
     <div className="dataset-list-item">
       <div>
@@ -32,10 +36,14 @@ export const DatasetListItemComponent = (props: Props & DispatchProps) => {
         <span className="mr-2">
           {props.currentCollection.productCountForCurrentQuery} 
         </span>
-        <Tip identifier={'info-tip-' + props.currentCollection.collection.id}
-          content={getDatasetInfoTipUI(props.currentCollection.collection)}>
+        <span className="dataset-list-item-info" onClick={() => setModalOpen(true)}>
           <i className="fas fa-info-circle" />
-        </Tip>
+        </span>
+        <WmsModal
+          show={modalOpen}
+          onHide={() => setModalOpen(false)}
+          wmsLink={'https://example.com/'}
+        />
       </div>
     </div>
   )

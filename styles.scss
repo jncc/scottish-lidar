@@ -51,8 +51,10 @@ body {
   flex-direction: column;
 }
 
+// z-index that is above the leaflet map (*and* its custom controls),
+// but below the react-bootstrap modal!
 @mixin above-map {
-  z-index: 10000;
+  z-index: 1001;
 }
 
 h1 {
@@ -322,8 +324,14 @@ $panel-gutter: 1.5rem;
   :first-child {
     flex: 1;
   }
-  i {
-    color: $gray-600;
+  .dataset-list-item-info {
+    cursor: pointer;
+    i {
+      color: $gray-600;
+      &:hover {
+        color: $gray-700;
+      }
+    }
   }
 }
 
