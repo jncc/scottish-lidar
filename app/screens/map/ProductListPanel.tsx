@@ -9,7 +9,7 @@ import { ProductListItem } from './ProductListItem'
 import { DatasetPath } from '../../shared/DatasetPath'
 import { CollectionTuple, State, DispatchProps } from '../../state'
 import { SimplePager } from './SimplePager'
-import { getPageNumberFromOffset, getPagerInfo } from '../../utility/pagerUtility'
+import { getPageNumberFromOffset } from '../../utility/pagerUtility'
 import { useBasket } from '../../basket'
 
 type Props = {
@@ -24,7 +24,8 @@ let ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
 
   let [basket, toggleBasketItem] = useBasket()
   let currentResultPage = getPageNumberFromOffset(props.products.query.offset || 0)
-
+  let addAllToBasketIsAllowed = props.productCountForCurrentCollection && props.productCountForCurrentCollection < 100
+  
   if (props.currentCollection) {
     return (
       <div className="panel product-list-panel">
@@ -77,6 +78,11 @@ let ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
             /> )}
           </motion.div>
         </div>
+        {/* <div
+          className={'text-right add-all-to-basket' + (addAllToBasketIsAllowed ? ' add-all-to-basket-enabled' : '')}
+          onClick={() => {}} >
+            Add all
+        </div> */}
         <div className="mt-3">
           <SimplePager currentPage={currentResultPage} totalItems={props.productCountForCurrentCollection || 0} />
         </div>

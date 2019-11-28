@@ -334,7 +334,7 @@ $panel-gutter: 1.5rem;
   }
   .product-list-items {
     flex: 1;
-    min-height:15rem;
+    min-height:15.4rem;
   }
   .product-list-item {
     display: flex;
@@ -364,6 +364,11 @@ $panel-gutter: 1.5rem;
       }
     }
     i { color: $gray-600; }
+  }
+  .add-all-to-basket {
+    &.add-all-to-basket-enabled {
+      cursor: pointer;
+    }
   }
 }
 
