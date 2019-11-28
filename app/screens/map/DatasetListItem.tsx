@@ -1,14 +1,11 @@
 
 import React from 'react'
-import _ from 'lodash'
-import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 
-import { CollectionTuple, State, MapActions, DispatchProps } from '../../state'
-import { Form, Button } from 'react-bootstrap'
+import { CollectionTuple, MapActions, DispatchProps } from '../../state'
+import { Form } from 'react-bootstrap'
 import { Collection } from '../../catalog/types'
-import { Tip } from '../../shared/Tip'
-import { WmsModal } from '../../shared/WmsModal'
+import { DatasetModal } from '../../shared/DatasetModal'
 
 type Props = {
   currentCollection: CollectionTuple & { productCountForCurrentQuery: number }
@@ -22,7 +19,8 @@ export const DatasetListItemComponent = (props: Props & DispatchProps) => {
   return (
     <div className="dataset-list-item">
       <div>
-        <Form.Check 
+        <Form.Check
+          className="hoverable"
           custom
           inline
           type={'radio'}
@@ -39,10 +37,9 @@ export const DatasetListItemComponent = (props: Props & DispatchProps) => {
         <span className="dataset-list-item-info" onClick={() => setModalOpen(true)}>
           <i className="fas fa-info-circle" />
         </span>
-        <WmsModal
+        <DatasetModal
           show={modalOpen}
           onHide={() => setModalOpen(false)}
-          wmsLink={'https://example.com/'}
         />
       </div>
     </div>
