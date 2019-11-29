@@ -19,22 +19,24 @@ export function DatasetModal(props: any) {
 
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <i className="fas fa-info-circle mr-3 text-secondary" />
-          About this dataset
+          <i className="fas fa-th text-primary mr-2" />
+          {c.metadata.title}
         </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
 
         <div>
-          <h5>
-            <i className="fas fa-th text-primary mr-2" />
-            {c.metadata.title}
-          </h5>
-          <div className="mb-2">
+
+          <div className="mb-4">
             <DatasetPath dataset={props.path.dataset} />
           </div>
-          <div className="mb-3">{c.metadata.abstract}</div>
+          <div className="mb-2">
+            <h5>About this dataset</h5>
+          </div>
+          <div className="mb-3">
+            {c.metadata.abstract}
+          </div>
 
           <DatasetLicenceAndMetadataButtons collection={props.collection} />
 

@@ -3,9 +3,10 @@ import React from 'react'
 import { connect as reduxConnect } from 'react-redux'
 
 import { CollectionTuple, MapActions, DispatchProps } from '../../state'
-import { Form } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import { Collection } from '../../catalog/types'
 import { DatasetModal } from '../../shared/DatasetModal'
+import { WmsModal } from '../../shared/WmsModal'
 
 type Props = {
   collection: CollectionTuple & { productCountForCurrentQuery: number }
@@ -14,7 +15,8 @@ type Props = {
 
 const DatasetListItemComponent = (props: Props & DispatchProps) => {
 
-  let [modalOpen, setModalOpen] = React.useState(false)
+  let [wmsModalOpen, setWmsModalOpen] = React.useState(false)
+  let [infoModalOpen, setInfoModalOpen] = React.useState(false)
 
   return (
     <div className="dataset-list-item">
@@ -31,19 +33,35 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
         />
       </div>
       <div>
-        <span className="mr-2">
+        <span className="mr-3">
           {props.collection.productCountForCurrentQuery} 
         </span>
-        <span className="dataset-list-item-info" onClick={() => setModalOpen(true)}>
+
+          {/* WMS */}
+          {props.collection.ogcProduct && props.collection.ogcProduct.data.product.wms &&
+            <span className="mr-1">
+              <span className="hoverable-little-icon" onClick={() => setWmsModalOpen(true)}>
+                <i className="fas fa-globe" />
+              </span>
+              <WmsModal
+                show={wmsModalOpen}
+                onHide={() => setWmsModalOpen(false)}
+                wmsLink={props.collection.ogcProduct.data.product.wms.url}
+              />
+            </span>
+          }
+
+        <span className="hoverable-little-icon" onClick={() => setInfoModalOpen(true)}>
           <i className="fas fa-info-circle" />
         </span>
         <DatasetModal
-          show={modalOpen}
-          onHide={() => setModalOpen(false)}
+          show={infoModalOpen}
+          onHide={() => setInfoModalOpen(false)}
           collection={props.collection.collection}
           path={props.collection.path}
         />
       </div>
+      
     </div>
   )
 }

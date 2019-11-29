@@ -11,6 +11,7 @@ import { CollectionTuple, State, DispatchProps } from '../../state'
 import { SimplePager } from './SimplePager'
 import { getPageNumberFromOffset } from '../../utility/pagerUtility'
 import { useBasket } from '../../basket'
+import { DatasetModal } from '../../shared/DatasetModal'
 
 type Props = {
   products: ProductResult
@@ -23,6 +24,8 @@ type StateProps = State['mapScreen']
 let ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
 
   let [basket, toggleBasketItem] = useBasket()
+  let [infoModalOpen, setInfoModalOpen] = React.useState(false)
+
   let currentResultPage = getPageNumberFromOffset(props.products.query.offset || 0)
   let addAllToBasketIsAllowed = props.productCountForCurrentCollection && props.productCountForCurrentCollection < 100
   
@@ -37,8 +40,16 @@ let ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
           <div className="mb-1">
             <DatasetPath dataset={props.currentCollection.path.dataset} />
           </div>
-          <div className="product-list-panel-abstract mb-2">
-            <i className="fas fa-info-circle text-secondary mr-2" />
+          <div className="product-list-panel-abstract">
+            <span className="hoverable-little-icon mr-2" onClick={() => setInfoModalOpen(true)}>
+              <i className="fas fa-info-circle" />
+            </span>
+            <DatasetModal
+              show={infoModalOpen}
+              onHide={() => setInfoModalOpen(false)}
+              collection={props.currentCollection.collection}
+              path={props.currentCollection.path}
+            />
             {props.currentCollection.collection.metadata.abstract}
           </div>
         </div>

@@ -319,19 +319,20 @@ $panel-gutter: 1.5rem;
   overflow-y: scroll;
 }
 
+.hoverable-little-icon {
+  cursor: pointer;
+  i {
+    color: $gray-600;
+    &:hover {
+      color: $gray-700;
+    }
+  }
+}
+
 .dataset-list-item {
   display: flex;
   :first-child {
     flex: 1;
-  }
-  .dataset-list-item-info {
-    cursor: pointer;
-    i {
-      color: $gray-600;
-      &:hover {
-        color: $gray-700;
-      }
-    }
   }
 }
 
