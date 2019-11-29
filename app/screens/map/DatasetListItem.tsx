@@ -8,11 +8,11 @@ import { Collection } from '../../catalog/types'
 import { DatasetModal } from '../../shared/DatasetModal'
 
 type Props = {
-  currentCollection: CollectionTuple & { productCountForCurrentQuery: number }
+  collection: CollectionTuple & { productCountForCurrentQuery: number }
   checked: boolean
 }
 
-export const DatasetListItemComponent = (props: Props & DispatchProps) => {
+const DatasetListItemComponent = (props: Props & DispatchProps) => {
 
   let [modalOpen, setModalOpen] = React.useState(false)
 
@@ -24,15 +24,15 @@ export const DatasetListItemComponent = (props: Props & DispatchProps) => {
           custom
           inline
           type={'radio'}
-          id={`radio-` + props.currentCollection.path.dataset}
-          label={props.currentCollection.path.shortName}
+          id={`radio-` + props.collection.path.dataset}
+          label={props.collection.path.shortName}
           checked={props.checked}
-          onChange={() => props.dispatch(MapActions.setCollection(props.currentCollection.collection.name))}
+          onChange={() => props.dispatch(MapActions.setCollection(props.collection.collection.name))}
         />
       </div>
       <div>
         <span className="mr-2">
-          {props.currentCollection.productCountForCurrentQuery} 
+          {props.collection.productCountForCurrentQuery} 
         </span>
         <span className="dataset-list-item-info" onClick={() => setModalOpen(true)}>
           <i className="fas fa-info-circle" />
@@ -40,17 +40,10 @@ export const DatasetListItemComponent = (props: Props & DispatchProps) => {
         <DatasetModal
           show={modalOpen}
           onHide={() => setModalOpen(false)}
+          collection={props.collection.collection}
+          path={props.collection.path}
         />
       </div>
-    </div>
-  )
-}
-
-let getDatasetInfoTipUI = (c: Collection) => {
-  return (
-    <div>
-      <h5>{c.metadata.title}</h5>
-      <div>{c.metadata.abstract}</div>
     </div>
   )
 }

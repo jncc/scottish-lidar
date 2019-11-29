@@ -6,10 +6,9 @@ import { connect as reduxConnect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { CollectionTuple, DispatchProps, MapActions } from '../../state'
-import { getLicenceDetailsFromUseConstraints } from '../../utility/licenseUtility'
 import { DatasetPath } from '../../shared/DatasetPath'
 import { WmsModal } from '../../shared/WmsModal'
-import { Tip } from '../../shared/Tip'
+import { DatasetLicenceAndMetadataButtons } from '../../shared/DatasetLicenceAndMetadataButtons'
 
 type Props = {
   collection: CollectionTuple
@@ -57,17 +56,7 @@ const ListItemComponent = (props: Props & DispatchProps) => {
 
         <div className="">
 
-          {/* Licence */}
-          <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
-            {makeLicenceElement(c.collection.metadata.useConstraints, c.collection.id)}
-          </div>
-
-          {/* Metadata */}
-          <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
-            {c.collection.metadata.additionalInformationSource &&
-                makeExternalMetadataLinkElement(c.collection.metadata.additionalInformationSource, c.collection.id)
-            }
-          </div>
+          <DatasetLicenceAndMetadataButtons collection={c.collection} />
 
           {/* WMS */}
           {c.ogcProduct && c.ogcProduct.data.product.wms &&
@@ -100,33 +89,3 @@ const ListItemComponent = (props: Props & DispatchProps) => {
 }
 
 export const ListItem = reduxConnect()(ListItemComponent)
-
-let makeLicenceElement = (useConstraints: string, collectionId: string) => {
-  let licence = getLicenceDetailsFromUseConstraints(useConstraints)
-  return (
-    <a href={licence.url} target="_blank" className="btn btn-light" >
-      { licence.image
-        ? <Tip identifier={'lic' + collectionId} content={licence.name}>
-            <img src={licence.image} width="56" height="23" />
-          </Tip>
-        : <Tip identifier={'lic' + collectionId} content={licence.name}>
-            <span>
-              <i className="fas fa-book-open text-secondary mr-2" />
-              Licence
-            </span>
-          </Tip>
-      }
-    </a>
-  )
-}
-
-let makeExternalMetadataLinkElement = (metadataExternalLink: string, collectionId: string) => {
-  return (
-    <Tip identifier={collectionId} content="More information about this dataset">
-      <a className="btn btn-light" href={metadataExternalLink} target="_blank">
-        <i className="fas fa-cog text-secondary mr-2" />
-        Metadata
-      </a>
-    </Tip>
-  )
-}

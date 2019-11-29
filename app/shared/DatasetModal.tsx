@@ -1,10 +1,13 @@
 
 import React, { useState } from 'react'
 import { Button, Modal, Fade } from 'react-bootstrap'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import debounce from 'lodash/debounce'
+import { Collection } from '../catalog/types'
+import { DatasetPath } from './DatasetPath'
+import { DatasetLicenceAndMetadataButtons } from './DatasetLicenceAndMetadataButtons'
 
 export function DatasetModal(props: any) {
+
+  let c: Collection = props.collection
 
   return (
     <Modal
@@ -16,35 +19,27 @@ export function DatasetModal(props: any) {
 
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <i className="fas fa-globe mr-3 text-secondary" />
+          <i className="fas fa-info-circle mr-3 text-secondary" />
           About this dataset
         </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
 
-        <h5 className="text-center font-weight-bold mb-4">
-          You can use this link in your GIS client
-        </h5>
-
-        <div className="row">
-          <div className="col text-center py-3 gutter-line">
-            <i className="fas fa-rocket fa-3x text-secondary mb-3" />
-
-            <div>
-              How to use WMS <a href="http://www.qgis.org/en/docs" target="_blank">in QGIS</a>
-            </div>
+        <div>
+          <h5>
+            <i className="fas fa-th text-primary mr-2" />
+            {c.metadata.title}
+          </h5>
+          <div className="mb-2">
+            <DatasetPath dataset={props.path.dataset} />
           </div>
-          <div className="col text-center py-3">
-            <div className="">
-              <i className="fas fa-globe-americas fa-3x text-secondary mb-3" />            
+          <div className="mb-3">{c.metadata.abstract}</div>
 
-            </div>
-            <div>
-              How to use WMS <a href="https://www.arcgis.com/features/index.html" target="_blank">in ArcGIS</a>
-            </div>
-          </div>
+          <DatasetLicenceAndMetadataButtons collection={props.collection} />
+
         </div>
+      
       </Modal.Body>
 
       <Modal.Footer>

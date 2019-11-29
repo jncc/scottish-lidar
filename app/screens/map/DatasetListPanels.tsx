@@ -79,7 +79,7 @@ let makeDatasetListUI = (
           <h5>{key}</h5>
           {collections.map(c => <DatasetListItem
             key={c.collection.name}
-            currentCollection={c}
+            collection={c}
             checked={c.collection.name === collection}
           />)}
         </div>
