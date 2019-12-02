@@ -25,6 +25,7 @@ var currentProducts: { product: Product, footprint: L.GeoJSON<any> }[]
 let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
   let [basket, toggleBasketItem] = useBasket()
+  // console.log('in ')
 
   React.useEffect(() => {
 
@@ -100,7 +101,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
     }
   }, [props.wmsLayer])
 
-  // draw the product footprints when the products change
+  // draw the product footprints when the products or basket items change
   React.useEffect(() => {
     productFootprintLayerGroup.clearLayers()
     
@@ -147,7 +148,10 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
         x.footprint.addTo(productFootprintLayerGroup)
       })
     }
-  }, [props.products.map(p => p.id).join(',')]) // make a comparator string for React
+  }, [
+    props.products.map(p => p.id).join(','),
+    basket.items.map(item => item.id).join(',')
+  ]) // make comparator dependency strings for React
 
   // highlight the currently hovered product
   React.useEffect(() => {
