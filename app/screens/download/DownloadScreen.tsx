@@ -32,6 +32,7 @@ const DownloadScreenComponent = (props: StateProps & DispatchProps) => {
 
   let basketItemElements = _(props.basket)
     .orderBy(item => item.name)
+    .uniqBy(item => item.id)
     .map(item => <DownloadItem key={item.id} item={item} downloaded={false}/>)
     .value()
 
@@ -70,7 +71,7 @@ const DownloadScreenComponent = (props: StateProps & DispatchProps) => {
               Add more products
             </Link>
 
-            <Button onClick={() => AppActions.removeAll()} variant="secondary">Clear basket</Button>
+            <Button onClick={() => props.dispatch(AppActions.removeAll())} variant="secondary">Clear basket</Button>
           </div>
           {/* <div>
             {downloadingAll
