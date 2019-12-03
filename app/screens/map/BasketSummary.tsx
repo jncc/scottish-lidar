@@ -16,7 +16,7 @@ const BasketSummaryComponent = (props: State & DispatchProps) => {
         </Link>
       </div>
       <div>
-        <Button onClick={() => props.dispatch(AppActions.removeAll())} variant="secondary">Clear</Button>
+        <Button onClick={() => props.dispatch(AppActions.removeAll())} variant="light">Clear</Button>
       </div>
       <div className="basket-summary-stretchy">
       </div>

@@ -66,6 +66,10 @@ export let AppActions = {
   productUnhovered: (product: Product) =>
     createAction('PRODUCT_UNHOVERED', { product }
   ),
+  leafletZoomIn: () =>
+    createAction('LEAFLET_ZOOM_IN'),
+  leafletZoomOut: () =>
+    createAction('LEAFLET_ZOOM_OUT'),
   leafletZoomChanged: (zoom: number) =>
     createAction('LEAFLET_ZOOM_CHANGED', { zoom }
   ),
@@ -121,11 +125,12 @@ export function reducer(state = initialState, a: AppAction): State {
       return {
         ...state,
         mapScreen: {
-          // reset everything to default, apart from the current collection
+          // reset everything to default, apart from the current collection,
+          // and increment the redraw number so that dependent effect hook can re-run
           ...initialState.mapScreen,
           collection: state.mapScreen.collection,
           leaflet: {
-            ...state.mapScreen.leaflet,
+            ...initialState.mapScreen.leaflet,
             redraw: state.mapScreen.leaflet.redraw + 1
           }
         }
@@ -152,6 +157,30 @@ export function reducer(state = initialState, a: AppAction): State {
         }
       } else {
         return state
+      }
+    }
+    case 'LEAFLET_ZOOM_IN': {
+      return {
+        ...state,
+        mapScreen:{
+          ...state.mapScreen,
+          leaflet: {
+            ...state.mapScreen.leaflet,
+            zoom: Math.min(state.mapScreen.leaflet.zoom + 1, config.maximumZoom)
+          }
+        }
+      }
+    }
+    case 'LEAFLET_ZOOM_OUT': {
+      return {
+        ...state,
+        mapScreen:{
+          ...state.mapScreen,
+          leaflet: {
+            ...state.mapScreen.leaflet,
+            zoom: Math.max(state.mapScreen.leaflet.zoom - 1, 0)
+          }
+        }
       }
     }
     case 'LEAFLET_ZOOM_CHANGED': {

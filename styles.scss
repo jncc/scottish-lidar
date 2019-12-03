@@ -301,6 +301,11 @@ $panel-gutter: 1.5rem;
   position: absolute;
   bottom: $panel-gutter;
   left: $panel-gutter;
+  >div {
+
+    display: flex;
+    flex-direction: row;
+  }
 }
 .bottom-right-control-group {
   position: absolute;

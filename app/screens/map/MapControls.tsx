@@ -2,6 +2,8 @@
 import React from 'react'
 import { connect as reduxConnect } from 'react-redux'
 import { DispatchProps, State, AppActions } from '../../state'
+import { Button, ButtonGroup } from 'react-bootstrap'
+import { Delayed } from '../../shared/Delayed'
 
 type Props = {
 }
@@ -9,14 +11,27 @@ type StateProps = State['mapScreen']
 
 const MapControlsComponent = (props: Props & DispatchProps) => {
   return (
-    <div className="bottom-left-control-group">
-      <div className="panel">
-        <div onClick={() => props.dispatch(AppActions.resetToCenter())}>
-          Reset
+    <Delayed delayInMilliseconds={800}>
+      <div className="bottom-left-control-group">
+        <div className="panel">
+
+          <div>
+            <ButtonGroup className="mr-2">
+              <Button onClick={() => props.dispatch(AppActions.leafletZoomIn())} variant="light">
+                <i className="fas fa-plus fa-xs"/>
+              </Button>
+              <Button onClick={() => props.dispatch(AppActions.leafletZoomOut())} variant="light">
+                <i className="fas fa-minus fa-xs"/>
+              </Button>
+            </ButtonGroup>
+          </div>
+          <div>
+            <Button onClick={() => props.dispatch(AppActions.resetToCenter())} variant="light">Reset</Button>
+          </div>
+
         </div>
-        <i className="fas fa-dot-circle fa-lg" />
       </div>
-    </div>
+    </Delayed>
   )
 }
 

@@ -22,6 +22,7 @@ let collectionWmsLayerGroup: L.LayerGroup
 let productFootprintLayerGroup: L.LayerGroup
 let currentProducts: { product: Product, footprint: L.GeoJSON<any> }[]
 let map: L.Map
+let bboxRect: L.Rectangle
 
 let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
@@ -34,7 +35,31 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
     })
 
     // zoom controls
-    new L.Control.Zoom({ position: 'bottomleft' }).addTo(map)
+    // new L.Control.Zoom({ position: 'bottomleft' }).addTo(map)
+
+    
+  //   let CustomControl = L.Control.extend({
+  //     onAdd: function(map: L.Map) {
+  //         var div = L.DomUtil.create('div');
+  //         div.style.width = '200px';
+  //         div.textContent = 'Hello'
+  //         div.onclick = () => { props.dispatch(AppActions.resetToCenter()) }
+  
+  //         return div
+  //     },
+  //     onRemove: function(map: L.Map) {}
+  //   })
+  // let control = function(opts: any) {
+  //     return new CustomControl(opts)
+  // }
+  // control({ position: 'bottomleft' }).addTo(map)
+
+
+
+
+
+
+    map.setView(props.mapScreen.leaflet.center, props.mapScreen.leaflet.zoom)
 
     // add layer groups
     productFootprintLayerGroup = L.layerGroup([]).addTo(map)
@@ -55,24 +80,8 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
       tiled: true // custom parameter for Geoserver tilecache
     } as TileLayerOptions).addTo(map)
 
-    // save the map view so we can come back to it from a different screen
-    map.on('zoomend', () => {
-      props.dispatch(AppActions.leafletZoomChanged(map.getZoom()))
-    })
-    map.on('moveend', () => {
-      props.dispatch(AppActions.leafletCenterChanged([map.getCenter().lat, map.getCenter().lng]))
-    })
-
-  }, [])
-
-
-  React.useEffect(() => {
-
-    map.setView(props.mapScreen.leaflet.center, props.mapScreen.leaflet.zoom)
-
-
     // add the bbox rectangle
-    let bboxRect = L.rectangle(
+    bboxRect = L.rectangle(
       L.latLngBounds(bboxFlatArrayToCoordArray(props.mapScreen.bbox)), { fillOpacity: 0 }
     )
     bboxRect.addTo(map)
@@ -88,9 +97,34 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
       }
     })
 
+    // save the map view so we can come back to it from a different screen
+    map.on('zoomend', () => {
+      props.dispatch(AppActions.leafletZoomChanged(map.getZoom()))
+    })
+    map.on('moveend', () => {
+      props.dispatch(AppActions.leafletCenterChanged([map.getCenter().lat, map.getCenter().lng]))
+    })
+  }, [])
+
+  React.useEffect(() => {
+
+    // set the position
+    map.setView(props.mapScreen.leaflet.center, props.mapScreen.leaflet.zoom, { animate: false })
+
+    // redraw the bbox rectangle
+    bboxRect.remove()
+    bboxRect = L.rectangle(
+      L.latLngBounds(bboxFlatArrayToCoordArray(props.mapScreen.bbox)), { fillOpacity: 0 }
+    )
+    bboxRect.addTo(map)
+    bboxRect.enableEdit() // enable a moveable bbox with leaflet.editable
 
   }, [props.mapScreen.leaflet.redraw])
 
+  // set the zoom when it changes (effectively a no-op when zoom changed by double-clicking / keyboard)
+  React.useEffect(() => {
+    map.setZoom(props.mapScreen.leaflet.zoom)
+  }, [props.mapScreen.leaflet.zoom])
 
   // draw the wms layer when it changes
   React.useEffect(() => {
