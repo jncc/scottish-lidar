@@ -18,15 +18,16 @@ type Props = {
 }
 type StateProps = State
 
-var collectionWmsLayerGroup: L.LayerGroup
-var productFootprintLayerGroup: L.LayerGroup
-var currentProducts: { product: Product, footprint: L.GeoJSON<any> }[]
+let collectionWmsLayerGroup: L.LayerGroup
+let productFootprintLayerGroup: L.LayerGroup
+let currentProducts: { product: Product, footprint: L.GeoJSON<any> }[]
+let map: L.Map
 
 let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
   React.useEffect(() => {
-
-    let map = L.map('leaflet-map', {
+    
+    map = L.map('leaflet-map', {
       minZoom: 2,
       maxZoom: config.maximumZoom,
       editable: true, // enable leaflet.editable plugin
@@ -34,8 +35,6 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
     // zoom controls
     new L.Control.Zoom({ position: 'bottomleft' }).addTo(map)
-
-    map.setView(props.mapScreen.leaflet.center, props.mapScreen.leaflet.zoom)
 
     // add layer groups
     productFootprintLayerGroup = L.layerGroup([]).addTo(map)
@@ -56,6 +55,22 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
       tiled: true // custom parameter for Geoserver tilecache
     } as TileLayerOptions).addTo(map)
 
+    // save the map view so we can come back to it from a different screen
+    map.on('zoomend', () => {
+      props.dispatch(AppActions.leafletZoomChanged(map.getZoom()))
+    })
+    map.on('moveend', () => {
+      props.dispatch(AppActions.leafletCenterChanged([map.getCenter().lat, map.getCenter().lng]))
+    })
+
+  }, [])
+
+
+  React.useEffect(() => {
+
+    map.setView(props.mapScreen.leaflet.center, props.mapScreen.leaflet.zoom)
+
+
     // add the bbox rectangle
     let bboxRect = L.rectangle(
       L.latLngBounds(bboxFlatArrayToCoordArray(props.mapScreen.bbox)), { fillOpacity: 0 }
@@ -73,14 +88,9 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
       }
     })
 
-    // save the map view so we can come back to it from a different screen
-    map.on('zoomend', () => {
-      props.dispatch(AppActions.leafletZoomChanged(map.getZoom()))
-    })
-    map.on('moveend', () => {
-      props.dispatch(AppActions.leafletCenterChanged([map.getCenter().lat, map.getCenter().lng]))
-    })
+
   }, [props.mapScreen.leaflet.redraw])
+
 
   // draw the wms layer when it changes
   React.useEffect(() => {

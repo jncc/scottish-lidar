@@ -48,7 +48,7 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
   return <>
     {makeSmallScreenWarningUI()}
     <div className="d-none d-lg-block ">
-      {/* <MapControls /> */}
+      <MapControls />
       <div className="r">
         <Delayed delayInMilliseconds={800}>
           <motion.div className="right-panel-container"

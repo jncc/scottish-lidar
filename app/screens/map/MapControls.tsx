@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { connect as reduxConnect } from 'react-redux'
-import { DispatchProps, State } from '../../state'
+import { DispatchProps, State, AppActions } from '../../state'
 
 type Props = {
 }
@@ -11,6 +11,9 @@ const MapControlsComponent = (props: Props & DispatchProps) => {
   return (
     <div className="bottom-left-control-group">
       <div className="panel">
+        <div onClick={() => props.dispatch(AppActions.resetToCenter())}>
+          Reset
+        </div>
         <i className="fas fa-dot-circle fa-lg" />
       </div>
     </div>
