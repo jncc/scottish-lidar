@@ -2,7 +2,7 @@
 import React from 'react'
 import { connect as reduxConnect } from 'react-redux'
 
-import { CollectionTuple, MapActions, DispatchProps } from '../../state'
+import { CollectionTuple, AppActions, DispatchProps } from '../../state'
 import { Form, Button } from 'react-bootstrap'
 import { Collection } from '../../catalog/types'
 import { DatasetModal } from '../../shared/DatasetModal'
@@ -29,7 +29,7 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
           id={`radio-` + props.collection.path.dataset}
           label={props.collection.path.shortName}
           checked={props.checked}
-          onChange={() => props.dispatch(MapActions.setCollection(props.collection.collection.name))}
+          onChange={() => props.dispatch(AppActions.setCollection(props.collection.collection.name))}
         />
       </div>
       <div>

@@ -1,6 +1,5 @@
 
 import * as React from 'react'
-import { CookiesProvider } from 'react-cookie'
 import { createStore } from 'redux'
 import { Provider as ReduxProvider } from 'react-redux'
 // import reduxThunk, { ThunkMiddleware } from 'redux-thunk'
@@ -30,10 +29,8 @@ export const App = () => {
   }, [])
   
   return (
-    <CookiesProvider>
-      <ReduxProvider store={reduxStore}>
-        <Routing {...initialState} collections={collections} />
-      </ReduxProvider>
-    </CookiesProvider>
+    <ReduxProvider store={reduxStore}>
+      <Routing {...initialState} collections={collections} />
+    </ReduxProvider>
   )
 }

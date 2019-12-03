@@ -4,7 +4,7 @@ import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 import { PagerInfo, getPageNumberFromOffset, getPagerInfo } from '../../utility/pagerUtility'
 import { Pagination, Button } from 'react-bootstrap'
-import { MapActions, DispatchProps } from '../../state'
+import { AppActions, DispatchProps } from '../../state'
 import { ProductResult } from '../../catalog/types'
 
 type Props = {
@@ -20,7 +20,7 @@ const SimplePagerComponent = (props: Props & DispatchProps) => {
       <div>
         <Button
           disabled={p.currentPage <= 1}
-          onClick={() => props.dispatch(MapActions.setPage(p.currentPage - 1))}
+          onClick={() => props.dispatch(AppActions.setPage(p.currentPage - 1))}
         ><i className="fas fa-chevron-left mr-1" /> Prev</Button>
       </div>
       <div className="pager-central">
@@ -29,7 +29,7 @@ const SimplePagerComponent = (props: Props & DispatchProps) => {
       <div>
         <Button
           disabled={p.currentPage === p.endPage}
-          onClick={() => props.dispatch(MapActions.setPage(p.currentPage + 1))}
+          onClick={() => props.dispatch(AppActions.setPage(p.currentPage + 1))}
         >Next <i className="fas fa-chevron-right ml-1" /> </Button>
       </div>
     </nav>

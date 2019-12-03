@@ -7,10 +7,9 @@ import { motion } from 'framer-motion'
 import { ProductResult } from '../../catalog/types'
 import { ProductListItem } from './ProductListItem'
 import { DatasetPath } from '../../shared/DatasetPath'
-import { CollectionTuple, State, DispatchProps } from '../../state'
+import { CollectionTuple, State, DispatchProps, AppActions } from '../../state'
 import { SimplePager } from './SimplePager'
 import { getPageNumberFromOffset } from '../../utility/pagerUtility'
-import { useBasket } from '../../basket'
 import { DatasetModal } from '../../shared/DatasetModal'
 
 type Props = {
@@ -19,11 +18,9 @@ type Props = {
   productCountByCollection: { collectionName: string, products: number }[]
   productCountForCurrentCollection: number | undefined
 }
-type StateProps = State['mapScreen']
 
-let ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
+let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
 
-  let [basket, toggleBasketItem] = useBasket()
   let [infoModalOpen, setInfoModalOpen] = React.useState(false)
 
   let currentResultPage = getPageNumberFromOffset(props.products.query.offset || 0)
@@ -83,9 +80,9 @@ let ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
             {props.products.result.map(p => <ProductListItem
               key={p.id}
               product={p}
-              hovered={props.hovered}
-              isInBasket={basket.items.some(item => item.id === p.id)}
-              toggleBasketItem={toggleBasketItem}
+              hovered={props.mapScreen.hovered}
+              isInBasket={props.basket.some(item => item.id === p.id)}
+              toggleBasketItem={(item) => props.dispatch(AppActions.toggleItem(item))}
             /> )}
           </motion.div>
         </div>
@@ -106,8 +103,8 @@ let ProductListPanelComponent = (props: Props & StateProps & DispatchProps) => {
 }
 
 export const ProductListPanel = reduxConnect(
-  (s: State): StateProps => {
-    return s.mapScreen
+  (s: State): State => {
+    return s
   }
 )(ProductListPanelComponent)
 

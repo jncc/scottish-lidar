@@ -3,37 +3,34 @@ import * as React from 'react'
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
+import { connect as reduxConnect } from 'react-redux'
 
-import { useBasket, BasketItem } from '../../basket'
 import { DownloadItem } from './DownloadItem'
-import { orderBy } from 'lodash'
+import { State, DispatchProps, AppActions } from '../../state'
 
-type Props = {
-}
+type StateProps = State
 
-export const DownloadScreen = (props: Props) => {
-
-  let [basket, toggleItem, removeAll] = useBasket()
+const DownloadScreenComponent = (props: StateProps & DispatchProps) => {
 
   let [downloadingAll, setDownloadingAll] = React.useState(false)
  
   // experimental...
-  React.useEffect(() => {
-    if (downloadingAll) {
-      let downloadFirstProductAndThenTheRest = (items: BasketItem[]) => {
-        if (items.length) {
-          window.location.assign(items[0].url) // causes browser to download the resource
-          setTimeout(() => {
-            // let's get recursive
-            downloadFirstProductAndThenTheRest(items.slice(1))
-          }, 1000)
-        }
-      }
-      downloadFirstProductAndThenTheRest(basket.items)
-    }
-  }, [downloadingAll])
+  // React.useEffect(() => {
+  //   if (downloadingAll) {
+  //     let downloadFirstProductAndThenTheRest = (items: BasketItem[]) => {
+  //       if (items.length) {
+  //         window.location.assign(items[0].url) // causes browser to download the resource
+  //         setTimeout(() => {
+  //           // let's get recursive
+  //           downloadFirstProductAndThenTheRest(items.slice(1))
+  //         }, 1000)
+  //       }
+  //     }
+  //     downloadFirstProductAndThenTheRest(basket.items)
+  //   }
+  // }, [downloadingAll])
 
-  let basketItemElements = _(basket.items)
+  let basketItemElements = _(props.basket)
     .orderBy(item => item.name)
     .map(item => <DownloadItem key={item.id} item={item} downloaded={false}/>)
     .value()
@@ -73,7 +70,7 @@ export const DownloadScreen = (props: Props) => {
               Add more products
             </Link>
 
-            <Button onClick={() => removeAll()} variant="secondary">Clear basket</Button>
+            <Button onClick={() => AppActions.removeAll()} variant="secondary">Clear basket</Button>
           </div>
           {/* <div>
             {downloadingAll
@@ -87,3 +84,9 @@ export const DownloadScreen = (props: Props) => {
     )  
   }
 }
+
+export const DownloadScreen = reduxConnect(
+  (s: State): StateProps => {
+    return s
+  }
+)(DownloadScreenComponent)

@@ -3,9 +3,6 @@
 declare module '*.png'
 
 declare module 'react-copy-to-clipboard'
-declare module 'redux-cookies-middleware'
-
-// pos
 declare module 'react-router-dom'
 
 // declare our own types for leaflet-editable plugin

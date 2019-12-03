@@ -2,23 +2,11 @@
 import * as React from 'react'
 import { connect as reduxConnect } from 'react-redux'
 
-import { CollectionTuple, State } from '../../state'
-import { ProductResult } from '../../catalog/types'
-import { useBasket } from '../../basket'
+import { State, DispatchProps, AppActions } from '../../state'
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-type Props = {
-  // collections: CollectionTuple[]
-  // products: ProductResult
-  // productCountByCollection: { collectionName: string, products: number }[]
-}
-
-type StateProps = State['mapScreen']
-
-const BasketSummaryComponent = (props: Props & StateProps) => {
-
-  let [basket, toggleItem, removeAll] = useBasket()
+const BasketSummaryComponent = (props: State & DispatchProps) => {
 
   return (
     <div className="panel basket-summary">
@@ -28,13 +16,13 @@ const BasketSummaryComponent = (props: Props & StateProps) => {
         </Link>
       </div>
       <div>
-        <Button onClick={() => removeAll()} variant="secondary">Clear</Button>
+        <Button onClick={() => props.dispatch(AppActions.removeAll())} variant="secondary">Clear</Button>
       </div>
       <div className="basket-summary-stretchy">
       </div>
       <div className="basket-summary-count">
         <span className="float-right badge badge-pill badge-primary">
-          {basket.items.length}
+          {props.basket.length}
         </span>
       </div>
       <div>
@@ -45,7 +33,7 @@ const BasketSummaryComponent = (props: Props & StateProps) => {
 }
 
 export const BasketSummary = reduxConnect(
-  (s: State): StateProps => {
-    return s.mapScreen
+  (s: State): State => {
+    return s  
   }
 )(BasketSummaryComponent)

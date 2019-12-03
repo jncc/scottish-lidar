@@ -1,23 +1,20 @@
 
 /**
  * The global application state's initial values, and types thereof.
- * Note that the application also stores appropriate state in:
- * - the list screen URL querystring
- * - the basket cookie.
  */
+
+import { Dispatch } from 'redux'
 
 import { Collection, Product } from './catalog/types'
 import { ParsedCollectionPath } from './utility/collectionUtility'
 import { createAction, ActionsUnion } from './utility/reducerUtility'
 import { config } from './screens/map/config'
-import { Dispatch } from 'redux'
+import { BasketItem } from './basket'
 
 /** The type of a React props object containing a Redux dispatch function. */
 export type DispatchProps = { dispatch: Dispatch }
 
 export let initialState = {
-  /** The number of in-progress network requests. */
-  loading    : 0,
   /** The set of collections, stored once for use throughout the app.
    *  It's convenient to store tuples of { collection, parsed path, OGC product  } */
   collections: [] as {
@@ -25,6 +22,8 @@ export let initialState = {
     path: ParsedCollectionPath,
     ogcProduct?: Product
   }[],
+  /** The shopping basket */
+  basket: [] as BasketItem[],
   /** The state for the map screen. */
   mapScreen: {
     collection: 'scotland-gov/lidar/phase-1/dsm',
@@ -50,7 +49,7 @@ export let initialState = {
 export type State = typeof initialState
 export type CollectionTuple = State['collections'][0] // named typed for convenience
 
-export let MapActions = {
+export let AppActions = {
   setCollection: (collection: string) =>
     createAction('SET_COLLECTION', { collection }
   ),
@@ -74,11 +73,16 @@ export let MapActions = {
   ),
   resetToCenter: () =>
     createAction('RESET_TO_CENTER'),
+  toggleItem: (item: BasketItem) =>
+    createAction('TOGGLE_ITEM', { item }
+  ),
+  removeAll: () =>
+    createAction('REMOVE_ALL'),
 }
 
-export type MapAction = ActionsUnion<typeof MapActions>
+export type AppAction = ActionsUnion<typeof AppActions>
 
-export function reducer(state = initialState, a: MapAction): State {
+export function reducer(state = initialState, a: AppAction): State {
   switch (a.type) {
     case 'SET_COLLECTION':
       return {
@@ -156,7 +160,34 @@ export function reducer(state = initialState, a: MapAction): State {
           leaflet: { ...state.mapScreen.leaflet, center: a.payload.center }
         }
       }
+    case 'TOGGLE_ITEM':
+      let existingItem = state.basket.find(x => x.id === a.payload.item.id)
+      let basket = existingItem
+        ? state.basket.filter(item => item.id !== a.payload.item.id)
+        : [...state.basket, a.payload.item]
+      return {
+        ...state,
+        basket
+      }
+    case 'REMOVE_ALL':
+      return {
+        ...state,
+        basket: []
+      }
+    
     default:
       return state
   }
 }
+
+// export let BasketActions = {
+// }
+
+// export type BasketAction = ActionsUnion<typeof BasketActions>
+
+// export function basketReducer(state = initialState, a: BasketAction): State {
+//   switch (a.type) {
+//     default:
+//       return state
+//   }
+// }

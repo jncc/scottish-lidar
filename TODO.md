@@ -1,4 +1,7 @@
 
+- 11 items bug?!
+- Sitemap and Robots
+
 In PiD
 ======
 

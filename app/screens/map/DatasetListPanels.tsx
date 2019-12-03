@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { Dispatch } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 
-import { CollectionTuple, State, MapActions, DispatchProps } from '../../state'
+import { CollectionTuple, State, AppActions, DispatchProps } from '../../state'
 import { DatasetListItem } from './DatasetListItem'
 import { splitVerticalSpace } from '../../utility/verticalSpaceUtility'
 

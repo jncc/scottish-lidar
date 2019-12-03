@@ -3,7 +3,7 @@ import React from 'react'
 import { connect as reduxConnect } from 'react-redux'
 import { PagerInfo } from '../../utility/pagerUtility'
 import { Pagination } from 'react-bootstrap'
-import { MapActions, DispatchProps } from '../../state'
+import { AppActions, DispatchProps } from '../../state'
 
 type Props = {
   pagerInfo: PagerInfo
@@ -19,12 +19,12 @@ const PagerComponent = (props: Props & DispatchProps) => {
         {/* previous page */}
         <Pagination.Prev
           disabled={p.currentPage === 1}
-          onClick={() => props.dispatch(MapActions.setPage(p.currentPage - 1))}
+          onClick={() => props.dispatch(AppActions.setPage(p.currentPage - 1))}
         />
         {/* first page */}
         {p.startPage > 1 &&
           <Pagination.Item 
-            onClick={() => props.dispatch(MapActions.setPage(1))}>
+            onClick={() => props.dispatch(AppActions.setPage(1))}>
             {1}
           </Pagination.Item>
         }
@@ -37,7 +37,7 @@ const PagerComponent = (props: Props & DispatchProps) => {
           <Pagination.Item
             key={n}
             active={n === p.currentPage}
-            onClick={() => props.dispatch(MapActions.setPage(n))}>
+            onClick={() => props.dispatch(AppActions.setPage(n))}>
             {n}
           </Pagination.Item>
         )}
@@ -48,14 +48,14 @@ const PagerComponent = (props: Props & DispatchProps) => {
         {/* last page */}
         {p.endPage < p.totalPages &&
           <Pagination.Item
-            onClick={() => props.dispatch(MapActions.setPage(p.totalPages))}>
+            onClick={() => props.dispatch(AppActions.setPage(p.totalPages))}>
             {p.totalPages}
           </Pagination.Item>
         }
         {/* next page */}
         <Pagination.Next
           disabled={p.currentPage === p.endPage}
-          onClick={() => props.dispatch(MapActions.setPage(p.currentPage + 1))}
+          onClick={() => props.dispatch(AppActions.setPage(p.currentPage + 1))}
         />
       </Pagination>
     </nav>

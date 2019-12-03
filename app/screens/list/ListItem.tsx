@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { connect as reduxConnect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { CollectionTuple, DispatchProps, MapActions } from '../../state'
+import { CollectionTuple, DispatchProps, AppActions } from '../../state'
 import { DatasetPath } from '../../shared/DatasetPath'
 import { WmsModal } from '../../shared/WmsModal'
 import { DatasetLicenceAndMetadataButtons } from '../../shared/DatasetLicenceAndMetadataButtons'
@@ -76,8 +76,8 @@ const ListItemComponent = (props: Props & DispatchProps) => {
           {/* View on map */}
           <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
             <Button onClick={() => {
-              props.dispatch(MapActions.resetToCenter())
-              props.dispatch(MapActions.setCollection(props.collection.collection.name))
+              props.dispatch(AppActions.resetToCenter())
+              props.dispatch(AppActions.setCollection(props.collection.collection.name))
               history.push('/map')
             }}>View on map</Button>
           </div>
