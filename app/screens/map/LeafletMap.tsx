@@ -34,31 +34,6 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
       editable: true, // enable leaflet.editable plugin
     })
 
-    // zoom controls
-    // new L.Control.Zoom({ position: 'bottomleft' }).addTo(map)
-
-    
-  //   let CustomControl = L.Control.extend({
-  //     onAdd: function(map: L.Map) {
-  //         var div = L.DomUtil.create('div');
-  //         div.style.width = '200px';
-  //         div.textContent = 'Hello'
-  //         div.onclick = () => { props.dispatch(AppActions.resetToCenter()) }
-  
-  //         return div
-  //     },
-  //     onRemove: function(map: L.Map) {}
-  //   })
-  // let control = function(opts: any) {
-  //     return new CustomControl(opts)
-  // }
-  // control({ position: 'bottomleft' }).addTo(map)
-
-
-
-
-
-
     map.setView(props.mapScreen.leaflet.center, props.mapScreen.leaflet.zoom)
 
     // add layer groups
