@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 import { Product } from '../../catalog/types'
 import { AppActions, DispatchProps } from '../../state'
-import { BasketItem, MakeBasketItemFromProduct, makeBasketItemFromProduct } from '../../basket'
+import { BasketItem, makeBasketItemFromProduct } from '../../basket'
 
 type Props = { 
   product: Product
