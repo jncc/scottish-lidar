@@ -381,8 +381,10 @@ $panel-gutter: 1.5rem;
     i { color: $gray-600; }
   }
   .add-all-to-basket {
-    &.add-all-to-basket-enabled {
-      cursor: pointer;
+    cursor: pointer;
+    &.add-all-to-basket-disabled {
+      cursor: auto;
+      color: $gray-500;
     }
   }
 }

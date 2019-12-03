@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 import { Product } from '../../catalog/types'
 import { AppActions, DispatchProps } from '../../state'
-import { BasketItem } from '../../basket'
+import { BasketItem, MakeBasketItemFromProduct, makeBasketItemFromProduct } from '../../basket'
 
 type Props = { 
   product: Product
@@ -42,14 +42,7 @@ let ProductListItemComponent = (props: Props & DispatchProps) => {
 
         </div>
         <div className={'product-list-item-basket ' + inBasketItemCssClass}
-          onClick={() => props.toggleBasketItem({
-            id: props.product.id,
-            name: props.product.name,
-            title: props.product.metadata.title,
-            url: props.product.data.product!.http!.url,
-            type: props.product.data.product!.http!.type!,
-            size: props.product.data.product!.http!.size!,
-          })}
+          onClick={() => props.toggleBasketItem(makeBasketItemFromProduct(props.product))}
         >
           <i className="fas fa-shopping-cart" />
         </div>

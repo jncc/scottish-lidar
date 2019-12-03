@@ -10,6 +10,7 @@ import { roundTo3Decimals } from '../../utility/numberUtility'
 import { Product } from '../../catalog/types'
 import { GeoJsonObject } from 'geojson'
 import { State, AppActions, DispatchProps } from '../../state'
+import { makeBasketItemFromProduct } from '../../basket'
 
 type Props = {
   products: Product[]  
@@ -113,14 +114,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
           props.dispatch(AppActions.productHovered(p))
         })
         footprint.on('click', () => {
-          props.dispatch(AppActions.toggleItem({
-            id: p.id,
-            name: p.name,
-            title: p.metadata.title,
-            url: p.data.product!.http!.url,
-            type: p.data.product!.http!.type!,
-            size: p.data.product!.http!.size!,
-          }))
+          props.dispatch(AppActions.toggleItem(makeBasketItemFromProduct(p)))
         })
 
         if (props.basket.some(item => item.id === p.id)) {

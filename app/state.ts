@@ -78,6 +78,9 @@ export let AppActions = {
   ),
   removeAll: () =>
     createAction('REMOVE_ALL'),
+  addAll: (items: BasketItem[]) =>
+    createAction('ADD_ALL', { items }
+  ),
 }
 
 export type AppAction = ActionsUnion<typeof AppActions>
@@ -173,6 +176,11 @@ export function reducer(state = initialState, a: AppAction): State {
       return {
         ...state,
         basket: []
+      }
+    case 'ADD_ALL':
+      return {
+        ...state,
+        basket: [...state.basket, ...a.payload.items]
       }
     
     default:

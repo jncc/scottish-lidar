@@ -11,6 +11,7 @@ import { CollectionTuple, State, DispatchProps, AppActions } from '../../state'
 import { SimplePager } from './SimplePager'
 import { getPageNumberFromOffset } from '../../utility/pagerUtility'
 import { DatasetModal } from '../../shared/DatasetModal'
+import { makeBasketItemFromProduct } from '../../basket'
 
 type Props = {
   products: ProductResult
@@ -24,7 +25,7 @@ let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
   let [infoModalOpen, setInfoModalOpen] = React.useState(false)
 
   let currentResultPage = getPageNumberFromOffset(props.products.query.offset || 0)
-  let addAllToBasketIsAllowed = props.productCountForCurrentCollection && props.productCountForCurrentCollection < 100
+  let entireCurrentResultPageIsInBasket = props.products.result.every(p => props.basket.some(x => x.id === p.id))
   
   if (props.currentCollection) {
     return (
@@ -86,11 +87,14 @@ let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
             /> )}
           </motion.div>
         </div>
-        {/* <div
-          className={'text-right add-all-to-basket' + (addAllToBasketIsAllowed ? ' add-all-to-basket-enabled' : '')}
-          onClick={() => {}} >
+        <div
+          className={'text-right add-all-to-basket'
+            + (entireCurrentResultPageIsInBasket ? ' add-all-to-basket-disabled' : '')}
+          onClick={() => {props.dispatch(AppActions.addAll(
+            props.products.result.map(p => makeBasketItemFromProduct(p))
+          ))}}>
             Add all
-        </div> */}
+        </div>
         <div className="mt-3">
           <SimplePager currentPage={currentResultPage} totalItems={props.productCountForCurrentCollection || 0} />
         </div>
