@@ -4,6 +4,7 @@
  */
 
 import { Dispatch } from 'redux'
+import _ from 'lodash'
 
 import { Collection, Product } from './catalog/types'
 import { ParsedCollectionPath } from './utility/collectionUtility'
@@ -87,7 +88,7 @@ export type AppAction = ActionsUnion<typeof AppActions>
 
 export function reducer(state = initialState, a: AppAction): State {
   switch (a.type) {
-    case 'SET_COLLECTION':
+    case 'SET_COLLECTION': {
       return {
         ...state,
         mapScreen: {
@@ -96,7 +97,8 @@ export function reducer(state = initialState, a: AppAction): State {
           page: 1 // reset paging whenever collection changes
         }
       }
-    case 'SET_BBOX':
+    }
+    case 'SET_BBOX': {
       return {
         ...state,
         mapScreen:{
@@ -105,7 +107,8 @@ export function reducer(state = initialState, a: AppAction): State {
           page: 1 // reset paging whenever bbox changes
         }
       }
-    case 'SET_PAGE':
+    }
+    case 'SET_PAGE': {
       return {
         ...state,
         mapScreen: {
@@ -113,7 +116,8 @@ export function reducer(state = initialState, a: AppAction): State {
           page: a.payload.page
         }
       }
-    case 'RESET_TO_CENTER':
+    }
+    case 'RESET_TO_CENTER': {
       return {
         ...state,
         mapScreen: {
@@ -126,7 +130,8 @@ export function reducer(state = initialState, a: AppAction): State {
           }
         }
       }
-    case 'PRODUCT_HOVERED':
+    }
+    case 'PRODUCT_HOVERED': {
       return {
         ...state,
         mapScreen: {
@@ -134,7 +139,8 @@ export function reducer(state = initialState, a: AppAction): State {
           hovered: a.payload.product
         }
       }
-    case 'PRODUCT_UNHOVERED':
+    }
+    case 'PRODUCT_UNHOVERED': {
       // only unset the hovered product if it's this product that's currently hovered
       if (state.mapScreen.hovered === a.payload.product) {
         return {
@@ -147,7 +153,8 @@ export function reducer(state = initialState, a: AppAction): State {
       } else {
         return state
       }
-    case 'LEAFLET_ZOOM_CHANGED':
+    }
+    case 'LEAFLET_ZOOM_CHANGED': {
       return {
         ...state,
         mapScreen:{
@@ -155,7 +162,8 @@ export function reducer(state = initialState, a: AppAction): State {
           leaflet: { ...state.mapScreen.leaflet, zoom: a.payload.zoom }
         }
       }
-    case 'LEAFLET_CENTER_CHANGED':
+    }
+    case 'LEAFLET_CENTER_CHANGED': {
       return {
         ...state,
         mapScreen:{
@@ -163,26 +171,30 @@ export function reducer(state = initialState, a: AppAction): State {
           leaflet: { ...state.mapScreen.leaflet, center: a.payload.center }
         }
       }
-    case 'TOGGLE_ITEM':
+    }
+    case 'TOGGLE_ITEM': {
       let existingItem = state.basket.find(x => x.id === a.payload.item.id)
       let basket = existingItem
         ? state.basket.filter(item => item.id !== a.payload.item.id)
-        : [...state.basket, a.payload.item]
+        : [...state.basket.filter(item => item.id !== a.payload.item.id), a.payload.item]
       return {
         ...state,
-        basket
+        basket: basket.length <= 1000 ? basket : state.basket
       }
-    case 'REMOVE_ALL':
+    }
+    case 'REMOVE_ALL': {
       return {
         ...state,
         basket: []
       }
-    case 'ADD_ALL':
+    }
+    case 'ADD_ALL': {
+      let basket = _([...state.basket, ...a.payload.items]).uniqBy(item => item.id).value()
       return {
         ...state,
-        basket: [...state.basket, ...a.payload.items]
+        basket: basket.length <= 1000 ? basket : state.basket
       }
-    
+    }
     default:
       return state
   }
