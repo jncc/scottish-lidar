@@ -390,6 +390,12 @@ $panel-gutter: 1.5rem;
     &.add-all-to-basket-disabled {
       cursor: auto;
       color: $gray-500;
+      >i {
+        color: $gray-600;
+      }
+      }
+    >i {
+      color: $gray-300;
     }
   }
 }

@@ -93,7 +93,8 @@ let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
           onClick={() => {props.dispatch(AppActions.addAll(
             props.products.result.map(p => makeBasketItemFromProduct(p))
           ))}}>
-            Add all
+            Add all 
+            <i className="fas fa-shopping-cart ml-2" />
         </div>
         <div className="mt-3">
           <SimplePager currentPage={currentResultPage} totalItems={props.productCountForCurrentCollection || 0} />
