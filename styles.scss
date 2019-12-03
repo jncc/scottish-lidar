@@ -296,15 +296,18 @@ $panel-gutter: 1.5rem;
   text-align: center;
   box-shadow: 0 10px 6px -6px #777;
 }
-.bottom-left-control-group {
+.bottom-left-controls {
   @include above-map;
   position: absolute;
   bottom: $panel-gutter;
   left: $panel-gutter;
+  display: flex;
+  flex-direction: row;
   >div {
-
-    display: flex;
-    flex-direction: row;
+    box-shadow: 0 10px 6px -6px #777;
+  }
+  i {
+    color: $gray-600;
   }
 }
 .bottom-right-control-group {

@@ -12,8 +12,7 @@ type StateProps = State['mapScreen']
 const MapControlsComponent = (props: Props & DispatchProps) => {
   return (
     <Delayed delayInMilliseconds={800}>
-      <div className="bottom-left-control-group">
-        <div className="panel">
+      <div className="bottom-left-controls">
 
           <div>
             <ButtonGroup className="mr-2">
@@ -26,10 +25,13 @@ const MapControlsComponent = (props: Props & DispatchProps) => {
             </ButtonGroup>
           </div>
           <div>
-            <Button onClick={() => props.dispatch(AppActions.resetToCenter())} variant="light">Reset</Button>
+            
+            <Button className="px-3" onClick={() => props.dispatch(AppActions.resetToCenter())} variant="light">
+              <i className="fas fa-dot-circle mr-1"/>
+              Reset
+            </Button>
           </div>
 
-        </div>
       </div>
     </Delayed>
   )
