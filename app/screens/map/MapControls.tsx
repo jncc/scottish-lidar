@@ -26,8 +26,8 @@ const MapControlsComponent = (props: Props & DispatchProps) => {
           </div>
           <div>
             
-            <Button className="px-3" onClick={() => props.dispatch(AppActions.resetToCenter())} variant="light">
-              <i className="fas fa-dot-circle mr-1"/>
+            <Button onClick={() => props.dispatch(AppActions.resetToCenter())} variant="light">
+              <i className="fas fa-crosshairs mr-1"/>
               Reset
             </Button>
           </div>
