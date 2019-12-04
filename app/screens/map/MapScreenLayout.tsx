@@ -56,12 +56,14 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
             animate={rightPanelOpen ? 'open' : 'closed'}
             variants={rightPanelAnimationVariants}
           >
-            <div className="right-panel-container-toggle" onClick={() => setRightPanelOpen(!rightPanelOpen)}>
-              {rightPanelOpen
-                ? <i className="fas fa-chevron-right fa-xs"/>
-                : <i className="fas fa-chevron-left fa-xs"/>
-              }
-            </div>
+            {currentCollection &&
+              <div className="right-panel-container-toggle" onClick={() => setRightPanelOpen(!rightPanelOpen)}>
+                {rightPanelOpen
+                  ? <i className="fas fa-chevron-right fa-xs"/>
+                  : <i className="fas fa-chevron-left fa-xs"/>
+                }
+              </div>
+            }
             <ProductListPanel
               products={props.products}
               currentCollection={currentCollection}
@@ -77,12 +79,14 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
             animate={leftPanelOpen ? 'open' : 'closed'}
             variants={leftPanelAnimationVariants}
           >
-            <div className="left-panel-container-toggle" onClick={() => setLeftPanelOpen(!leftPanelOpen)}>
-              {leftPanelOpen
-                ? <i className="fas fa-chevron-left fa-xs"/>
-                : <i className="fas fa-chevron-right fa-xs"/>
-              }
-            </div>
+            {currentCollection &&
+              <div className="left-panel-container-toggle" onClick={() => setLeftPanelOpen(!leftPanelOpen)}>
+                {leftPanelOpen
+                  ? <i className="fas fa-chevron-left fa-xs"/>
+                  : <i className="fas fa-chevron-right fa-xs"/>
+                }
+              </div>
+            }
             <DatasetListPanels
               collections={props.collections}
               productCountByCollection={props.productCountByCollection}

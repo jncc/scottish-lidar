@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 
-const variants = {
+const animationVariants = {
   attention: {
     scale: [1, 1.2, 1],
     rotate: [180, 360, 360],
@@ -16,20 +16,19 @@ type Props = {
 
 export const BasketSummaryCount = (props: Props) => {
 
-  let [lengthChanged, setLengthChanged] = React.useState(false)
+  let [changed, setChanged] = React.useState(false)
   
   React.useEffect(() => {
-    setLengthChanged(true)
-    setTimeout(() => setLengthChanged(false), 1000)
+    setChanged(true)
+    setTimeout(() => setChanged(false), 1000)
   }, [props.count])
 
   return (
     <motion.div className="basket-summary-count"
-      animate={lengthChanged ? 'attention' : 'normal'}
-      variants={variants}
-      transition={{duration: 0.3}}
-    >
-      <span className="float-right badge badge-pill badge-primary">
+      animate={changed ? 'attention' : 'normal'}
+      variants={animationVariants}
+      transition={{duration: 0.3}}>
+      <span className="badge badge-pill badge-primary">
         {props.count}
       </span>
     </motion.div>
