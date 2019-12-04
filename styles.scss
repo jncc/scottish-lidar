@@ -244,12 +244,6 @@ h1 {
 
 $panel-gutter: 1.5rem;
 
-// tweak leaflet zoom control position
-.leaflet-control-zoom {
-  margin-left: $panel-gutter !important;
-  margin-bottom: $panel-gutter !important;
-}
-
 .r {
   position:relative;
 }
@@ -303,15 +297,17 @@ $panel-gutter: 1.5rem;
   left: $panel-gutter;
   display: flex;
   flex-direction: row;
+  .btn {
+    padding: 0.45rem 0.7rem;;
+  }
   >div {
     box-shadow: 0 10px 6px -6px #777;
   }
   i {
-    color: $gray-600;
+    color: $gray-700;
   }
   .zoom-icon {
     color: $gray-800;
-    
   }
 }
 .bottom-right-control-group {
@@ -383,7 +379,7 @@ $panel-gutter: 1.5rem;
       i {
         color: $gray-300;
         &:hover {
-          color: $gray-400;
+          color: $gray-500;
         }
       }
       &.product-list-item-basket-in {
@@ -393,18 +389,23 @@ $panel-gutter: 1.5rem;
     i { color: $gray-600; }
   }
   .add-all-to-basket {
-    cursor: pointer;
-    &.add-all-to-basket-disabled {
-      cursor: auto;
-      color: $gray-500;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    >div {
+      padding-right: 0.15rem;
       >i {
-        color: $gray-600;
+        color: $gray-500;
+        margin-left: 0.4rem;
       }
-      }
-    >i {
-      color: $gray-300;
       &:hover {
-        color: $gray-400;
+        cursor: pointer;
+        >i { color: $gray-600; }
+      }
+      &.add-all-to-basket-disabled {
+        cursor: auto;
+        color: $gray-300;
+        >i { color: $gray-300; }
       }
     }
   }

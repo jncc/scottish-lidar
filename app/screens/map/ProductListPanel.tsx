@@ -87,14 +87,15 @@ let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
             /> )}
           </motion.div>
         </div>
-        <div
-          className={'text-right add-all-to-basket'
-            + (entireCurrentResultPageIsInBasket ? ' add-all-to-basket-disabled' : '')}
-          onClick={() => {props.dispatch(AppActions.addAll(
-            props.products.result.map(p => makeBasketItemFromProduct(p))
-          ))}}>
-            Add all 
-            <i className="fas fa-shopping-cart ml-2" />
+        <div className="text-right add-all-to-basket">
+          <div
+            className={entireCurrentResultPageIsInBasket ? ' add-all-to-basket-disabled' : ''}
+            onClick={() => {props.dispatch(AppActions.addAll(
+              props.products.result.map(p => makeBasketItemFromProduct(p))
+            ))}}>
+                Add all
+                <i className="fas fa-angle-up" />
+          </div>
         </div>
         <div className="mt-3">
           <SimplePager currentPage={currentResultPage} totalItems={props.productCountForCurrentCollection || 0} />

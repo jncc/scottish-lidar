@@ -27,7 +27,7 @@ const MapControlsComponent = (props: Props & DispatchProps) => {
           <div>
             
             <Button onClick={() => props.dispatch(AppActions.resetToCenter())} variant="light">
-              <i className="fas fa-crosshairs mr-1"/>
+              <i className="fas fa-crosshairs mr-2"/>
               Reset
             </Button>
           </div>
