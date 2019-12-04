@@ -309,6 +309,10 @@ $panel-gutter: 1.5rem;
   i {
     color: $gray-600;
   }
+  .zoom-icon {
+    color: $gray-800;
+    
+  }
 }
 .bottom-right-control-group {
   position: absolute;
@@ -399,6 +403,9 @@ $panel-gutter: 1.5rem;
       }
     >i {
       color: $gray-300;
+      &:hover {
+        color: $gray-400;
+      }
     }
   }
 }
