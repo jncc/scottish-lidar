@@ -5,6 +5,7 @@ import { connect as reduxConnect } from 'react-redux'
 import { State, DispatchProps, AppActions } from '../../state'
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { BasketSummaryCount } from './BasketSummaryCount'
 
 const BasketSummaryComponent = (props: State & DispatchProps) => {
 
@@ -20,11 +21,7 @@ const BasketSummaryComponent = (props: State & DispatchProps) => {
       </div>
       <div className="basket-summary-stretchy">
       </div>
-      <div className="basket-summary-count">
-        <span className="float-right badge badge-pill badge-primary">
-          {props.basket.length}
-        </span>
-      </div>
+      <BasketSummaryCount count={props.basket.length} />
       <div>
         <i className="fas fa-shopping-cart fa-2x" />
       </div>
