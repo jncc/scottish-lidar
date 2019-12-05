@@ -33,7 +33,7 @@ const DownloadScreenComponent = (props: StateProps & DispatchProps) => {
   let basketItemElements = _(props.basket)
     .orderBy(item => item.name)
     .uniqBy(item => item.id)
-    .map(item => <DownloadItem key={item.id} item={item} downloaded={false}/>)
+    .map(item => <DownloadItem key={item.id} item={item} />)
     .value()
 
   if (!basketItemElements.length) {

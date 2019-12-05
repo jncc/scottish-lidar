@@ -2,12 +2,13 @@
 import { Product } from './catalog/types'
 
 export type BasketItem = {
-  id   : string
-  name : string
-  title: string
-  url  : string
-  type : string
-  size : number
+  id        : string
+  name      : string
+  title     : string
+  url       : string
+  type      : string
+  size      : number
+  downloaded: boolean
 }
 
 export const makeBasketItemFromProduct = (p: Product): BasketItem => {
@@ -18,5 +19,6 @@ export const makeBasketItemFromProduct = (p: Product): BasketItem => {
     url: p.data.product!.http!.url,
     type: p.data.product!.http!.type!,
     size: p.data.product!.http!.size!,
+    downloaded: false,
   }  
 }

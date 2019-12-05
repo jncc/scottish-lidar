@@ -2,13 +2,14 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import { motion } from 'framer-motion'
+import { connect as reduxConnect } from 'react-redux'
 
 import { BasketItem } from '../../basket'
 import { formatBytesForHuman } from '../../utility/stringFormatUtility'
+import { DispatchProps, AppActions } from '../../state'
 
 type Props = {
   item: BasketItem
-  downloaded: boolean
 }
 
 const variants = {
@@ -16,9 +17,9 @@ const variants = {
   invisible: { opacity: 0, y: '-100%' },
 }
 
-export const DownloadItem = (props: Props) => {
+const DownloadItemComponent = (props: Props & DispatchProps) => {
 
-  let [downloaded, setDownloaded] = React.useState(props.downloaded)
+  // let [downloaded, setDownloaded] = React.useState(props.downloaded)
 
   return (
     <tr className="download-item">
@@ -38,15 +39,15 @@ export const DownloadItem = (props: Props) => {
         method="get"
         action={props.item.url}
         style={{ display: 'inline' }}>
-        <Button type="submit" onClick={() => setDownloaded(true)}>
+        <Button type="submit" onClick={() => props.dispatch(AppActions.itemDownloaded(props.item))}>
           <i className="fas fa-cloud-download-alt"></i> Download
         </Button>
       </form>
       </td>
       <td className="align-middle download-item-indicator">
       <motion.div
-        initial="invisible"
-        animate={downloaded ? 'visible' : 'invisible'}
+        initial={props.item.downloaded ? 'visible' : 'invisible'}
+        animate={props.item.downloaded ? 'visible' : 'invisible'}
         variants={variants}
       >
         <i className="fas fa-cloud-download-alt fa-lg"></i>
@@ -55,3 +56,5 @@ export const DownloadItem = (props: Props) => {
     </tr>
   )  
 }
+
+export const DownloadItem = reduxConnect()(DownloadItemComponent)

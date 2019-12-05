@@ -86,6 +86,9 @@ export let AppActions = {
   addAll: (items: BasketItem[]) =>
     createAction('ADD_ALL', { items }
   ),
+  itemDownloaded: (item: BasketItem) =>
+    createAction('ITEM_DOWNLOADED', { item}
+  ),
 }
 
 export type AppAction = ActionsUnion<typeof AppActions>
@@ -222,6 +225,17 @@ export function reducer(state = initialState, a: AppAction): State {
       return {
         ...state,
         basket: basket.length <= 1000 ? basket : state.basket
+      }
+    }
+    case 'ITEM_DOWNLOADED': {
+      let basket = state.basket.map(item =>
+        item.id === a.payload.item.id
+          ? { ...item, downloaded: true }
+          : item
+      )
+      return {
+        ...state,
+        basket
       }
     }
     default:
