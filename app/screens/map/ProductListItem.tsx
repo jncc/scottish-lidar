@@ -35,7 +35,7 @@ let ProductListItemComponent = (props: Props & DispatchProps) => {
         <div className="product-list-item-highlight" />
         }
         <div className={'product-list-item-title ' + titleCssClass}>
-          <i className="fas fa-chevron-right fa-xs mr-1"/>
+          <i className="fas fa-chevron-right fa-xs mr-1" aria-hidden="true" />
           {props.product.data.product.title}
         </div>
         <div className="product-list-item-size">
@@ -44,7 +44,7 @@ let ProductListItemComponent = (props: Props & DispatchProps) => {
         <div className={'product-list-item-basket ' + inBasketItemCssClass}
           onClick={() => props.toggleBasketItem(makeBasketItemFromProduct(props.product))}
         >
-          <i className="fas fa-shopping-cart" />
+          <i className="fas fa-shopping-cart" aria-hidden="true" />
         </div>
       </motion.div>
     </AnimatePresence>

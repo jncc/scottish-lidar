@@ -38,7 +38,7 @@ let makeLicenceElement = (useConstraints: string, collectionId: string) => {
           </Tip>
         : <Tip identifier={'lic' + collectionId} content={licence.name}>
             <span>
-              <i className="fas fa-book-open text-secondary mr-2" />
+              <i className="fas fa-book-open text-secondary mr-2" aria-hidden="true" />
               Licence
             </span>
           </Tip>
@@ -51,7 +51,7 @@ let makeExternalMetadataLinkElement = (metadataExternalLink: string, collectionI
   return (
     <Tip identifier={collectionId} content="More information about this dataset">
       <a className="btn btn-light" href={metadataExternalLink} target="_blank">
-        <i className="fas fa-cog text-secondary mr-2" />
+        <i className="fas fa-cog text-secondary mr-2" aria-hidden="true" />
         Metadata
       </a>
     </Tip>

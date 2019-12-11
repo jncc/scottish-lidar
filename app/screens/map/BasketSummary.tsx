@@ -23,7 +23,7 @@ const BasketSummaryComponent = (props: State & DispatchProps) => {
       </div>
       <BasketSummaryCount count={props.basket.length} />
       <div>
-        <i className="fas fa-shopping-cart fa-2x" />
+        <i className="fas fa-shopping-cart fa-2x" aria-hidden="true" />
       </div>
     </div>
   )

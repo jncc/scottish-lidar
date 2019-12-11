@@ -24,7 +24,7 @@ const DownloadItemComponent = (props: Props & DispatchProps) => {
   return (
     <tr className="download-item">
       <td className="align-middle download-item-title">
-        <i className="fas fa-chevron-right fa-xs mr-1"/>
+        <i className="fas fa-chevron-right fa-xs mr-1" aria-hidden="true"/>
         {props.item.title}
       </td>
       <td className="align-middle download-item-name">
@@ -40,7 +40,7 @@ const DownloadItemComponent = (props: Props & DispatchProps) => {
         action={props.item.url}
         style={{ display: 'inline' }}>
         <Button type="submit" onClick={() => props.dispatch(AppActions.itemDownloaded(props.item))}>
-          <i className="fas fa-cloud-download-alt"></i> Download
+          <i className="fas fa-cloud-download-alt" aria-hidden="true"></i> Download
         </Button>
       </form>
       </td>
@@ -50,7 +50,7 @@ const DownloadItemComponent = (props: Props & DispatchProps) => {
         animate={props.item.downloaded ? 'visible' : 'invisible'}
         variants={variants}
       >
-        <i className="fas fa-cloud-download-alt fa-lg"></i>
+        <i className="fas fa-cloud-download-alt fa-lg" aria-hidden="true"></i>
       </motion.div>
       </td>
     </tr>

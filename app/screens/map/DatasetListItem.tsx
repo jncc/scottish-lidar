@@ -41,7 +41,7 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
           {props.collection.ogcProduct && props.collection.ogcProduct.data.product.wms &&
             <span className="mr-1">
               <span className="hoverable-little-icon" onClick={() => setWmsModalOpen(true)}>
-                <i className="fas fa-globe" />
+                <i className="fas fa-globe" aria-hidden="true" />
               </span>
               <WmsModal
                 show={wmsModalOpen}
@@ -52,7 +52,7 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
           }
 
         <span className="hoverable-little-icon" onClick={() => setInfoModalOpen(true)}>
-          <i className="fas fa-info-circle" />
+          <i className="fas fa-info-circle" aria-hidden="true" />
         </span>
         <DatasetModal
           show={infoModalOpen}

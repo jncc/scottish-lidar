@@ -17,17 +17,17 @@ const MapControlsComponent = (props: Props & DispatchProps) => {
           <div>
             <ButtonGroup className="mr-2">
               <Button onClick={() => props.dispatch(AppActions.leafletZoomIn())} variant="light">
-                <i className="fas fa-plus fa-xs zoom-icon"/>
+                <i className="fas fa-plus fa-xs zoom-icon" aria-hidden="true" />
               </Button>
               <Button onClick={() => props.dispatch(AppActions.leafletZoomOut())} variant="light">
-                <i className="fas fa-minus fa-xs zoom-icon"/>
+                <i className="fas fa-minus fa-xs zoom-icon" aria-hidden="true" />
               </Button>
             </ButtonGroup>
           </div>
           <div>
             
             <Button onClick={() => props.dispatch(AppActions.resetToCenter())} variant="light">
-              <i className="fas fa-crosshairs mr-2"/>
+              <i className="fas fa-crosshairs mr-2" aria-hidden="true" />
               Reset
             </Button>
           </div>

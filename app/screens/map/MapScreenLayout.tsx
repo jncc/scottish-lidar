@@ -59,8 +59,8 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
             {currentCollection &&
               <div className="right-panel-container-toggle" onClick={() => setRightPanelOpen(!rightPanelOpen)}>
                 {rightPanelOpen
-                  ? <i className="fas fa-chevron-right fa-xs"/>
-                  : <i className="fas fa-chevron-left fa-xs"/>
+                  ? <i className="fas fa-chevron-right fa-xs" aria-hidden="true" />
+                  : <i className="fas fa-chevron-left fa-xs" aria-hidden="true" />
                 }
               </div>
             }
@@ -82,8 +82,8 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
             {currentCollection &&
               <div className="left-panel-container-toggle" onClick={() => setLeftPanelOpen(!leftPanelOpen)}>
                 {leftPanelOpen
-                  ? <i className="fas fa-chevron-left fa-xs"/>
-                  : <i className="fas fa-chevron-right fa-xs"/>
+                  ? <i className="fas fa-chevron-left fa-xs" aria-hidden="true" />
+                  : <i className="fas fa-chevron-right fa-xs"  aria-hidden="true" />
                 }
               </div>
             }

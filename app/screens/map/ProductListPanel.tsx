@@ -32,7 +32,7 @@ let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
       <div className="panel product-list-panel">
         <div>
           <h5>
-            <i className="fas fa-th text-primary mr-2" />
+            <i className="fas fa-th text-primary mr-2" aria-hidden="true" />
             {props.currentCollection.collection.metadata.title}
           </h5>
           <div className="mb-1">
@@ -40,7 +40,7 @@ let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
           </div>
           <div className="product-list-panel-abstract">
             <span className="hoverable-little-icon mr-2" onClick={() => setInfoModalOpen(true)}>
-              <i className="fas fa-info-circle" />
+              <i className="fas fa-info-circle" aria-hidden="true" />
             </span>
             <DatasetModal
               show={infoModalOpen}
@@ -94,7 +94,7 @@ let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
               props.products.result.map(p => makeBasketItemFromProduct(p))
             ))}}>
                 Add all
-                <i className="fas fa-angle-up" />
+                <i className="fas fa-angle-up" aria-hidden="true" />
           </div>
         </div>
         <div className="mt-3">
