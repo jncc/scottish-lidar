@@ -34,7 +34,7 @@ let makeLicenceElement = (useConstraints: string, collectionId: string) => {
     <a href={licence.url} target="_blank" className="btn btn-light" >
       { licence.image
         ? <Tip identifier={'lic' + collectionId} content={licence.name}>
-            <img src={licence.image} width="56" height="23" />
+            <img src={licence.image} width="56" height="23" alt={'Licence: ' + licence.name} />
           </Tip>
         : <Tip identifier={'lic' + collectionId} content={licence.name}>
             <span>
