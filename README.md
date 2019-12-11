@@ -44,7 +44,7 @@ These variables are both set to the empty string in production, and HTML links a
         ->  /            # prod
         ->  /index.pug   # dev
 
-(But note that Parcel *then* converts .pug templates into .html files!)
+(But note that Parcel of course *then* converts .pug templates into .html files!)
 
 (2) Due to [this bug](https://github.com/parcel-bundler/parcel/issues/2340) each page currently has its own bundle. This could be improved significantly in the future - only three bundles are really needed; one for the static pages, one for the single-page React app, and one shared bundle.
 
@@ -77,9 +77,11 @@ Upgrade all library packages to their latest versions with
 
     yarn upgrade --latest
 
-The parcel-plugin-bundle-visualiser package creates a visual report on bundle size. Build without source maps so they don't confuse matters, and view the output file in `dist/report.html`.
+You can install the `parcel-plugin-bundle-visualiser` package to create a visual report on bundle size. Build without source maps so they don't confuse matters, and view the output file in `dist/report.html`.
 
     yarn build --no-source-maps
+
+Don't commit this change or you'll end up with `report.html` in the production build.
 
 Deployment
 ----------
@@ -91,14 +93,13 @@ The site is automatically deployed to Github Pages by Jenkins using the script i
 Page structure
 --------------
 
-The web application consists of several html "content" pages plus a page that holds the single-page React app. It has been designed to be hosted in production on a static web host. There is no dynamic web server, and we make do with direct calls to the JNCC Catalog database API.
+The web application consists of several html "content" pages plus a page that holds a single-page React app. It has been designed carefully to be hosted in production on a "static" web host. There is no dynamic web server, and we make do with direct client-side calls to the JNCC Catalog database API.
 
     - /                         - home page       (index.html)
     - /data                     - the react app   (data.html)
     - /data#/list                   - the list screen
     - /data#/list?lidar/phase-1     - the list screen, filtered
     - /data#/map                    - the map screen
-    - /data#/map?c=lidar/phase-1    - the map screen (?not sure yet?)
     - /data#/download               - the download screen
     - /about                    - about page      (about.html)
     - /contribute               - contribute page (contribute.html)
@@ -106,7 +107,7 @@ The web application consists of several html "content" pages plus a page that ho
     - /privacy                  - privacy page    (privacy.html)
     - /404                      - 404 page        (404.html)
 
-Note that we use the react-router `HashRouter` to ensure the app behaves itself in a static hosting environment. You can navigate directly to deep links and refresh the browser within the app because the static `data.html` page will be (re)fetched from the server, then allowing the the client-side router to take over.
+Note that we use the react-router `HashRouter` to ensure the app behaves itself in a static hosting environment. You can navigate directly to deep links and refresh the browser within the app because the static `data.html` page will be (re)fetched from the server, allowing the the client-side router to then take over.
 
 Data model and server-side API
 ------------------------------
@@ -197,9 +198,3 @@ Project plan
 - [0.8] Task: Web essentials [1 week] https://github.com/jncc/scottish-lidar/issues/12
 - [0.0] Task: Feedback [1 week] https://github.com/jncc/scottish-lidar/issues/14
 - [0.0] Task (Stretch): Gazetteer https://github.com/jncc/scottish-lidar/issues/15
-
-Demo
-----
-
-- Overriding reason for redesign - Answer the question, "What data do you have here?"
-- Ready for more data! Map screen future-proofed.

@@ -5,12 +5,12 @@
   "scripts": {
     "tsc": "tsc --noEmit",
     "pug": "pug --pretty ./pages",
-    "dev": "parcel ./pages/*.pug --port 4000",
+    "dev": "parcel ./pages/*.* --port 4000",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "tslint --project .",
     "clean": "rimraf .cache ./dist",
-    "build": "yarn clean && yarn tsc && yarn lint && yarn test && parcel build ./pages/*.pug"
+    "build": "yarn clean && yarn tsc && yarn lint && yarn test && parcel build ./pages/*.*"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "5.10.2",
@@ -25,7 +25,6 @@
     "@types/react-router-dom": "4.3.5",
     "jest": "24.9.0",
     "parcel-bundler": "1.12.3",
-    "parcel-plugin-bundle-visualiser": "1.2.0",
     "pug": "^2.0.4",
     "pug-cli": "1.0.0-alpha6",
     "rimraf": "3.0.0",
