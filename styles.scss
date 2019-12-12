@@ -66,6 +66,10 @@ h1 {
   background-color: white;
 }
 
+.pointable {
+  cursor: pointer;
+}
+
 .custom-select {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='white' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
   background-color: $scot-gov-blue;
@@ -308,6 +312,14 @@ $panel-gutter: 1.5rem;
   }
   .zoom-icon {
     color: $gray-800;
+  }
+  .little-control-container {
+    background-color: white;
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.8rem;
   }
 }
 .bottom-right-control-group {

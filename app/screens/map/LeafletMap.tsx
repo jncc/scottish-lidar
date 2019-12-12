@@ -20,6 +20,7 @@ type StateProps = State
 
 let collectionWmsLayerGroup: L.LayerGroup
 let productFootprintLayerGroup: L.LayerGroup
+let aggregateLayer: L.Layer
 let currentProducts: { product: Product, footprint: L.GeoJSON<any> }[]
 let map: L.Map
 let bboxRect: L.Rectangle
@@ -36,7 +37,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
     map.setView(props.mapScreen.leaflet.center, props.mapScreen.leaflet.zoom)
 
-    // add layer groups
+    // footprint and collection layers
     productFootprintLayerGroup = L.layerGroup([]).addTo(map)
     collectionWmsLayerGroup = L.layerGroup([]).addTo(map)
 
@@ -47,7 +48,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
     }).addTo(map)
   
     // aggregate layer
-    L.tileLayer.wms(config.aggregateLayer.baseUrl, {
+    aggregateLayer = L.tileLayer.wms(config.aggregateLayer.baseUrl, {
       layers: config.aggregateLayer.layer,
       format: config.aggregateLayer.format,
       opacity: config.aggregateLayer.opacity,
@@ -100,6 +101,17 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
   React.useEffect(() => {
     map.setZoom(props.mapScreen.leaflet.zoom)
   }, [props.mapScreen.leaflet.zoom])
+
+  // toggle the visualisation layers
+  React.useEffect(() => {
+    if (props.mapScreen.visualise) {
+      map.addLayer(aggregateLayer)
+      map.addLayer(collectionWmsLayerGroup)
+    } else {
+      map.removeLayer(aggregateLayer)
+      map.removeLayer(collectionWmsLayerGroup)
+    }
+  }, [props.mapScreen.visualise])
 
   // draw the wms layer when it changes
   React.useEffect(() => {

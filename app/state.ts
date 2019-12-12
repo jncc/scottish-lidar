@@ -27,23 +27,20 @@ export let initialState = {
   basket: [] as BasketItem[],
   /** The state for the map screen. */
   mapScreen: {
+    /** The current query */
     collection: 'scotland-gov/lidar/phase-1/dsm',
     bbox:       [-4.5, 56.1, -3.5, 56.7] as [number, number, number, number],
     page:       1,
+    /** The currently hover-over product (if any) */
     hovered:    undefined as unknown as Product | undefined,
+    /** Show layers (other than the base layer) */
+    visualise:  true,
+    /** Saved state from the Leaflet map so we can redraw it */
     leaflet:    {
       zoom: config.defaultZoom,
       center: config.defaultCenter,
       redraw: 0,
     },
-    // products:   {
-    //   query: {
-    //     collections: [] as string[], //config.defaultQuery.collections,
-    //     footprint: '', // bboxToWkt(config.defaultQuery.bbox),
-    //     spatialop: 'overlaps'
-    //   },
-    //   result: []
-    // } as ProductResult
   }
 }
 
@@ -66,6 +63,8 @@ export let AppActions = {
   productUnhovered: (product: Product) =>
     createAction('PRODUCT_UNHOVERED', { product }
   ),
+  toggleVisualise: () =>
+    createAction('TOGGLE_VISUALISE'),
   leafletZoomIn: () =>
     createAction('LEAFLET_ZOOM_IN'),
   leafletZoomOut: () =>
@@ -160,6 +159,15 @@ export function reducer(state = initialState, a: AppAction): State {
         }
       } else {
         return state
+      }
+    }
+    case 'TOGGLE_VISUALISE': {
+      return {
+        ...state,
+        mapScreen: {
+          ...state.mapScreen,
+          visualise: !state.mapScreen.visualise
+        }
       }
     }
     case 'LEAFLET_ZOOM_IN': {
