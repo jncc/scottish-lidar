@@ -71,7 +71,7 @@ export function WmsModal(props: any) {
 
             </div>
             <div>
-              How to use WMS <a href="https://www.arcgis.com/features/index.html" target="_blank">in ArcGIS</a>
+              How to use WMS <a href="https://desktop.arcgis.com/en/arcmap/10.3/map/web-maps-and-services/adding-wms-services.htm" target="_blank">in ArcGIS</a>
             </div>
           </div>
         </div>
