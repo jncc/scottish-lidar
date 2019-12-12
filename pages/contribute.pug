@@ -15,7 +15,44 @@ block content
   div.container.normal-page-container.flex-grow-1
     h1 How to contribute data
     p 
-      | Here's how to contribute data to the portal.
+      | For Lidar data, data contributions should consist of metadata and data.
+    p
+      | The first step is to submit your metadata to 
+      a(href='https://www.spatialdata.gov.scot/geonetwork/srv/eng/catalog.search;jsessionid=881CC600DD9138162FE72D2F3483E4D4#/home')
+        | Scotland’s Spatial Data Inventory (SSDI)
+      | . The metadata can be added to the portal in various ways for example, by 
+      a(href='https://scottish-sdi-metadata-portal.readthedocs.io/en/3.4.x/UserDoc_Chap5_Create.html#import-existing-metadata')
+        | importing an existing metadata
+      |  XML file, 
+      a(href='https://scottish-sdi-metadata-portal.readthedocs.io/en/3.4.x/UserDoc_Chap5_Create.html#creating-metadata-from-a-template')
+        | creating a new record from a template
+      | ,
+      a(href='https://scottish-sdi-metadata-portal.readthedocs.io/en/3.4.x/UserDoc_Chap5_Create.html#duplicating-existing-metadata')
+      |  duplicating an existing record
+      |  or 
+      a(href='https://scottish-sdi-metadata-portal.readthedocs.io/en/3.4.x/UserDoc_Chap5_Create.html#harvesting-metadata')
+        | harvesting records 
+      |  from other metadata portals. For more details about creating
+      | discovery metadata and the metadata elements required or other information about the SSDI
+      | please use the SSDI’s 
+      a(href='https://scottish-sdi-metadata-portal.readthedocs.io/en/3.4.x/')
+        | online user guide
+      |  or email 
+      a(href='mailto:SSDI.Metadata@gov.scot') SSDI.Metadata@gov.scot
+      | . 
+    p
+      | Once the metadata has been completed the data can be sent for uploading to the remote
+      | sensing data portal. The data should be point cloud data (LAS format or in LAZ compressed format)
+      | and/or the derived Digital Terrain Model (DTM) and Digital Surface Model (DSM) products as Cloud
+      | optimized GeoTIFFs (COG) if possible or GeoTIFF. 
+    p
+      | Please contact 
+      a(href='mailto:gi-sat@gov.scot') gi-sat@gov.scot
+      | to let them know some data is on its way, its format and size and find out where and how to send your data. 
+    p
+      | For contributing other types of remotely sensed data please contact 
+      a(href='mailto:gi-sat@gov.scot') gi-sat@gov.scot
+      | .
 
   include ../templates/footer
 
