@@ -5,14 +5,17 @@ block variables
     - var page_name = 'index'
 
 block head
-  title Scottish Remote Sensing Portal - Home
+  title Scottish Remote Sensing Portal | Scottish Government
+
+block meta
+  meta(description='A portal containing Scottish Public Sector LiDAR data which you can download by 10km tiles and via WMS web services.')
 
 block content
 
   div.intro
     section
       h1.intro-title Find, share and reuse 
-        h3.intro-subtitle remote sensed data provided by Scottish public sector organisations
+        h3.intro-subtitle Remote sensed data provided by Scottish public sector organisations
         a.btn.btn-dark.mr-1(href='/data' + process.env.PAGE_EXTENSION + '#list')
           | Browse datasets
         a.btn.btn-primary.ml-1(href='/data' + process.env.PAGE_EXTENSION + '#map')

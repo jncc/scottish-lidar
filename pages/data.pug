@@ -1,6 +1,12 @@
 
 extends ../templates/layout.pug
 
+block head
+  title Scottish LiDAR Remote Sensing datasets | Scottish Government
+
+block meta
+  meta(description='Access Scottish remote sensed LiDAR data via WMS or on a map to select and download in DSM, DTM and LAS (LAZ) format.')
+
 block content
   div.flex-grow-1.d-flex.flex-column#app
 
