@@ -27,7 +27,7 @@ const MapControlsComponent = (props: StateProps & DispatchProps) => {
               checked={props.visualise}
               type="switch"
               id="visualised-checkbox"
-              label="Visualisation"
+              label="Visualise"
               onChange={() => props.dispatch(AppActions.toggleVisualise())}
             />
           </div>

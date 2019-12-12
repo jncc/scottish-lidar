@@ -51,9 +51,6 @@ export const DatasetListPanelsComponent = (props: Props & StateProps) => {
         <span className="mr-3">Other datasets </span>
         <span className="float-right badge badge-pill badge-primary">{nonMatchingDatasets.length}</span>
       </h4>
-      {nonMatchingDatasets.length === 0 &&
-      <div>All datasets match your query</div>
-      }
       {nonMatchingDatasets.length > 0 &&
       <div>{nonMatchingDatasets.length} datasets don't match your query</div>
       }
