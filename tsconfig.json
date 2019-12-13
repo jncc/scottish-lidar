@@ -5,5 +5,6 @@
     "strict":          true,     // use typescript's strict type-checking
     "target":          "es5",    // support older es5 browsers
     "esModuleInterop": true,     // support lodash imports with parcel bundler
+    "skipLibCheck"   : true      // react-bootstrap typings are currently borked
   }
 }
