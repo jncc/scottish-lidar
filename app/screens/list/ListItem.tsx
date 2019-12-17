@@ -9,6 +9,7 @@ import { CollectionTuple, DispatchProps, AppActions } from '../../state'
 import { DatasetPath } from '../../shared/DatasetPath'
 import { WmsModal } from '../../shared/WmsModal'
 import { DatasetLicenceAndMetadataButtons } from '../../shared/DatasetLicenceAndMetadataButtons'
+import { Tip } from '../../shared/Tip'
 
 type Props = {
   collection: CollectionTuple
@@ -61,10 +62,14 @@ const ListItemComponent = (props: Props & DispatchProps) => {
           {/* WMS */}
           {c.ogcProduct && c.ogcProduct.data.product.wms &&
             <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
-              <Button variant="light" onClick={() => setModalOpen(true)}>
-                <i className="fas fa-globe text-secondary mr-2" aria-hidden="true" />
-                WMS
-              </Button>
+
+              <Tip identifier={'wms' + c.collection.id} content={'Get WMS link'}>
+                <Button variant="light" onClick={() => setModalOpen(true)}>
+                  <i className="fas fa-globe text-secondary mr-2" aria-hidden="true" />
+                  WMS
+                </Button>
+              </Tip>
+
               <WmsModal
                 show={modalOpen}
                 onHide={() => setModalOpen(false)}
