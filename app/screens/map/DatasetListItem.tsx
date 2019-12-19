@@ -26,7 +26,7 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
           custom
           inline
           type={'radio'}
-          id={`radio-` + props.collection.path.dataset}
+          id={`dataset-radio-` + props.collection.path.dataset}
           label={props.collection.path.shortName}
           checked={props.checked}
           onChange={() => props.dispatch(AppActions.setCollection(props.collection.collection.name))}
