@@ -47,7 +47,7 @@ window.NodeList&&!NodeList.prototype.forEach&&(NodeList.prototype.forEach=functi
 },{}],"BWvR":[function(require,module,exports) {
 
 },{"./images/layers.png":[["layers.350ec81b.png","igUS"],"igUS"],"./images/layers-2x.png":[["layers-2x.d8c4f271.png","cPiA"],"cPiA"],"./images/marker-icon.png":[["marker-icon.b29b8023.png","tG0w"],"tG0w"]}],"8Tcw":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.env={NODE_ENV:"production",CATALOG_API_ENDPOINT:void 0,PAGE_EXTENSION:"",INDEX_PAGE:""};
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.env={NODE_ENV:"production",CATALOG_API_ENDPOINT:"https://srsp-catalog.jncc.gov.uk",PAGE_EXTENSION:"",INDEX_PAGE:""};
 },{}],"JZ8d":[function(require,module,exports) {
 "use strict";function e(e){var o,r=e.Symbol;return"function"==typeof r?r.observable?o=r.observable:(o=r("observable"),r.observable=o):o="@@observable",o}Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=e;
 },{}],"LkZ7":[function(require,module,exports) {
@@ -643,4 +643,4 @@ var t=require("process");Object.defineProperty(exports,"__esModule",{value:!0}),
 },{"react":"1n8/","react-dom":"NKHc","ts-polyfill":"r6TH","whatwg-fetch":"MCp7","nodelist-foreach-polyfill":"nidE","leaflet/dist/leaflet.css":"BWvR","../env":"8Tcw","./App":"hu8U"}],"KAAg":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),require("../shared"),require("../app/index");
 },{"../shared":"LcwX","../app/index":"oLVY"}]},{},["KAAg"], null)
-//# sourceMappingURL=/data.df2feb82.js.map
+//# sourceMappingURL=/data.e7b5ac76.js.map
