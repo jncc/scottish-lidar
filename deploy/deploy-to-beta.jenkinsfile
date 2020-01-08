@@ -1,0 +1,49 @@
+pipeline {
+    agent { label ' nodejs ' }
+    stages {
+        stage('Checkout beta and build') {
+            steps {
+                checkout([$class: 'GitSCM', 
+                    branches: [[name: '*/beta']], 
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [[$class: 'RelativeTargetDirectory', 
+                                    relativeTargetDir: 'beta']], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [[url: 'https://github.com/jncc/scottish-lidar.git']]])
+                dir('./beta') {
+                    sh 'rm -rf node_modules'
+                    sh 'yarn'
+                    // set empty environment variables for live here, because Jenkins bug doesn't seem
+                    // to allow empty strings to be set in Properties Content
+                    // https://issues.jenkins-ci.org/browse/JENKINS-43632
+                    sh 'INDEX_PAGE="" PAGE_EXTENSION="" yarn build'
+                }
+            }
+        }
+        stage('Checkout deployment branch and push') {
+            steps {
+                dir('./gh-pages')  {
+                    deleteDir()
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.GIT_CREDENTIALS_ID,
+                        usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+                        sh 'git clone https://github.com/jncc/scottish-lidar.git . --branch=gh-pages --depth 1'
+                        sh 'git config --local credential.helper "!p() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; p"'
+                        sh 'git rm -rf .'
+                        sh 'git clean -fxd'
+                        sh 'cp -r ../beta/dist/* .'
+                        // Github Pages custom domain configured with a file called 'CNAME'
+                        sh 'echo "beta-scottish-remote-sensing-portal.jncc.gov.uk" > CNAME'
+                        // add the version stamp (replace the string 'x-version-stamp' in all .html files)
+                        sh 'sed -i "s/x-version-stamp/' + env.BUILD_NUMBER + '.' + env.GIT_COMMIT + '/g" *.html'
+                        sh 'ls -a'
+                        sh 'git add --all'
+                        sh 'git config user.name "Jenkins"'
+                        sh 'git config user.email "jenkins@jncc.gov.uk"'
+                        sh 'git commit -a -m "Jenkins Build ' + env.BUILD_NUMBER + '" || echo \'Commit failed. There is possibly nothing to commit.\''
+                        sh 'git push --force || echo \'Push failed. There is possibly nothing to commit.\''
+                    }
+                }
+            }
+        }
+    }
+}
