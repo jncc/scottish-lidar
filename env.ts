@@ -18,10 +18,10 @@ if (!CATALOG_API_ENDPOINT) {
 if (!AGGREGATE_LAYER_BASE_URL) {
   throw(`Environment variable AGGREGATE_LAYER_BASE_URL is required.`)
 }
-if (!PAGE_EXTENSION) {
+if (PAGE_EXTENSION === null || PAGE_EXTENSION === undefined) {
   throw(`Environment variable PAGE_EXTENSION is required.`)
 }
-if (!INDEX_PAGE) {
+if (INDEX_PAGE === null || INDEX_PAGE === undefined) {
   throw(`Environment variable INDEX_PAGE is required.`)
 }
 
