@@ -25,6 +25,7 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
           className="hoverable"
           custom
           inline
+          title={props.collection.collection.name}
           type={'radio'}
           id={`dataset-radio-` + props.collection.path.dataset}
           label={props.collection.path.shortName}

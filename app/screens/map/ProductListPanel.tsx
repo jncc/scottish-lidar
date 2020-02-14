@@ -20,13 +20,18 @@ type Props = {
   productCountForCurrentCollection: number | undefined
 }
 
+
 let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
-
+  
   let [infoModalOpen, setInfoModalOpen] = React.useState(false)
-
+  
   let currentResultPage = getPageNumberFromOffset(props.products.query.offset || 0)
   let entireCurrentResultPageIsInBasket = props.products.result.every(p => props.basket.some(x => x.id === p.id))
   
+  let addAll = () => {props.dispatch(AppActions.addAll(
+    props.products.result.map(p => makeBasketItemFromProduct(p))
+  ))}
+
   if (props.currentCollection) {
     return (
       <div className="panel product-list-panel">
@@ -90,11 +95,10 @@ let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
         <div className="text-right add-all-to-basket">
           <div
             className={entireCurrentResultPageIsInBasket ? ' add-all-to-basket-disabled' : ''}
-            onClick={() => {props.dispatch(AppActions.addAll(
-              props.products.result.map(p => makeBasketItemFromProduct(p))
-            ))}}>
-                Add all
-                <i className="fas fa-angle-up" aria-hidden="true" />
+            tabIndex={0}
+            onClick={addAll}
+            onKeyPress={addAll}>
+              Add all <i className="fas fa-angle-up" aria-hidden="true" />
           </div>
         </div>
         <div className="mt-3">
