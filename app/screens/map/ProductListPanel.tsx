@@ -20,7 +20,6 @@ type Props = {
   productCountForCurrentCollection: number | undefined
 }
 
-
 let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
   
   let [infoModalOpen, setInfoModalOpen] = React.useState(false)
