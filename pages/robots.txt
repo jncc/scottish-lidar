@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://remotesensingdata.gov.scot/sitemap.xml
