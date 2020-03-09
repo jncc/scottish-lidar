@@ -6,8 +6,8 @@
 import { get, post } from './methods'
 import {
   CollectionResult, ProductResult,
-  ProductQuery, ProductCountByCollectionResult } from './types'
-import { bboxToWkt } from '../utility/geospatialUtility'
+  ProductQuery, ProductCountByCollectionResult
+} from './types'
 
 export async function loadCollections() {
   return await get<CollectionResult>('/search/collection/scotland-gov/*')
