@@ -32,7 +32,7 @@ pipeline {
                         sh 'git clean -fxd'
                         sh 'cp -r ../master/dist/* .'
                         // Github Pages custom domain configured with a file called 'CNAME'
-                        sh 'echo "dev-scottish-remote-sensing-portal.jncc.gov.uk" > CNAME'
+                        sh 'echo "remotesensingdata.gov.scot" > CNAME'
                         // add the version stamp (replace the string 'x-version-stamp' in all .html files)
                         sh 'sed -i "s/x-version-stamp/' + env.BUILD_NUMBER + '.' + env.GIT_COMMIT + '/g" *.html'
                         sh 'ls -a'
