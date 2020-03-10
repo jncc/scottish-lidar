@@ -121,6 +121,12 @@ h1 {
   display: none;
 }
 
+.announcement-banner {
+  @include white-background;
+  @include above-map;  
+  opacity: 0.8;
+}
+
 .footer {
   background-color: $gray-700;
   color: white;
