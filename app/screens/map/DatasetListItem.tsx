@@ -34,7 +34,7 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
         />
       </div>
       <div>
-        <span className="mr-3">
+        <span className="dataset-list-item-product-count mr-3">
           {props.collection.productCountForCurrentQuery} 
         </span>
 
