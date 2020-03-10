@@ -43,6 +43,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
     // base layer
     L.tileLayer(config.baseLayerUrlTemplate, {
+      id: 'mapbox/light-v10',
       attribution: config.attribution,
       maxZoom: config.maximumZoom,
     }).addTo(map)
