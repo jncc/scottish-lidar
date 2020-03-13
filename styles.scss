@@ -262,12 +262,12 @@ $panel-gutter: 1.5rem;
   top: $panel-gutter;
   left: $panel-gutter;
   @include above-map;
-  max-width: 19rem;
+  max-width: 29rem;
 }
 .left-panel-container-toggle {
   position: absolute;
   right: -1rem;
-  top: 10rem;
+  top: 12rem;
   background-color: white;
   height: 3rem;
   width: 1rem;
@@ -288,7 +288,7 @@ $panel-gutter: 1.5rem;
 .right-panel-container-toggle {
   position: absolute;
   left: -1rem;
-  top: 10rem;
+  top: 12rem;
   background-color: white;
   height: 3rem;
   width: 1rem;
@@ -355,10 +355,16 @@ $panel-gutter: 1.5rem;
   }
 }
 
+.dataset-list-subheader {
+  color: $gray-600;
+}
 .dataset-list-item {
   display: flex;
   :first-child {
     flex: 1;
+  }
+  .dataset-list-item-product-count {
+    color: $gray-700;
   }
 }
 

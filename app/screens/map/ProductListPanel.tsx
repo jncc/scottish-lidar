@@ -59,18 +59,19 @@ let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
           {props.products.result.length === 0 &&
           <div className="card text-white bg-secondary mt-4">
             <div className="card-body">
-              <h5 className="card-title">No products found</h5>
+              <h5 className="card-title">No products found here</h5>
               <div className="card-text">
 
                 {props.productCountByCollection.every(x => x.products === 0)
                 ?
                 <div>
-                  Try changing the box location - there are no products available here
+                  Try moving the bounding box - there are no products available here
                 </div>
                 :
-                <div>
-                  Try selecting a different dataset
-                </div>
+                <ul>
+                  <li>Select a different dataset</li>
+                  <li>Move the bounding box</li>
+                </ul>
                 }
                 {/* <div>
                   <Button onClick={() => props.dispatch(MapActions.resetToCenter())}>
