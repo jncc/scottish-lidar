@@ -30,11 +30,13 @@ export let initialState = {
     /** The current query */
     collection: 'scotland-gov/lidar/phase-1/dsm',
     bbox:       [-4.5, 56.1, -3.5, 56.7] as [number, number, number, number],
-    page:       1,
-    /** The currently hover-over product (if any) */
+    page:       2,
+    /** The currently hovered-over product (if any) */
     hovered:    undefined as unknown as Product | undefined,
     /** Show layers (other than the base layer) */
     visualise:  true,
+    /** The current Mapbox base layer name */
+    baseLayer: 'mapbox/light-v10' as string | undefined, // this property was added after v1 release
     /** Saved state from the Leaflet map so we can redraw it */
     leaflet:    {
       zoom: config.defaultZoom,

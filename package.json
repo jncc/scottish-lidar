@@ -31,7 +31,7 @@
     "sass": "^1.22.12",
     "ts-jest": "24.0.2",
     "tslint": "5.19.0",
-    "typescript": "3.6.2"
+    "typescript": "3.8.3"
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "5.11.1",

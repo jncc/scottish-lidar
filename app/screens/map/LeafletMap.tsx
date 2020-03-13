@@ -9,7 +9,7 @@ import { bboxFlatArrayToCoordArray } from '../../utility/geospatialUtility'
 import { roundTo3Decimals } from '../../utility/numberUtility'
 import { Product } from '../../catalog/types'
 import { GeoJsonObject } from 'geojson'
-import { State, AppActions, DispatchProps } from '../../state'
+import { State, AppActions, DispatchProps, initialState } from '../../state'
 import { makeBasketItemFromProduct } from '../../basket'
 
 type Props = {
@@ -43,7 +43,10 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
     // base layer
     L.tileLayer(config.baseLayerUrlTemplate, {
-      id: 'mapbox/light-v10',
+      // the `baseLayer` property (the value of which is interpolated into
+      // baseLayerUrlTemplate's {id} placeholder) was added after v1 release,
+      // so existing users might not have the property in their session state
+      id: props.mapScreen.baseLayer ?? initialState.mapScreen.baseLayer,
       attribution: config.attribution,
       maxZoom: config.maximumZoom,
     }).addTo(map)
