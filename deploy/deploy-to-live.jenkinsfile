@@ -1,7 +1,7 @@
 pipeline {
     agent { label ' nodejs ' }
     stages {
-        stage('Checkout master and build') {
+        stage('Checkout live and build') {
             steps {
                 checkout([$class: 'GitSCM', 
                     branches: [[name: '*/master']], 
@@ -10,7 +10,7 @@ pipeline {
                                     relativeTargetDir: 'master']], 
                     submoduleCfg: [], 
                     userRemoteConfigs: [[url: 'https://github.com/jncc/scottish-lidar.git']]])
-                dir('./master') {
+                dir('./live') {
                     sh 'rm -rf node_modules'
                     sh 'yarn'
                     // set empty environment variables for live here, because Jenkins bug doesn't seem
