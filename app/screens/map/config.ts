@@ -7,7 +7,7 @@ export const config = {
   defaultZoom: 8,
   maximumZoom: 13,
   defaultCenter: [56.4, -4] as [number, number],
-  baseLayerUrlTemplate: `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGV0ZW1vbiIsImEiOiJjazlzZjVuMnoxM21jM2dxcDVtdGtvOHZ1In0.p_HR_xVr93qHH4l8PIoCVw`,
+  baseLayerUrlTemplate: `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam5jYy13ZWJtYXN0ZXIiLCJhIjoiY2s5c2wyeXdxMG8weTNlcWt6dmw3Nno4cCJ9.zSDqXxiNyofO3Ilq-hyfqg`,
   attribution: `Backdrop &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>`,
   aggregateLayer: {
     baseUrl: env.AGGREGATE_LAYER_BASE_URL,
