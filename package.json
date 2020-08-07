@@ -38,7 +38,7 @@
     "autoprefixer": "^9.6.1",
     "bootstrap": "4.3.1",
     "framer-motion": "1.6.15",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "leaflet": "1.5.1",
     "leaflet-editable": "1.0.0",
     "lodash": "4.17.15",
