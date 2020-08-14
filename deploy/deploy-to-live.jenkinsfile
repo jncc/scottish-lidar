@@ -4,10 +4,10 @@ pipeline {
         stage('Checkout live and build') {
             steps {
                 checkout([$class: 'GitSCM', 
-                    branches: [[name: '*/master']], 
+                    branches: [[name: '*/live']], 
                     doGenerateSubmoduleConfigurations: false, 
                     extensions: [[$class: 'RelativeTargetDirectory', 
-                                    relativeTargetDir: 'master']], 
+                                    relativeTargetDir: 'live']], 
                     submoduleCfg: [], 
                     userRemoteConfigs: [[url: 'https://github.com/jncc/scottish-lidar.git']]])
                 dir('./live') {
@@ -30,7 +30,7 @@ pipeline {
                         sh 'git config --local credential.helper "!p() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; p"'
                         sh 'git rm -rf .'
                         sh 'git clean -fxd'
-                        sh 'cp -r ../master/dist/* .'
+                        sh 'cp -r ../live/dist/* .'
                         // Github Pages custom domain configured with a file called 'CNAME'
                         sh 'echo "remotesensingdata.gov.scot" > CNAME'
                         // add the version stamp (replace the string 'x-version-stamp' in all .html files)
