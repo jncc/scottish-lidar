@@ -204,5 +204,5 @@ export const LeafletMap = reduxConnect(
   }
 )(LeafletMapComponent)
 
-let productFootprintStyleOff = { fillOpacity: 0, weight: 1, color: '#fff' }
-let productFootprintStyleOn =  { fillOpacity: 0, weight: 3, color: '#fff' }
+let productFootprintStyleOff = { fillOpacity: 0, weight: 1, color: '#555' }
+let productFootprintStyleOn =  { fillOpacity: 0, weight: 2, color: '#444' }
