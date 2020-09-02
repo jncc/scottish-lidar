@@ -13,10 +13,6 @@ html(lang='en')
     block head
       title Scottish Remote Sensing Portal | Scottish Government
   body
-    //- cannot put the Google Tag Manager script in the document head
-    //- because Parcel munches it; sure it'll be ok here in the body
-    include ./google-tag-manager-head.html
-    //- include ./google-tag-manager-body.html
     div#layout-container
       include ./header
       include ./cookie-consent
