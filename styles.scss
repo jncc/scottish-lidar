@@ -114,13 +114,6 @@ h1 {
   }
 }
 
-.cookie-banner {
-  @include white-background;
-  @include above-map;  
-  opacity: 0.8;
-  display: none;
-}
-
 .announcement-banner {
   @include white-background;
   @include above-map;  
@@ -496,3 +489,31 @@ $panel-gutter: 1.5rem;
     }
   }
 }
+
+// CIVIC COOKIE CONTROL CUSTOMISATIONS
+//
+// make hyperlinks look different to normal text
+.civic-cookie-control-link {
+  text-decoration: underline;
+  &:visited { text-decoration: underline; }
+  &:hover { text-decoration: underline; }
+  &:active { text-decoration: underline; }
+}
+.civic-cookie-banner-title {
+  font-size: 2em;
+  margin: 3em 0;
+}
+.ccc-notify-text {
+  margin-top: 7em;
+  margin-bottom: 7em;
+  padding-right: 2em;
+}
+.cc-panel {
+  padding: 1em;
+}
+// hack to hide the "Accept" button - the cookie control UI is otherwise very misleading
+#ccc-button-holder {
+  display: none;
+}
+//
+// END CIVIC COOKIE CONTROL CUSTOMISATIONS

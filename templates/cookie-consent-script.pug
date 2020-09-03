@@ -1,19 +1,62 @@
 
 script.
-  // implement cookie consent with smooth, classic javascript
-  document.addEventListener("DOMContentLoaded", function() {
-    var ok = document.querySelector('#cookie-consent-ok');
-    var banner = document.querySelector('.cookie-banner');
-    var hideBanner = function() { banner.style.display = "none"; }
-    var showBanner = function() { banner.style.display = "block"; }
-    ok.onclick = function(e) {
-      var date = new Date();
-      date.setMonth(date.getMonth() + 1)
-      document.cookie = "cookie-consent=all;expires=" + date.toUTCString();
-      hideBanner();
-      e.preventDefault();
-    }
-    if (document.cookie.indexOf('cookie-consent=') < 0) {
-      showBanner();
-    }
-  });
+    var civicCookieControlConfig = {
+      apiKey: 'c21c48ca8bb88a6c190b5cb444772f1970eb87ef',
+      product: 'PRO',
+      logConsent: true,
+      initialState: 'notify',
+      notifyDismissButton: false,
+      rejectButton: false,
+      setInnerHTML: true,
+      closeStyle: 'button',
+      text: {
+        notifyTitle: '<span class="civic-cookie-banner-title">We use cookies</span>',
+        notifyDescription: 'Some of these cookies are essential, while others help us to improve your experience by providing insights into how the site is being used.'
+          + ' For more detailed information, please read our <a href="/cookies" class="civic-cookie-control-link">cookie notice</a>.',
+        accept: 'Accept all cookies',
+        reject: 'Customise settings',
+        title: 'The Scottish Remote Sensing Portal uses cookies',
+        settings: 'Customise settings',
+        intro: '<p>Some of these cookies are essential, while others help us to improve your experience by providing insights into how the site is being used.</p>'
+          + '<p>For more detailed information, please read our <a href="/cookies" class="civic-cookie-control-link">cookie notice</a>.</p>',
+        necessaryTitle: 'Essential cookies',
+        necessaryDescription: 'Essential cookies enable core functionality. The site cannot function without these cookies and can only be disabled by changing your browser preferences.',
+        closeLabel: 'Save settings'  // closing doesn't *do* anything!
+      },
+      branding: {
+        removeAbout: true,
+        backgroundColor: '#222',
+        toggleColor: '#0065bd',
+        fontFamily: 'Hind Madurai, "Helvetica Neue", Helvetica, Arial, sans-serif',
+        fontSize: '1em',
+        fontSizeTitle: '2em'
+      },
+      optionalCookies: [
+        {
+            name : 'analytics',
+            recommendedState: false,
+            label: 'Analytics cookies',
+            description: 'Please let us set analytical cookies to help us improve our website by collecting and reporting information about how you use it, in a way that does not directly identify anyone.',
+            cookies: ['_gat_UA-100321458-2', '_gid', '_ga'],
+            onAccept : function(){
+                // Google Tag Manager
+                // (GTM doesn't set any cookies and we only use it currently to enable
+                // analytics. If we ever need it for anything else, we would probably raise
+                // a custom 'enable analytics' event here and move this initialisation code out of here.)
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-KTFCSMX');
+                // End Google Tag Manager
+            },
+            onRevoke: function(){
+                // Disable Google Analytics
+                window['ga-disable-UA-100321458-2'] = true;
+                // End Google Analytics
+            }
+        }
+      ]
+    };
+
+    CookieControl.load(civicCookieControlConfig);
