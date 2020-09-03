@@ -40,7 +40,7 @@ pipeline {
                         sh 'git config user.name "Jenkins"'
                         sh 'git config user.email "jenkins@jncc.gov.uk"'
                         sh 'git commit -a -m "Jenkins Build ' + env.BUILD_NUMBER + '"'
-                        sh 'git push --force || echo \'Push failed. There is possibly nothing to commit.\''
+                        sh 'git push --force'
                     }
                 }
             }
