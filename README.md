@@ -90,6 +90,10 @@ The site is automatically deployed to Github Pages by Jenkins using the script i
 
     <meta name="x-version" content="43.320b45076e0c0ffc3016944f66754f32af85a6cf">
 
+It is possible to deploy the site without Jenkins by manually following the command line steps in the relevent Jenkinsfile. Essentially, you need to force push to the `gh-pages` branch of the relevent repository. You need to ensure that all the required environment variables are set during the build, e.g.
+
+    INDEX_PAGE="" PAGE_EXTENSION="" CATALOG_API_ENDPOINT="https://beta-srsp-ows.jncc.gov.uk" AGGREGATE_LAYER_BASE_URL="https://beta-srsp-ows.jncc.gov.uk.uk/scotland/wms" yarn build
+
 Page structure
 --------------
 
