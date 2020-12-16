@@ -37,8 +37,8 @@ pipeline {
                         sh 'sed -i "s/x-version-stamp/' + env.BUILD_NUMBER + '.' + env.GIT_COMMIT + '/g" *.html'
                         sh 'ls -a'
                         sh 'git add --all'
-                        sh 'git commit -a -m "Jenkins Build ' + env.BUILD_NUMBER + '"'
-                        sh 'git push --force'
+                        sh 'git commit -a -m "Jenkins build ' + env.BUILD_NUMBER + '" --author "Jenkins <jenkins@jncc.gov.uk>"'
+                        sh 'git push --force --repo https://$GIT_USERNAME:$GIT_PASSWORD@github.com/jncc/scottish-lidar-beta.git'
                     }
                 }
             }
