@@ -27,7 +27,6 @@ pipeline {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.GIT_CREDENTIALS_ID,
                         usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
                         sh 'git clone https://github.com/jncc/scottish-lidar-beta.git . --branch=gh-pages --depth 1'
-                        sh 'git config --local credential.helper "!p() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; p"'
                         sh 'git rm -rf .'
                         sh 'git clean -fxd'
                         sh 'cp -r ../beta/dist/* .'
