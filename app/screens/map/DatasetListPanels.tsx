@@ -71,7 +71,9 @@ let makeDatasetListUI = (
       return (
         <div key={key} className="mb-2">
           <h5 className="mb-1">{key}</h5>
-          {collections.map(c => <DatasetListItem
+          {collections
+            .slice(0).sort((a, b) => a.path.shortName.localeCompare(b.path.shortName)) // sort alphabetically
+            .map(c => <DatasetListItem
             key={c.collection.name}
             collection={c}
             checked={c.collection.name === collection}
