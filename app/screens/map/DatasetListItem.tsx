@@ -28,7 +28,8 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
           title={props.collection.collection.name}
           type={'radio'}
           id={`dataset-radio-` + props.collection.path.dataset}
-          label={props.collection.path.shortName.replace(`/`, `\u2009/\u2009`)} // add some space around any slashes in short names
+          // add some space around any slashes in short names
+          label={props.collection.path.shortName.replace(`/`, `\u2009/\u2009`)}
           checked={props.checked}
           onChange={() => props.dispatch(AppActions.setCollection(props.collection.collection.name))}
         />
