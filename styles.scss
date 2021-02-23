@@ -378,6 +378,10 @@ $panel-gutter: 1.5rem;
   }
   .product-list-item {
     display: flex;
+    .product-list-item-bullet {
+      color: $gray-600;
+      font-size: 80%;
+    }
     .product-list-item-highlight {
       position: relative;
       left: -9px;
@@ -474,7 +478,10 @@ $panel-gutter: 1.5rem;
     }
     .download-item-title {
       font-size: 110%;
-      i { color: $gray-600; }
+      .download-item-bullet {
+        color: $gray-600;
+        font-size: 80%;        
+      }
     }
     .download-item-name {
       color: $spot-muted;
