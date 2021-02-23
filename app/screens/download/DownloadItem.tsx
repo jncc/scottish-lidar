@@ -19,8 +19,6 @@ const variants = {
 
 const DownloadItemComponent = (props: Props & DispatchProps) => {
 
-  // let [downloaded, setDownloaded] = React.useState(props.downloaded)
-
   return (
     <tr className="download-item">
       <td className="align-middle download-item-title">

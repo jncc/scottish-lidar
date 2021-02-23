@@ -9,12 +9,3 @@ export function bboxFlatArrayToCoordArray(bbox: number[]): [[number, number], [n
   let [minX, minY, maxX, maxY] = bbox
   return [[minY, minX], [maxY, maxX]]
 }
-
-// /** Ensures the value is either already an array, else makes it into  a singleton array. */
-// export function ensureArray<T>(input: T | T[]) {
-//   if (Array.isArray(input)) {
-//       return input
-//   } else {
-//       return [input]
-//   }
-// }
