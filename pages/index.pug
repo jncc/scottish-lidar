@@ -14,12 +14,13 @@ block content
 
   div.intro
     section
-      h1.intro-title Find, share and reuse 
-        h3.intro-subtitle Remote sensed data provided by Scottish public sector organisations
-        a.btn.btn-dark.mr-1(href='/data' + process.env.PAGE_EXTENSION + '#/list')
-          | Browse datasets
-        a.btn.btn-primary.ml-1(href='/data' + process.env.PAGE_EXTENSION + '#/map')
-          | Explore the map
+      div.intro-text
+        h1.intro-title Find, share and reuse 
+          h3.intro-subtitle Remote sensed data provided by Scottish public sector organisations
+      a.btn.btn-dark.mr-1(href='/data' + process.env.PAGE_EXTENSION + '#/list')
+        | Browse datasets
+      a.btn.btn-primary.ml-1(href='/data' + process.env.PAGE_EXTENSION + '#/map')
+        | Explore the map
           
   include ../templates/footer
 

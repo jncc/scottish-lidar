@@ -42,9 +42,12 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
           {/* WMS */}
           {props.collection.ogcProduct && props.collection.ogcProduct.data.product.wms &&
             <span className="mr-1">
-              <span className="hoverable-little-icon" onClick={() => setWmsModalOpen(true)}>
-                <i className="fas fa-globe" aria-hidden="true" />
-              </span>
+              {/* we want the semantics of a button but none of the styling... */}
+              <button onClick={() => setWmsModalOpen(true)} style={{border:"none", background:"none", padding:"0", margin:"0"}}>
+                <span className="hoverable-little-icon" >
+                  <i className="fas fa-globe" aria-hidden="true" />
+                </span>
+              </button>
               <WmsModal
                 show={wmsModalOpen}
                 onHide={() => setWmsModalOpen(false)}
@@ -52,10 +55,11 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
               />
             </span>
           }
-
-        <span className="hoverable-little-icon" onClick={() => setInfoModalOpen(true)}>
-          <i className="fas fa-info-circle" aria-hidden="true" />
-        </span>
+        <button onClick={() => setInfoModalOpen(true)} style={{border:"none", background:"none", padding:"0", margin:"0"}}>
+          <span className="hoverable-little-icon" >
+            <i className="fas fa-info-circle" aria-hidden="true" />
+          </span>
+        </button>
         <DatasetModal
           show={infoModalOpen}
           onHide={() => setInfoModalOpen(false)}
