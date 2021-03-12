@@ -62,6 +62,23 @@ h1 {
     font-family: $header-font-family;
   }
 
+.btn {
+  box-shadow: none;
+  border-width: 2px;
+  border-color: transparent;
+
+  &.btn-primary:focus {
+    background-color: #f8f9fa;
+    color: black;
+  }
+
+  &:focus {
+    box-shadow: none;
+    border-width: 2px;
+    border-color: black;
+  }
+}
+
 @mixin white-background {
   background-color: white;
 }
@@ -74,10 +91,22 @@ h1 {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='white' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
   background-color: $scot-gov-blue;
   color: white;
-  border: 0 none;
-  border-radius: 20px;
+  border-radius: 18px;
   padding: 6px 20px;
   min-width: 15rem;
+
+  box-shadow: none;
+  border-width: 2px;
+  border-color: transparent;
+
+  &:focus {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='black' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+    box-shadow: none;
+    border-width: 2px;
+    border-color: black;
+    background-color: #f8f9fa;
+    color: black;
+  }
 }
 
 .header {
@@ -105,8 +134,11 @@ h1 {
       padding-bottom: 0;
     }
     .nav-item {
-      margin-bottom: 0.3rem;
-      &.active {
+      &.active a.nav-link {
+        margin-bottom: 0;
+        border-bottom: 0.3rem solid $scot-gov-blue;
+      }
+      & a.nav-link:focus {
         margin-bottom: 0;
         border-bottom: 0.3rem solid $scot-gov-blue;
       }
@@ -194,13 +226,14 @@ h1 {
 }
 
 .moreable {
+  a {
+    float: right;
+  }
   a.collapsed:after {
     content: '+ Show More';
-    float: right;
   }
   a:not(.collapsed):after {
     content: '- Show Less';
-    float: right;
   }
   .moreable-content {
     margin-bottom: 0;

@@ -63,7 +63,7 @@ const ListItemComponent = (props: Props & DispatchProps) => {
           {c.ogcProduct && c.ogcProduct.data.product.wms &&
             <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
 
-              <Tip identifier={'wms' + c.collection.id} content={'Get WMS link'}>
+              <Tip identifier={'wms' + c.collection.id} content={'Get WMS link popup'}>
                 <Button variant="light" onClick={() => setModalOpen(true)}>
                   <i className="fas fa-globe text-secondary mr-2" aria-hidden="true" />
                   WMS

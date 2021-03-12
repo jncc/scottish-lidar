@@ -28,13 +28,13 @@ export const ListScreen = (props: Props) => {
   return (
     <div className="container normal-page-container list-screen">
       <h1>Datasets</h1>
-      <hr />
+      <hr aria-hidden="true" />
       <div className="filter-bar row align-items-center">
         <div className="col mb-md-0 mb-3">
-          <span>
+          <span aria-live="polite">
             Showing 
             {listItemElements.length == props.collections.length &&
-              <span> all</span>
+              <span> all </span>
             }
             <span className="badge badge-pill badge-light">
               <span className="badge badge-pill badge-secondary mr-1">
@@ -61,7 +61,7 @@ export const ListScreen = (props: Props) => {
           </select>
         </div>
       </div>
-      <hr className="filter-bar-hr"/>
+      <hr className="filter-bar-hr" aria-hidden="true"/>
       <Delayed delayInMilliseconds={300}>
         <div className="list-items">
           {listItemElements}
