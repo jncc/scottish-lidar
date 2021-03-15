@@ -72,6 +72,11 @@ h1 {
     color: black;
   }
 
+  &.btn-dark:focus {
+    background-color: #f8f9fa;
+    color: black;
+  }
+
   &:focus {
     box-shadow: none;
     border-width: 2px;
@@ -81,6 +86,15 @@ h1 {
 
 @mixin white-background {
   background-color: white;
+}
+
+.accessibility {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .pointable {
@@ -134,12 +148,14 @@ h1 {
       padding-bottom: 0;
     }
     .nav-item {
-      &.active a.nav-link {
+      & a.nav-link {
         margin-bottom: 0;
+        border-bottom: 0.3rem solid transparent;
+      }
+      &.active a.nav-link {
         border-bottom: 0.3rem solid $scot-gov-blue;
       }
       & a.nav-link:focus {
-        margin-bottom: 0;
         border-bottom: 0.3rem solid $scot-gov-blue;
       }
     }

@@ -195,7 +195,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
   // react has nothing to do with the leaflet map;
   // map manipulation is performed via side-effects
-  return <div id="leaflet-map"></div>
+  return <div id="leaflet-map" aria-description="An interactive map of Scotland showing areas of LiDAR data available to download. If you need help finding or accessing the data please contact us."></div>
 }
 
 export const LeafletMap = reduxConnect(
