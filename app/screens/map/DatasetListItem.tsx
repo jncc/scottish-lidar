@@ -43,7 +43,8 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
           {props.collection.ogcProduct && props.collection.ogcProduct.data.product.wms &&
             <span className="mr-1">
               {/* we want the semantics of a button but none of the styling... */}
-              <button onClick={() => setWmsModalOpen(true)} style={{border:"none", background:"none", padding:"0", margin:"0"}}>
+              <button onClick={() => setWmsModalOpen(true)} style={{border:"none", background:"none", padding:"0", margin:"0"}}
+                aria-label="Get WMS link">
                 <span className="hoverable-little-icon" >
                   <i className="fas fa-globe" aria-hidden="true" />
                 </span>
@@ -55,7 +56,8 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
               />
             </span>
           }
-        <button onClick={() => setInfoModalOpen(true)} style={{border:"none", background:"none", padding:"0", margin:"0"}}>
+        <button onClick={() => setInfoModalOpen(true)} style={{border:"none", background:"none", padding:"0", margin:"0"}}
+          aria-label="About this dataset">
           <span className="hoverable-little-icon" >
             <i className="fas fa-info-circle" aria-hidden="true" />
           </span>

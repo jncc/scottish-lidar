@@ -67,12 +67,7 @@ h1 {
   border-width: 2px;
   border-color: transparent;
 
-  &.btn-primary:focus {
-    background-color: #f8f9fa;
-    color: black;
-  }
-
-  &.btn-dark:focus {
+  &.btn-primary:focus, &.btn-secondary:focus, &.btn-dark:focus {
     background-color: #f8f9fa;
     color: black;
   }
