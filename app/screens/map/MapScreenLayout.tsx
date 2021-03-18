@@ -47,7 +47,10 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
   
   return <>
     {makeSmallScreenWarningUI()}
-    <span id="sr-map-description" className="accessibility">An interactive map of Scotland showing areas of LiDAR data available to download. The map is not accessible at this time, please contact us for help accessing the data.</span>
+    <span id="sr-map-description" className="accessibility">
+      An interactive map of Scotland showing areas of LiDAR data available to download. 
+      The map is not accessible at this time, please contact us for help accessing the data.
+    </span>
     <div className="d-none d-lg-block ">
       <div className="r">
         <Delayed delayInMilliseconds={800}>
