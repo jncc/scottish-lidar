@@ -45,7 +45,7 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
               {/* we want the semantics of a button but none of the styling... */}
               <button onClick={() => setWmsModalOpen(true)}
                 style={{border:'none', background:'none', padding:0, margin:0}}
-                aria-label='Get WMS link'>
+                aria-label="Get WMS link">
                 <span className="hoverable-little-icon" >
                   <i className="fas fa-globe" aria-hidden="true" />
                 </span>
@@ -59,7 +59,7 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
           }
         <button onClick={() => setInfoModalOpen(true)}
           style={{border:'none', background:'none', padding:0, margin:0}}
-          aria-label='About this dataset'>
+          aria-label="About this dataset">
           <span className="hoverable-little-icon" >
             <i className="fas fa-info-circle" aria-hidden="true" />
           </span>
