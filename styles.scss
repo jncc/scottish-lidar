@@ -57,26 +57,37 @@ body {
   z-index: 1001;
 }
 
+@mixin accessibility-border {
+  outline: none;
+  box-shadow: none;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  &:focus {
+    box-shadow: none;
+    border-color: black;
+  }
+}
+
 h1 {
     color: $scot-gov-blue;
     font-family: $header-font-family;
   }
 
 .btn {
-  box-shadow: none;
-  border-width: 2px;
-  border-color: transparent;
+  @include accessibility-border;
 
   &.btn-primary:focus, &.btn-secondary:focus, &.btn-dark:focus {
     background-color: #f8f9fa;
     color: black;
   }
+}
 
-  &:focus {
-    box-shadow: none;
-    border-width: 2px;
-    border-color: black;
-  }
+.icon-button {
+  @include accessibility-border;
+
+  background: none;
+  margin: 0px;
+  padding: 0px;
 }
 
 @mixin white-background {
@@ -97,6 +108,8 @@ h1 {
 }
 
 .custom-select {
+  @include accessibility-border;
+
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='white' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
   background-color: $scot-gov-blue;
   color: white;
@@ -104,15 +117,8 @@ h1 {
   padding: 6px 20px;
   min-width: 15rem;
 
-  box-shadow: none;
-  border-width: 2px;
-  border-color: transparent;
-
   &:focus {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='black' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
-    box-shadow: none;
-    border-width: 2px;
-    border-color: black;
     background-color: #f8f9fa;
     color: black;
   }
@@ -238,6 +244,8 @@ h1 {
 
 .moreable {
   a {
+    @include accessibility-border;
+
     float: right;
   }
   a.collapsed:after {
@@ -440,6 +448,7 @@ $panel-gutter: 1.5rem;
       }
     }
     .product-list-item-basket {
+      @include accessibility-border;
       cursor: pointer;
       i {
         color: $gray-300;
@@ -458,6 +467,8 @@ $panel-gutter: 1.5rem;
     flex-direction: row;
     justify-content: flex-end;
     >div {
+      @include accessibility-border;
+
       padding-right: 0.15rem;
       >i {
         color: $gray-500;
