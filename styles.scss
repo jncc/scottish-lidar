@@ -246,13 +246,16 @@ h1 {
   a {
     @include accessibility-border;
 
+    font-size: 0; /* link elements should have text, but we don't want it visible here */
     float: right;
   }
   a.collapsed:after {
     content: '+ Show More';
+    font-size: initial;
   }
   a:not(.collapsed):after {
     content: '- Show Less';
+    font-size: initial;
   }
   .moreable-content {
     margin-bottom: 0;

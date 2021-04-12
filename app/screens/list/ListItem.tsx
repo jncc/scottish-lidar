@@ -49,7 +49,7 @@ const ListItemComponent = (props: Props & DispatchProps) => {
           </p>
           <a role="button" className="collapsed"
             data-toggle="collapse" href={'#' + abstractElementId}
-            aria-expanded="false" aria-controls="collapseExample"></a>
+            aria-expanded="false" aria-controls="collapseExample">Show more/less</a>
         </div>        
       </div>
 

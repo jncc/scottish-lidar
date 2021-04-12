@@ -56,7 +56,8 @@ export const ListScreen = (props: Props) => {
             <select
               value={props.filter}
               onChange={e => { props.setFilter(e.target.value) }}
-              className="custom-select" >
+              className="custom-select"
+              aria-label="Choose a dataset">
               <option key="all" value="">All</option>
               {filterDropdownElements}
             </select>
