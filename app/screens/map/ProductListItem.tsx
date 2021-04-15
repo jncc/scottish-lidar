@@ -45,6 +45,7 @@ let ProductListItemComponent = (props: Props & DispatchProps) => {
           onClick={() => props.toggleBasketItem(makeBasketItemFromProduct(props.product))}
           onKeyPress={() => props.toggleBasketItem(makeBasketItemFromProduct(props.product))}
           tabIndex={0}
+          aria-label={'Add ' + props.product.data.product.title}
         >
           <i className="fas fa-shopping-cart" aria-hidden="true" />
         </div>

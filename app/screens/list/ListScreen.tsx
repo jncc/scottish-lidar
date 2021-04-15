@@ -27,41 +27,44 @@ export const ListScreen = (props: Props) => {
 
   return (
     <div className="container normal-page-container list-screen">
-      <h1>Datasets</h1>
-      <hr />
-      <div className="filter-bar row align-items-center">
-        <div className="col mb-md-0 mb-3">
-          <span>
-            Showing 
-            {listItemElements.length == props.collections.length &&
-              <span> all</span>
-            }
-            <span className="badge badge-pill badge-light">
-              <span className="badge badge-pill badge-secondary mr-1">
-                {listItemElements.length}
+      <div aria-live="polite">
+        <h1>Datasets</h1>
+        <hr aria-hidden="true" />
+        <div className="filter-bar row align-items-center">
+          <div className="col mb-md-0 mb-3">
+            <span>
+              Showing 
+              {listItemElements.length == props.collections.length &&
+                <span> all </span>
+              }
+              <span className="badge badge-pill badge-light">
+                <span className="badge badge-pill badge-secondary mr-1">
+                  {listItemElements.length}
+                </span>
+                of {props.collections.length}
               </span>
-              of {props.collections.length}
-            </span>
-          </span> datasets
-        </div>
+            </span> datasets
+          </div>
 
-        {props.filter &&
-        <div className="col-md-auto d-lg-flex d-none">
-            <span>Filtered by</span>
-        </div>
-        }
+          {props.filter &&
+          <div className="col-md-auto d-lg-flex d-none">
+              <span>Filtered by</span>
+          </div>
+          }
 
-        <div className="col-md-auto mb-md-0 mb-2">
-          <select
-            value={props.filter}
-            onChange={e => { props.setFilter(e.target.value) }}
-            className="custom-select" >
-            <option key="all" value="">All</option>
-            {filterDropdownElements}
-          </select>
+          <div className="col-md-auto mb-md-0 mb-2">
+            <select
+              value={props.filter}
+              onChange={e => { props.setFilter(e.target.value) }}
+              className="custom-select"
+              aria-label="Choose a dataset">
+              <option key="all" value="">All</option>
+              {filterDropdownElements}
+            </select>
+          </div>
         </div>
       </div>
-      <hr className="filter-bar-hr"/>
+      <hr className="filter-bar-hr" aria-hidden="true"/>
       <Delayed delayInMilliseconds={300}>
         <div className="list-items">
           {listItemElements}

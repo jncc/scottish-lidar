@@ -37,7 +37,8 @@ const DownloadItemComponent = (props: Props & DispatchProps) => {
         method="get"
         action={props.item.url}
         style={{ display: 'inline' }}>
-        <Button type="submit" onClick={() => props.dispatch(AppActions.itemDownloaded(props.item))}>
+        <Button type="submit" onClick={() => props.dispatch(AppActions.itemDownloaded(props.item))}
+          aria-label={'Download ' + props.item.name}>
           <i className="fas fa-cloud-download-alt" aria-hidden="true"></i> Download
         </Button>
       </form>

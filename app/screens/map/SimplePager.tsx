@@ -40,7 +40,7 @@ let getProductSliceText = (p: PagerInfo) => {
 
   if (p.total > 0) {
     return (
-      <div>
+      <div aria-live="polite">
         {p.startIndex + 1}<span className="pager-dash">-</span>{p.endIndex + 1}
         <span className="pager-of"> of </span>{p.total}
         {p.total < 1000 &&

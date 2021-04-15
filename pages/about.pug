@@ -11,7 +11,7 @@ block meta
   meta(description='The portal has been developed as a partnership between Scottish Government and Joint Nature Conservation Committee (JNCC).')
 
 block content
-  div.container.normal-page-container.flex-grow-1
+  main(role='main')#main.container.normal-page-container.flex-grow-1
     h1.mb-3 About
     p 
       | The Scottish Remote Sensing Portal has been developed as a partnership between 
@@ -24,8 +24,8 @@ block content
       | via WMS web services.
     p
       | For more information on the LiDAR data, please 
-      a(href='/feedback' + process.env.PAGE_EXTENSION) contact us. 
-      | For more information on a particular dataset, please use the contact information
+      a(href='/feedback' + process.env.PAGE_EXTENSION) contact us
+      | . For more information on a particular dataset, please use the contact information
       | provided in the full metadata.
     p
       | All data is made available under the 

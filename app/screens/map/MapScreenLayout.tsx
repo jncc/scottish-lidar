@@ -47,9 +47,32 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
   
   return <>
     {makeSmallScreenWarningUI()}
+    <span id="sr-map-description" className="accessibility">
+      An interactive map of Scotland showing areas of LiDAR data available to download. 
+      The map is not accessible at this time, please contact us for help accessing the data.
+    </span>
     <div className="d-none d-lg-block ">
-      <MapControls />
       <div className="r">
+        <Delayed delayInMilliseconds={800}>
+          <motion.div className="left-panel-container"
+            initial="open"
+            animate={leftPanelOpen ? 'open' : 'closed'}
+            variants={leftPanelAnimationVariants}
+          >
+            {currentCollection &&
+              <div className="left-panel-container-toggle" onClick={() => setLeftPanelOpen(!leftPanelOpen)}>
+                {leftPanelOpen
+                  ? <i className="fas fa-chevron-left fa-xs" aria-hidden="true" />
+                  : <i className="fas fa-chevron-right fa-xs"  aria-hidden="true" />
+                }
+              </div>
+            }
+            <DatasetListPanels
+              collections={props.collections}
+              productCountByCollection={props.productCountByCollection}
+            />
+          </motion.div>        
+        </Delayed>
         <Delayed delayInMilliseconds={800}>
           <motion.div className="right-panel-container"
             initial="open"
@@ -73,27 +96,8 @@ const MapScreenLayoutComponent = (props: Props & StateProps) => {
             <BasketSummary />
           </motion.div>
         </Delayed>        
-        <Delayed delayInMilliseconds={800}>
-          <motion.div className="left-panel-container"
-            initial="open"
-            animate={leftPanelOpen ? 'open' : 'closed'}
-            variants={leftPanelAnimationVariants}
-          >
-            {currentCollection &&
-              <div className="left-panel-container-toggle" onClick={() => setLeftPanelOpen(!leftPanelOpen)}>
-                {leftPanelOpen
-                  ? <i className="fas fa-chevron-left fa-xs" aria-hidden="true" />
-                  : <i className="fas fa-chevron-right fa-xs"  aria-hidden="true" />
-                }
-              </div>
-            }
-            <DatasetListPanels
-              collections={props.collections}
-              productCountByCollection={props.productCountByCollection}
-            />
-          </motion.div>        
-        </Delayed>
       </div>
+      <MapControls />
       <LeafletMap
         products={props.products.result}
         wmsLayer={wmsLayer}

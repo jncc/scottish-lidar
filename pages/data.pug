@@ -8,7 +8,8 @@ block meta
   meta(description='Access Scottish remote sensed LiDAR data via WMS or on a map to select and download in DSM, DTM and LAS (LAZ) format.')
 
 block content
-  div.flex-grow-1.d-flex.flex-column#app
+  main(role='main')#main
+    div.flex-grow-1.d-flex.flex-column#app
 
 block scripts
   script(src='../bundles/data.ts')

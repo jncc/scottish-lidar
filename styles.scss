@@ -57,13 +57,59 @@ body {
   z-index: 1001;
 }
 
+@mixin accessibility-border {
+  outline: none;
+  box-shadow: none;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  &:focus {
+    box-shadow: none;
+    border-color: black;
+  }
+}
+
 h1 {
     color: $scot-gov-blue;
     font-family: $header-font-family;
+}
+
+a {
+  &:focus {
+    text-decoration: underline;
+    &.btn {
+      text-decoration: none;
+    }
   }
+}
+
+.btn {
+  @include accessibility-border;
+
+  &.btn-primary:focus, &.btn-secondary:focus, &.btn-dark:focus {
+    background-color: #f8f9fa;
+    color: black;
+  }
+}
+
+.icon-button {
+  @include accessibility-border;
+
+  background: none;
+  margin: 0px;
+  padding: 0px;
+}
 
 @mixin white-background {
   background-color: white;
+}
+
+.accessibility {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .pointable {
@@ -71,13 +117,20 @@ h1 {
 }
 
 .custom-select {
+  @include accessibility-border;
+
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='white' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
   background-color: $scot-gov-blue;
   color: white;
-  border: 0 none;
-  border-radius: 20px;
+  border-radius: 18px;
   padding: 6px 20px;
   min-width: 15rem;
+
+  &:focus {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='black' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+    background-color: #f8f9fa;
+    color: black;
+  }
 }
 
 .header {
@@ -105,9 +158,14 @@ h1 {
       padding-bottom: 0;
     }
     .nav-item {
-      margin-bottom: 0.3rem;
-      &.active {
+      & a.nav-link {
         margin-bottom: 0;
+        border-bottom: 0.3rem solid transparent;
+      }
+      &.active a.nav-link {
+        border-bottom: 0.3rem solid $scot-gov-blue;
+      }
+      & a.nav-link:focus {
         border-bottom: 0.3rem solid $scot-gov-blue;
       }
     }
@@ -194,13 +252,19 @@ h1 {
 }
 
 .moreable {
+  a {
+    @include accessibility-border;
+
+    font-size: 0; /* link elements should have text, but we don't want it visible here */
+    float: right;
+  }
   a.collapsed:after {
     content: '+ Show More';
-    float: right;
+    font-size: initial;
   }
   a:not(.collapsed):after {
     content: '- Show Less';
-    float: right;
+    font-size: initial;
   }
   .moreable-content {
     margin-bottom: 0;
@@ -238,7 +302,7 @@ h1 {
   }
   .dataset-path-separator {
     padding: 0 0.15rem;
-    color: $gray-300;
+    color: $gray-600;
     font-weight: normal;
   }
 }
@@ -396,6 +460,7 @@ $panel-gutter: 1.5rem;
       }
     }
     .product-list-item-basket {
+      @include accessibility-border;
       cursor: pointer;
       i {
         color: $gray-300;
@@ -414,6 +479,8 @@ $panel-gutter: 1.5rem;
     flex-direction: row;
     justify-content: flex-end;
     >div {
+      @include accessibility-border;
+
       padding-right: 0.15rem;
       >i {
         color: $gray-500;

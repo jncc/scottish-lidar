@@ -195,7 +195,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
 
   // react has nothing to do with the leaflet map;
   // map manipulation is performed via side-effects
-  return <div id="leaflet-map"></div>
+  return <div id="leaflet-map" aria-describedby="sr-map-description"></div>
 }
 
 export const LeafletMap = reduxConnect(

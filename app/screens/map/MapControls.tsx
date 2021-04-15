@@ -14,10 +14,10 @@ const MapControlsComponent = (props: StateProps & DispatchProps) => {
 
           <div className="mr-2">
             <ButtonGroup>
-              <Button onClick={() => props.dispatch(AppActions.leafletZoomIn())} variant="light">
+              <Button onClick={() => props.dispatch(AppActions.leafletZoomIn())} variant="light" aria-label="Zoom in">
                 <i className="fas fa-plus fa-xs zoom-icon" aria-hidden="true" />
               </Button>
-              <Button onClick={() => props.dispatch(AppActions.leafletZoomOut())} variant="light">
+              <Button onClick={() => props.dispatch(AppActions.leafletZoomOut())} variant="light" aria-label="Zoom out">
                 <i className="fas fa-minus fa-xs zoom-icon" aria-hidden="true" />
               </Button>
             </ButtonGroup>

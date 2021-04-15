@@ -14,9 +14,11 @@ html(lang='en')
       title Scottish Remote Sensing Portal | Scottish Government
   body
     div#layout-container
+      a(class='accessibility', href='#main') Skip to content
       include ./header
       //- uncomment to include the announcement banner
       //- include ./announcement
       block content
+      a(class='accessibility', href='#layout-container') Back to top
     block scripts
     include ./cookie-consent-script
