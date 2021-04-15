@@ -71,7 +71,16 @@ body {
 h1 {
     color: $scot-gov-blue;
     font-family: $header-font-family;
+}
+
+a {
+  &:focus {
+    text-decoration: underline;
+    &.btn {
+      text-decoration: none;
+    }
   }
+}
 
 .btn {
   @include accessibility-border;
