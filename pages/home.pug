@@ -1,0 +1,30 @@
+
+extends ../templates/layout.pug
+
+block variables
+    - var page_name = 'index'
+
+block head
+  title About the Scottish Remote Sensing Portal | Scottish Government
+
+block meta
+  meta(description='The portal has been developed as a partnership between Scottish Government and Joint Nature Conservation Committee (JNCC).')
+
+block content
+  main(role='main')#main.home-main.flex-grow-1
+    div
+      h1.strap-text
+        span Find, share and reuse
+        br
+        span.strap-subtext remote sensed data provided by Scottish public sector organisations
+
+      div
+        a.btn.btn-dark.mr-2(href='/data' + process.env.PAGE_EXTENSION + '#/list')
+          | Browse datasets
+        a.btn.btn-primary(href='/data' + process.env.PAGE_EXTENSION + '#/map')
+          | Explore the map
+
+  include ../templates/footer
+
+block scripts
+  script(src='../bundles/home.ts')

@@ -18,6 +18,8 @@ You'll need Node (version 8+), with Yarn installed.
     yarn      # install packages
     yarn dev  # build and run a development server
 
+...but please read on about Parcel.js!
+
 Parcel.js
 ---------
 
@@ -27,7 +29,7 @@ Parcel.js is great, but so far has very basic support for multi-page web applica
 
     http://localhost:4000/index.html  <-- note the `index.html`
 
-In production, the `.html` extension isn't needed. Github Pages serves `.html`, and `index.html`, automatically.
+In production, the `.html` extension isn't needed. Github Pages serves `.html` (and `index.html`) automatically.
 
 This means we need a workaround for ugly local development URLs. Variables are appended to page URLs so that in-app links work at development time:
 
