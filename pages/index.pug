@@ -11,16 +11,19 @@ block meta
   meta(description='A portal containing Scottish Public Sector LiDAR data which you can download by 10km tiles and via WMS web services.')
 
 block content
-  main(role='main')#main.intro
-    section
-      div.intro-text
-        h1.intro-title Find, share and reuse 
-          h3.intro-subtitle Remote sensed data provided by Scottish public sector organisations
-      a.btn.btn-dark.mr-1(href='/data' + process.env.PAGE_EXTENSION + '#/list')
-        | Browse datasets
-      a.btn.btn-primary.ml-1(href='/data' + process.env.PAGE_EXTENSION + '#/map')
-        | Explore the map
-          
+  main(role='main')#main.home-main.flex-grow-1
+    div
+      h1.strap-text
+        span Find, share and reuse
+        br
+        span.strap-subtext remote sensed data provided by Scottish public sector organisations
+
+      div
+        a.btn.btn-dark.mr-2(href='/data' + process.env.PAGE_EXTENSION + '#/list')
+          | Browse datasets
+        a.btn.btn-primary(href='/data' + process.env.PAGE_EXTENSION + '#/map')
+          | Explore the map
+
   include ../templates/footer
 
 block scripts
