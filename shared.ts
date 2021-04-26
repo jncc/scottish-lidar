@@ -10,4 +10,3 @@ import 'bootstrap'
 // Both the static html pages and react-bootstrap use the bootstrap css.
 // The static html pages currently don't use bootstrap's javascript.
 import './styles.scss'
-import './intro.scss'

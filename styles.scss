@@ -118,7 +118,7 @@ a {
     animation: home-anim 20s cubic-bezier(0, 0.5, 0, 1) forwards;
     background:
       linear-gradient(to bottom,  rgba(0,0,0,0), rgba(0,0,0,.5)),
-      url(assets/map-screenshot-x.png) no-repeat bottom
+      url(assets/lidar-home-page-map.jpg) no-repeat bottom
       #888;
     background-size: cover;
     position: absolute;
@@ -137,6 +137,9 @@ a {
   // position: relative;
   text-align: center;
 
+  .strap {
+    margin: 4rem 0;
+  }
   .strap-text {
     color: #fff;
     background-color: rgba(0,0,0,.5);
