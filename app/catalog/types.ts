@@ -34,7 +34,6 @@ export type Collection = {
   name          : string
   metadata      : Metadata
   productsSchema: any
-  footprint     : Footprint
 }
 
 export type Footprint = {
