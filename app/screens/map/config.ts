@@ -8,6 +8,8 @@ export const config = {
   maximumZoom: 13,
   defaultCenter: [56.4, -4] as [number, number],
   baseLayerUrlTemplate: `https://tile.viaeuropa.uk.com/osmao-scotg-ov012-a8f54/m0335/{z}/{x}/{y}.png`,
+  // ignore long line here
+  // tslint:disable-next-line
   // attribution: `Backdrop &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>`,
   aggregateLayer: {
     baseUrl: env.AGGREGATE_LAYER_BASE_URL,
