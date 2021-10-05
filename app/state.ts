@@ -36,6 +36,7 @@ export let initialState = {
     /** Show layers (other than the base layer) */
     visualise:  true,
     /** The current Mapbox base layer name */
+    /** currently not used, it seems */
     baseLayer: 'mapbox/light-v10' as string | undefined, // this property was added after v1 release
     /** Saved state from the Leaflet map so we can redraw it */
     leaflet:    {

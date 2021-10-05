@@ -35,6 +35,9 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
       editable: true, // enable leaflet.editable plugin
     })
 
+    // attribution
+    L.control.attribution({ position: 'bottomleft', prefix: '' }).addTo(map)
+
     map.setView(props.mapScreen.leaflet.center, props.mapScreen.leaflet.zoom)
 
     // footprint and collection layers
