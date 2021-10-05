@@ -8,9 +8,7 @@ export const config = {
   maximumZoom: 13,
   defaultCenter: [56.4, -4] as [number, number],
   baseLayerUrlTemplate: `https://tile.viaeuropa.uk.com/osmao-scotg-ov012-a8f54/m0335/{z}/{x}/{y}.png`,
-  // ignore long line here
-  // tslint:disable-next-line
-  // attribution: `Backdrop &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>`,
+  attribution: `Base mapping from viaEuropa. © Crown copyright and database right (2021). Ordnance Survey (OS Licence number 100024655)`,
   aggregateLayer: {
     baseUrl: env.AGGREGATE_LAYER_BASE_URL,
     layer: `scotland:lidar-aggregate`,

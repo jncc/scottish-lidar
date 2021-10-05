@@ -35,6 +35,13 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
       editable: true, // enable leaflet.editable plugin
     })
 
+    L.control.attribution({
+      position: 'bottomleft',
+      prefix: ''
+    }).addTo(map);
+    
+
+
     map.setView(props.mapScreen.leaflet.center, props.mapScreen.leaflet.zoom)
 
     // footprint and collection layers
@@ -47,7 +54,7 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
       // baseLayerUrlTemplate's {id} placeholder) was added after v1 release,
       // so existing users might not have the property in their session state
       id: props.mapScreen.baseLayer ?? initialState.mapScreen.baseLayer,
-      // attribution: config.attribution,
+      attribution: config.attribution,
       maxZoom: config.maximumZoom,
     }).addTo(map)
   
