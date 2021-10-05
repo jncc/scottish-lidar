@@ -35,12 +35,8 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
       editable: true, // enable leaflet.editable plugin
     })
 
-    L.control.attribution({
-      position: 'bottomleft',
-      prefix: ''
-    }).addTo(map);
-    
-
+    // attribution
+    L.control.attribution({ position: 'bottomleft', prefix: '' }).addTo(map)
 
     map.setView(props.mapScreen.leaflet.center, props.mapScreen.leaflet.zoom)
 
