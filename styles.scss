@@ -614,14 +614,18 @@ $panel-gutter: 1.5rem;
   }
 }
 
-.case-study-with-image-1 {
+.case-study-with-image {
   display: flex;
   align-items: flex-start;
   img {
     height:400px;
     float: right;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
+
+#case-study-image-3 {height:500px}
 
 // CIVIC COOKIE CONTROL CUSTOMISATIONS
 //
