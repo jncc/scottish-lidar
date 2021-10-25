@@ -614,6 +614,15 @@ $panel-gutter: 1.5rem;
   }
 }
 
+.case-study-with-image-1 {
+  display: flex;
+  align-items: flex-start;
+  img {
+    height:400px;
+    float: right;
+  }
+}
+
 // CIVIC COOKIE CONTROL CUSTOMISATIONS
 //
 // make hyperlinks look different to normal text

@@ -34,11 +34,11 @@ header.header
           li.nav-item.mr-4#download-screen-nav-item
             a.nav-link.text-dark(href='/data' + process.env.PAGE_EXTENSION + '#/download')
               | Download
-          li.nav-item.mr-4(class=(page_name === "cases" ? "active" : undefined))
-            a.nav-link.text-dark(href='/cases' + process.env.PAGE_EXTENSION)
-              if page_name === "cases"
+          li.nav-item.mr-4(class=(page_name === "example" ? "active" : undefined))
+            a.nav-link.text-dark(href='/example' + process.env.PAGE_EXTENSION)
+              if page_name === "example"
                 span.sr-only (current)
-              | Case studies
+              | Example
           li.nav-item.mr-4(class=(page_name === "contribute" ? "active" : undefined))
             a.nav-link.text-dark(href='/contribute' + process.env.PAGE_EXTENSION)
               if page_name === "contribute"
