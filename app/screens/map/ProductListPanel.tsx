@@ -57,7 +57,7 @@ let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
         </div>
         <div className="product-list-items">
           {props.products.result.length === 0 &&
-          <div className="card text-white bg-secondary mt-4">
+          <div className="card text-white bg-primary mt-4">
             <div className="card-body">
               <h5 className="card-title">No products found here</h5>
               <div className="card-text">
