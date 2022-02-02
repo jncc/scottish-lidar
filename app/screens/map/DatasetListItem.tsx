@@ -18,8 +18,17 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
   let [wmsModalOpen, setWmsModalOpen] = React.useState(false)
   let [infoModalOpen, setInfoModalOpen] = React.useState(false)
 
+  let div = React.useRef<HTMLDivElement>(null)
+
+  // ensure the user can actually see the item that's selected (the list could get quite big)
+  React.useEffect(() => {
+    if (props.checked && div.current) {
+      div.current.scrollIntoView()
+    }
+  }, [props.checked])
+
   return (
-    <div className="dataset-list-item">
+    <div ref={div} className="dataset-list-item">
       <div>
         <Form.Check
           className="hoverable"
