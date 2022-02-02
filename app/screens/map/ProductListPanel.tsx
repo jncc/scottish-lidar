@@ -69,8 +69,8 @@ let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
                 </div>
                 :
                 <ul>
-                  <li>Select a different dataset</li>
                   <li>Move the bounding box</li>
+                  <li>Select a different dataset</li>
                 </ul>
                 }
                 {/* <div>
