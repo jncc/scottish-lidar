@@ -4,7 +4,7 @@ import { env } from '../../../env'
 /** Config for the map */
 
 export const config = {
-  defaultZoom: 9,
+  defaultZoom: 7,
   maximumZoom: 13,
   defaultCenter: [56.4, -4] as [number, number],
   baseLayerUrlTemplate: `https://tile.viaeuropa.uk.com/osmao-scotg-ov012-a8f54/m0335/{z}/{x}/{y}.png`,
