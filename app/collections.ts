@@ -1,4 +1,5 @@
 
+import { orderBy } from 'lodash'
 import { parseCollectionName } from './utility/collectionUtility'
 import { loadOgcProducts, loadCollections } from './catalog/api'
 
@@ -9,9 +10,10 @@ export let loadAndParseCollections = async () => {
     loadOgcProducts()
   ])
 
-  let tuples = collections.result
-    // discard the "OGC" collection which only exists to catalogue the OGC WMS products
-    // (this is just how the catalog data has been structured)
+  // first, order sensibly for the UI - we want to ensure the phase-1 datasets are at the top
+  let tuples = orderBy(collections.result, [c => !c.name.startsWith('scotland-gov/lidar/phase-'), c => c.name])
+    // discard the "OGC" collection which only exists to catalogue the OGC WMS "products"
+    // (this is just an fact of how the catalog data has been structured in the database)
     .filter(c => !c.name.endsWith('/ogc'))
     // create a tuple of { collection, path, OGC product }
     .map(c => {
