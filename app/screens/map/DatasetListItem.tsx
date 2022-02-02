@@ -23,7 +23,7 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
   // ensure the user can actually see the item that's selected (the list could get quite big)
   React.useEffect(() => {
     if (props.checked && div.current) {
-      div.current.scrollIntoView()
+      div.current.scrollIntoView({block: 'center'})
     }
   }, [props.checked])
 
