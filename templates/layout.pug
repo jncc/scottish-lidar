@@ -12,6 +12,20 @@ html(lang='en')
     <script src="https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js" type="text/javascript"></script>
     block head
       title Scottish Remote Sensing Portal | Scottish Government
+
+    //- 
+      Clickjacking vulnerability fix below
+      Github pages doesn't allow changing response headers, so use this script instead
+      https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Clickjacking_Defense_Cheat_Sheet.md#best-for-now-legacy-browser-frame-breaking-script
+    style(id="antiClickjack").
+      body{display:none !important;}
+    script(type="text/javascript").
+      if (self === top) {
+        var antiClickjack = document.getElementById("antiClickjack");
+        antiClickjack.parentNode.removeChild(antiClickjack);
+      } else {
+        top.location = self.location;
+      }
   body
     div#layout-container
       a(class='accessibility', href='#main') Skip to content
