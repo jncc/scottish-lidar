@@ -1,0 +1,1 @@
+{"version":3,"sources":["antiClickjack.css"],"names":[],"mappings":"AAAA,KACE,sBACF","file":"antiClickjack.css","sourceRoot":"../pages","sourcesContent":["body {\n  display:none !important;\n}"]}
