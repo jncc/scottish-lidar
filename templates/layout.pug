@@ -17,8 +17,8 @@ html(lang='en')
       Clickjacking vulnerability fix below
       Github pages doesn't allow changing response headers, so use this script instead
       https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Clickjacking_Defense_Cheat_Sheet.md#best-for-now-legacy-browser-frame-breaking-script
-    style(id="antiClickjack").
-      body{display:none !important;}
+      Parcel also doesn't like <style> tags so pull the styling in from a css file
+    link(href="antiClickjack.css" rel="stylesheet" id="antiClickjack")
     script(type="text/javascript").
       if (self === top) {
         var antiClickjack = document.getElementById("antiClickjack");
