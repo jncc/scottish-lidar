@@ -41,7 +41,9 @@ MAP_TILES_CLASS = 'leaflet-interactive'
 MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_TILE_INDEX = 2
 MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_LIST_INDEX = 1
 MAP_PAGE_LOAD_WAIT_TIME_SECONDS = 10 # NB pseudo-random test failures observed if wait time for map loading lowered to 5 seconds
-LIDAR_BASKET_ITEM_CLASS = 'product-list-item-basket'
+MAP_LIDAR_ITEM_TITLE_PREFIX_PHASE2_DTM = "Scotland Lidar Phase 2 DTM"
+LIDAR_ITEM_BASKET_CLASS = 'product-list-item-basket'
+LIDAR_ITEM_TITLE_CLASS = 'product-list-item-title'
 LIDAR_SELECTED_BASKET_ITEM_CLASS = 'product-list-item-basket-in'
 
 def get_browser_option(browser):
@@ -96,6 +98,19 @@ def test_multiple_datasets_available(driver) :
            else: 
                pass_test(driver, "Multiple datasets available!")
 
+def test_lidar_pane_contents_match_selected_dataset(driver) :
+   wait_xpath_elem(driver, ACCEPT_COOKIES_BUTTON_XPATH).click() 
+   wait_xpath_elem(driver, EXPLORE_MAP_BUTTON_XPATH).click()
+   wait_page(driver, DETAILS_PAGE_TITLE)
+   wait_xpath_elem(driver, MAP_DATASET_LIST_LIDAR_PHASE2_DTM_LABEL_XPATH).click()
+   lidar_items = driver.find_element(By.XPATH, MAP_LIDAR_ITEM_LIST_XPATH)
+   lidar_titles = lidar_items.find_elements(By.CLASS_NAME, LIDAR_ITEM_TITLE_CLASS)
+   for lidar_title in lidar_titles:
+       if MAP_LIDAR_ITEM_TITLE_PREFIX_PHASE2_DTM not in lidar_title.text:
+           fail_test(driver, "Expected displayed LiDAR titles to refer to Scotland Lidar Phase 2 DTM after selecting that dataset")
+           return
+   pass_test(driver, "Displayed LiDAR titles correctly matched selected dataset for LiDAR Phase 2 DTM!")        
+
 def test_selected_10km_grid_square_registered(driver) :
    wait_xpath_elem(driver, ACCEPT_COOKIES_BUTTON_XPATH).click() 
    wait_xpath_elem(driver, EXPLORE_MAP_BUTTON_XPATH).click()
@@ -110,7 +125,8 @@ def test_selected_10km_grid_square_registered(driver) :
        fail_test(driver, "Expected LiDAR basket to contain 1 item after clicking on NN55 10km grid square")
    else: 
        lidar_items = driver.find_element(By.XPATH, MAP_LIDAR_ITEM_LIST_XPATH)
-       lidar_baskets = lidar_items.find_elements(By.CLASS_NAME, LIDAR_BASKET_ITEM_CLASS)
+       lidar_baskets = lidar_items.find_elements(By.CLASS_NAME, LIDAR_ITEM_BASKET_CLASS)
+       print(len(list(lidar_baskets)))
        if LIDAR_SELECTED_BASKET_ITEM_CLASS not in lidar_baskets[MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_LIST_INDEX].get_attribute("class"):
            fail_test(driver, "LiDAR basket icon corresponding to NN55 10km grid square should be highlighted after clicking on the grid square") 
        else:
@@ -120,6 +136,10 @@ tests = [
     {
         "name": "Test Multiple Datasets Available",
         "function": test_multiple_datasets_available,
+    },
+    {
+        "name": "Test LiDAR Pane Contents Match Selected Dataset",
+        "function": test_lidar_pane_contents_match_selected_dataset,
     },
     {
         "name": "Test Selected 10km Grid Square is registered",
