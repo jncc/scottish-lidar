@@ -2,7 +2,7 @@ from decouple import config
 from dotenv import load_dotenv
 import re
 import time
-from capabilities import capabilities
+from capabilities import browsers
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
@@ -21,7 +21,7 @@ BROWSERSTACK_USERNAME = config('BROWSERSTACK_USERNAME')
 BROWSERSTACK_ACCESS_KEY = config('BROWSERSTACK_ACCESS_KEY')
 BROWSERSTACK_URL = config('BROWSERSTACK_URL')
 
-BUILD_NAME = "Scots LiDAR automated testing"
+BUILD_NAME = "Scots LiDAR {} Testing"
 URL_UNDER_TEST = "https://remotesensingdata.gov.scot/"
 MAIN_PAGE_TITLE = "Scottish Remote Sensing Portal | Scottish Government"
 DETAILS_PAGE_TITLE = "Scottish LiDAR Remote Sensing datasets | Scottish Government"
@@ -40,7 +40,7 @@ MAP_DATASET_ITEM_CLASS = 'dataset-list-item'
 MAP_TILES_CLASS = 'leaflet-interactive'
 MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_TILE_INDEX = 2
 MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_LIST_INDEX = 1
-MAP_PAGE_LOAD_WAIT_TIME_SECONDS = 10 # NB pseudo-random test failures observed if wait time lowered to 5 seconds
+MAP_PAGE_LOAD_WAIT_TIME_SECONDS = 10 # NB pseudo-random test failures observed if wait time for map loading lowered to 5 seconds
 LIDAR_BASKET_ITEM_CLASS = 'product-list-item-basket'
 LIDAR_SELECTED_BASKET_ITEM_CLASS = 'product-list-item-basket-in'
 
@@ -127,30 +127,34 @@ tests = [
     },
 ]
 
-def run_session(cap):
+def run_session(browser):
     bstack_options = {
         "userName": BROWSERSTACK_USERNAME,
         "accessKey": BROWSERSTACK_ACCESS_KEY,
-        "buildName": BUILD_NAME,
-        "os": cap["os"],
-        "osVersion": cap["osVersion"],
     }
-    options = get_browser_option(cap["browserName"].lower())
-    options.browser_version = cap["browserVersion"]
-    for test in tests:
-        try:
-            bstack_options["sessionName"] = test["name"]
-            options.set_capability('bstack:options', bstack_options)
-            driver = webdriver.Remote(command_executor=BROWSERSTACK_URL,options=options)
-            driver.maximize_window()  # The Scots LiDAR website will not load maps in Selenium's smaller default window size
-            driver.get(URL_UNDER_TEST)
-            wait_page(driver, MAIN_PAGE_TITLE)
-            test["function"](driver)
-        except NoSuchElementException:
-            fail_test(driver, "Some elements failed to load")
-        except Exception:
-            fail_test(driver, "Some exception occurred")    
-        driver.quit()
+    bstack_options["buildName"] = BUILD_NAME.format(browser["browserName"])
+    for os in browser["oss"]:
+        bstack_options["os"] = os["os"]
+        for os_version in os["osVersions"]:
+            bstack_options["osVersion"] = os_version
+            options = get_browser_option(browser["browserName"].lower())
+            browser_versions = browser["browserVersions"]
+            for browser_version in browser_versions:
+                options.browser_version = browser_version
+                for test in tests:
+                    try:
+                        bstack_options["sessionName"] = test["name"]
+                        options.set_capability('bstack:options', bstack_options)
+                        driver = webdriver.Remote(command_executor=BROWSERSTACK_URL,options=options)
+                        driver.maximize_window()  # The Scots LiDAR website will not load maps in Selenium's smaller default window size
+                        driver.get(URL_UNDER_TEST)
+                        wait_page(driver, MAIN_PAGE_TITLE)
+                        test["function"](driver)
+                    except NoSuchElementException:
+                        fail_test(driver, "Some elements failed to load")
+                    except Exception:
+                        fail_test(driver, "Some exception occurred")    
+                    driver.quit()
     
-for cap in capabilities:
-  Thread(target=run_session, args=(cap,)).start()
+for browser in browsers:
+  Thread(target=run_session, args=(browser,)).start()
