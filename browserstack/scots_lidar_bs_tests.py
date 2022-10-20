@@ -83,20 +83,21 @@ def test_multiple_datasets_available(driver) :
    showing_x_of_y = [int(s) for s in re.findall(r'\d+', datasets_header)]
    if len(showing_x_of_y) != 2:
        fail_test(driver, "Expected datasets header <Showing x of y> did not contain 2 numbers")
-   else: 
-       showing_total_datasets = showing_x_of_y[1]
-       if showing_total_datasets <= 1:
-           fail_test(driver,  "Multiple datasets were expected in the Datasets tab")
-       elif showing_x_of_y[0] != showing_total_datasets:
-              fail_test(driver, "Full unfiltered datasets list should be displayed initially")
-       else: 
-           list_div = driver.find_element(By.XPATH, DATASETS_LIST_XPATH)
-           list_elems = list_div.find_elements(By.CLASS_NAME, DATASETS_LIST_CLASS)
-           dataset_count = len(list(list_elems))
-           if dataset_count != showing_total_datasets:
-               fail_test(driver, "Number of datasets in list does not match total value in header")
-           else: 
-               pass_test(driver, "Multiple datasets available!")
+       return
+   showing_total_datasets = showing_x_of_y[1]
+   if showing_total_datasets <= 1:
+       fail_test(driver,  "Multiple datasets were expected in the Datasets tab")
+       return
+   if showing_x_of_y[0] != showing_total_datasets:
+       fail_test(driver, "Full unfiltered datasets list should be displayed initially")
+       return
+   list_div = driver.find_element(By.XPATH, DATASETS_LIST_XPATH)
+   list_elems = list_div.find_elements(By.CLASS_NAME, DATASETS_LIST_CLASS)
+   dataset_count = len(list(list_elems))
+   if dataset_count != showing_total_datasets:
+       fail_test(driver, "Number of datasets in list does not match total value in header")
+       return 
+   pass_test(driver, "Multiple datasets available!")
 
 def test_lidar_pane_contents_match_selected_dataset(driver) :
    wait_xpath_elem(driver, ACCEPT_COOKIES_BUTTON_XPATH).click() 
@@ -123,14 +124,13 @@ def test_selected_10km_grid_square_registered(driver) :
    lidar_basket_count = driver.find_element(By.XPATH, MAP_LIDAR_BASKET_COUNT_XPATH).text
    if '1' not in lidar_basket_count:
        fail_test(driver, "Expected LiDAR basket to contain 1 item after clicking on NN55 10km grid square")
-   else: 
-       lidar_items = driver.find_element(By.XPATH, MAP_LIDAR_ITEM_LIST_XPATH)
-       lidar_baskets = lidar_items.find_elements(By.CLASS_NAME, LIDAR_ITEM_BASKET_CLASS)
-       print(len(list(lidar_baskets)))
-       if LIDAR_SELECTED_BASKET_ITEM_CLASS not in lidar_baskets[MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_LIST_INDEX].get_attribute("class"):
-           fail_test(driver, "LiDAR basket icon corresponding to NN55 10km grid square should be highlighted after clicking on the grid square") 
-       else:
-           pass_test(driver, "Selected grid square for LiDAR Phase 2 DTM NN55 successfully registered!")             
+       return
+   lidar_items = driver.find_element(By.XPATH, MAP_LIDAR_ITEM_LIST_XPATH)
+   lidar_baskets = lidar_items.find_elements(By.CLASS_NAME, LIDAR_ITEM_BASKET_CLASS)
+   if LIDAR_SELECTED_BASKET_ITEM_CLASS not in lidar_baskets[MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_LIST_INDEX].get_attribute("class"):
+       fail_test(driver, "LiDAR basket icon corresponding to NN55 10km grid square should be highlighted after clicking on the grid square") 
+       return
+   pass_test(driver, "Selected grid square for LiDAR Phase 2 DTM NN55 successfully registered!")             
 
 tests = [
     {
