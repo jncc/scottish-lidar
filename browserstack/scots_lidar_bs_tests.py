@@ -41,6 +41,7 @@ MAP_TILES_CLASS = 'leaflet-interactive'
 MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_TILE_INDEX = 2
 MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_LIST_INDEX = 1
 MAP_PAGE_LOAD_WAIT_TIME_SECONDS = 10 # NB pseudo-random test failures observed if wait time for map loading lowered to 5 seconds
+MAP_LIDAR_PANE_DATALOAD_WAIT_TIME_SECONDS = 1
 MAP_LIDAR_ITEM_TITLE_PREFIX_PHASE2_DTM = "Scotland Lidar Phase 2 DTM"
 LIDAR_ITEM_BASKET_CLASS = 'product-list-item-basket'
 LIDAR_ITEM_TITLE_CLASS = 'product-list-item-title'
@@ -104,6 +105,7 @@ def test_lidar_pane_contents_match_selected_dataset(driver) :
    wait_xpath_elem(driver, EXPLORE_MAP_BUTTON_XPATH).click()
    wait_page(driver, DETAILS_PAGE_TITLE)
    wait_xpath_elem(driver, MAP_DATASET_LIST_LIDAR_PHASE2_DTM_LABEL_XPATH).click()
+   time.sleep(MAP_LIDAR_PANE_DATALOAD_WAIT_TIME_SECONDS)
    lidar_items = driver.find_element(By.XPATH, MAP_LIDAR_ITEM_LIST_XPATH)
    lidar_titles = lidar_items.find_elements(By.CLASS_NAME, LIDAR_ITEM_TITLE_CLASS)
    for lidar_title in lidar_titles:
