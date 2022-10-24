@@ -27,11 +27,11 @@ MAIN_PAGE_TITLE = "Scottish Remote Sensing Portal | Scottish Government"
 DETAILS_PAGE_TITLE = "Scottish LiDAR Remote Sensing datasets | Scottish Government"
 ACCEPT_COOKIES_BUTTON_XPATH = '//*[@id="ccc-notify-accept"]'
 BROWSE_DATASETS_BUTTON_XPATH = '//*[@id="main"]/div/div[1]/a[1]'
-EXPLORE_MAP_BUTTON_XPATH = '//*[@id="main"]/div/div[1]/a[2]'
 DATASETS_HEADER_SHOWING_X_OF_Y_XPATH = '//*[@id="app"]/div[1]/div[1]/div[1]/div[1]/span'
 DATASETS_LIST_XPATH = '//*[@id="app"]/div[1]/div[2]'
+DATASETS_HEADER_MAP_LINK_XPATH = '//*[@id="layout-container"]/header//nav/div/div/ul/li[4]/a'
 DATASETS_LIST_CLASS = 'list-item'
-DATASETS_PAGE_LOAD_WAIT_TIME_SECONDS = 2.5
+DATASETS_PAGE_LOAD_WAIT_TIME_SECONDS = 2
 MAP_DATASET_LIST_LIDAR_PHASE2_DTM_LABEL_XPATH = '//*[@id="main"]/div[1]/div[2]/div[1]/div[1]/div[2]/div[3]/div[2]/div[2]/div[1]/div'
 MAP_10KM_TILES_COLLECTION_XPATH = '//*[@id="main"]/div[1]/div[2]/div[3]/div[1]/div[3]'
 MAP_LIDAR_ITEM_LIST_XPATH = '//*[@id="main"]/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]'
@@ -40,7 +40,7 @@ MAP_DATASET_ITEM_CLASS = 'dataset-list-item'
 MAP_TILES_CLASS = 'leaflet-interactive'
 MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_TILE_INDEX = 2
 MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_LIST_INDEX = 1
-MAP_PAGE_LOAD_WAIT_TIME_SECONDS = 10 # NB pseudo-random test failures observed if wait time for map loading lowered to 5 seconds
+MAP_PAGE_LOAD_WAIT_TIME_SECONDS = 5
 MAP_LIDAR_PANE_DATALOAD_WAIT_TIME_SECONDS = 1
 MAP_LIDAR_ITEM_TITLE_PREFIX_PHASE2_DTM = "Scotland Lidar Phase 2 DTM"
 LIDAR_ITEM_BASKET_CLASS = 'product-list-item-basket'
@@ -75,7 +75,7 @@ def wait_xpath_elem(driver, path):
 def perform_svg_element_compatible_click(driver, element):
     driver.execute_script("arguments[0].dispatchEvent(new MouseEvent('click', {view: window, bubbles:true, cancelable: true}))", element)
 
-def test_multiple_datasets_available(driver) :
+def functional_smoke_test(driver) :
    wait_xpath_elem(driver, ACCEPT_COOKIES_BUTTON_XPATH).click() 
    wait_xpath_elem(driver, BROWSE_DATASETS_BUTTON_XPATH).click()
    wait_page(driver, DETAILS_PAGE_TITLE)
@@ -97,29 +97,17 @@ def test_multiple_datasets_available(driver) :
    dataset_count = len(list(list_elems))
    if dataset_count != showing_total_datasets:
        fail_test(driver, "Number of datasets in list does not match total value in header")
-       return 
-   pass_test(driver, "Multiple datasets available!")
-
-def test_lidar_pane_contents_match_selected_dataset(driver) :
-   wait_xpath_elem(driver, ACCEPT_COOKIES_BUTTON_XPATH).click() 
-   wait_xpath_elem(driver, EXPLORE_MAP_BUTTON_XPATH).click()
+       return
+   driver.find_element(By.XPATH, DATASETS_HEADER_MAP_LINK_XPATH).click()     
    wait_page(driver, DETAILS_PAGE_TITLE)
    wait_xpath_elem(driver, MAP_DATASET_LIST_LIDAR_PHASE2_DTM_LABEL_XPATH).click()
-   time.sleep(MAP_LIDAR_PANE_DATALOAD_WAIT_TIME_SECONDS)
+   time.sleep(MAP_PAGE_LOAD_WAIT_TIME_SECONDS)
    lidar_items = driver.find_element(By.XPATH, MAP_LIDAR_ITEM_LIST_XPATH)
    lidar_titles = lidar_items.find_elements(By.CLASS_NAME, LIDAR_ITEM_TITLE_CLASS)
    for lidar_title in lidar_titles:
        if MAP_LIDAR_ITEM_TITLE_PREFIX_PHASE2_DTM not in lidar_title.text:
            fail_test(driver, "Expected displayed LiDAR titles to refer to Scotland Lidar Phase 2 DTM after selecting that dataset")
            return
-   pass_test(driver, "Displayed LiDAR titles correctly matched selected dataset for LiDAR Phase 2 DTM!")        
-
-def test_selected_10km_grid_square_registered(driver) :
-   wait_xpath_elem(driver, ACCEPT_COOKIES_BUTTON_XPATH).click() 
-   wait_xpath_elem(driver, EXPLORE_MAP_BUTTON_XPATH).click()
-   wait_page(driver, DETAILS_PAGE_TITLE)
-   wait_xpath_elem(driver, MAP_DATASET_LIST_LIDAR_PHASE2_DTM_LABEL_XPATH).click()
-   time.sleep(MAP_PAGE_LOAD_WAIT_TIME_SECONDS)
    tiles_10km_collection = driver.find_element(By.XPATH, MAP_10KM_TILES_COLLECTION_XPATH)
    tile_nn55 = tiles_10km_collection.find_elements(By.CLASS_NAME, MAP_TILES_CLASS)[MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_TILE_INDEX]
    perform_svg_element_compatible_click(driver, tile_nn55)
@@ -127,25 +115,17 @@ def test_selected_10km_grid_square_registered(driver) :
    if '1' not in lidar_basket_count:
        fail_test(driver, "Expected LiDAR basket to contain 1 item after clicking on NN55 10km grid square")
        return
-   lidar_items = driver.find_element(By.XPATH, MAP_LIDAR_ITEM_LIST_XPATH)
    lidar_baskets = lidar_items.find_elements(By.CLASS_NAME, LIDAR_ITEM_BASKET_CLASS)
    if LIDAR_SELECTED_BASKET_ITEM_CLASS not in lidar_baskets[MAP_LIDAR_PHASE2_DTM_NN55_SQUARE_LIST_INDEX].get_attribute("class"):
        fail_test(driver, "LiDAR basket icon corresponding to NN55 10km grid square should be highlighted after clicking on the grid square") 
        return
-   pass_test(driver, "Selected grid square for LiDAR Phase 2 DTM NN55 successfully registered!")             
+   pass_test(driver, "All elements of functional smoke test succeeded!")
+          
 
 tests = [
     {
-        "name": "Test Multiple Datasets Available",
-        "function": test_multiple_datasets_available,
-    },
-    {
-        "name": "Test LiDAR Pane Contents Match Selected Dataset",
-        "function": test_lidar_pane_contents_match_selected_dataset,
-    },
-    {
-        "name": "Test Selected 10km Grid Square is registered",
-        "function": test_selected_10km_grid_square_registered,
+        "name": "Functional Smoke Test",
+        "function": functional_smoke_test,
     },
 ]
 
