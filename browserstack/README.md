@@ -9,17 +9,25 @@ Current limitations:
 - The test conditions coded so far are examples of what we can do, not comprehensive functional test coverage of the website
 - The tests are currently triggered manually from the command line, rather than running as part of a pipeline
 - The tests are running against an externally visible website - local developer testing has not been investigated
-- Additional visual testing based on snapshots using Percy still needs to be implemented 
+- Additional visual testing based on snapshots using Percy still needs to be implemented
+
+# .env file
+
+Copy the provided .env.template file to create a .env file in the same directory
+
+The inherited configuration points to the Live environment as the target for testing - amend as required
 
 # Browserstack account
 
-Open the JNCC Web Stack KeePASS file referenced [here](http://jncc-wiki/Restricted_Access_Pages/JNCC_KeePass)
+Navigate to the [Browserstack Account summary](https://www.browserstack.com/accounts/profile)
 
-Access the [Browserstack Account summary](https://www.browserstack.com/accounts/profile) using the credentials found under 'Browserstack' in the KeePass file
+Log on using the credentials under 'Browserstack' in the JNCC Web Stack KeePASS file referenced [here](http://jncc-wiki/Restricted_Access_Pages/JNCC_KeePass)
 
 Copy the Username and Access Key from the "Authentication and Security" section into the .env file created above
 
 # Setup venv
+
+From within the browserstack directory of this project:
 
     python3 -m venv .venv
     source .venv/bin/activate
