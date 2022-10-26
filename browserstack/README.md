@@ -31,7 +31,7 @@ Current limitations:
 
 # View the results
 
-    Go to www.browsterstack.com and sign in, and you will see the tests you have triggered coming through
+    Sign into [Browserstack](www.browsterstack.com), and you will see the tests you have triggered coming through
     Currently we are using one thread for each browser so you will see the individual tests, 
     separated into Chrome, Firefox, Edge and Safari tests
     NB Until the entire test run has completed, the test results are presented in a slightly confusing way..
