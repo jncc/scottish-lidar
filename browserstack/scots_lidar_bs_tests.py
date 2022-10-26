@@ -20,9 +20,10 @@ load_dotenv()
 BROWSERSTACK_USERNAME = config('BROWSERSTACK_USERNAME')
 BROWSERSTACK_ACCESS_KEY = config('BROWSERSTACK_ACCESS_KEY')
 BROWSERSTACK_URL = config('BROWSERSTACK_URL')
+URL_UNDER_TEST = config('URL_UNDER_TEST')
+ENVIRONMENT_UNDER_TEST = config('ENVIRONMENT_UNDER_TEST')
 
-BUILD_NAME = "Scots LiDAR {} Testing"
-URL_UNDER_TEST = "https://remotesensingdata.gov.scot/"
+BUILD_NAME = "Scots LiDAR {} Testing - {}"
 MAIN_PAGE_TITLE = "Scottish Remote Sensing Portal | Scottish Government"
 DETAILS_PAGE_TITLE = "Scottish LiDAR Remote Sensing datasets | Scottish Government"
 ACCEPT_COOKIES_BUTTON_XPATH = '//*[@id="ccc-notify-accept"]'
@@ -134,7 +135,7 @@ def run_session(browser):
         "userName": BROWSERSTACK_USERNAME,
         "accessKey": BROWSERSTACK_ACCESS_KEY,
     }
-    bstack_options["buildName"] = BUILD_NAME.format(browser["browserName"])
+    bstack_options["buildName"] = BUILD_NAME.format(browser["browserName"], ENVIRONMENT_UNDER_TEST)
     for os in browser["oss"]:
         bstack_options["os"] = os["os"]
         for os_version in os["osVersions"]:
