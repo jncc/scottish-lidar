@@ -22,7 +22,7 @@ function getLicenceDetails(licence: Licence) {
     case 'ncgl' : return {
       name: 'Non-Commercial Government Licence',
       image: '',
-      url: 'http://www.nationalarchives.gov.uk/doc/non-commercial-government-licence/non-commercial-government-licence.htm'
+      url: 'https://www.nationalarchives.gov.uk/doc/non-commercial-government-licence/version/2/'
     }
   }
 }
