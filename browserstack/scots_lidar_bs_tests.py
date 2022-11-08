@@ -9,6 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from threading import Thread
+from browserstack.local import Local
 
 load_dotenv()
 
@@ -17,11 +18,17 @@ BROWSERSTACK_ACCESS_KEY = config('BROWSERSTACK_ACCESS_KEY')
 BROWSERSTACK_URL = config('BROWSERSTACK_URL')
 URL_UNDER_TEST = config('URL_UNDER_TEST')
 ENVIRONMENT_UNDER_TEST = config('ENVIRONMENT_UNDER_TEST')
+LOCAL = config('LOCAL').lower()
+is_local = LOCAL == 'true'
 
-
+if is_local:
+    bs_local = Local()
+    bs_local_args = { "key": BROWSERSTACK_ACCESS_KEY }
+    bs_local.start(**bs_local_args)
+    print("Local binary connected: ", bs_local.isRunning())
 
 def functional_smoke_test(driver) :
-   bs_utils.wait_xpath_elem(driver, SL.ACCEPT_COOKIES_BUTTON_XPATH).click() 
+   bs_utils.click_potentially_absent_elem(driver, SL.ACCEPT_COOKIES_BUTTON_XPATH)
    bs_utils.wait_xpath_elem(driver, SL.BROWSE_DATASETS_BUTTON_XPATH).click()
    bs_utils.wait_page(driver, SL.DETAILS_PAGE_TITLE)
    time.sleep(SL.DATASETS_PAGE_LOAD_WAIT_TIME_SECONDS)
@@ -78,6 +85,7 @@ def run_session(browser):
     bstack_options = {
         "userName": BROWSERSTACK_USERNAME,
         "accessKey": BROWSERSTACK_ACCESS_KEY,
+        "local": LOCAL
     }
     bstack_options["buildName"] = SL.BUILD_NAME.format(browser["browserName"], ENVIRONMENT_UNDER_TEST)
     for os in browser["oss"]:
@@ -101,7 +109,15 @@ def run_session(browser):
                         bs_utils.fail_test(driver, "Some elements failed to load")
                     except Exception:
                         bs_utils.fail_test(driver, "Some exception occurred")    
-                    driver.quit()
+                    if driver: driver.quit()
     
+threads = []
 for browser in browsers:
-  Thread(target=run_session, args=(browser,)).start()
+    t = Thread(target=run_session, args=(browser,))
+    threads.append(t)
+    t.start()   
+
+if is_local: 
+    for t in threads:
+        t.join()
+    bs_local.stop()
