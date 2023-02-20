@@ -12,13 +12,12 @@ In an ideal world tests should be atomic, but due to the number of threads we ha
 Current limitations:
 - The test conditions coded so far are examples of what we can do, not comprehensive functional test coverage of the website
 - The tests are currently triggered manually from the command line, rather than running as part of a pipeline
-- The functional tests are currently being run against the live website only, local developer testing needs further investigation.  (However, it is possible to point the percy tests at either a local deployment or the live site)
 
 # .env file
 
 Copy the provided .env.template file to create a .env file in the same directory
 
-The inherited configuration points to the Live environment as the target for testing - amend as required
+The inherited configuration points to the Live environment as the target for testing - see below for instructions on local testing
 
 # Browserstack account
 
@@ -41,6 +40,20 @@ From within the browserstack directory of this project:
     python3 -m venv .venv
     source .venv/bin/activate
     pip install -r requirements.txt
+    
+# Running locally
+
+To enable local testing, change the LOCAL parameter in the .env file from false to true.
+
+You will need to deploy the application locally on the same machine from which you are triggering the Browserstack tests.
+
+Change the URL_UNDER_TEST parameter in the .env file to the URL of the index page of the locally deployed application.  This will take effect for either Browserstack functional tests or Percy visual tests
+
+The ENVIRONMENT_UNDER_TEST parameter is just text that will be inserted into the build names under which test results are grouped.  If you change it from "Live" to "Dev" the test results will be grouped separately.
+
+(In the same way you could change URL_UNDER_TEST to the URL of the Beta site, change ENVIRONMENT_UNDER_TEST to "Beta", and set the LOCAL parameter to false, in order to run tests against the Beta site and group the results separately in the Browserstack portal)
+
+When running local testing, if for some reason the script crashes and doesn't end gracefully, the Browserstack local connection will be left open which will prevent you from running local tests again.  The easiest way to fix this, assuming you are running on a Linux VM, is just to restart the VM.
 
 # Run the Browserstack functional tests
 
@@ -64,8 +77,6 @@ EG If 12 tests are defined to run in Firefox, when 7 of them have run so far it 
 "7/7 Passed" under Firefox, not "7/12 Passed" as you might expect
 
 # Run the Percy visual tests
-
-If you want to test against your local deployment, just go into your .env file and change the URL_UNDER_TEST from the live site URL to your local one. 
 
 Log into [Percy](https://percy.io/login) with the Browserstack login credentials.
 
