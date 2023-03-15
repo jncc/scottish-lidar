@@ -25,7 +25,7 @@
     "@types/react-router-dom": "4.3.5",
     "jest": "24.9.0",
     "parcel-bundler": "1.12.4",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "pug-cli": "1.0.0-alpha6",
     "rimraf": "3.0.0",
     "sass": "^1.22.12",
