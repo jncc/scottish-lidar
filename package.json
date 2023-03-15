@@ -41,7 +41,7 @@
     "jquery": "3.4.1",
     "leaflet": "1.5.1",
     "leaflet-editable": "1.0.0",
-    "lodash": "4.17.15",
+    "lodash": "4.17.21",
     "nodelist-foreach-polyfill": "1.2.0",
     "popper.js": "1.15.0",
     "postcss-modules": "^1.4.1",
