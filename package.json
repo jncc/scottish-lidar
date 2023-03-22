@@ -45,7 +45,7 @@
     "lodash": "4.17.21",
     "nodelist-foreach-polyfill": "1.2.0",
     "popper.js": "1.15.0",
-    "postcss-modules": "^1.4.1",
+    "postcss-modules": "^6.0.0",
     "react": "16.9.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-copy-to-clipboard": "5.0.1",
