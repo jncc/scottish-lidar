@@ -35,8 +35,9 @@
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "5.11.1",
+    "@popperjs/core": "^2.11.8",
     "autoprefixer": "^9.6.1",
-    "bootstrap": "4.3.1",
+    "bootstrap": "^5.3.1",
     "framer-motion": "1.6.15",
     "handlebars": "^4.7.7",
     "jquery": "3.4.1",
@@ -44,10 +45,9 @@
     "leaflet-editable": "1.0.0",
     "lodash": "4.17.21",
     "nodelist-foreach-polyfill": "1.2.0",
-    "popper.js": "1.15.0",
     "postcss-modules": "^6.0.0",
-    "react": "16.9.0",
-    "react-bootstrap": "^1.0.0-beta.16",
+    "react": "16.14.0",
+    "react-bootstrap": "^2.8.0",
     "react-copy-to-clipboard": "5.0.1",
     "react-dom": "16.9.0",
     "react-leaflet": "2.4.0",
@@ -56,5 +56,8 @@
     "redux": "4.0.4",
     "ts-polyfill": "3.5.3",
     "whatwg-fetch": "3.0.0"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.13.8"
   }
 }

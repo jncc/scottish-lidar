@@ -13,7 +13,7 @@ Please enable [EditorConfig](https://EditorConfig.org) before you do anything el
 
 Create an `.env` file by copying `.example.env`.
 
-You'll need Node (version 8+), with Yarn installed.
+You'll need Node (version v18), with Yarn installed.
 
     yarn      # install packages
     yarn dev  # build and run a development server
