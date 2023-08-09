@@ -3,8 +3,7 @@ import React from 'react'
 import { connect as reduxConnect } from 'react-redux'
 
 import { CollectionTuple, AppActions, DispatchProps } from '../../state'
-import { Form, Button } from 'react-bootstrap'
-import { Collection } from '../../catalog/types'
+import { Form } from 'react-bootstrap'
 import { DatasetModal } from '../../shared/DatasetModal'
 import { WmsModal } from '../../shared/WmsModal'
 
@@ -32,7 +31,6 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
       <div>
         <Form.Check
           className="hoverable"
-          custom
           inline
           title={props.collection.collection.name}
           type={'radio'}
@@ -44,13 +42,13 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
         />
       </div>
       <div>
-        <span className="dataset-list-item-product-count mr-3">
+        <span className="dataset-list-item-product-count me-3">
           {props.collection.productCountForCurrentQuery} 
         </span>
 
           {/* WMS */}
           {props.collection.ogcProduct && props.collection.ogcProduct.data.product.wms &&
-            <span className="mr-1">
+            <span className="me-1">
               {/* we want the semantics of a button but none of the styling... */}
               <button onClick={() => setWmsModalOpen(true)}
                 className="icon-button"

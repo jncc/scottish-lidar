@@ -32,8 +32,8 @@ export const DatasetListPanelsComponent = (props: Props & StateProps) => {
   return <>
     <div className="panel scrollable-panel" style={{maxHeight: '30rem'}}>
       <h4 className="mb-0">
-        <span className="mr-3 ">Matching datasets </span>
-        <span className="float-right badge badge-pill badge-primary">{matchingDatasets.length}</span>
+        <span className="me-3 ">Matching datasets </span>
+        <span className="float-right badge rounded-pill bg-primary">{matchingDatasets.length}</span>
       </h4>
       <div className="dataset-list-subheader">
         {matchingDatasets.length} datasets match your query
@@ -43,8 +43,8 @@ export const DatasetListPanelsComponent = (props: Props & StateProps) => {
         {makeDatasetListUI(props.collection, matchingDatasets)}
       </div>
       <h4 className="mb-0">
-        <span className="mr-3">Other datasets </span>
-        <span className="float-right badge badge-pill badge-primary">{nonMatchingDatasets.length}</span>
+        <span className="me-3">Other datasets </span>
+        <span className="float-right badge rounded-pill bg-primary">{nonMatchingDatasets.length}</span>
       </h4>
       {nonMatchingDatasets.length > 0 &&
       <div className="dataset-list-subheader">

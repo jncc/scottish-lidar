@@ -22,7 +22,7 @@ const DownloadItemComponent = (props: Props & DispatchProps) => {
   return (
     <tr className="download-item">
       <td className="align-middle download-item-title">
-        <span className="download-item-bullet mr-1" aria-hidden="true">&bull;</span>
+        <span className="download-item-bullet me-1" aria-hidden="true">&bull;</span>
         {props.item.title}
       </td>
       <td className="align-middle download-item-name">

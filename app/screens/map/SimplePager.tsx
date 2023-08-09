@@ -21,7 +21,7 @@ const SimplePagerComponent = (props: Props & DispatchProps) => {
         <Button
           disabled={p.currentPage <= 1}
           onClick={() => props.dispatch(AppActions.setPage(p.currentPage - 1))}
-        ><i className="fas fa-chevron-left mr-1" aria-hidden="true" /> Prev</Button>
+        ><i className="fas fa-chevron-left me-1" aria-hidden="true" /> Prev</Button>
       </div>
       <div className="pager-central">
         {getProductSliceText(p)}
@@ -30,7 +30,7 @@ const SimplePagerComponent = (props: Props & DispatchProps) => {
         <Button
           disabled={p.currentPage === p.endPage}
           onClick={() => props.dispatch(AppActions.setPage(p.currentPage + 1))}
-        >Next <i className="fas fa-chevron-right ml-1" aria-hidden="true" /> </Button>
+        >Next <i className="fas fa-chevron-right ms-1" aria-hidden="true" /> </Button>
       </div>
     </nav>
   )

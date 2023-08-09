@@ -36,14 +36,14 @@ let ProductListPanelComponent = (props: Props & State & DispatchProps) => {
       <div className="panel product-list-panel">
         <div>
           <h5>
-            <i className="fas fa-th text-primary mr-2" aria-hidden="true" />
+            <i className="fas fa-th text-primary me-2" aria-hidden="true" />
             {props.currentCollection.collection.metadata.title}
           </h5>
           <div className="mb-1">
             <DatasetPath dataset={props.currentCollection.path.dataset} />
           </div>
           <div className="product-list-panel-abstract">
-            <span className="hoverable-little-icon mr-2" onClick={() => setInfoModalOpen(true)}>
+            <span className="hoverable-little-icon me-2" onClick={() => setInfoModalOpen(true)}>
               <i className="fas fa-info-circle" aria-hidden="true" />
             </span>
             <DatasetModal

@@ -19,7 +19,7 @@ export function DatasetModal(props: any) {
 
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <i className="fas fa-th text-primary mr-2" aria-hidden="true" />
+          <i className="fas fa-th text-primary me-2" aria-hidden="true" />
           {c.metadata.title}
         </Modal.Title>
       </Modal.Header>

@@ -35,7 +35,7 @@ let ProductListItemComponent = (props: Props & DispatchProps) => {
         <div className="product-list-item-highlight" />
         }
         <div className={'product-list-item-title ' + titleCssClass}>
-          <span className="product-list-item-bullet mr-1" aria-hidden="true">&bull;</span>
+          <span className="product-list-item-bullet me-1" aria-hidden="true">&bull;</span>
           {props.product.data.product.title}
         </div>
         <div className="product-list-item-size">
