@@ -48,8 +48,8 @@ const ListItemComponent = (props: Props & DispatchProps) => {
             {c.collection.metadata.abstract}
           </p>
           <a role="button" className="collapsed"
-            data-toggle="collapse" href={'#' + abstractElementId}
-            aria-expanded="false" aria-controls="collapseExample">Show more/less</a>
+            data-bs-toggle="collapse" href={'#' + abstractElementId}
+            aria-expanded="false" aria-controls="abstract">Show more/less</a>
         </div>        
       </div>
 
@@ -73,7 +73,7 @@ const ListItemComponent = (props: Props & DispatchProps) => {
               <WmsModal
                 show={modalOpen}
                 onHide={() => setModalOpen(false)}
-                wmsLink={c.ogcProduct.data.product.wms.url}
+                wmsUrl={c.ogcProduct.data.product.wms.url}
               />
             </div>
           }

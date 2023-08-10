@@ -5,8 +5,9 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import debounce from 'lodash/debounce'
 
 export function WmsModal(props: any) {
+  const {wmsUrl, ...rest} = props
 
-  let wmsLink = props.wmsLink + '?service=wms&version=1.3.0&request=GetCapabilities'
+  let wmsLink = wmsUrl + '?service=wms&version=1.3.0&request=GetCapabilities'
 
   let [copied, setCopied] = useState(false)
   let resetCopied = () => { setCopied(false) }
@@ -17,7 +18,7 @@ export function WmsModal(props: any) {
 
   return (
     <Modal
-      {...props}
+      {...rest}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -40,7 +41,7 @@ export function WmsModal(props: any) {
 
         <div className="copy-to-clipboard mb-5">
           <CopyToClipboard text={wmsLink} onCopy={() => handleCopiedToClipboard()}>
-                  <Button variant="danger">
+                  <Button variant="danger text-white">
                     <i className="fas fa-copy me-2" aria-hidden="true" />
                     Copy to clipboard
                   </Button>

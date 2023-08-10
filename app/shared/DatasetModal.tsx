@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react'
-import { Button, Modal, Fade } from 'react-bootstrap'
+import React from 'react'
+import { Button, Modal } from 'react-bootstrap'
 import { Collection } from '../catalog/types'
 import { DatasetPath } from './DatasetPath'
 import { DatasetLicenceAndMetadataButtons } from './DatasetLicenceAndMetadataButtons'

@@ -60,7 +60,7 @@ const DatasetListItemComponent = (props: Props & DispatchProps) => {
               <WmsModal
                 show={wmsModalOpen}
                 onHide={() => setWmsModalOpen(false)}
-                wmsLink={props.collection.ogcProduct.data.product.wms.url}
+                wmsUrl={props.collection.ogcProduct.data.product.wms.url}
               />
             </span>
           }
