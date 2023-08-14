@@ -17,7 +17,6 @@
     "@types/jest": "24.0.18",
     "@types/leaflet": "1.5.1",
     "@types/lodash": "4.14.138",
-    "@types/node": "12.7.4",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
     "@types/react-leaflet": "2.4.0",
@@ -29,7 +28,7 @@
     "sass": "^1.22.12",
     "ts-jest": "24.0.2",
     "tslint": "5.19.0",
-    "typescript": "3.8.3"
+    "typescript": "5.1.6"
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "5.11.1",
@@ -51,8 +50,8 @@
     "react-leaflet": "2.4.0",
     "react-redux": "8.1.2",
     "react-router-dom": "^5.3.4",
-    "redux": "4.0.4",
-    "ts-polyfill": "3.5.3",
+    "redux": "4.2.1",
+    "ts-polyfill": "3.8.2",
     "whatwg-fetch": "3.0.0"
   },
   "resolutions": {
