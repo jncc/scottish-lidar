@@ -26,7 +26,7 @@ let ProductListItemComponent = (props: Props & DispatchProps) => {
       <motion.div
         variants={animationVariants}
         exit="hidden"
-        positionTransition={{ type: 'tween' }}
+        transition={{ type: 'tween' }}
         className="product-list-item"
         onMouseOver={() => props.dispatch(AppActions.productHovered(props.product))}
         onMouseOut={() => props.dispatch(AppActions.productUnhovered(props.product))}
