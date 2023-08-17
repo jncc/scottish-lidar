@@ -11,6 +11,7 @@ let CATALOG_API_ENDPOINT     = process.env.CATALOG_API_ENDPOINT
 let AGGREGATE_LAYER_BASE_URL = process.env.AGGREGATE_LAYER_BASE_URL
 let PAGE_EXTENSION           = process.env.PAGE_EXTENSION
 let INDEX_PAGE               = process.env.INDEX_PAGE
+let COOKIE_CONSENT_KEY       = process.env.COOKIE_CONSENT_KEY
 
 if (!CATALOG_API_ENDPOINT) {
   throw(`Environment variable CATALOG_API_ENDPOINT is required.`)
@@ -34,4 +35,5 @@ export const env = {
     AGGREGATE_LAYER_BASE_URL,
     PAGE_EXTENSION,
     INDEX_PAGE,
+    COOKIE_CONSENT_KEY
 }

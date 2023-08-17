@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout beta and build') {
             steps {
                 checkout([$class: 'GitSCM', 
-                    branches: [[name: '*/live']], 
+                    branches: [[name: '*/beta']], 
                     doGenerateSubmoduleConfigurations: false, 
                     extensions: [[$class: 'RelativeTargetDirectory', 
                                     relativeTargetDir: 'beta']], 
