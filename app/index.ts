@@ -17,11 +17,9 @@ import { env } from '../env'
 import { App } from './App'
 
 if (env.NODE_ENV === 'development') {
-  // tslint:disable-next-line
   console.log('App is starting up...')
 }
 if (!env.CATALOG_API_ENDPOINT) {
-  // tslint:disable-next-line
   console.log('CATALOG_API_ENDPOINT is required.')
 }
 
