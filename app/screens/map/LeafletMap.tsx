@@ -36,7 +36,9 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
     })
 
     // attribution
-    L.control.attribution({ position: 'bottomleft', prefix: '' }).addTo(map)
+    map.attributionControl.setPrefix(false)
+    map.attributionControl.setPosition('bottomleft')
+    map.attributionControl.addAttribution(config.attribution)
 
     map.setView(props.mapScreen.leaflet.center, props.mapScreen.leaflet.zoom)
 
@@ -50,7 +52,6 @@ let LeafletMapComponent = (props: Props & StateProps & DispatchProps) => {
       // baseLayerUrlTemplate's {id} placeholder) was added after v1 release,
       // so existing users might not have the property in their session state
       id: props.mapScreen.baseLayer ?? initialState.mapScreen.baseLayer,
-      attribution: config.attribution,
       maxZoom: config.maximumZoom,
     }).addTo(map)
   

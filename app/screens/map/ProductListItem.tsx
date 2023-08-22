@@ -22,35 +22,34 @@ let ProductListItemComponent = (props: Props & DispatchProps) => {
   let inBasketItemCssClass = props.isInBasket ? 'product-list-item-basket-in' : ''
 
   return (
-    <AnimatePresence>
-      <motion.div
-        variants={animationVariants}
-        exit="hidden"
-        transition={{ type: 'tween' }}
-        className="product-list-item"
-        onMouseOver={() => props.dispatch(AppActions.productHovered(props.product))}
-        onMouseOut={() => props.dispatch(AppActions.productUnhovered(props.product))}
-        >
-        {isHovered &&
-        <div className="product-list-item-highlight" />
-        }
-        <div className={'product-list-item-title ' + titleCssClass}>
-          <span className="product-list-item-bullet me-1" aria-hidden="true">&bull;</span>
-          {props.product.data.product.title}
-        </div>
-        <div className="product-list-item-size">
+    <motion.div
+      variants={animationVariants}
+      exit="hidden"
+      layout
+      transition={{ type: 'tween' }}
+      className="product-list-item"
+      onMouseOver={() => props.dispatch(AppActions.productHovered(props.product))}
+      onMouseOut={() => props.dispatch(AppActions.productUnhovered(props.product))}
+      >
+      {isHovered &&
+      <div className="product-list-item-highlight" />
+      }
+      <div className={'product-list-item-title ' + titleCssClass}>
+        <span className="product-list-item-bullet me-1" aria-hidden="true">&bull;</span>
+        {props.product.data.product.title}
+      </div>
+      <div className="product-list-item-size">
 
-        </div>
-        <div className={'product-list-item-basket ' + inBasketItemCssClass}
-          onClick={() => props.toggleBasketItem(makeBasketItemFromProduct(props.product))}
-          onKeyPress={() => props.toggleBasketItem(makeBasketItemFromProduct(props.product))}
-          tabIndex={0}
-          aria-label={'Add ' + props.product.data.product.title}
-        >
-          <i className="fas fa-shopping-cart" aria-hidden="true" />
-        </div>
-      </motion.div>
-    </AnimatePresence>
+      </div>
+      <div className={'product-list-item-basket ' + inBasketItemCssClass}
+        onClick={() => props.toggleBasketItem(makeBasketItemFromProduct(props.product))}
+        onKeyPress={() => props.toggleBasketItem(makeBasketItemFromProduct(props.product))}
+        tabIndex={0}
+        aria-label={'Add ' + props.product.data.product.title}
+      >
+        <i className="fas fa-shopping-cart" aria-hidden="true" />
+      </div>
+    </motion.div>
   )
 }
 
