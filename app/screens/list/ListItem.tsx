@@ -29,8 +29,8 @@ const ListItemComponent = (props: Props & DispatchProps) => {
 
         {/* Title */}
         <div className="list-item-title">
-          <i className="fas fa-th fa-lg text-primary mr-2" aria-hidden="true" />
-          <span className="ml-1">
+          <i className="fas fa-th fa-lg text-primary me-2" aria-hidden="true" />
+          <span className="ms-1">
             {c.collection.metadata.title}
           </span>
         </div>      
@@ -48,8 +48,8 @@ const ListItemComponent = (props: Props & DispatchProps) => {
             {c.collection.metadata.abstract}
           </p>
           <a role="button" className="collapsed"
-            data-toggle="collapse" href={'#' + abstractElementId}
-            aria-expanded="false" aria-controls="collapseExample">Show more/less</a>
+            data-bs-toggle="collapse" href={'#' + abstractElementId}
+            aria-expanded="false" aria-controls="abstract">Show more/less</a>
         </div>        
       </div>
 
@@ -61,11 +61,11 @@ const ListItemComponent = (props: Props & DispatchProps) => {
 
           {/* WMS */}
           {c.ogcProduct && c.ogcProduct.data.product.wms &&
-            <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
+            <div className="mb-lg-2 mb-0 me-1 d-inline-block">
 
               <Tip identifier={'wms' + c.collection.id} content={'Get WMS link popup'}>
                 <Button variant="light" onClick={() => setModalOpen(true)}>
-                  <i className="fas fa-globe text-secondary mr-2" aria-hidden="true" />
+                  <i className="fas fa-globe text-secondary me-2" aria-hidden="true" />
                   WMS
                 </Button>
               </Tip>
@@ -73,13 +73,13 @@ const ListItemComponent = (props: Props & DispatchProps) => {
               <WmsModal
                 show={modalOpen}
                 onHide={() => setModalOpen(false)}
-                wmsLink={c.ogcProduct.data.product.wms.url}
+                wmsUrl={c.ogcProduct.data.product.wms.url}
               />
             </div>
           }
 
           {/* View on map */}
-          <div className="mb-lg-2 mb-0 mr-1 d-inline-block">
+          <div className="mb-lg-2 mb-0 me-1 d-inline-block">
             <Button onClick={() => {
               props.dispatch(AppActions.resetToCenter())
               props.dispatch(AppActions.setCollection(props.collection.collection.name))

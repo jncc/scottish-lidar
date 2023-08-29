@@ -3,7 +3,7 @@
 // Import browser polyfills and render the app into the DOM.
 
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import * as ReactDOM from 'react-dom/client'
 
 // polyfills
 import 'ts-polyfill'
@@ -17,15 +17,12 @@ import { env } from '../env'
 import { App } from './App'
 
 if (env.NODE_ENV === 'development') {
-  // tslint:disable-next-line
   console.log('App is starting up...')
 }
 if (!env.CATALOG_API_ENDPOINT) {
-  // tslint:disable-next-line
   console.log('CATALOG_API_ENDPOINT is required.')
 }
 
-ReactDOM.render(
-  React.createElement(App),
-  document.getElementById('app')
-)
+const container = document.getElementById('app')
+const root = ReactDOM.createRoot(container!)
+root.render(React.createElement(App))

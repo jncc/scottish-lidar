@@ -37,8 +37,8 @@ export const ListScreen = (props: Props) => {
               {listItemElements.length == props.collections.length &&
                 <span> all </span>
               }
-              <span className="badge badge-pill badge-light">
-                <span className="badge badge-pill badge-secondary mr-1">
+              <span className="badge rounded-pill bg-light text-dark">
+                <span className="badge rounded-pill bg-secondary me-1">
                   {listItemElements.length}
                 </span>
                 of {props.collections.length}
@@ -56,7 +56,7 @@ export const ListScreen = (props: Props) => {
             <select
               value={props.filter}
               onChange={e => { props.setFilter(e.target.value) }}
-              className="custom-select"
+              className="form-select"
               aria-label="Choose a dataset">
               <option key="all" value="">All</option>
               {filterDropdownElements}

@@ -29,7 +29,7 @@ export const BasketSummaryCount = (props: Props) => {
       variants={animationVariants}
       transition={{duration: 0.3}}
       aria-live="polite">
-      <span className="badge badge-pill badge-primary" aria-label={props.count + ' products in basket'}>
+      <span className="badge rounded-pill bg-primary" aria-label={props.count + ' products in basket'}>
         {props.count}
       </span>
     </motion.div>

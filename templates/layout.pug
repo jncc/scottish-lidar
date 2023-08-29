@@ -35,4 +35,6 @@ html(lang='en')
       block content
       a(class='accessibility', href='#layout-container') Back to top
     block scripts
-    include ./cookie-consent-script
+    if process.env.COOKIE_CONSENT_KEY
+      include ./cookie-consent-script
+    

@@ -4,6 +4,7 @@ import { Fade } from 'react-bootstrap'
 
 type Props = {
   delayInMilliseconds: number
+  children: React.ReactElement
 }
 
 /** Delays the initial render of child components

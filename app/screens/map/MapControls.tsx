@@ -12,7 +12,7 @@ const MapControlsComponent = (props: StateProps & DispatchProps) => {
     <Delayed delayInMilliseconds={800}>
       <div className="bottom-left-controls">
 
-          <div className="mr-2">
+          <div className="me-2">
             <ButtonGroup>
               <Button onClick={() => props.dispatch(AppActions.leafletZoomIn())} variant="light" aria-label="Zoom in">
                 <i className="fas fa-plus fa-xs zoom-icon" aria-hidden="true" />
@@ -22,7 +22,7 @@ const MapControlsComponent = (props: StateProps & DispatchProps) => {
               </Button>
             </ButtonGroup>
           </div>
-          <div className="little-control-container mr-2">
+          <div className="little-control-container me-2">
             <Form.Check
               checked={props.visualise}
               type="switch"
@@ -33,7 +33,7 @@ const MapControlsComponent = (props: StateProps & DispatchProps) => {
           </div>
           <div>
             <Button onClick={() => props.dispatch(AppActions.resetToCenter())} variant="light">
-              <i className="fas fa-crosshairs mr-2" aria-hidden="true" />
+              <i className="fas fa-crosshairs me-2" aria-hidden="true" />
               Reset
             </Button>
           </div>

@@ -67,7 +67,7 @@ const DownloadScreenComponent = (props: StateProps & DispatchProps) => {
 
         <div>
           <div>
-            <Link to={{ pathname: '/map' }} className="btn btn-primary mr-1">
+            <Link to={{ pathname: '/map' }} className="btn btn-primary me-1">
               Add more products
             </Link>
 

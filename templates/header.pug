@@ -14,32 +14,32 @@ header.header
       button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
         span.navbar-toggler-icon
       div.collapse.navbar-collapse#navbarSupportedContent
-        ul.navbar-nav.mr-auto
-          li.nav-item.mr-4(class=(page_name === "index" ? "active" : undefined))
+        ul.navbar-nav.me-auto
+          li.nav-item.me-4(class=(page_name === "index" ? "active" : undefined))
             a.nav-link.text-dark(href='/' + process.env.INDEX_PAGE + process.env.PAGE_EXTENSION)
               if page_name === "index"
                 span.sr-only (current)
               | Home
-          li.nav-item.mr-4(class=(page_name === "about" ? "active" : undefined))
+          li.nav-item.me-4(class=(page_name === "about" ? "active" : undefined))
             a.nav-link.text-dark(href='/about' + process.env.PAGE_EXTENSION)
               if page_name ===  "about"
                 span.sr-only (current)
               | About
-          li.nav-item.mr-4#list-screen-nav-item
+          li.nav-item.me-4#list-screen-nav-item
             a.nav-link.text-dark(href='/data' + process.env.PAGE_EXTENSION + '#/list')
               | Datasets
-          li.nav-item.mr-4#map-screen-nav-item
+          li.nav-item.me-4#map-screen-nav-item
             a.nav-link.text-dark(href='/data' + process.env.PAGE_EXTENSION + '#/map')
               | Map
-          li.nav-item.mr-4#download-screen-nav-item
+          li.nav-item.me-4#download-screen-nav-item
             a.nav-link.text-dark(href='/data' + process.env.PAGE_EXTENSION + '#/download')
               | Download
-          li.nav-item.mr-4(class=(page_name === "cases" ? "active" : undefined))
+          li.nav-item.me-4(class=(page_name === "cases" ? "active" : undefined))
             a.nav-link.text-dark(href='/cases' + process.env.PAGE_EXTENSION)
               if page_name === "cases"
                 span.sr-only (current)
               | Case studies
-          li.nav-item.mr-4(class=(page_name === "contribute" ? "active" : undefined))
+          li.nav-item.me-4(class=(page_name === "contribute" ? "active" : undefined))
             a.nav-link.text-dark(href='/contribute' + process.env.PAGE_EXTENSION)
               if page_name === "contribute"
                 span.sr-only (current)

@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react'
-import { Button, Modal, Fade } from 'react-bootstrap'
+import React from 'react'
+import { Button, Modal } from 'react-bootstrap'
 import { Collection } from '../catalog/types'
 import { DatasetPath } from './DatasetPath'
 import { DatasetLicenceAndMetadataButtons } from './DatasetLicenceAndMetadataButtons'
@@ -19,7 +19,7 @@ export function DatasetModal(props: any) {
 
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <i className="fas fa-th text-primary mr-2" aria-hidden="true" />
+          <i className="fas fa-th text-primary me-2" aria-hidden="true" />
           {c.metadata.title}
         </Modal.Title>
       </Modal.Header>
