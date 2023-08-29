@@ -150,7 +150,7 @@ window.NodeList&&!NodeList.prototype.forEach&&(NodeList.prototype.forEach=functi
 },{}],"BWvR":[function(require,module,exports) {
 
 },{"./images/layers.png":[["layers.350ec81b.png","igUS"],"igUS"],"./images/layers-2x.png":[["layers-2x.d8c4f271.png","cPiA"],"cPiA"],"./images/marker-icon.png":[["marker-icon.b29b8023.png","tG0w"],"tG0w"]}],"TcwV":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.env=void 0;var r="production",e="https://srsp-catalog.jncc.gov.uk",E="https://srsp-ows.jncc.gov.uk/scotland/wms",i="",o="",t=void 0;if(!e)throw"Environment variable CATALOG_API_ENDPOINT is required.";if(!E)throw"Environment variable AGGREGATE_LAYER_BASE_URL is required.";if(null==i)throw"Environment variable PAGE_EXTENSION is required.";if(null==o)throw"Environment variable INDEX_PAGE is required.";exports.env={NODE_ENV:r,CATALOG_API_ENDPOINT:e,AGGREGATE_LAYER_BASE_URL:E,PAGE_EXTENSION:i,INDEX_PAGE:o,COOKIE_CONSENT_KEY:t};
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.env=void 0;var e="production",r="https://srsp-catalog.jncc.gov.uk",E="https://srsp-ows.jncc.gov.uk/scotland/wms",i="",t="",n="c21c48ca8bb88a6c190b5cb444772f1970eb87ef";if(!r)throw"Environment variable CATALOG_API_ENDPOINT is required.";if(!E)throw"Environment variable AGGREGATE_LAYER_BASE_URL is required.";if(null==i)throw"Environment variable PAGE_EXTENSION is required.";if(null==t)throw"Environment variable INDEX_PAGE is required.";exports.env={NODE_ENV:e,CATALOG_API_ENDPOINT:r,AGGREGATE_LAYER_BASE_URL:E,PAGE_EXTENSION:i,INDEX_PAGE:t,COOKIE_CONSENT_KEY:n};
 },{}],"mHMq":[function(require,module,exports) {
 "use strict";function t(o){return exports.default=t="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},t(o)}Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=t;
 },{}],"QNPk":[function(require,module,exports) {
@@ -879,4 +879,4 @@ var e=require("process");Object.defineProperty(exports,"__esModule",{value:!0}),
 },{"react":"n8MK","react-dom/client":"NdAl","ts-polyfill":"r6TH","whatwg-fetch":"MCp7","nodelist-foreach-polyfill":"nidE","leaflet/dist/leaflet.css":"BWvR","../env":"TcwV","./App":"hu8U"}],"KAAg":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),require("../shared"),require("../app/index");
 },{"../shared":"LcwX","../app/index":"oLVY"}]},{},["KAAg"], null)
-//# sourceMappingURL=/data.95f201df.js.map
+//# sourceMappingURL=/data.06ab16d8.js.map
