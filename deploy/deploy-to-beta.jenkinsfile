@@ -32,7 +32,7 @@ pipeline {
                         sh 'cp -r ../beta/dist/* .'
                         // Configure git ssh
                         sh 'mkdir -p ~/.ssh'
-                        sh 'echo -e "${' + env.GIT_DEPLOY_KEY + '//_/\\n}" > ~/.ssh/id_ed25519'
+                        sh 'echo -e "${GIT_DEPLOY_KEY//_/\\n}" > ~/.ssh/id_ed25519'
                         sh 'chmod 600 ~/.ssh/id_ed25519'
                         sh 'ssh-keygen -R github.com'
                         sh 'ssh-keyscan github.com >>~/.ssh/known_hosts'
