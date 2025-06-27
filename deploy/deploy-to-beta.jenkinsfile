@@ -43,7 +43,7 @@ pipeline {
                         sh 'ls -a'
                         sh 'git add --all'
                         sh 'git commit -a -m "Jenkins build ' + env.BUILD_NUMBER + '" --author "Jenkins <jenkins@jncc.gov.uk>"'
-                        sh 'GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes" git push --force --repo git@github.com/jncc/scottish-lidar-beta.git'
+                        sh 'GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes" git push --force --repo git@github.com:jncc/scottish-lidar-beta.git'
                     }
                 }
             }
