@@ -25,11 +25,17 @@ pipeline {
                 dir('./gh-pages')  {
                     deleteDir()
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.GIT_CREDENTIALS_ID,
-                        usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+                        usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_DEPLOY_KEY']]) {
                         sh 'git clone https://github.com/jncc/scottish-lidar.git . --branch=gh-pages --depth 1'
                         sh 'git rm -rf .'
                         sh 'git clean -fxd'
                         sh 'cp -r ../live/dist/* .'
+                        // Configure git ssh
+                        sh 'mkdir -p ~/.ssh'
+                        sh 'echo "' + env.GIT_DEPLOY_KEY + '" | sed "s/_/\\n/g" > ~/.ssh/id_ed25519'
+                        sh 'chmod 600 ~/.ssh/id_ed25519'
+                        sh 'ssh-keygen -R github.com'
+                        sh 'ssh-keyscan github.com >>~/.ssh/known_hosts'
                         // Github Pages custom domain configured with a file called 'CNAME'
                         sh 'echo "remotesensingdata.gov.scot" > CNAME'
                         // add the version stamp (replace the string 'x-version-stamp' in all .html files)
@@ -37,7 +43,7 @@ pipeline {
                         sh 'ls -a'
                         sh 'git add --all'
                         sh 'git commit -a -m "Jenkins build ' + env.BUILD_NUMBER + '" --author "Jenkins <jenkins@jncc.gov.uk>"'
-                        sh 'git push --force --repo https://$GIT_USERNAME:$GIT_PASSWORD@github.com/jncc/scottish-lidar.git'
+                        sh 'GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes" git push --force --repo git@github.com:jncc/scottish-lidar.git'
                     }
                 }
             }
