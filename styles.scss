@@ -232,6 +232,12 @@ a {
   }
 }
 
+.feedback-banner {
+  @include above-map;  
+  background-color: $scot-gov-blue;
+  color: white;
+}
+
 .announcement-banner {
   @include white-background;
   @include above-map;  
