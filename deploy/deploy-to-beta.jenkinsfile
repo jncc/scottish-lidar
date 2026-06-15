@@ -37,7 +37,7 @@ pipeline {
                         sh 'ssh-keygen -R github.com'
                         sh 'ssh-keyscan github.com >>~/.ssh/known_hosts'
                         // Github Pages custom domain configured with a file called 'CNAME'
-                        sh 'echo "beta-scottish-remote-sensing-portal.jncc.gov.uk" > CNAME'
+                        sh 'echo "beta.remotesensingdata.gov.scot" > CNAME'
                         // add the version stamp (replace the string 'x-version-stamp' in all .html files)
                         sh 'sed -i "s/x-version-stamp/' + env.BUILD_NUMBER + '.' + env.GIT_COMMIT + '/g" *.html'
                         sh 'ls -a'
