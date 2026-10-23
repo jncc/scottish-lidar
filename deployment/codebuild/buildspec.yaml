@@ -1,0 +1,33 @@
+version: 0.2
+env:
+  shell: bash
+phases:
+  pre_build:
+    commands:
+      - echo `aws --version`
+      - DATESTAMP=$(date +"%Y%m%d")
+      - BUILD_NUMBER=$CODEBUILD_BUILD_NUMBER
+      - GITHUB_PAGES_REPO=${GITHUB_PAGES_REPO}
+      - GITHUB_PAGES_CNAME=${GITHUB_PAGES_CNAME}
+      - echo Configured pre-build environment
+  build:
+    commands:
+      - echo Build started on `env TZ=Europe/London date`
+      - yarn build
+      - echo Build completed on `env TZ=Europe/London date`
+  post_build:
+    commands:
+      - echo Deployment started on `env TZ=Europe/London date`
+      - cd ..
+      - echo Checkout github pages repository
+      - git clone $GITHUB_PAGES_REPO deployment -b gh-pages --single-branch --depth 1
+      - cd deployment
+      - git rm -rf *
+      - git clean -fxd
+      - echo Copy new build files
+      - cp -r ../build/* .
+      - echo $GITHUB_PAGES_CNAME > CNAME
+      - git add .
+      - git commit -m "Codebuild $BUILD_NUMBER" --author "JNCC Build <developers@jncc.gov.uk>"
+      - git push origin gh-pages
+      - echo Deployment completed on `env TZ=Europe/London date`
